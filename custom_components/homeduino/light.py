@@ -34,7 +34,6 @@ async def async_setup_entry(
 ) -> None:
     """Set up the Homeduino switch."""
     entry_type = config_entry.data.get(CONF_ENTRY_TYPE)
-    _LOGGER.debug("Entry type: %s", entry_type)
 
     entities = []
 
@@ -98,12 +97,24 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
-        if last_state := await self.async_get_last_state():
-            self._attr_is_on = last_state.state == STATE_ON
+        if self.coordinator.has_transceiver():
+            if last_state := await self.async_get_last_state():
+                self._attr_is_on = last_state.state == STATE_ON
+            self._attr_available = True
+            self.async_write_ha_state()
+
+    @property
+    def available(self) -> bool:
+        """Return if entity is available."""
+        if not self._attr_available:
+            return self._attr_available
+
+        return self.coordinator.last_update_success
 
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
+        _LOGGER.debug(self.coordinator.transceiver)
         if self.coordinator.data.get("protocol") != self.protocol:
             return
 
@@ -158,7 +169,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
 
         brightness = int(brightness / 17)
 
-        if self.coordinator.homeduino.rf_send(
+        if self.coordinator.rf_send(
             self.protocol,
             {"id": self.id, "unit": self.unit, "state": state, "dimlevel": brightness},
         ):
@@ -172,7 +183,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
     async def async_turn_off(self, **kwargs) -> None:
         """Turn the entity off."""
         _LOGGER.debug("Turning off %s", self._attr_name)
-        if self.coordinator.homeduino.rf_send(
+        if self.coordinator.rf_send(
             self.protocol,
             {"id": self.id, "unit": self.unit, "state": False, "dimlevel": 0},
         ):

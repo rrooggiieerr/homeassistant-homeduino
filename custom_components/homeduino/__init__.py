@@ -8,7 +8,7 @@ import os
 import serial
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.core import HomeAssistant, callback, ServiceCall
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.entity import DeviceInfo
@@ -41,7 +41,7 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
     _instance = None
 
     serial_port = None
-    homeduino = None
+    transceiver = None
 
     binary_sensors = []
     analog_sensors = []
@@ -54,9 +54,8 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
 
         return HomeduinoCoordinator._instance
 
-    @staticmethod
-    def has_instance():
-        return HomeduinoCoordinator._instance is not None
+    def has_transceiver(self):
+        return self.transceiver is not None
 
     @staticmethod
     async def remove_instance():
@@ -71,21 +70,19 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
             name=__name__,
         )
 
-    def init(
-        self, serial_port: str, receive_pin: int, send_pin: int, hdt_pin: int = None
-    ):
-        """Initialize Homeduino Data Update Coordinator."""
-
-        self.serial_port = serial_port
-        self.homeduino = Homeduino(
-            self.serial_port, receive_pin, send_pin, hdt_pin, self.hass.loop
-        )
-
         self.device_info = DeviceInfo(
-            identifiers={(DOMAIN, self.serial_port)},
+            identifiers={(DOMAIN)},
             name="Homeduino Transceiver",
             manufacturer="pimatic",
         )
+
+    def add_transceiver(
+        self, transceiver: Homeduino
+    ):
+        """Add a Homeduino transceiver."""
+
+        self.transceiver = transceiver
+        self.transceiver.add_rf_receive_callback(self.rf_receive_callback)
 
     @callback
     def rf_receive_callback(self, decoded) -> None:
@@ -97,24 +94,19 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         )
         self.async_set_updated_data(decoded)
 
-    async def connect(self):
-        if not await self.homeduino.connect():
-            raise ConfigEntryNotReady(f"Unable to connect to device {self.serial_port}")
-
-        self.homeduino.add_rf_receive_callback(self.rf_receive_callback)
-
     def disconnect(self):
-        self.homeduino.disconnect()
+        self.transceiver.disconnect()
+        self.transceiver = None
 
     def rf_send(self, protocol, values):
-        if self.homeduino:
-            return self.homeduino.rf_send(protocol, values)
+        if self.transceiver:
+            return self.transceiver.rf_send(protocol, values)
 
         return False
 
     def send(self, command):
-        if self.homeduino:
-            return self.homeduino.send_command(command)
+        if self.transceiver:
+            return self.transceiver.send_command(command)
 
         return False
 
@@ -122,13 +114,13 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
 def setup(hass, config):
     """Set up is called when Home Assistant is loading our component."""
 
-    def handle_send(call):
+    async def async_handle_send(call: ServiceCall):
         """Handle the service call."""
         command: str = call.data.get("command")
 
         return HomeduinoCoordinator.instance().send(command.strip())
 
-    hass.services.register(DOMAIN, "send", handle_send)
+    hass.services.async_register(DOMAIN, "send", async_handle_send)
 
     # Return boolean to indicate that initialization was successful.
     return True
@@ -138,8 +130,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up Homeduino from a config entry."""
     entry_type = entry.data.get(CONF_ENTRY_TYPE)
 
+    homeduino_coordinator = HomeduinoCoordinator.instance(hass)
+    
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-        if HomeduinoCoordinator.has_instance():
+        if homeduino_coordinator.has_transceiver():
             # We allow only one transceiver
             _LOGGER.error("Only one Homeduino Transceiver is currently allowed")
             return False
@@ -147,22 +141,19 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         # Set up Homeduino 433 MHz RF transceiver
         try:
             serial_port = entry.data.get(CONF_SERIAL_PORT, None)
+            
+            homeduino = Homeduino(serial_port, entry.options.get(CONF_RECEIVE_PIN), entry.options.get(CONF_SEND_PIN))
 
-            homeduino_coordinator = HomeduinoCoordinator.instance(hass)
-            homeduino_coordinator.init(
-                serial_port,
-                entry.options.get(CONF_RECEIVE_PIN),
-                entry.options.get(CONF_SEND_PIN),
-            )
+            if not await homeduino.connect():
+                raise ConfigEntryNotReady(f"Unable to connect to device {serial_port}")
+    
+            homeduino_coordinator.add_transceiver(homeduino)
 
             # Create the device if not exists
             device_registry = dr.async_get(hass)
             device_registry.async_get_or_create(
                 config_entry_id=entry.entry_id, **homeduino_coordinator.device_info
             )
-
-            # Open the connection.
-            await homeduino_coordinator.connect()
 
             _LOGGER.info("Homeduino transceiver on %s is available", serial_port)
         except serial.SerialException as ex:
