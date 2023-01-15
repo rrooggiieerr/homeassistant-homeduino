@@ -1,0 +1,23 @@
+send:
+  name: Send command
+  description: Sends a command to Homeduino.
+  fields:
+    command:
+      name: Command
+      description: A command to send.
+      required: true
+      example: "RF send 4 3 453 1992 88 9228 0 0 0 0 01020102020201020101010101010102010101010202010202020202010102010102020203"
+      selector:
+        text:
+rf_send:
+  name: Send raw RF command
+  description: Sends a raw RF command.
+  fields:
+    command:
+      name: Command
+      description: A command to send.
+      required: true
+      example: "453 1992 88 9228 0 0 0 0 01020102020201020101010101010102010101010202010202020202010102010102020203"
+      selector:
+        text:
+    

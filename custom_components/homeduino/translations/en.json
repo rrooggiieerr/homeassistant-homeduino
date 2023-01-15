@@ -1,0 +1,53 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Device is already configured"
+        },
+        "error": {
+            "cannot_connect": "Failed to connect",
+            "unknown": "Unexpected error"
+        },
+        "step": {
+            "setup_serial": {
+            	"title": "Homeduino Transceiver",
+                "data": {
+                    "serial_port": "Serial port",
+                    "manual_path": "Manually entry",
+                    "receive_pin": "Receive pin",
+                    "send_pin": "Send pin"
+                },
+                "data_description": {
+                    "serial_port": "The serial port your Homeduino 433mhz RF hub is connected to.",
+                    "manual_path": "Device path",
+                    "receive_pin": "The Arduino digital pin the 433 MHz receiver is connected to.",
+                    "send_pin": "The Arduino digital pin the 433 MHz transmitter is connected to."
+                }
+            },
+            "setup_rf_device": {
+            	"title": "Homeduino RF Actor",
+            	"data": {
+            		"rf_device_name": "Device name",
+            		"rf_id": "Device ID",
+            		"rf_protocol": "Protocol",
+            		"rf_unit": "Device unit",
+            		"rf_unit_extrapolate": "Extrapolate device units",
+            		"rf_id_ignore_all": "Ignore all"
+            	}
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "data": {
+                    "receive_pin": "Receive pin",
+                    "send_pin": "Send pin"
+                },
+                "data_description": {
+                    "receive_pin": "The Arduino digital pin the 433 MHz receiver is connected to.",
+                    "send_pin": "The Arduino digital pin the 433 MHz transmitter is connected to."
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "serial_port": "[%key:common::config_flow::data::serial_port%]",
+          "manual_path": "[%key:common::config_flow::data::manual_path%]",
+          "receive_pin": "[%key:common::config_flow::data::receive_pin%]",
+          "send_pin": "[%key:common::config_flow::data::send_pin%]"
+        },
+        "data_description": {
+          "manual_path": "[%key:common::config_flow::data_description::manual_path%]",
+          "receive_pin": "[%key:common::config_flow::data_description::receive_pin%]",
+          "send_pin": "[%key:common::config_flow::data_description::send_pin%]"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "receive_pin": "[%key:common::config_flow::data::receive_pin%]",
+          "send_pin": "[%key:common::config_flow::data::send_pin%]"
+        },
+        "data_description": {
+          "receive_pin": "[%key:common::config_flow::data_description::receive_pin%]",
+          "send_pin": "[%key:common::config_flow::data_description::send_pin%]"
+        }
+      }
+    }
+  }
+}

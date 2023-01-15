@@ -1,0 +1,20 @@
+{
+  "domain": "homeduino",
+  "name": "Homeduino",
+  "version": "0.0.1",
+  "config_flow": true,
+  "documentation": "https://github.com/rrooggiieerr/homeassistant-homeduino",
+  "issue_tracker": "https://github.com/rrooggiieerr/homeassistant-homeduino/issues",
+  "requirements": [
+    "pyserial-asyncio==0.6"
+  ],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [],
+  "codeowners": [
+    "@rrooggiieerr"
+  ],
+  "iot_class": "local_push",
+  "integration_type": "hub"
+}
