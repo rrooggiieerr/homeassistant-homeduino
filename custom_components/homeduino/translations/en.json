@@ -17,7 +17,7 @@
                     "send_pin": "Send pin"
                 },
                 "data_description": {
-                    "serial_port": "The serial port your Homeduino 433mhz RF hub is connected to.",
+                    "serial_port": "The serial port your Homeduino 433MHz RF hub is connected to.",
                     "manual_path": "Device path",
                     "receive_pin": "The Arduino digital pin the 433 MHz receiver is connected to.",
                     "send_pin": "The Arduino digital pin the 433 MHz transmitter is connected to."
