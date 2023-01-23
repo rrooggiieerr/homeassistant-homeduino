@@ -54,26 +54,12 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
 
         return HomeduinoCoordinator._instance
 
-    def has_transceiver(self):
-        return self.transceiver is not None
-
-    @staticmethod
-    async def remove_instance():
-        await HomeduinoCoordinator._instance.disconnect()
-        HomeduinoCoordinator._instance = None
-
     def __init__(self, hass):
         super().__init__(
             hass,
             _LOGGER,
             # Name of the data. For logging purposes.
             name=__name__,
-        )
-
-        self.device_info = DeviceInfo(
-            identifiers={(DOMAIN)},
-            name="Homeduino Transceiver",
-            manufacturer="pimatic",
         )
 
     def add_transceiver(
@@ -83,6 +69,17 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
 
         self.transceiver = transceiver
         self.transceiver.add_rf_receive_callback(self.rf_receive_callback)
+        
+        self.async_set_updated_data(None)
+
+    def has_transceiver(self):
+        return self.transceiver is not None
+
+    def remove_transceiver(self, serial_port):
+        _LOGGER.debug(self.transceiver)
+        if self.transceiver:
+            self.transceiver.disconnect()
+        self.transceiver = None
 
     @callback
     def rf_receive_callback(self, decoded) -> None:
@@ -94,11 +91,7 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         )
         self.async_set_updated_data(decoded)
 
-    def disconnect(self):
-        self.transceiver.disconnect()
-        self.transceiver = None
-
-    def rf_send(self, protocol, values):
+    def rf_send(self, protocol: str, values):
         if self.transceiver:
             return self.transceiver.rf_send(protocol, values)
 
@@ -152,7 +145,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             # Create the device if not exists
             device_registry = dr.async_get(hass)
             device_registry.async_get_or_create(
-                config_entry_id=entry.entry_id, **homeduino_coordinator.device_info
+                config_entry_id=entry.entry_id, identifiers={(DOMAIN, serial_port)}, manufacturer="pimatic", name="Homeduino Transceiver"
             )
 
             _LOGGER.info("Homeduino transceiver on %s is available", serial_port)
@@ -174,9 +167,11 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     entry_type = entry.data.get(CONF_ENTRY_TYPE)
 
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-        HomeduinoCoordinator.remove_instance()
-
-    if unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
-        hass.data[DOMAIN].pop(entry.entry_id)
+        serial_port = entry.data.get(CONF_SERIAL_PORT, None)
+        HomeduinoCoordinator.instance(hass).remove_transceiver(serial_port)
+        if unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
+            hass.data[DOMAIN].pop(entry.entry_id)
+    elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
+        unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
 
     return unload_ok

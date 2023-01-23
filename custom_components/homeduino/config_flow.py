@@ -48,7 +48,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     ) -> FlowResult:
         """Handle the initial step."""
         # Test if we already have a Homeduino transceiver configured
-        if not HomeduinoCoordinator.has_instance():
+        if not HomeduinoCoordinator._instance:
             return await self.async_step_setup_transceiver(user_input)
         else:
             return await self.async_step_setup_rf_device(user_input)
@@ -252,7 +252,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         unique_id = f"{DOMAIN}-{rf_protocol}-{rf_id}"
         if not rf_unit_extrapolate:
-            unique_id += f"-rf_unit"
+            unique_id += f"-{rf_unit}"
         await self.async_set_unique_id(unique_id)
         self._abort_if_unique_id_configured()
 

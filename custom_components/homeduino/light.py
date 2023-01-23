@@ -81,7 +81,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         super().__init__(HomeduinoCoordinator.instance())
 
         self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, f"{protocol}-{id}-{unit}")},
+            identifiers={(DOMAIN, f"{protocol}-{id}")},
             name=device_name,
             via_device=(DOMAIN, self.coordinator.serial_port),
         )
@@ -114,7 +114,16 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        _LOGGER.debug(self.coordinator.transceiver)
+        if self.coordinator.has_transceiver() and not self._attr_available:
+            self._attr_available = True
+            self.async_write_ha_state()
+        elif not self.coordinator.has_transceiver() and self._attr_available:
+            self._attr_available = False
+            self.async_write_ha_state()
+
+        if not self.coordinator.data:
+            return
+ 
         if self.coordinator.data.get("protocol") != self.protocol:
             return
 
@@ -169,7 +178,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
 
         brightness = int(brightness / 17)
 
-        if self.coordinator.rf_send(
+        if await self.coordinator.rf_send(
             self.protocol,
             {"id": self.id, "unit": self.unit, "state": state, "dimlevel": brightness},
         ):
@@ -183,7 +192,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
     async def async_turn_off(self, **kwargs) -> None:
         """Turn the entity off."""
         _LOGGER.debug("Turning off %s", self._attr_name)
-        if self.coordinator.rf_send(
+        if await self.coordinator.rf_send(
             self.protocol,
             {"id": self.id, "unit": self.unit, "state": False, "dimlevel": 0},
         ):
