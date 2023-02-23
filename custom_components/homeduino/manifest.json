@@ -1,25 +1,21 @@
 {
   "domain": "homeduino",
   "name": "Homeduino",
-  "version": "0.0.1",
+  "codeowners": [
+    "@rrooggiieerr"
+  ],
   "config_flow": true,
   "documentation": "https://github.com/rrooggiieerr/homeassistant-homeduino",
+  "integration_type": "hub",
+  "iot_class": "local_push",
   "issue_tracker": "https://github.com/rrooggiieerr/homeassistant-homeduino/issues",
+  "loggers": [
+  	"homeduino",
+  	"rfcontrol"
+  ],
   "requirements": [
     "pyserial==3.5",
     "homeduino==0.0.3"
   ],
-  "ssdp": [],
-  "zeroconf": [],
-  "homekit": {},
-  "dependencies": [],
-  "codeowners": [
-    "@rrooggiieerr"
-  ],
-  "iot_class": "local_push",
-  "integration_type": "hub",
-  "loggers": [
-  	"homeduino",
-  	"rfcontrol"
-  ]
+  "version": "0.0.1"
 }
