@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+from datetime import timedelta
 
 import serial
 from homeassistant.config_entries import ConfigEntry
@@ -12,7 +13,8 @@ from homeassistant.core import HomeAssistant, callback, ServiceCall
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.entity import DeviceInfo
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator,\
+    UpdateFailed
 from homeduino import Homeduino
 
 from .const import (
@@ -28,10 +30,11 @@ from .const import (
 _LOGGER = logging.getLogger(__name__)
 
 PLATFORMS: list[Platform] = [
-    Platform.SWITCH,
+    Platform.BINARY_SENSOR,
+    Platform.BUTTON,
     Platform.LIGHT,
     Platform.SENSOR,
-    Platform.BINARY_SENSOR,
+    Platform.SWITCH,
 ]
 
 
@@ -60,6 +63,8 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
             _LOGGER,
             # Name of the data. For logging purposes.
             name=__name__,
+            # Polling interval. Will only be polled if there are subscribers.
+            update_interval=timedelta(seconds=5),
         )
 
     def add_transceiver(
@@ -80,6 +85,17 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         if self.transceiver:
             self.transceiver.disconnect()
         self.transceiver = None
+
+    async def _async_update_data(self):
+        if not self.transceiver:
+            raise UpdateFailed(f"No Homeduino configured")
+
+        if not await self.transceiver.ping():
+            # self.transceiver.disconnect()
+            # self.transceiver = None
+            raise UpdateFailed(f"Unable to ping Homeduino")
+        
+        return None
 
     @callback
     def rf_receive_callback(self, decoded) -> None:

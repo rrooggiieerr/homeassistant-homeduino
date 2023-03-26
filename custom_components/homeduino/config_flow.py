@@ -48,7 +48,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     ) -> FlowResult:
         """Handle the initial step."""
         # Test if we already have a Homeduino transceiver configured
-        if not HomeduinoCoordinator._instance:
+        if not HomeduinoCoordinator.instance().has_transceiver():
             return await self.async_step_setup_transceiver(user_input)
         else:
             return await self.async_step_setup_rf_device(user_input)
@@ -198,7 +198,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 ): cv.string,
                 vol.Required(
                     CONF_RF_PROTOCOL, default=user_input.get(CONF_RF_PROTOCOL)
-                ): vol.In(["switch1", "dimmer1"]),
+                ): vol.In(["button1", "switch1", "dimmer1"]),
                 vol.Required(
                     CONF_RF_ID, default=user_input.get(CONF_RF_ID)
                 ): cv.positive_int,
