@@ -19,7 +19,7 @@ ToDo
 - Click **Add**
 - Close the **Custom repositories** menu
 - Select **+ Explore & download repositories** and search for *Homeduino*
-- Select Download
+- Select **Download**
 - Restart Home Assistant
 
 ### Manually
