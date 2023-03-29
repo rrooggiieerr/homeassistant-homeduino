@@ -17,6 +17,9 @@ ToDo
 - Add this repository URL to the **Custom repositories** and select
 **Integration** as the **Category**
 - Click **Add**
+- Close the **Custom repositories** menu
+- Select **+ Explore & download repositories** and search for *Homeduino*
+- Select Download
 - Restart Home Assistant
 
 ### Manually
@@ -26,7 +29,7 @@ ToDo
 
 ##  Adding a new Homeduino
 - After restarting go to **Settings** then **Devices & Services**
-- Select **+ Add Integration** and type in *Homeduino*
+- Select **+ Add integration** and type in *Homeduino*
 - Select the serial port or enter the path manually
 - Select **Submit**
 
