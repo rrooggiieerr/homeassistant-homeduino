@@ -27,15 +27,22 @@ ToDo
 `config/custom_components/` directory of your Home Assistant installation
 - Restart Home Assistant
 
-##  Adding a new Homeduino
+## Adding a new Homeduino
 - After restarting go to **Settings** then **Devices & Services**
 - Select **+ Add integration** and type in *Homeduino*
-- Select the serial port or enter the path manually
+- Select the *Serial port* or enter the path manually
 - Select **Submit**
 
 When your wiring is right a new Homeduino integration and device will now
 be added to your Integrations view. If your wiring is not right you will get a
 *Failed to connect* error message.
+
+## Adding a new RF Actor
+
+- After adding your Homeduino go to **Settings** then **Devices & Services**
+- Select **+ Add integration** and type in *Homeduino*
+- Select the *Protocol* and give the *Device ID* and *Device unit* for your device
+- Select **Submit**
 
 Do you enjoy using this Home Assistant integration? Then consider supporting
 my work:\
