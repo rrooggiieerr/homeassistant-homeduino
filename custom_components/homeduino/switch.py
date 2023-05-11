@@ -54,17 +54,15 @@ async def async_setup_entry(
         if config_entry.options.get(CONF_RF_UNIT_EXTRAPOLATE):
             for i in range(unit + 1):
                 entities.append(
-                    HomeduinoRFSwitch(
-                        device_name, protocol, id, i, id_ignore_all
-                    )
+                    HomeduinoRFSwitch(device_name, protocol, id, i, id_ignore_all)
                 )
             if id_ignore_all:
-                entities.append(HomeduinoRFSwitchAll(device_name, protocol, id, unit + 1))
+                entities.append(
+                    HomeduinoRFSwitchAll(device_name, protocol, id, unit + 1)
+                )
         else:
             entities.append(
-                HomeduinoRFSwitch(
-                    device_name, protocol, id, unit, id_ignore_all
-                )
+                HomeduinoRFSwitch(device_name, protocol, id, unit, id_ignore_all)
             )
 
     async_add_entities(entities)
@@ -105,8 +103,8 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
 
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
-        
-        if self.coordinator.has_transceiver():
+
+        if self.coordinator.connected():
             if last_state := await self.async_get_last_state():
                 self._attr_is_on = last_state.state == STATE_ON
             self._attr_available = True
@@ -123,16 +121,16 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        if self.coordinator.has_transceiver() and not self._attr_available:
+        if self.coordinator.connected() and not self._attr_available:
             self._attr_available = True
             self.async_write_ha_state()
-        elif not self.coordinator.has_transceiver() and self._attr_available:
+        elif not self.coordinator.connected() and self._attr_available:
             self._attr_available = False
             self.async_write_ha_state()
 
         if not self.coordinator.data:
             return
- 
+
         if self.coordinator.data.get("protocol") != self.protocol:
             return
 
@@ -141,12 +139,12 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
 
         if (
             self.coordinator.data.get("values", {}).get("unit") != self.unit
-            and self.coordinator.data.get("values", {}).get("all", False) == False
+            and self.coordinator.data.get("values", {}).get("all", False) is False
         ):
             return
 
         if (
-            self.coordinator.data.get("values", {}).get("all", False) == True
+            self.coordinator.data.get("values", {}).get("all", False) is True
             and self.ignore_all
         ):
             return
@@ -204,38 +202,28 @@ class HomeduinoRFSwitchAll(HomeduinoRFSwitch):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        if self.coordinator.has_transceiver() and not self._attr_available:
-            self._attr_available = True
-            self.async_write_ha_state()
-        elif not self.coordinator.has_transceiver() and self._attr_available:
+        if not self.coordinator.connected():
             self._attr_available = False
-            self.async_write_ha_state()
+        else:
+            self._attr_available = True
 
-        if not self.coordinator.data:
-            return
- 
-        if self.coordinator.data.get("protocol") != self.protocol:
-            return
+            if not self.coordinator.data:
+                return
 
-        if self.coordinator.data.get("values", {}).get("id") != self.id:
-            return
+            if self.coordinator.data.get("protocol") != self.protocol:
+                return
 
-        if self.coordinator.data.get("values", {}).get("all", False) != True:
-            return
+            if self.coordinator.data.get("values", {}).get("id") != self.id:
+                return
 
-        _LOGGER.debug(self.coordinator.data)
+            if not self.coordinator.data.get("values", {}).get("all", False) is not True:
+                return
 
-        updated = False
+            _LOGGER.debug(self.coordinator.data)
 
-        new_state = self.coordinator.data.get("values", {}).get("state")
-        if self._attr_is_on != new_state:
-            _LOGGER.debug("Updating state to %s", new_state)
-            self._attr_is_on = new_state
-            updated = True
+            self._attr_is_on = self.coordinator.data.get("values", {}).get("state")
 
-        # Only update the HA state if state has updated.
-        if updated:
-            self.async_write_ha_state()
+        self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs) -> None:
         """Turn the entity on."""

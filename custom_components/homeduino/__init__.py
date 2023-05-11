@@ -9,12 +9,11 @@ from datetime import timedelta
 import serial
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
-from homeassistant.core import HomeAssistant, callback, ServiceCall
+from homeassistant.core import HomeAssistant, ServiceCall, callback
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.entity import DeviceInfo
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator,\
-    UpdateFailed
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from homeduino import Homeduino
 
 from .const import (
@@ -44,7 +43,7 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
     _instance = None
 
     serial_port = None
-    transceiver = None
+    transceiver: Homeduino = None
 
     binary_sensors = []
     analog_sensors = []
@@ -67,18 +66,22 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
             update_interval=timedelta(seconds=5),
         )
 
-    def add_transceiver(
-        self, transceiver: Homeduino
-    ):
+    def add_transceiver(self, transceiver: Homeduino):
         """Add a Homeduino transceiver."""
 
         self.transceiver = transceiver
         self.transceiver.add_rf_receive_callback(self.rf_receive_callback)
-        
+
         self.async_set_updated_data(None)
 
     def has_transceiver(self):
         return self.transceiver is not None
+
+    def connected(self):
+        if not self.transceiver:
+            return False
+
+        return self.transceiver.connected()
 
     def remove_transceiver(self, serial_port):
         _LOGGER.debug(self.transceiver)
@@ -88,36 +91,46 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
 
     async def _async_update_data(self):
         if not self.transceiver:
-            raise UpdateFailed(f"No Homeduino configured")
+            raise UpdateFailed("No Homeduino configured")
+
+        if not self.transceiver.connected() and not await self.transceiver.connect():
+            _LOGGER.error("Homeduino not connected")
+            raise UpdateFailed("Homeduino not connected")
 
         if not await self.transceiver.ping():
             # self.transceiver.disconnect()
             # self.transceiver = None
-            raise UpdateFailed(f"Unable to ping Homeduino")
-        
+            raise UpdateFailed("Unable to ping Homeduino")
+
         return None
 
     @callback
     def rf_receive_callback(self, decoded) -> None:
         """Handle received messages."""
         _LOGGER.info(
-            f"RF Protocol: %s Values: %s",
+            "RF Protocol: %s Values: %s",
             decoded["protocol"],
             json.dumps(decoded["values"]),
         )
         self.async_set_updated_data(decoded)
 
-    def rf_send(self, protocol: str, values):
-        if self.transceiver:
-            return self.transceiver.rf_send(protocol, values)
+    async def rf_send(self, protocol: str, values):
+        if not self.transceiver:
+            return False
 
-        return False
+        if not self.transceiver.connected() and not await self.transceiver.connect():
+            return False
 
-    def send(self, command):
-        if self.transceiver:
-            return self.transceiver.send_command(command)
+        return await self.transceiver.rf_send(protocol, values)
 
-        return False
+    async def send(self, command):
+        if not self.transceiver:
+            return False
+
+        if not self.transceiver.connected() and not await self.transceiver.connect():
+            return False
+
+        return self.transceiver.send_command(command)
 
 
 def setup(hass, config):
@@ -127,7 +140,7 @@ def setup(hass, config):
         """Handle the service call."""
         command: str = call.data.get("command")
 
-        return HomeduinoCoordinator.instance().send(command.strip())
+        return await HomeduinoCoordinator.instance().send(command.strip())
 
     hass.services.async_register(DOMAIN, "send", async_handle_send)
 
@@ -140,7 +153,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     entry_type = entry.data.get(CONF_ENTRY_TYPE)
 
     homeduino_coordinator = HomeduinoCoordinator.instance(hass)
-    
+
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
         if homeduino_coordinator.has_transceiver():
             # We allow only one transceiver
@@ -150,18 +163,25 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         # Set up Homeduino 433 MHz RF transceiver
         try:
             serial_port = entry.data.get(CONF_SERIAL_PORT, None)
-            
-            homeduino = Homeduino(serial_port, entry.options.get(CONF_RECEIVE_PIN), entry.options.get(CONF_SEND_PIN))
+
+            homeduino = Homeduino(
+                serial_port,
+                entry.options.get(CONF_RECEIVE_PIN),
+                entry.options.get(CONF_SEND_PIN),
+            )
 
             if not await homeduino.connect():
                 raise ConfigEntryNotReady(f"Unable to connect to device {serial_port}")
-    
+
             homeduino_coordinator.add_transceiver(homeduino)
 
             # Create the device if not exists
             device_registry = dr.async_get(hass)
             device_registry.async_get_or_create(
-                config_entry_id=entry.entry_id, identifiers={(DOMAIN, serial_port)}, manufacturer="pimatic", name="Homeduino Transceiver"
+                config_entry_id=entry.entry_id,
+                identifiers={(DOMAIN, serial_port)},
+                manufacturer="pimatic",
+                name="Homeduino Transceiver",
             )
 
             _LOGGER.info("Homeduino transceiver on %s is available", serial_port)
@@ -185,7 +205,9 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
         serial_port = entry.data.get(CONF_SERIAL_PORT, None)
         HomeduinoCoordinator.instance(hass).remove_transceiver(serial_port)
-        if unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
+        if unload_ok := await hass.config_entries.async_unload_platforms(
+            entry, PLATFORMS
+        ):
             hass.data[DOMAIN].pop(entry.entry_id)
     elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
         unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)

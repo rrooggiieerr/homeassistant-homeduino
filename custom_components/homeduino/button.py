@@ -53,9 +53,7 @@ async def async_setup_entry(
         if config_entry.options.get(CONF_RF_UNIT_EXTRAPOLATE):
             for i in range(unit + 1):
                 entities.append(
-                    HomeduinoRFButton(
-                        device_name, protocol, id, i, True, id_ignore_all
-                    )
+                    HomeduinoRFButton(device_name, protocol, id, i, True, id_ignore_all)
                 )
                 entities.append(
                     HomeduinoRFButton(
@@ -63,18 +61,18 @@ async def async_setup_entry(
                     )
                 )
             if id_ignore_all:
-                entities.append(HomeduinoRFButtonAll(device_name, protocol, id, unit + 1, True))
-                entities.append(HomeduinoRFButtonAll(device_name, protocol, id, unit + 1, False))
+                entities.append(
+                    HomeduinoRFButtonAll(device_name, protocol, id, unit + 1, True)
+                )
+                entities.append(
+                    HomeduinoRFButtonAll(device_name, protocol, id, unit + 1, False)
+                )
         else:
             entities.append(
-                HomeduinoRFButton(
-                    device_name, protocol, id, unit, True, id_ignore_all
-                )
+                HomeduinoRFButton(device_name, protocol, id, unit, True, id_ignore_all)
             )
             entities.append(
-                HomeduinoRFButton(
-                    device_name, protocol, id, unit, False, id_ignore_all
-                )
+                HomeduinoRFButton(device_name, protocol, id, unit, False, id_ignore_all)
             )
 
     async_add_entities(entities)
@@ -117,20 +115,20 @@ class HomeduinoRFButton(CoordinatorEntity, ButtonEntity, RestoreEntity):
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
         _LOGGER.debug("async_added_to_hass")
-        
-        if self.coordinator.has_transceiver():
+
+        if self.coordinator.connected():
             self._attr_available = True
             self.async_write_ha_state()
 
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        if self.coordinator.has_transceiver() and not self._attr_available:
-            self._attr_available = True
-            self.async_write_ha_state()
-        elif not self.coordinator.has_transceiver() and self._attr_available:
+        if not self.coordinator.connected():
             self._attr_available = False
-            self.async_write_ha_state()
+        else:
+            self._attr_available = True
+
+        self.async_write_ha_state()
 
     @property
     def available(self) -> bool:
@@ -150,12 +148,7 @@ class HomeduinoRFButton(CoordinatorEntity, ButtonEntity, RestoreEntity):
 
 class HomeduinoRFButtonAll(HomeduinoRFButton):
     def __init__(
-        self,
-        device_name: str,
-        protocol: str,
-        id: int,
-        unit: int,
-        state: bool
+        self, device_name: str, protocol: str, id: int, unit: int, state: bool
     ) -> None:
         """Initialize the button."""
         super().__init__(device_name, protocol, id, unit, state, True)
@@ -166,5 +159,6 @@ class HomeduinoRFButtonAll(HomeduinoRFButton):
         """Turn the entity on."""
         _LOGGER.debug("Switching %s", self._attr_name)
         await self.coordinator.rf_send(
-            self.protocol, {"id": self.id, "unit": 0, "state": self._unit_state, "all": True},
+            self.protocol,
+            {"id": self.id, "unit": 0, "state": self._unit_state, "all": True},
         )

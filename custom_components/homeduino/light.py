@@ -88,7 +88,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
 
         self._attr_unique_id = f"{DOMAIN}-{protocol}-{id}-{unit}"
 
-        self._attr_name = f"Light"
+        self._attr_name = "Light"
         self.protocol = protocol
         self.id = id
         self.unit = unit
@@ -97,7 +97,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
-        if self.coordinator.has_transceiver():
+        if self.coordinator.connected():
             if last_state := await self.async_get_last_state():
                 self._attr_is_on = last_state.state == STATE_ON
             self._attr_available = True
@@ -114,55 +114,42 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        if self.coordinator.has_transceiver() and not self._attr_available:
-            self._attr_available = True
-            self.async_write_ha_state()
-        elif not self.coordinator.has_transceiver() and self._attr_available:
+        if not self.coordinator.connected():
             self._attr_available = False
-            self.async_write_ha_state()
+        else:
+            self._attr_available = True
 
-        if not self.coordinator.data:
-            return
- 
-        if self.coordinator.data.get("protocol") != self.protocol:
-            return
+            if not self.coordinator.data:
+                return
 
-        if self.coordinator.data.get("values", {}).get("id") != self.id:
-            return
+            if self.coordinator.data.get("protocol") != self.protocol:
+                return
 
-        if (
-            self.coordinator.data.get("values", {}).get("unit") != self.unit
-            and self.coordinator.data.get("values", {}).get("all", False) == False
-        ):
-            return
+            if self.coordinator.data.get("values", {}).get("id") != self.id:
+                return
 
-        if (
-            self.coordinator.data.get("values", {}).get("all", False) == True
-            and self.ignore_all
-        ):
-            return
+            if (
+                self.coordinator.data.get("values", {}).get("unit") != self.unit
+                and self.coordinator.data.get("values", {}).get("all", False) is False
+            ):
+                return
 
-        _LOGGER.debug(self.coordinator.data)
+            if (
+                self.coordinator.data.get("values", {}).get("all", False) is True
+                and self.ignore_all
+            ):
+                return
 
-        updated = False
+            _LOGGER.debug(self.coordinator.data)
 
-        new_state = self.coordinator.data.get("values", {}).get("state")
-        if self._attr_is_on != new_state:
-            _LOGGER.debug("Updating state to %s", new_state)
-            self._attr_is_on = new_state
-            updated = True
+            self._attr_is_on = self.coordinator.data.get("values", {}).get("state")
 
-        new_brightness = self.coordinator.data.get("values", {}).get("dimlevel")
-        new_brightness = new_brightness * 17
-        if self.brightness != new_brightness:
-            _LOGGER.debug("Updating brightness to %s", new_brightness)
+            new_brightness = self.coordinator.data.get("values", {}).get("dimlevel")
+            new_brightness = new_brightness * 17
             self._attr_brightness = new_brightness
             self.last_brightness = new_brightness
-            updated = True
 
-        # Only update the HA state if state has updated.
-        if updated:
-            self.async_write_ha_state()
+        self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs) -> None:
         """Turn the entity on."""

@@ -165,10 +165,10 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             _LOGGER.info("Device %s available", serial_port)
         except serial.SerialException as ex:
             _LOGGER.exception("Unable to connect to the device %s: %s", serial_port, ex)
-            raise CannotConnect()
-        except Exception:  # pylint: disable=broad-except
+            raise CannotConnect("Unable to connect", ex) from ex
+        except Exception as ex:  # pylint: disable=broad-except
             _LOGGER.exception("Unable to connect to the device %s: %s", serial_port, ex)
-            raise CannotConnect()
+            raise CannotConnect("Unable to connect", ex) from ex
 
         # Return title, data, options.
         return (
