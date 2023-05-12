@@ -14,8 +14,7 @@ from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
 
-from custom_components.homeduino import HomeduinoCoordinator
-
+from . import HomeduinoCoordinator
 from .const import (
     CONF_ENTRY_TYPE,
     CONF_ENTRY_TYPE_RF_DEVICE,
