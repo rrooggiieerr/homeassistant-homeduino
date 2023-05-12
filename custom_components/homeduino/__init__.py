@@ -132,7 +132,11 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         if not self.transceiver.connected() and not await self.transceiver.connect():
             return False
 
-        return await self.transceiver.rf_send(protocol, values)
+        if await self.transceiver.rf_send(protocol, values):
+            self.async_set_updated_data({"protocol": protocol, "values": values})
+            return True
+
+        return False
 
     async def send(self, command):
         if not self.transceiver:
