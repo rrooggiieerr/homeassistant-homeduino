@@ -2,7 +2,12 @@ from __future__ import annotations
 
 import logging
 
-from homeassistant.components.light import ATTR_BRIGHTNESS, ColorMode, LightEntity
+from homeassistant.components.light import (
+    ATTR_BRIGHTNESS,
+    ColorMode,
+    LightEntity,
+    LightEntityDescription,
+)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import STATE_ON
 from homeassistant.core import HomeAssistant, callback
@@ -45,13 +50,28 @@ async def async_setup_entry(
     elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE and config_entry.data.get(
         CONF_RF_PROTOCOL
     ).startswith("dimmer"):
+        coordinator = HomeduinoCoordinator.instance()
+
         device_name = config_entry.data.get(CONF_RF_DEVICE_NAME)
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
         id = config_entry.data.get(CONF_RF_ID)
         unit = config_entry.data.get(CONF_RF_UNIT)
         id_ignore_all = config_entry.options.get(CONF_RF_ID_IGNORE_ALL)
+
+        device_info = DeviceInfo(
+            identifiers={(DOMAIN, f"{protocol}-{id}")},
+            name=device_name,
+            via_device=(DOMAIN, coordinator.serial_port),
+        )
+
+        entity_description = LightEntityDescription(
+            key=(protocol, id, unit), name="Light"
+        )
+
         entities.append(
-            HomeduinoRFDimmer(device_name, protocol, id, unit, id_ignore_all)
+            HomeduinoRFDimmer(
+                coordinator, device_info, entity_description, id_ignore_all
+            )
         )
 
     async_add_entities(entities)
@@ -71,27 +91,25 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
 
     def __init__(
         self,
-        device_name: str,
-        protocol: str,
-        id: int,
-        unit: int,
+        coordinator: HomeduinoCoordinator,
+        device_info: DeviceInfo,
+        entity_description: LightEntityDescription,
         ignore_all: bool = False,
     ) -> None:
         """Initialize the switch."""
-        super().__init__(HomeduinoCoordinator.instance())
-
-        self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, f"{protocol}-{id}")},
-            name=device_name,
-            via_device=(DOMAIN, self.coordinator.serial_port),
+        super().__init__(
+            coordinator,
         )
 
-        self._attr_unique_id = f"{DOMAIN}-{protocol}-{id}-{unit}"
+        self.protocol = entity_description.key[0]
+        self.id = entity_description.key[1]
+        self.unit = entity_description.key[2]
 
-        self._attr_name = "Light"
-        self.protocol = protocol
-        self.id = id
-        self.unit = unit
+        self._attr_device_info = device_info
+
+        self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}"
+
+        self.entity_description = entity_description
         self.ignore_all = ignore_all
 
     async def async_added_to_hass(self) -> None:
@@ -153,7 +171,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
 
     async def async_turn_on(self, **kwargs) -> None:
         """Turn the entity on."""
-        _LOGGER.debug("Turning on %s", self._attr_name)
+        _LOGGER.debug("Turning on %s", self.name)
         brightness = kwargs.get(ATTR_BRIGHTNESS)
         state = None
         if brightness:
@@ -174,11 +192,11 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
             self.last_brightness = self._attr_brightness
             self.async_write_ha_state()
         else:
-            _LOGGER.error("Failed to switch on %s", self._attr_name)
+            _LOGGER.error("Failed to switch on %s", self.name)
 
     async def async_turn_off(self, **kwargs) -> None:
         """Turn the entity off."""
-        _LOGGER.debug("Turning off %s", self._attr_name)
+        _LOGGER.debug("Turning off %s", self.name)
         if await self.coordinator.rf_send(
             self.protocol,
             {"id": self.id, "unit": self.unit, "state": False, "dimlevel": 0},
@@ -186,4 +204,4 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
             self._attr_is_on = False
             self.async_write_ha_state()
         else:
-            _LOGGER.error("Failed to switch off %s", self._attr_name)
+            _LOGGER.error("Failed to switch off %s", self.name)

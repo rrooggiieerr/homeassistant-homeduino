@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 
-from homeassistant.components.button import ButtonEntity
+from homeassistant.components.button import ButtonEntity, ButtonEntityDescription
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import DeviceInfo
@@ -45,34 +45,80 @@ async def async_setup_entry(
     elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE and config_entry.data.get(
         CONF_RF_PROTOCOL
     ).startswith("button"):
+        coordinator = HomeduinoCoordinator.instance()
+
         device_name = config_entry.data.get(CONF_RF_DEVICE_NAME)
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
+        protocol = protocol.replace("button", "switch")
         id = config_entry.data.get(CONF_RF_ID)
         unit = config_entry.data.get(CONF_RF_UNIT)
         id_ignore_all = config_entry.options.get(CONF_RF_ID_IGNORE_ALL)
+
+        device_info = DeviceInfo(
+            identifiers={(DOMAIN, f"{protocol}-{id}")},
+            name=device_name,
+            via_device=(DOMAIN, coordinator.serial_port),
+        )
+
         if config_entry.options.get(CONF_RF_UNIT_EXTRAPOLATE):
             for i in range(unit + 1):
-                entities.append(
-                    HomeduinoRFButton(device_name, protocol, id, i, True, id_ignore_all)
+                entity_description = ButtonEntityDescription(
+                    key=(protocol, id, i), name=f"Button {i} On"
                 )
                 entities.append(
                     HomeduinoRFButton(
-                        device_name, protocol, id, i, False, id_ignore_all
+                        coordinator,
+                        device_info,
+                        entity_description,
+                        True,
+                        id_ignore_all,
+                    )
+                )
+                entity_description = ButtonEntityDescription(
+                    key=(protocol, id, i), name=f"Button {i} Off"
+                )
+                entities.append(
+                    HomeduinoRFButton(
+                        coordinator,
+                        device_info,
+                        entity_description,
+                        False,
+                        id_ignore_all,
                     )
                 )
             if id_ignore_all:
-                entities.append(
-                    HomeduinoRFButtonAll(device_name, protocol, id, unit + 1, True)
+                entity_description = ButtonEntityDescription(
+                    key=(protocol, id, unit + 1), name=f"Button {unit + 1} On"
                 )
                 entities.append(
-                    HomeduinoRFButtonAll(device_name, protocol, id, unit + 1, False)
+                    HomeduinoRFButtonAll(
+                        coordinator, device_info, entity_description, True
+                    )
+                )
+                entity_description = ButtonEntityDescription(
+                    key=(protocol, id, unit + 1), name=f"Button {unit + 1} Off"
+                )
+                entities.append(
+                    HomeduinoRFButtonAll(
+                        coordinator, device_info, entity_description, False
+                    )
                 )
         else:
-            entities.append(
-                HomeduinoRFButton(device_name, protocol, id, unit, True, id_ignore_all)
+            entity_description = ButtonEntityDescription(
+                key=(protocol, id, unit), name=f"Button {unit} On"
             )
             entities.append(
-                HomeduinoRFButton(device_name, protocol, id, unit, False, id_ignore_all)
+                HomeduinoRFButton(
+                    coordinator, device_info, entity_description, True, id_ignore_all
+                )
+            )
+            entity_description = ButtonEntityDescription(
+                key=(protocol, id, unit), name=f"Button {unit} Off"
+            )
+            entities.append(
+                HomeduinoRFButton(
+                    coordinator, device_info, entity_description, False, id_ignore_all
+                )
             )
 
     async_add_entities(entities)
@@ -87,29 +133,25 @@ class HomeduinoRFButton(CoordinatorEntity, ButtonEntity, RestoreEntity):
 
     def __init__(
         self,
-        device_name: str,
-        protocol: str,
-        id: int,
-        unit: int,
+        coordinator: HomeduinoCoordinator,
+        device_info: DeviceInfo,
+        entity_description: ButtonEntityDescription,
         state: bool,
         ignore_all: bool = False,
     ) -> None:
         """Initialize the button."""
-        super().__init__(HomeduinoCoordinator.instance())
+        super().__init__(coordinator)
 
-        self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, f"{protocol}-{id}")},
-            name=device_name,
-            via_device=(DOMAIN, self.coordinator.serial_port),
-        )
+        self.protocol = entity_description.key[0]
+        self.id = entity_description.key[1]
+        self.unit = entity_description.key[2]
 
-        self._attr_unique_id = f"{DOMAIN}-{protocol}-{id}-{unit}-{state}"
+        self._attr_device_info = device_info
 
-        self._attr_name = f"Button {unit} {state}"
-        self.protocol = protocol.replace("button", "switch")
-        self.id = id
-        self.unit = unit
+        self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}-{state}"
+
         self._unit_state = state
+        self.entity_description = entity_description
         self.ignore_all = ignore_all
 
     async def async_added_to_hass(self) -> None:
@@ -140,7 +182,7 @@ class HomeduinoRFButton(CoordinatorEntity, ButtonEntity, RestoreEntity):
 
     async def async_press(self, **kwargs) -> None:
         """Turn the entity on."""
-        _LOGGER.debug("Switching %s", self._attr_name)
+        _LOGGER.debug("Switching %s", self.name)
         await self.coordinator.rf_send(
             self.protocol, {"id": self.id, "unit": self.unit, "state": self._unit_state}
         )
@@ -148,16 +190,20 @@ class HomeduinoRFButton(CoordinatorEntity, ButtonEntity, RestoreEntity):
 
 class HomeduinoRFButtonAll(HomeduinoRFButton):
     def __init__(
-        self, device_name: str, protocol: str, id: int, unit: int, state: bool
+        self,
+        coordinator: HomeduinoCoordinator,
+        device_info: DeviceInfo,
+        entity_description: ButtonEntityDescription,
+        state: bool,
     ) -> None:
         """Initialize the button."""
-        super().__init__(device_name, protocol, id, unit, state, True)
+        super().__init__(coordinator, device_info, entity_description, state, True)
 
-        self._attr_unique_id = f"{DOMAIN}-{protocol}-{id}-all-{state}"
+        self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-all-{self.state}"
 
     async def async_press(self, **kwargs) -> None:
         """Turn the entity on."""
-        _LOGGER.debug("Switching %s", self._attr_name)
+        _LOGGER.debug("Switching %s", self.name)
         await self.coordinator.rf_send(
             self.protocol,
             {"id": self.id, "unit": 0, "state": self._unit_state, "all": True},

@@ -2,7 +2,11 @@ from __future__ import annotations
 
 import logging
 
-from homeassistant.components.switch import SwitchDeviceClass, SwitchEntity
+from homeassistant.components.switch import (
+    SwitchDeviceClass,
+    SwitchEntity,
+    SwitchEntityDescription,
+)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import STATE_ON
 from homeassistant.core import HomeAssistant, callback
@@ -46,23 +50,45 @@ async def async_setup_entry(
     elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE and config_entry.data.get(
         CONF_RF_PROTOCOL
     ).startswith("switch"):
+        coordinator = HomeduinoCoordinator.instance()
+
         device_name = config_entry.data.get(CONF_RF_DEVICE_NAME)
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
         id = config_entry.data.get(CONF_RF_ID)
         unit = config_entry.data.get(CONF_RF_UNIT)
         id_ignore_all = config_entry.options.get(CONF_RF_ID_IGNORE_ALL)
+
+        device_info = DeviceInfo(
+            identifiers={(DOMAIN, f"{protocol}-{id}")},
+            name=device_name,
+            via_device=(DOMAIN, coordinator.serial_port),
+        )
+
         if config_entry.options.get(CONF_RF_UNIT_EXTRAPOLATE):
             for i in range(unit + 1):
+                entity_description = SwitchEntityDescription(
+                    key=(protocol, id, i), name=f"Switch {i}"
+                )
                 entities.append(
-                    HomeduinoRFSwitch(device_name, protocol, id, i, id_ignore_all)
+                    HomeduinoRFSwitch(
+                        coordinator, device_info, entity_description, id_ignore_all
+                    )
                 )
             if id_ignore_all:
+                entity_description = SwitchEntityDescription(
+                    key=(protocol, id, unit + 1), name=f"Switch {unit + 1}"
+                )
                 entities.append(
-                    HomeduinoRFSwitchAll(device_name, protocol, id, unit + 1)
+                    HomeduinoRFSwitchAll(coordinator, device_info, entity_description)
                 )
         else:
+            entity_description = SwitchEntityDescription(
+                key=(protocol, id, unit), name=f"Switch {unit}"
+            )
             entities.append(
-                HomeduinoRFSwitch(device_name, protocol, id, unit, id_ignore_all)
+                HomeduinoRFSwitch(
+                    coordinator, device_info, entity_description, id_ignore_all
+                )
             )
 
     async_add_entities(entities)
@@ -78,27 +104,23 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
 
     def __init__(
         self,
-        device_name: str,
-        protocol: str,
-        id: int,
-        unit: int,
+        coordinator: HomeduinoCoordinator,
+        device_info: DeviceInfo,
+        entity_description: SwitchEntityDescription,
         ignore_all: bool = False,
     ) -> None:
         """Initialize the switch."""
-        super().__init__(HomeduinoCoordinator.instance())
+        super().__init__(coordinator, entity_description.key)
 
-        self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, f"{protocol}-{id}")},
-            name=device_name,
-            via_device=(DOMAIN, self.coordinator.serial_port),
-        )
+        self.protocol = entity_description.key[0]
+        self.id = entity_description.key[1]
+        self.unit = entity_description.key[2]
 
-        self._attr_unique_id = f"{DOMAIN}-{protocol}-{id}-{unit}"
+        self._attr_device_info = device_info
 
-        self._attr_name = f"Switch {unit}"
-        self.protocol = protocol
-        self.id = id
-        self.unit = unit
+        self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}"
+
+        self.entity_description = entity_description
         self.ignore_all = ignore_all
 
     async def async_added_to_hass(self) -> None:
@@ -165,39 +187,38 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
 
     async def async_turn_on(self, **kwargs) -> None:
         """Turn the entity on."""
-        _LOGGER.debug("Turning on %s", self._attr_name)
+        _LOGGER.debug("Turning on %s", self.name)
         if await self.coordinator.rf_send(
             self.protocol, {"id": self.id, "unit": self.unit, "state": True}
         ):
             self._attr_is_on = True
             self.async_write_ha_state()
         else:
-            _LOGGER.error("Failed to switch on %s", self._attr_name)
+            _LOGGER.error("Failed to switch on %s", self.name)
 
     async def async_turn_off(self, **kwargs) -> None:
         """Turn the entity off."""
-        _LOGGER.debug("Turning off %s", self._attr_name)
+        _LOGGER.debug("Turning off %s", self.name)
         if await self.coordinator.rf_send(
             self.protocol, {"id": self.id, "unit": self.unit, "state": False}
         ):
             self._attr_is_on = False
             self.async_write_ha_state()
         else:
-            _LOGGER.error("Failed to switch off %s", self._attr_name)
+            _LOGGER.error("Failed to switch off %s", self.name)
 
 
 class HomeduinoRFSwitchAll(HomeduinoRFSwitch):
     def __init__(
         self,
-        device_name: str,
-        protocol: str,
-        id: int,
-        unit: int,
+        coordinator: HomeduinoCoordinator,
+        device_info: DeviceInfo,
+        entity_description: SwitchEntityDescription,
     ) -> None:
         """Initialize the switch."""
-        super().__init__(device_name, protocol, id, unit, True)
+        super().__init__(coordinator, device_info, entity_description, True)
 
-        self._attr_unique_id = f"{DOMAIN}-{protocol}-{id}-all"
+        self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-all"
 
     @callback
     def _handle_coordinator_update(self) -> None:
@@ -216,7 +237,7 @@ class HomeduinoRFSwitchAll(HomeduinoRFSwitch):
             if self.coordinator.data.get("values", {}).get("id") != self.id:
                 return
 
-            if not self.coordinator.data.get("values", {}).get("all", False) is not True:
+            if self.coordinator.data.get("values", {}).get("all", False) is not True:
                 return
 
             _LOGGER.debug(self.coordinator.data)
@@ -227,7 +248,7 @@ class HomeduinoRFSwitchAll(HomeduinoRFSwitch):
 
     async def async_turn_on(self, **kwargs) -> None:
         """Turn the entity on."""
-        _LOGGER.debug("Turning on %s", self._attr_name)
+        _LOGGER.debug("Turning on %s", self.name)
         if await self.coordinator.rf_send(
             self.protocol,
             {"id": self.id, "unit": 0, "state": True, "all": True},
@@ -235,11 +256,11 @@ class HomeduinoRFSwitchAll(HomeduinoRFSwitch):
             self._attr_is_on = True
             self.async_write_ha_state()
         else:
-            _LOGGER.error("Failed to switch on %s", self._attr_name)
+            _LOGGER.error("Failed to switch on %s", self.name)
 
     async def async_turn_off(self, **kwargs) -> None:
         """Turn the entity off."""
-        _LOGGER.debug("Turning off %s", self._attr_name)
+        _LOGGER.debug("Turning off %s", self.name)
         if await self.coordinator.rf_send(
             self.protocol,
             {"id": self.id, "unit": 0, "state": False, "all": True},
@@ -247,4 +268,4 @@ class HomeduinoRFSwitchAll(HomeduinoRFSwitch):
             self._attr_is_on = False
             self.async_write_ha_state()
         else:
-            _LOGGER.error("Failed to switch off %s", self._attr_name)
+            _LOGGER.error("Failed to switch off %s", self.name)
