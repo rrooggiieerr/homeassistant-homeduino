@@ -207,7 +207,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 vol.Required(
                     CONF_RF_ID, default=user_input.get(CONF_RF_ID)
                 ): cv.positive_int,
-                vol.Required(
+                vol.Optional(
                     CONF_RF_UNIT, default=user_input.get(CONF_RF_UNIT)
                 ): cv.positive_int,
                 vol.Optional(
