@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 from typing import Any
 
 import homeassistant.helpers.config_validation as cv
@@ -13,6 +14,7 @@ from homeassistant import config_entries
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
+from homeduino.homeduino import controller
 
 from . import HomeduinoCoordinator
 from .const import (
@@ -186,6 +188,14 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if not user_input:
             user_input = {}
 
+        def natural_sort(l):
+            convert = lambda text: int(text) if text.isdigit() else text.lower()
+            alphanum_key = lambda key: [convert(c) for c in re.split("([0-9]+)", key)]
+            return sorted(l, key=alphanum_key)
+
+        protocol_names = [protocol.name for protocol in controller.get_all_protocols()]
+        protocol_names = natural_sort(protocol_names)
+
         self.STEP_SETUP_SCHEMA = vol.Schema(
             {
                 vol.Required(
@@ -193,7 +203,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 ): cv.string,
                 vol.Required(
                     CONF_RF_PROTOCOL, default=user_input.get(CONF_RF_PROTOCOL)
-                ): vol.In(["button1", "switch1", "dimmer1"]),
+                ): vol.In(protocol_names),
                 vol.Required(
                     CONF_RF_ID, default=user_input.get(CONF_RF_ID)
                 ): cv.positive_int,
