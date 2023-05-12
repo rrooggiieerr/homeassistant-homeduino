@@ -6,7 +6,9 @@ import logging
 import os
 from datetime import timedelta
 
+import homeassistant.helpers.config_validation as cv
 import serial
+import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant, ServiceCall, callback
@@ -35,6 +37,14 @@ PLATFORMS: list[Platform] = [
     Platform.SENSOR,
     Platform.SWITCH,
 ]
+
+CONF_SERVICE_COMMAND = "command"
+
+SERVICE_SEND_SCHEMA = vol.Schema(
+    {
+        vol.Required(CONF_SERVICE_COMMAND): cv.string,
+    }
+)
 
 
 class HomeduinoCoordinator(DataUpdateCoordinator):
@@ -133,16 +143,18 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         return self.transceiver.send_command(command)
 
 
-def setup(hass, config):
+async def async_setup(hass: HomeAssistant, config: ConfigType):
     """Set up is called when Home Assistant is loading our component."""
 
     async def async_handle_send(call: ServiceCall):
         """Handle the service call."""
-        command: str = call.data.get("command")
+        command: str = call.data.get(CONF_SERVICE_COMMAND)
 
         return await HomeduinoCoordinator.instance().send(command.strip())
 
-    hass.services.async_register(DOMAIN, "send", async_handle_send)
+    hass.services.async_register(
+        DOMAIN, "send", async_handle_send, schema=SERVICE_SEND_SCHEMA
+    )
 
     # Return boolean to indicate that initialization was successful.
     return True
