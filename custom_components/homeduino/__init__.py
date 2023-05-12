@@ -145,7 +145,7 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         if not self.transceiver.connected() and not await self.transceiver.connect():
             return False
 
-        return self.transceiver.send_command(command)
+        return self.transceiver.send(command)
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType):
