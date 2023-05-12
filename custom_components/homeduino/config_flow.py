@@ -82,12 +82,8 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 vol.Exclusive(
                     CONF_MANUAL_PATH, CONF_SERIAL_PORT, CONF_MANUAL_PATH
                 ): cv.string,
-                vol.Optional(CONF_RECEIVE_PIN, default=2): vol.All(
-                    cv.positive_int, vol.Range(min=2, max=3)
-                ),
-                vol.Optional(CONF_SEND_PIN, default=4): vol.All(
-                    cv.positive_int, vol.Range(min=4, max=13)
-                ),
+                vol.Optional(CONF_RECEIVE_PIN, default=2): vol.In(range(2, 4)),
+                vol.Optional(CONF_SEND_PIN, default=4): vol.In(range(4, 14)),
             }
         )
 
