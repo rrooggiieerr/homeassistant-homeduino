@@ -50,8 +50,8 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         # Test if we already have a Homeduino transceiver configured
         if not HomeduinoCoordinator.instance().has_transceiver():
             return await self.async_step_setup_transceiver(user_input)
-        else:
-            return await self.async_step_setup_rf_device(user_input)
+
+        return await self.async_step_setup_rf_device(user_input)
 
     async def async_step_setup_transceiver(
         self, user_input: dict[str, Any] | None = {}
@@ -127,7 +127,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             serial_port = data[CONF_SERIAL_PORT]
 
         if serial_port is None:
-            raise vol.error.RequiredFieldInvalid()
+            raise vol.error.RequiredFieldInvalid("No serial port configured")
 
         serial_port = await self.hass.async_add_executor_job(
             get_serial_by_id, serial_port
