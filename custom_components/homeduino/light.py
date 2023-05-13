@@ -66,11 +66,18 @@ async def async_setup_entry(
             key=(protocol, id, unit), name="Light"
         )
 
-        entities.append(
-            HomeduinoRFDimmer(
-                coordinator, device_info, entity_description, id_ignore_all
+        if config_entry.data.get(CONF_RF_PROTOCOL) == "dimmer1":
+            entities.append(
+                HomeduinoRFDimmer1(
+                    coordinator, device_info, entity_description, id_ignore_all
+                )
             )
-        )
+        else:
+            entities.append(
+                HomeduinoRFDimmer(
+                    coordinator, device_info, entity_description, id_ignore_all
+                )
+            )
 
     async_add_entities(entities)
 
@@ -100,6 +107,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         )
 
         self.protocol = entity_description.key[0]
+        self.protocols = [entity_description.key[0]]
         self.id = entity_description.key[1]
         self.unit = entity_description.key[2]
 
@@ -138,7 +146,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
             if not self.coordinator.data:
                 return
 
-            if self.coordinator.data.get("protocol") != self.protocol:
+            if self.coordinator.data.get("protocol") in self.protocols:
                 return
 
             if self.coordinator.data.get("values", {}).get("id") != self.id:
@@ -160,10 +168,13 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
 
             self._attr_is_on = self.coordinator.data.get("values", {}).get("state")
 
-            new_brightness = self.coordinator.data.get("values", {}).get("dimlevel")
-            new_brightness = new_brightness * 17
-            self._attr_brightness = new_brightness
-            self.last_brightness = new_brightness
+            new_brightness = self.coordinator.data.get("values", {}).get(
+                "dimlevel", None
+            )
+            if new_brightness:
+                new_brightness = new_brightness * 17
+                self._attr_brightness = new_brightness
+                self.last_brightness = new_brightness
 
         self.async_write_ha_state()
 
@@ -203,3 +214,17 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
             self.async_write_ha_state()
         else:
             _LOGGER.error("Failed to switch off %s", self.name)
+
+
+class HomeduinoRFDimmer1(HomeduinoRFDimmer):
+    def __init__(
+        self,
+        coordinator: HomeduinoCoordinator,
+        device_info: DeviceInfo,
+        entity_description: LightEntityDescription,
+        ignore_all: bool = False,
+    ) -> None:
+        """Initialize the switch."""
+        super().__init__(coordinator, device_info, entity_description, ignore_all)
+
+        self.protocols.append("switch1")
