@@ -142,6 +142,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
             self._attr_available = False
         else:
             self._attr_available = True
+            self.async_write_ha_state()
 
             if not self.coordinator.data:
                 return
