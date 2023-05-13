@@ -23,7 +23,6 @@ from .const import (
     CONF_ENTRY_TYPE_TRANSCEIVER,
     CONF_MANUAL_PATH,
     CONF_RECEIVE_PIN,
-    CONF_RF_DEVICE_NAME,
     CONF_RF_ID,
     CONF_RF_ID_IGNORE_ALL,
     CONF_RF_PROTOCOL,
@@ -169,7 +168,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         # Return title, data, options.
         return (
-            serial_port,
+            f"Homeduino Tranceiver {serial_port}",
             {
                 CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_TRANSCEIVER,
                 CONF_SERIAL_PORT: serial_port,
@@ -198,9 +197,6 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         self.STEP_SETUP_SCHEMA = vol.Schema(
             {
-                vol.Required(
-                    CONF_RF_DEVICE_NAME, default=user_input.get(CONF_RF_DEVICE_NAME)
-                ): cv.string,
                 vol.Required(
                     CONF_RF_PROTOCOL, default=user_input.get(CONF_RF_PROTOCOL)
                 ): vol.In(protocol_names),
@@ -248,7 +244,6 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         # Validate the data can be used to set up a connection.
         self.STEP_SETUP_SCHEMA(data)
 
-        rf_device_name: str = data.get(CONF_RF_DEVICE_NAME).strip()
         rf_protocol: str = data.get(CONF_RF_PROTOCOL).strip()
         rf_id: int = data.get(CONF_RF_ID)
         rf_unit: int = data.get(CONF_RF_UNIT)
@@ -263,10 +258,9 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         # Return title, data, options.
         return (
-            rf_device_name,
+            f"{rf_protocol} {rf_id}",
             {
                 CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_RF_DEVICE,
-                CONF_RF_DEVICE_NAME: rf_device_name,
                 CONF_RF_PROTOCOL: rf_protocol,
                 CONF_RF_ID: rf_id,
                 CONF_RF_UNIT: rf_unit,

@@ -15,7 +15,6 @@ from .const import (
     CONF_ENTRY_TYPE,
     CONF_ENTRY_TYPE_RF_DEVICE,
     CONF_ENTRY_TYPE_TRANSCEIVER,
-    CONF_RF_DEVICE_NAME,
     CONF_RF_ID,
     CONF_RF_ID_IGNORE_ALL,
     CONF_RF_PROTOCOL,
@@ -47,7 +46,6 @@ async def async_setup_entry(
     ).startswith("button"):
         coordinator = HomeduinoCoordinator.instance()
 
-        device_name = config_entry.data.get(CONF_RF_DEVICE_NAME)
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
         protocol = protocol.replace("button", "switch")
         id = config_entry.data.get(CONF_RF_ID)
@@ -56,7 +54,7 @@ async def async_setup_entry(
 
         device_info = DeviceInfo(
             identifiers={(DOMAIN, f"{protocol}-{id}")},
-            name=device_name,
+            name=config_entry.title,
             via_device=(DOMAIN, coordinator.serial_port),
         )
 
