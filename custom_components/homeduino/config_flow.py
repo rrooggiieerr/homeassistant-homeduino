@@ -14,10 +14,20 @@ from homeassistant import config_entries
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
-from homeduino.homeduino import controller
+from homeduino.homeduino import (
+    BAUD_RATES,
+    DEFAULT_BAUD_RATE,
+    DEFAULT_RECEIVE_PIN,
+    DEFAULT_SEND_PIN,
+    Homeduino,
+    NotReadyError,
+    controller,
+)
+from serial.serialutil import SerialException
 
 from . import HomeduinoCoordinator
 from .const import (
+    CONF_BAUD_RATE,
     CONF_ENTRY_TYPE,
     CONF_ENTRY_TYPE_RF_DEVICE,
     CONF_ENTRY_TYPE_TRANSCEIVER,
@@ -82,8 +92,15 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 vol.Exclusive(
                     CONF_MANUAL_PATH, CONF_SERIAL_PORT, CONF_MANUAL_PATH
                 ): cv.string,
-                vol.Optional(CONF_RECEIVE_PIN, default=2): vol.In(range(2, 4)),
-                vol.Optional(CONF_SEND_PIN, default=4): vol.In(range(4, 14)),
+                vol.Required(CONF_BAUD_RATE, default=DEFAULT_BAUD_RATE): vol.In(
+                    BAUD_RATES
+                ),
+                vol.Optional(CONF_RECEIVE_PIN, default=DEFAULT_RECEIVE_PIN): vol.In(
+                    range(2, 4)
+                ),
+                vol.Optional(CONF_SEND_PIN, default=DEFAULT_SEND_PIN): vol.In(
+                    range(4, 14)
+                ),
             }
         )
 
@@ -141,22 +158,22 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         # Test if we can connect to the device
         try:
-            # Create the connection instance
-            connection = serial.Serial(
-                port=serial_port,
-                baudrate=2400,
-                bytesize=serial.EIGHTBITS,
-                parity=serial.PARITY_NONE,
-                stopbits=serial.STOPBITS_ONE,
-                timeout=1,
+            homeduino = Homeduino(
+                serial_port,
+                data[CONF_BAUD_RATE],
+                data[CONF_RECEIVE_PIN],
+                data[CONF_SEND_PIN],
             )
 
-            # Open the connection
-            if not connection.is_open:
-                connection.open()
-
-            # Close the connection
-            connection.close()
+            try:
+                if not await homeduino.connect():
+                    errors["base"] = f"Unable to connect to device {serial_port}"
+            except SerialException as ex:
+                errors["base"] = ex.strerror
+            except NotReadyError as ex:
+                errors["base"] = ex.strerror
+            finally:
+                homeduino.disconnect()
 
             _LOGGER.info("Device %s available", serial_port)
         except serial.SerialException as ex:
@@ -172,6 +189,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             {
                 CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_TRANSCEIVER,
                 CONF_SERIAL_PORT: serial_port,
+                CONF_RECEIVE_PIN: data[CONF_BAUD_RATE],
             },
             {
                 CONF_RECEIVE_PIN: data[CONF_RECEIVE_PIN],

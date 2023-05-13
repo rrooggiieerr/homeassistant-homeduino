@@ -17,9 +17,15 @@ from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.typing import ConfigType
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
-from homeduino import Homeduino
+from homeduino import (
+    DEFAULT_BAUD_RATE,
+    DEFAULT_RECEIVE_PIN,
+    DEFAULT_SEND_PIN,
+    Homeduino,
+)
 
 from .const import (
+    CONF_BAUD_RATE,
     CONF_ENTRY_TYPE,
     CONF_ENTRY_TYPE_RF_DEVICE,
     CONF_ENTRY_TYPE_TRANSCEIVER,
@@ -183,8 +189,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
             homeduino = Homeduino(
                 serial_port,
-                entry.options.get(CONF_RECEIVE_PIN),
-                entry.options.get(CONF_SEND_PIN),
+                entry.options.get(CONF_BAUD_RATE, DEFAULT_BAUD_RATE),
+                entry.options.get(CONF_RECEIVE_PIN, DEFAULT_RECEIVE_PIN),
+                entry.options.get(CONF_SEND_PIN, DEFAULT_SEND_PIN),
             )
 
             if not await homeduino.connect():
