@@ -141,47 +141,38 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        if self.coordinator.connected() and not self._attr_available:
+        if self.coordinator.connected():
             self._attr_available = True
-            self.async_write_ha_state()
-        elif not self.coordinator.connected() and self._attr_available:
+        else:
             self._attr_available = False
             self.async_write_ha_state()
 
-        if not self.coordinator.data:
-            return
+            if not self.coordinator.data:
+                return
 
-        if self.coordinator.data.get("protocol") != self.protocol:
-            return
+            if self.coordinator.data.get("protocol") != self.protocol:
+                return
 
-        if self.coordinator.data.get("values", {}).get("id") != self.id:
-            return
+            if self.coordinator.data.get("values", {}).get("id") != self.id:
+                return
 
-        if (
-            self.coordinator.data.get("values", {}).get("unit") != self.unit
-            and self.coordinator.data.get("values", {}).get("all", False) is False
-        ):
-            return
+            if (
+                self.coordinator.data.get("values", {}).get("unit") != self.unit
+                and self.coordinator.data.get("values", {}).get("all", False) is False
+            ):
+                return
 
-        if (
-            self.coordinator.data.get("values", {}).get("all", False) is True
-            and self.ignore_all
-        ):
-            return
+            if (
+                self.coordinator.data.get("values", {}).get("all", False) is True
+                and self.ignore_all
+            ):
+                return
 
-        _LOGGER.debug(self.coordinator.data)
+            _LOGGER.debug(self.coordinator.data)
 
-        updated = False
+            self._attr_is_on = self.coordinator.data.get("values", {}).get("state")
 
-        new_state = self.coordinator.data.get("values", {}).get("state")
-        if self._attr_is_on != new_state:
-            _LOGGER.debug("Updating state to %s", new_state)
-            self._attr_is_on = new_state
-            updated = True
-
-        # Only update the HA state if state has updated.
-        if updated:
-            self.async_write_ha_state()
+        self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs) -> None:
         """Turn the entity on."""
