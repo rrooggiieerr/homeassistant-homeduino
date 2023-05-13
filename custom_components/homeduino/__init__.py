@@ -100,11 +100,10 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
 
         return self.transceiver.connected()
 
-    def remove_transceiver(self, serial_port):
+    async def remove_transceiver(self, serial_port):
         _LOGGER.debug(self.transceiver)
-        if self.transceiver:
-            self.transceiver.disconnect()
-        self.transceiver = None
+        if self.transceiver and await self.transceiver.disconnect():
+            self.transceiver = None
 
     async def _async_update_data(self):
         if not self.transceiver:
@@ -228,7 +227,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
         serial_port = entry.data.get(CONF_SERIAL_PORT, None)
-        HomeduinoCoordinator.instance(hass).remove_transceiver(serial_port)
+        await HomeduinoCoordinator.instance(hass).remove_transceiver(serial_port)
         if unload_ok := await hass.config_entries.async_unload_platforms(
             entry, PLATFORMS
         ):
