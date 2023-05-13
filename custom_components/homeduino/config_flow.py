@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import logging
 import os
-import re
 from typing import Any
 
 import homeassistant.helpers.config_validation as cv
@@ -21,7 +20,6 @@ from homeduino.homeduino import (
     DEFAULT_SEND_PIN,
     Homeduino,
     NotReadyError,
-    controller,
 )
 from serial.serialutil import SerialException
 
@@ -173,7 +171,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             except NotReadyError as ex:
                 errors["base"] = ex.strerror
             finally:
-                homeduino.disconnect()
+                await homeduino.disconnect()
 
             _LOGGER.info("Device %s available", serial_port)
         except serial.SerialException as ex:
@@ -205,13 +203,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if not user_input:
             user_input = {}
 
-        def natural_sort(l):
-            convert = lambda text: int(text) if text.isdigit() else text.lower()
-            alphanum_key = lambda key: [convert(c) for c in re.split("([0-9]+)", key)]
-            return sorted(l, key=alphanum_key)
-
-        protocol_names = [protocol.name for protocol in controller.get_all_protocols()]
-        protocol_names = natural_sort(protocol_names)
+        protocol_names = Homeduino.get_protocols()
 
         self.STEP_SETUP_SCHEMA = vol.Schema(
             {
