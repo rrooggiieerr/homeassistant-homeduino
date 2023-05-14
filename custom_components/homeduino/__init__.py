@@ -130,6 +130,9 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         )
         self.async_set_updated_data(decoded)
 
+        event_data = {**{"protocol": decoded["protocol"]}, **decoded["values"]}
+        self.hass.bus.async_fire(f"{DOMAIN}_event", event_data)
+
     async def rf_send(self, protocol: str, values):
         if not self.transceiver:
             return False
