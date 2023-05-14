@@ -7,7 +7,6 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from . import HomeduinoCoordinator
@@ -199,7 +198,7 @@ class HomeduinoRFButtonAll(HomeduinoRFButton):
         """Initialize the button."""
         super().__init__(coordinator, device_info, entity_description, state, True)
 
-        self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-all-{self.state}"
+        self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-all-{state}"
 
     async def async_press(self, **kwargs) -> None:
         """Turn the entity on."""
