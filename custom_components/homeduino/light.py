@@ -36,7 +36,7 @@ async def async_setup_entry(
     config_entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up the Homeduino switch."""
+    """Set up the Homeduino light."""
     entry_type = config_entry.data.get(CONF_ENTRY_TYPE)
 
     entities = []
@@ -92,8 +92,6 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
     _attr_is_on = None
     _attr_brightness = None
 
-    last_brightness = None
-
     def __init__(
         self,
         coordinator: HomeduinoCoordinator,
@@ -121,11 +119,14 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
+        if (last_state := await self.async_get_last_state()) is not None:
+            self._attr_is_on = last_state.state == STATE_ON
+            self._attr_brightness = last_state.attributes.get(ATTR_BRIGHTNESS, 255)
+
         if self.coordinator.connected():
-            if last_state := await self.async_get_last_state():
-                self._attr_is_on = last_state.state == STATE_ON
             self._attr_available = True
-            self.async_write_ha_state()
+
+        self.async_write_ha_state()
 
     @property
     def available(self) -> bool:
@@ -169,13 +170,9 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
 
             self._attr_is_on = self.coordinator.data.get("values", {}).get("state")
 
-            new_brightness = self.coordinator.data.get("values", {}).get(
-                "dimlevel", None
-            )
+            new_brightness = self.coordinator.data.get("values", {}).get("dimlevel")
             if new_brightness:
-                new_brightness = new_brightness * 17
-                self._attr_brightness = new_brightness
-                self.last_brightness = new_brightness
+                self._attr_brightness = new_brightness * 17
 
         self.async_write_ha_state()
 
@@ -184,11 +181,8 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         _LOGGER.debug("Turning on %s", self.name)
         brightness = kwargs.get(ATTR_BRIGHTNESS)
         state = None
-        if brightness:
-            self.last_brightness = brightness
-            state = None
-        else:
-            brightness = self.last_brightness
+        if not brightness:
+            brightness = self._attr_brightness
             state = True
 
         brightness = int(brightness / 17)
@@ -199,7 +193,6 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         ):
             self._attr_is_on = True
             self._attr_brightness = brightness * 17
-            self.last_brightness = self._attr_brightness
             self.async_write_ha_state()
         else:
             _LOGGER.error("Failed to switch on %s", self.name)

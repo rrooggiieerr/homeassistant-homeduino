@@ -98,7 +98,6 @@ async def async_setup_entry(
 class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
     _attr_has_entity_name = True
     _attr_device_class = SwitchDeviceClass.SWITCH
-    _attr_assumed_state = True
 
     _attr_available = False
     _attr_is_on = None
@@ -127,11 +126,13 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
+        if (last_state := await self.async_get_last_state()) is not None:
+            self._attr_is_on = last_state.state == STATE_ON
+
         if self.coordinator.connected():
-            if last_state := await self.async_get_last_state():
-                self._attr_is_on = last_state.state == STATE_ON
             self._attr_available = True
-            self.async_write_ha_state()
+
+        self.async_write_ha_state()
 
     @property
     def available(self) -> bool:
