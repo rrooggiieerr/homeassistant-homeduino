@@ -13,7 +13,7 @@ from homeassistant import config_entries
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
-from homeduino.homeduino import (
+from homeduino import (
     BAUD_RATES,
     DEFAULT_BAUD_RATE,
     DEFAULT_RECEIVE_PIN,
