@@ -23,6 +23,7 @@ from .const import (
     CONF_RF_ID,
     CONF_RF_ID_IGNORE_ALL,
     CONF_RF_PROTOCOL,
+    CONF_RF_SWITCH_AS_BUTTON,
     CONF_RF_UNIT,
     CONF_RF_UNIT_EXTRAPOLATE,
     DOMAIN,
@@ -46,9 +47,11 @@ async def async_setup_entry(
 
         # for binary_sensor in coordinator.binary_sensors:
         #     entities.append(HomeduinoTransceiverSwitch(coordinator, binary_sensor.get('pin')))
-    elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE and config_entry.data.get(
-        CONF_RF_PROTOCOL
-    ).startswith("switch"):
+    elif (
+        entry_type == CONF_ENTRY_TYPE_RF_DEVICE
+        and config_entry.data.get(CONF_RF_PROTOCOL).startswith("switch")
+        and not config_entry.options.get(CONF_RF_SWITCH_AS_BUTTON, False)
+    ):
         coordinator = HomeduinoCoordinator.instance()
 
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
@@ -141,10 +144,10 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        if self.coordinator.connected():
-            self._attr_available = True
-        else:
+        if not self.coordinator.connected():
             self._attr_available = False
+        else:
+            self._attr_available = True
             self.async_write_ha_state()
 
             if not self.coordinator.data:
@@ -216,6 +219,7 @@ class HomeduinoRFSwitchAll(HomeduinoRFSwitch):
             self._attr_available = False
         else:
             self._attr_available = True
+            self.async_write_ha_state()
 
             if not self.coordinator.data:
                 return

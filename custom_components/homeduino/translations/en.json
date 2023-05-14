@@ -26,12 +26,17 @@
             "setup_rf_device": {
             	"title": "Homeduino RF Actor",
             	"data": {
-            		"rf_device_name": "Device name",
             		"rf_id": "Device ID",
             		"rf_protocol": "Protocol",
             		"rf_unit": "Device unit",
             		"rf_unit_extrapolate": "Extrapolate device units",
-            		"rf_id_ignore_all": "Ignore all"
+            		"rf_id_ignore_all": "Ignore all",
+            		"rf_switch_as_button": "Switch as button"
+            	},
+            	"data_description": {
+            		"rf_unit_extrapolate": "Enable if you want the generate devices for each unit ID from 0 till the given unit ID.",
+            		"rf_id_ignore_all": "Enable when you want your switch/light ignore the all/master button often found on RF remote controls.",
+            		"rf_switch_as_button": "Generate switches for each on/off state instead of a button."
             	}
             }
         }
@@ -41,11 +46,17 @@
             "init": {
                 "data": {
                     "receive_pin": "Receive pin",
-                    "send_pin": "Send pin"
+                    "send_pin": "Send pin",
+            		"rf_unit_extrapolate": "Extrapolate device units",
+            		"rf_id_ignore_all": "Ignore all",
+            		"rf_switch_as_button": "Switch as button"
                 },
                 "data_description": {
                     "receive_pin": "The Arduino digital pin the 433 MHz receiver is connected to.",
-                    "send_pin": "The Arduino digital pin the 433 MHz transmitter is connected to."
+                    "send_pin": "The Arduino digital pin the 433 MHz transmitter is connected to.",
+            		"rf_unit_extrapolate": "Enable if you want the generate devices for each unit ID from 0 till the given unit ID.",
+            		"rf_id_ignore_all": "Enable when you want your switch/light ignore the all/master button often found on RF remote controls.",
+            		"rf_switch_as_button": "Generate switches for each on/off state instead of a button."
                 }
             }
         }

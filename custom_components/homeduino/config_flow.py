@@ -34,6 +34,7 @@ from .const import (
     CONF_RF_ID,
     CONF_RF_ID_IGNORE_ALL,
     CONF_RF_PROTOCOL,
+    CONF_RF_SWITCH_AS_BUTTON,
     CONF_RF_UNIT,
     CONF_RF_UNIT_EXTRAPOLATE,
     CONF_SEND_PIN,
@@ -224,6 +225,10 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     CONF_RF_UNIT_EXTRAPOLATE,
                     default=user_input.get(CONF_RF_UNIT_EXTRAPOLATE, False),
                 ): bool,
+                vol.Optional(
+                    CONF_RF_SWITCH_AS_BUTTON,
+                    default=user_input.get(CONF_RF_SWITCH_AS_BUTTON, False),
+                ): bool,
             }
         )
 
@@ -254,31 +259,42 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         # Validate the data can be used to set up a connection.
         self.STEP_SETUP_SCHEMA(data)
 
+        _LOGGER.debug(data)
         rf_protocol: str = data.get(CONF_RF_PROTOCOL).strip()
         rf_id: int = data.get(CONF_RF_ID)
-        rf_unit: int = data.get(CONF_RF_UNIT)
-        rf_id_ignore_all: bool = data.get(CONF_RF_ID_IGNORE_ALL)
-        rf_unit_extrapolate: bool = data.get(CONF_RF_UNIT_EXTRAPOLATE)
+        rf_unit: int = data.get(CONF_RF_UNIT, None)
+        rf_id_ignore_all: bool = data.get(CONF_RF_ID_IGNORE_ALL, False)
+        rf_unit_extrapolate: bool = data.get(CONF_RF_UNIT_EXTRAPOLATE, False)
+        rf_switch_as_button: bool = data.get(CONF_RF_SWITCH_AS_BUTTON, False)
 
         unique_id = f"{DOMAIN}-{rf_protocol}-{rf_id}"
-        if not rf_unit_extrapolate:
+        if rf_unit and not rf_unit_extrapolate:
             unique_id += f"-{rf_unit}"
         await self.async_set_unique_id(unique_id)
         self._abort_if_unique_id_configured()
 
+        title = f"{rf_protocol} {rf_id}"
+        data = {
+            CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_RF_DEVICE,
+            CONF_RF_PROTOCOL: rf_protocol,
+            CONF_RF_ID: rf_id,
+        }
+        if rf_unit is not None:
+            data[CONF_RF_UNIT] = rf_unit
+
+        options = {}
+
+        if rf_protocol.startswith("switch") or rf_protocol.startswith("dimmer"):
+            options[CONF_RF_ID_IGNORE_ALL] = rf_id_ignore_all
+            options[CONF_RF_UNIT_EXTRAPOLATE] = rf_unit_extrapolate
+        if rf_protocol.startswith("switch"):
+            options[CONF_RF_SWITCH_AS_BUTTON] = rf_switch_as_button
+
         # Return title, data, options.
         return (
-            f"{rf_protocol} {rf_id}",
-            {
-                CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_RF_DEVICE,
-                CONF_RF_PROTOCOL: rf_protocol,
-                CONF_RF_ID: rf_id,
-                CONF_RF_UNIT: rf_unit,
-            },
-            {
-                CONF_RF_ID_IGNORE_ALL: rf_id_ignore_all,
-                CONF_RF_UNIT_EXTRAPOLATE: rf_unit_extrapolate,
-            },
+            title,
+            data,
+            options,
         )
 
     @staticmethod
@@ -289,10 +305,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Create the options flow."""
         entry_type = config_entry.data.get(CONF_ENTRY_TYPE)
 
-        if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-            return HomeduinoOptionsFlowHandler(config_entry)
-
-        return None
+        return HomeduinoOptionsFlowHandler(config_entry)
 
 
 class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
@@ -307,24 +320,69 @@ class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
         """Manage the options."""
         errors: dict[str, str] = {}
 
-        schema = vol.Schema(
-            {
-                vol.Optional(
-                    CONF_RECEIVE_PIN,
-                    default=self.config_entry.options.get(CONF_RECEIVE_PIN, 2),
-                ): vol.All(cv.positive_int, vol.Range(min=2, max=3)),
-                vol.Optional(
-                    CONF_SEND_PIN,
-                    default=self.config_entry.options.get(CONF_SEND_PIN, 4),
-                ): vol.All(cv.positive_int, vol.Range(min=4, max=13)),
-            }
-        )
+        entry_type = self.config_entry.data.get(CONF_ENTRY_TYPE)
 
-        if user_input is not None and len(user_input) > 0:
-            # schema(user_input)
-            return self.async_create_entry(title="", data=user_input)
+        if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
+            schema = vol.Schema(
+                {
+                    vol.Optional(
+                        CONF_RECEIVE_PIN,
+                        default=self.config_entry.options.get(
+                            CONF_RECEIVE_PIN, DEFAULT_RECEIVE_PIN
+                        ),
+                    ): vol.In(range(2, 4)),
+                    vol.Optional(
+                        CONF_SEND_PIN,
+                        default=self.config_entry.options.get(
+                            CONF_SEND_PIN, DEFAULT_SEND_PIN
+                        ),
+                    ): vol.In(range(4, 14)),
+                }
+            )
 
-        return self.async_show_form(step_id="init", data_schema=schema, errors=errors)
+            if user_input is not None and len(user_input) > 0:
+                return self.async_create_entry(title="", data=user_input)
+
+            return self.async_show_form(
+                step_id="init", data_schema=schema, errors=errors
+            )
+        elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
+            rf_protocol = self.config_entry.data.get(CONF_RF_PROTOCOL)
+            schema = vol.Schema(
+                {
+                    vol.Optional(
+                        CONF_RF_ID_IGNORE_ALL,
+                        default=self.config_entry.options.get(
+                            CONF_RF_ID_IGNORE_ALL, False
+                        ),
+                    ): bool,
+                    vol.Optional(
+                        CONF_RF_UNIT_EXTRAPOLATE,
+                        default=self.config_entry.options.get(
+                            CONF_RF_UNIT_EXTRAPOLATE, False
+                        ),
+                    ): bool,
+                }
+            )
+
+            if rf_protocol.startswith("switch"):
+                schema = schema.extend(
+                    {
+                        vol.Optional(
+                            CONF_RF_SWITCH_AS_BUTTON,
+                            default=self.config_entry.options.get(
+                                CONF_RF_SWITCH_AS_BUTTON, False
+                            ),
+                        ): bool,
+                    }
+                )
+
+            if user_input is not None and len(user_input) > 0:
+                return self.async_create_entry(title="", data=user_input)
+
+            return self.async_show_form(
+                step_id="init", data_schema=schema, errors=errors
+            )
 
 
 def get_serial_by_id(dev_path: str) -> str:
