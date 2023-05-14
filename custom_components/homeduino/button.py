@@ -125,10 +125,8 @@ async def async_setup_entry(
 
 class HomeduinoRFButton(CoordinatorEntity, ButtonEntity):
     _attr_has_entity_name = True
-    _attr_assumed_state = True
 
     _attr_available = False
-    _attr_is_on = None
 
     def __init__(
         self,
@@ -139,7 +137,7 @@ class HomeduinoRFButton(CoordinatorEntity, ButtonEntity):
         ignore_all: bool = False,
     ) -> None:
         """Initialize the button."""
-        super().__init__(coordinator)
+        super().__init__(coordinator, entity_description.key)
 
         self.protocol = entity_description.key[0]
         self.id = entity_description.key[1]

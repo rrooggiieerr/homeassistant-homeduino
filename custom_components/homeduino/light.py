@@ -100,9 +100,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         ignore_all: bool = False,
     ) -> None:
         """Initialize the switch."""
-        super().__init__(
-            coordinator,
-        )
+        super().__init__(coordinator, entity_description.key)
 
         self.protocol = entity_description.key[0]
         self.protocols = [entity_description.key[0]]
