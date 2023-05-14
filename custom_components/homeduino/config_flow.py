@@ -346,7 +346,8 @@ class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
             return self.async_show_form(
                 step_id="init", data_schema=schema, errors=errors
             )
-        elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
+
+        if entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
             rf_protocol = self.config_entry.data.get(CONF_RF_PROTOCOL)
             schema = vol.Schema(
                 {
