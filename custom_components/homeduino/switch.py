@@ -52,7 +52,7 @@ async def async_setup_entry(
         and config_entry.data.get(CONF_RF_PROTOCOL).startswith("switch")
         and not config_entry.options.get(CONF_RF_SWITCH_AS_BUTTON, False)
     ):
-        coordinator = HomeduinoCoordinator.instance()
+        coordinator = HomeduinoCoordinator.instance(hass)
 
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
         id = config_entry.data.get(CONF_RF_ID)

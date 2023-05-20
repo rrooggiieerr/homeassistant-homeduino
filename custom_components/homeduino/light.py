@@ -49,7 +49,7 @@ async def async_setup_entry(
     elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE and config_entry.data.get(
         CONF_RF_PROTOCOL
     ).startswith("dimmer"):
-        coordinator = HomeduinoCoordinator.instance()
+        coordinator = HomeduinoCoordinator.instance(hass)
 
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
         id = config_entry.data.get(CONF_RF_ID)

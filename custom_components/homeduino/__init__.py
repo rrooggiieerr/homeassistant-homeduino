@@ -22,6 +22,7 @@ from homeduino import (
     DEFAULT_RECEIVE_PIN,
     DEFAULT_SEND_PIN,
     Homeduino,
+    ResponseTimeoutError,
 )
 
 from .const import (
@@ -67,13 +68,13 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
     dht_sensor = None
 
     @staticmethod
-    def instance(hass=None):
+    def instance(hass: HomeAssistant):
         if not HomeduinoCoordinator._instance:
             HomeduinoCoordinator._instance = HomeduinoCoordinator(hass)
 
         return HomeduinoCoordinator._instance
 
-    def __init__(self, hass):
+    def __init__(self, hass: HomeAssistant):
         super().__init__(
             hass,
             _LOGGER,
@@ -109,14 +110,20 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         if not self.transceiver:
             raise UpdateFailed("No Homeduino configured")
 
-        if not self.transceiver.connected() and not await self.transceiver.connect():
-            _LOGGER.error("Homeduino not connected")
-            raise UpdateFailed("Homeduino not connected")
+        try:
+            if (
+                not self.transceiver.connected()
+                and not await self.transceiver.connect()
+            ):
+                raise UpdateFailed("Homeduino not connected")
+        except ResponseTimeoutError as ex:
+            raise UpdateFailed("Unable to connect to Homeduino") from ex
 
-        if not await self.transceiver.ping():
-            # self.transceiver.disconnect()
-            # self.transceiver = None
-            raise UpdateFailed("Unable to ping Homeduino")
+        try:
+            if not await self.transceiver.ping():
+                raise UpdateFailed("Unable to ping Homeduino")
+        except ResponseTimeoutError as ex:
+            raise UpdateFailed("Unable to ping Homeduino") from ex
 
         return None
 
@@ -142,6 +149,9 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
 
         if await self.transceiver.rf_send(protocol, values):
             self.async_set_updated_data({"protocol": protocol, "values": values})
+
+            event_data = {**{"protocol": protocol}, **values}
+            self.hass.bus.async_fire(f"{DOMAIN}_event", event_data)
             return True
 
         return False
@@ -163,7 +173,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType):
         """Handle the service call."""
         command: str = call.data.get(CONF_SERVICE_COMMAND)
 
-        return await HomeduinoCoordinator.instance().send(command.strip())
+        return await HomeduinoCoordinator.instance(hass).send(command.strip())
 
     hass.services.async_register(
         DOMAIN, "send", async_handle_send, schema=SERVICE_SEND_SCHEMA
@@ -212,6 +222,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
             _LOGGER.info("Homeduino transceiver on %s is available", serial_port)
         except serial.SerialException as ex:
+            raise ConfigEntryNotReady(
+                f"Unable to connect to Homeduino transceiver on {serial_port}: {ex}"
+            ) from ex
+        except ResponseTimeoutError as ex:
             raise ConfigEntryNotReady(
                 f"Unable to connect to Homeduino transceiver on {serial_port}: {ex}"
             ) from ex
