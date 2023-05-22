@@ -205,6 +205,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             user_input = {}
 
         protocol_names = Homeduino.get_protocols()
+        protocol_names = [protocol_name for protocol_name in protocol_names if protocol_name.startswith(("switch", "dimmer"))]
 
         self.STEP_SETUP_SCHEMA = vol.Schema(
             {
