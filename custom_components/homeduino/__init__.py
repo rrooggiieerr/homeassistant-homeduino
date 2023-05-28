@@ -22,6 +22,7 @@ from homeduino import (
     DEFAULT_RECEIVE_PIN,
     DEFAULT_SEND_PIN,
     Homeduino,
+    HomeduinoError,
     ResponseTimeoutError,
 )
 
@@ -117,12 +118,14 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
             ):
                 raise UpdateFailed("Homeduino not connected")
         except ResponseTimeoutError as ex:
-            raise UpdateFailed("Unable to connect to Homeduino") from ex
+            raise UpdateFailed(
+                f"Unable to connect to Homeduino transceiver on {self.serial_port}"
+            ) from ex
 
         try:
             if not await self.transceiver.ping():
                 raise UpdateFailed("Unable to ping Homeduino")
-        except ResponseTimeoutError as ex:
+        except HomeduinoError as ex:
             raise UpdateFailed("Unable to ping Homeduino") from ex
 
         return None
@@ -223,11 +226,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             _LOGGER.info("Homeduino transceiver on %s is available", serial_port)
         except serial.SerialException as ex:
             raise ConfigEntryNotReady(
-                f"Unable to connect to Homeduino transceiver on {serial_port}: {ex}"
+                f"Unable to connect to Homeduino transceiver on {serial_port}"
             ) from ex
         except ResponseTimeoutError as ex:
             raise ConfigEntryNotReady(
-                f"Unable to connect to Homeduino transceiver on {serial_port}: {ex}"
+                f"Unable to connect to Homeduino transceiver on {serial_port}"
             ) from ex
 
         hass.data.setdefault(DOMAIN, {})
