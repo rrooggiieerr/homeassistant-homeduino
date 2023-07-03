@@ -146,7 +146,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
             if not self.coordinator.data:
                 return
 
-            if self.coordinator.data.get("protocol") in self.protocols:
+            if self.coordinator.data.get("protocol") not in self.protocols:
                 return
 
             if self.coordinator.data.get("values", {}).get("id") != self.id:
