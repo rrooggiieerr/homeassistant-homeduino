@@ -153,8 +153,6 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         if await self.transceiver.rf_send(protocol, values):
             self.async_set_updated_data({"protocol": protocol, "values": values})
 
-            event_data = {**{"protocol": protocol}, **values}
-            self.hass.bus.async_fire(f"{DOMAIN}_event", event_data)
             return True
 
         return False
