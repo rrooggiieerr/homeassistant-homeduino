@@ -15,7 +15,7 @@
   ],
   "requirements": [
     "pyserial==3.5",
-    "homeduino==0.0.9"
+    "homeduino==0.0.10"
   ],
-  "version": "0.0.2"
+  "version": "0.0.3"
 }
