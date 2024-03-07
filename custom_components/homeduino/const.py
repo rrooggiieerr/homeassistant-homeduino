@@ -1,4 +1,5 @@
 """Constants for the Homeduino 433 MHz RF transceiver integration."""
+
 from typing import Final
 
 DOMAIN: Final = "homeduino"

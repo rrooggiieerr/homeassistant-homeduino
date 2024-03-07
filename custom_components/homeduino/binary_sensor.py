@@ -3,10 +3,14 @@ Created on 12 Jan 2023
 
 @author: Rogier van Staveren
 """
+
 import logging
 
-from homeassistant.components.binary_sensor import BinarySensorEntity,\
-    BinarySensorEntityDescription, BinarySensorDeviceClass
+from homeassistant.components.binary_sensor import (
+    BinarySensorDeviceClass,
+    BinarySensorEntity,
+    BinarySensorEntityDescription,
+)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import DeviceInfo
@@ -44,12 +48,11 @@ async def async_setup_entry(
             entities.append(
                 HomeduinoTransceiverBinarySensor(coordinator, binary_sensor.get("pin"))
             )
-    elif (
-        entry_type == CONF_ENTRY_TYPE_RF_DEVICE
-        and config_entry.data.get(CONF_RF_PROTOCOL).startswith("pir")
-    ):
+    elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE and config_entry.data.get(
+        CONF_RF_PROTOCOL
+    ).startswith("pir"):
         coordinator = HomeduinoCoordinator.instance(hass)
-        
+
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
         id = config_entry.data.get(CONF_RF_ID)
         unit = config_entry.data.get(CONF_RF_UNIT)
@@ -61,13 +64,13 @@ async def async_setup_entry(
         )
 
         entity_description = BinarySensorEntityDescription(
-            key=(protocol, id, unit), name=f"Switch {unit}", device_class=BinarySensorDeviceClass.MOTION
+            key=(protocol, id, unit),
+            name=f"Switch {unit}",
+            device_class=BinarySensorDeviceClass.MOTION,
         )
 
         entities.append(
-            HomeduinoRFBinarySensor(
-                coordinator, device_info, entity_description
-            )
+            HomeduinoRFBinarySensor(coordinator, device_info, entity_description)
         )
 
     async_add_entities(entities)
@@ -90,6 +93,7 @@ class HomeduinoTransceiverBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self._attr_name = f"Binary {digital_pin}"
 
         self._digital_pin = digital_pin
+
 
 class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
     _attr_has_entity_name = True

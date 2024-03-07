@@ -68,7 +68,9 @@ async def async_setup_entry(
         if config_entry.options.get(CONF_RF_UNIT_EXTRAPOLATE):
             for i in range(unit + 1):
                 entity_description = SwitchEntityDescription(
-                    key=(protocol, id, i), name=f"Switch {i}", device_class=SwitchDeviceClass.SWITCH
+                    key=(protocol, id, i),
+                    name=f"Switch {i}",
+                    device_class=SwitchDeviceClass.SWITCH,
                 )
                 entities.append(
                     HomeduinoRFSwitch(

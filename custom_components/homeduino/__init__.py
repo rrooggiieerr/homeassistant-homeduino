@@ -1,4 +1,5 @@
 """The Homeduino 433 MHz RF transceiver integration."""
+
 from __future__ import annotations
 
 import json
