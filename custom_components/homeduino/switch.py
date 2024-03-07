@@ -56,14 +56,19 @@ async def async_setup_entry(
         id = config_entry.data.get(CONF_RF_ID)
         unit = config_entry.data.get(CONF_RF_UNIT)
         id_ignore_all = config_entry.options.get(CONF_RF_ID_IGNORE_ALL)
+        extrapolate = config_entry.options.get(CONF_RF_UNIT_EXTRAPOLATE)
+
+        identifier = f"{protocol}-{id}"
+        if unit is not None and not extrapolate:
+            identifier += f"-{unit}"
 
         device_info = DeviceInfo(
-            identifiers={(DOMAIN, f"{protocol}-{id}")},
+            identifiers={(DOMAIN, identifier)},
             name=config_entry.title,
             via_device=(DOMAIN, coordinator.serial_port),
         )
 
-        if config_entry.options.get(CONF_RF_UNIT_EXTRAPOLATE):
+        if extrapolate:
             for i in range(unit + 1):
                 entity_description = SwitchEntityDescription(
                     key=(protocol, id, i),

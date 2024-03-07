@@ -56,8 +56,12 @@ async def async_setup_entry(
         unit = config_entry.data.get(CONF_RF_UNIT)
         id_ignore_all = config_entry.options.get(CONF_RF_ID_IGNORE_ALL)
 
+        identifier = f"{protocol}-{id}"
+        if unit is not None:
+            identifier += f"-{unit}"
+
         device_info = DeviceInfo(
-            identifiers={(DOMAIN, f"{protocol}-{id}")},
+            identifiers={(DOMAIN, identifier)},
             name=config_entry.title,
             via_device=(DOMAIN, coordinator.serial_port),
         )
@@ -110,6 +114,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         self._attr_device_info = device_info
 
         self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}"
+        _LOGGER.debug(f"Unique ID: {self._attr_unique_id}")
 
         self.entity_description = entity_description
         self.ignore_all = ignore_all
