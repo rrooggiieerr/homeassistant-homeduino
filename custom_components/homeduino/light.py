@@ -87,7 +87,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
     _attr_available = False
 
     _attr_color_mode = ColorMode.BRIGHTNESS
-    _attr_supported_color_modes = [ColorMode.ONOFF, ColorMode.BRIGHTNESS]
+    _attr_supported_color_modes = {ColorMode.BRIGHTNESS}
 
     _attr_is_on = None
     _attr_brightness = None
