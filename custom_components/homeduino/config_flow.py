@@ -35,7 +35,6 @@ from .const import (
     CONF_RF_ID,
     CONF_RF_ID_IGNORE_ALL,
     CONF_RF_PROTOCOL,
-    CONF_RF_SWITCH_AS_BUTTON,
     CONF_RF_UNIT,
     CONF_RF_UNIT_EXTRAPOLATE,
     CONF_SEND_PIN,
@@ -230,10 +229,6 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     CONF_RF_UNIT_EXTRAPOLATE,
                     default=user_input.get(CONF_RF_UNIT_EXTRAPOLATE, False),
                 ): bool,
-                vol.Optional(
-                    CONF_RF_SWITCH_AS_BUTTON,
-                    default=user_input.get(CONF_RF_SWITCH_AS_BUTTON, False),
-                ): bool,
             }
         )
 
@@ -270,7 +265,6 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         rf_unit: int = data.get(CONF_RF_UNIT, None)
         rf_id_ignore_all: bool = data.get(CONF_RF_ID_IGNORE_ALL, False)
         rf_unit_extrapolate: bool = data.get(CONF_RF_UNIT_EXTRAPOLATE, False)
-        rf_switch_as_button: bool = data.get(CONF_RF_SWITCH_AS_BUTTON, False)
 
         unique_id = f"{DOMAIN}-{rf_protocol}-{rf_id}"
         if rf_unit and not rf_unit_extrapolate:
@@ -292,8 +286,6 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if rf_protocol.startswith("switch") or rf_protocol.startswith("dimmer"):
             options[CONF_RF_ID_IGNORE_ALL] = rf_id_ignore_all
             options[CONF_RF_UNIT_EXTRAPOLATE] = rf_unit_extrapolate
-        if rf_protocol.startswith("switch"):
-            options[CONF_RF_SWITCH_AS_BUTTON] = rf_switch_as_button
 
         # Return title, data, options.
         return (
@@ -370,18 +362,6 @@ class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
                     ): bool,
                 }
             )
-
-            if rf_protocol.startswith("switch"):
-                schema = schema.extend(
-                    {
-                        vol.Optional(
-                            CONF_RF_SWITCH_AS_BUTTON,
-                            default=self.config_entry.options.get(
-                                CONF_RF_SWITCH_AS_BUTTON, False
-                            ),
-                        ): bool,
-                    }
-                )
 
             if user_input is not None and len(user_input) > 0:
                 return self.async_create_entry(title="", data=user_input)
