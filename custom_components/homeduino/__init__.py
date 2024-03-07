@@ -55,6 +55,8 @@ SERVICE_SEND_SCHEMA = vol.Schema(
     }
 )
 
+ALLOWED_FAILED_PINGS = 1
+
 
 class HomeduinoCoordinator(DataUpdateCoordinator):
     """Homeduino Data Update Coordinator."""
@@ -67,6 +69,8 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
     binary_sensors = []
     analog_sensors = []
     dht_sensor = None
+
+    failed_pings = 0
 
     @staticmethod
     def instance(hass: HomeAssistant):
@@ -123,8 +127,15 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
             ) from ex
 
         try:
-            if not await self.transceiver.ping():
-                raise UpdateFailed("Unable to ping Homeduino")
+            if await self.transceiver.ping():
+                self.failed_pings = 0
+            else:
+                self.failed_pings += 1
+
+                if self.failed_pings > ALLOWED_FAILED_PINGS:
+                    raise UpdateFailed("Unable to ping Homeduino")
+
+                _LOGGER.warning("Unable to ping Homeduino")
         except HomeduinoError as ex:
             raise UpdateFailed("Unable to ping Homeduino") from ex
 
