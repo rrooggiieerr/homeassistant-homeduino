@@ -272,3 +272,9 @@ async def options_update_listener(hass: HomeAssistant, entry: ConfigEntry) -> No
     """Handle options update."""
     _LOGGER.debug("Configuration options updated, reloading Homeduino integration")
     await hass.config_entries.async_reload(entry.entry_id)
+
+async def async_remove_config_entry_device(
+    hass: HomeAssistant, config_entry: ConfigEntry, device_entry: DeviceEntry
+) -> bool:
+    """Remove a config entry from a device."""
+    return True
