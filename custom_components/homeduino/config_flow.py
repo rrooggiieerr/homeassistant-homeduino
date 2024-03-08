@@ -267,12 +267,14 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         rf_unit_extrapolate: bool = data.get(CONF_RF_UNIT_EXTRAPOLATE, False)
 
         unique_id = f"{DOMAIN}-{rf_protocol}-{rf_id}"
-        if rf_unit and not rf_unit_extrapolate:
+        if rf_unit is not None and not rf_unit_extrapolate:
             unique_id += f"-{rf_unit}"
         await self.async_set_unique_id(unique_id)
         self._abort_if_unique_id_configured()
 
         title = f"{rf_protocol} {rf_id}"
+        if rf_unit is not None and not rf_unit_extrapolate:
+            title += f" {rf_unit}"
         data = {
             CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_RF_DEVICE,
             CONF_RF_PROTOCOL: rf_protocol,
