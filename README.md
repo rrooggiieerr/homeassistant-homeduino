@@ -31,7 +31,7 @@ ToDo
 The recomended way to install this Home Assistant integration is using by [HACS][hacs].
 Click the following button to open the integration directly on the HACS integration page.
 
-[![Install XY Screens from HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=rrooggiieerr&repository=homeassistant-homeduino&category=integration)
+[![Install Homeduino from HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=rrooggiieerr&repository=homeassistant-homeduino&category=integration)
 
 Or follow these instructions:
 
@@ -72,7 +72,7 @@ be added to your Integrations view. If your wiring is not right you will get a
 ## Contributing
 
 If you would like to use this Home Assistant integration in youw own language you can provide me
-with a translation file as found in the `custom_components/axaremote/translations` directory.
+with a translation file as found in the `custom_components/homeduino/translations` directory.
 Create a pull request (preferred) or issue with the file attached.
 
 More on translating custom integrations can be found
@@ -91,10 +91,10 @@ the following platforms:
 ---
 
 [python-shield]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
-[releases]: https://github.com/rrooggiieerr/homeassistant-axaremote/releases
-[releases-shield]: https://img.shields.io/github/v/release/rrooggiieerr/homeassistant-axaremote?style=for-the-badge
+[releases]: https://github.com/rrooggiieerr/homeassistant-homeduino/releases
+[releases-shield]: https://img.shields.io/github/v/release/rrooggiieerr/homeassistant-homeduino?style=for-the-badge
 [license]: ./LICENSE
-[license-badge]: https://img.shields.io/github/license/rrooggiieerr/homeassistant-axaremote?style=for-the-badge
+[license-badge]: https://img.shields.io/github/license/rrooggiieerr/homeassistant-homeduino?style=for-the-badge
 [homeassistant]: https://www.home-assistant.io/
 [homeassistant-shield]: https://img.shields.io/badge/home%20assistant-%2341BDF5.svg?style=for-the-badge&logo=home-assistant&logoColor=white
 [hacs]: https://hacs.xyz/
