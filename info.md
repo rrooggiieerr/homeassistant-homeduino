@@ -25,33 +25,6 @@ This plugins supports all 433 MHz devices with [rfcontrolpy](https://github.com/
 
 ToDo
 
-## Installation
-
-### HACS
-
-The recommended way to install this Home Assistant integration is using by [HACS][hacs].
-Click the following button to open the integration directly on the HACS integration page.
-
-[![Install Homeduino from HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=rrooggiieerr&repository=homeassistant-homeduino&category=integration)
-
-Or follow these instructions:
-
-- Go to your **HACS** view in Home Assistant and then to **Integrations**
-- Open the **Custom repositories** menu
-- Add this repository URL to the **Custom repositories** and select
-**Integration** as the **Category**
-- Click **Add**
-- Close the **Custom repositories** menu
-- Select **+ Explore & download repositories** and search for *Homeduino*
-- Select **Download**
-- Restart Home Assistant
-
-### Manually
-
-- Copy the `custom_components/homeduino` directory of this repository into the
-`config/custom_components/` directory of your Home Assistant installation
-- Restart Home Assistant
-
 ## Adding a new Homeduino
 
 - After restarting go to **Settings** then **Devices & Services**
