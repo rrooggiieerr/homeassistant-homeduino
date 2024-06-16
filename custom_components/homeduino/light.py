@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from typing import Any
 
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
@@ -95,6 +96,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
 
     _attr_is_on = None
     _attr_brightness = None
+    _off_brightness = None
 
     def __init__(
         self,
@@ -119,12 +121,20 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         self.entity_description = entity_description
         self.ignore_all = ignore_all
 
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        """Return state attributes."""
+        return {
+            "off_brightness": self._off_brightness,
+        }
+
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
         if (last_state := await self.async_get_last_state()) is not None:
             self._attr_is_on = last_state.state == STATE_ON
             self._attr_brightness = last_state.attributes.get(ATTR_BRIGHTNESS, 255)
+            self._off_brightness = last_state.attributes.get("off_brightness")
 
         if self.coordinator.connected():
             self._attr_available = True
@@ -183,11 +193,16 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         """Turn the entity on."""
         _LOGGER.debug("Turning on %s", self.name)
         brightness = kwargs.get(ATTR_BRIGHTNESS)
-        state = None
         if not brightness:
             brightness = self._attr_brightness
-            state = True
 
+        if not brightness:
+            brightness = self._off_brightness
+
+        if not brightness:
+            brightness = 255
+
+        state = True
         brightness = int(brightness / 17)
 
         if await self.coordinator.rf_send(
@@ -196,6 +211,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         ):
             self._attr_is_on = True
             self._attr_brightness = brightness * 17
+            self._off_brightness = None
             self.async_write_ha_state()
         else:
             _LOGGER.error("Failed to switch on %s", self.name)
@@ -208,6 +224,11 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
             {"id": self.id, "unit": self.unit, "state": False, "dimlevel": 0},
         ):
             self._attr_is_on = False
+
+            # Store current brightness so that the next turn_on uses it
+            # when using "enhanced turn on".
+            self._off_brightness = self._attr_brightness
+
             self.async_write_ha_state()
         else:
             _LOGGER.error("Failed to switch off %s", self.name)
