@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 import logging
 import os
-from datetime import timedelta
 
 import homeassistant.helpers.config_validation as cv
 import serial
@@ -84,8 +83,6 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
             _LOGGER,
             # Name of the data. For logging purposes.
             name=__name__,
-            # Polling interval. Will only be polled if there are subscribers.
-            update_interval=timedelta(seconds=5),
         )
 
     def add_transceiver(self, transceiver: Homeduino):
@@ -109,36 +106,6 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         _LOGGER.debug(self.transceiver)
         if self.transceiver and await self.transceiver.disconnect():
             self.transceiver = None
-
-    async def _async_update_data(self):
-        if not self.transceiver:
-            raise UpdateFailed("No Homeduino configured")
-
-        try:
-            if (
-                not self.transceiver.connected()
-                and not await self.transceiver.connect()
-            ):
-                raise UpdateFailed("Homeduino not connected")
-        except ResponseTimeoutError as ex:
-            raise UpdateFailed(
-                f"Unable to connect to Homeduino transceiver on {self.serial_port}"
-            ) from ex
-
-        try:
-            if await self.transceiver.ping():
-                self.failed_pings = 0
-            else:
-                self.failed_pings += 1
-
-                if self.failed_pings > ALLOWED_FAILED_PINGS:
-                    raise UpdateFailed("Unable to ping Homeduino")
-
-                _LOGGER.warning("Unable to ping Homeduino")
-        except HomeduinoError as ex:
-            raise UpdateFailed("Unable to ping Homeduino") from ex
-
-        return None
 
     @callback
     def rf_receive_callback(self, decoded) -> None:

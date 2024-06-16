@@ -14,8 +14,7 @@
   	"rfcontrol"
   ],
   "requirements": [
-    "pyserial==3.5",
-    "homeduino==0.0.11"
+    "homeduino==0.0.13"
   ],
   "version": "0.0.3"
 }
