@@ -7,7 +7,6 @@ import os
 from typing import Any
 
 import homeassistant.helpers.config_validation as cv
-import serial
 import serial.tools.list_ports
 import voluptuous as vol
 from homeassistant import config_entries
@@ -15,8 +14,11 @@ from homeassistant.const import CONF_TYPE
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
-from homeassistant.helpers.selector import (SelectOptionDict, SelectSelector,
-                                            SelectSelectorConfig)
+from homeassistant.helpers.selector import (
+    SelectOptionDict,
+    SelectSelector,
+    SelectSelectorConfig,
+)
 from homeduino import (
     BAUD_RATES,
     DEFAULT_BAUD_RATE,
@@ -33,7 +35,6 @@ from .const import (
     CONF_ENTRY_TYPE,
     CONF_ENTRY_TYPE_RF_DEVICE,
     CONF_ENTRY_TYPE_TRANSCEIVER,
-    CONF_MANUAL_PATH,
     CONF_LOCAL_DEVICE_GPIO,
     CONF_LOCAL_DEVICE_INTERVAL,
     CONF_LOCAL_DEVICE_TYPE,
@@ -63,7 +64,8 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     VERSION = 1
 
-    STEP_SETUP_SCHEMA = None
+    _step_setup_serial_schema: vol.Schema
+    _step_setup_rf_device_schema: vol.Schema
     _STEP_SETUP_LOCAL_DEVICE_SCHEMA = vol.Schema(
         {
             vol.Required(CONF_LOCAL_DEVICE_GPIO, default=""): vol.In(range(4, 14)),
@@ -128,16 +130,24 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         # return self.async_show_form(step_id="user", data_schema=schema)
 
     async def async_step_setup_transceiver(
-        self, user_input: dict[str, Any] | None = {}
+        self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         """Handle the setup transceiver step."""
         return await self.async_step_setup_serial(user_input)
 
     async def async_step_setup_serial(
-        self, user_input: dict[str, Any] | None = {}
+        self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         """Handle the setup transceiver serial step."""
         errors: dict[str, str] = {}
+
+        if user_input is not None:
+            title, data, options = await self.validate_input_setup_serial(
+                user_input, errors
+            )
+
+            if not errors:
+                return self.async_create_entry(title=title, data=data, options=options)
 
         ports = await self.hass.async_add_executor_job(serial.tools.list_ports.comports)
         list_of_ports = {}
@@ -147,60 +157,56 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 + (f" - {port.manufacturer}" if port.manufacturer else "")
             )
 
-        self.STEP_SETUP_SCHEMA = vol.Schema(
+        self._step_setup_serial_schema = vol.Schema(
             {
-                vol.Exclusive(CONF_SERIAL_PORT, CONF_SERIAL_PORT): vol.In(
-                    list_of_ports
+                vol.Required(CONF_SERIAL_PORT, default=""): SelectSelector(
+                    SelectSelectorConfig(
+                        options=[
+                            SelectOptionDict(value=k, label=v)
+                            for k, v in list_of_ports.items()
+                        ],
+                        custom_value=True,
+                        sort=True,
+                    )
                 ),
-                vol.Exclusive(
-                    CONF_MANUAL_PATH, CONF_SERIAL_PORT, CONF_MANUAL_PATH
-                ): cv.string,
                 vol.Required(CONF_BAUD_RATE, default=DEFAULT_BAUD_RATE): vol.In(
                     BAUD_RATES
                 ),
                 vol.Optional(CONF_RECEIVE_PIN, default=DEFAULT_RECEIVE_PIN): vol.In(
                     range(2, 4)
                 ),
+                # vol.All(vol.Coerce(int), vol.Range(min=2, max=3)),
                 vol.Optional(CONF_SEND_PIN, default=DEFAULT_SEND_PIN): vol.In(
                     range(4, 14)
                 ),
+                # vol.All(vol.Coerce(int), vol.Range(min=2, max=13)),
             }
         )
 
-        if user_input is not None and len(user_input) > 0:
-            try:
-                title, data, options = await self.validate_input_setup_serial(
-                    user_input, errors
-                )
-            except CannotConnect:
-                errors["base"] = "cannot_connect"
-            except Exception:  # pylint: disable=broad-except
-                _LOGGER.exception("Unexpected exception")
-                errors["base"] = "unknown"
-            else:
-                return self.async_create_entry(title=title, data=data, options=options)
+        if user_input is not None:
+            data_schema = self.add_suggested_values_to_schema(
+                self._step_setup_serial_schema, user_input
+            )
+        else:
+            data_schema = self._step_setup_serial_schema
 
         return self.async_show_form(
             step_id="setup_serial",
-            data_schema=self.STEP_SETUP_SCHEMA,
+            data_schema=data_schema,
             errors=errors,
         )
 
     async def validate_input_setup_serial(
         self, data: dict[str, Any], errors: dict[str, str]
     ) -> (str, dict[str, Any], dict[str, Any]):
-        """Validate the user input allows us to connect.
+        """Validate the user input and create data.
 
-        Data has the keys from STEP_SETUP_SCHEMA with values provided by the user.
+        Data has the keys from _step_setup_serial_schema with values provided by the user.
         """
         # Validate the data can be used to set up a connection.
-        self.STEP_SETUP_SCHEMA(data)
+        self._step_setup_serial_schema(data)
 
-        serial_port = None
-        if CONF_MANUAL_PATH in data:
-            serial_port = data[CONF_MANUAL_PATH]
-        elif CONF_SERIAL_PORT in data:
-            serial_port = data[CONF_SERIAL_PORT]
+        serial_port = data.get(CONF_SERIAL_PORT)
 
         if serial_port is None:
             raise vol.error.RequiredFieldInvalid("No serial port configured")
@@ -209,46 +215,48 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             get_serial_by_id, serial_port
         )
 
+        # Test if the device exists
+        if not os.path.exists(serial_port):
+            errors[CONF_SERIAL_PORT] = "nonexisting_serial_port"
+
         await self.async_set_unique_id(f"{DOMAIN}-{serial_port}")
         self._abort_if_unique_id_configured()
 
-        # Test if the device exists
-        if not os.path.exists(serial_port):
-            _LOGGER.error("Unable to connect to the device %s: not exists", serial_port)
-            raise vol.error.PathInvalid(
-                f"Unable to connect to the device {serial_port}: not exists"
-            )
-
-        # Test if we can connect to the device
-        try:
-            homeduino = Homeduino(
-                serial_port,
-                data[CONF_BAUD_RATE],
-                data[CONF_RECEIVE_PIN],
-                data[CONF_SEND_PIN],
-            )
-
+        if errors.get(CONF_SERIAL_PORT) is None:
+            # Test if we can connect to the device
             try:
-                if not await homeduino.connect():
-                    errors["base"] = f"Unable to connect to device {serial_port}"
-            except SerialException as ex:
-                errors["base"] = ex.strerror
-            except NotReadyError as ex:
-                errors["base"] = ex.strerror
-            finally:
-                await homeduino.disconnect()
+                homeduino = Homeduino(
+                    serial_port,
+                    data[CONF_BAUD_RATE],
+                    data[CONF_RECEIVE_PIN],
+                    data[CONF_SEND_PIN],
+                )
 
-            _LOGGER.info("Device %s available", serial_port)
-        except serial.SerialException as ex:
-            _LOGGER.exception("Unable to connect to the device %s: %s", serial_port, ex)
-            raise CannotConnect("Unable to connect") from ex
-        except Exception as ex:  # pylint: disable=broad-except
-            _LOGGER.exception("Unable to connect to the device %s: %s", serial_port, ex)
-            raise CannotConnect("Unable to connect") from ex
+                try:
+                    if not await homeduino.connect():
+                        errors["base"] = f"Unable to connect to device {serial_port}"
+                except SerialException as ex:
+                    errors["base"] = ex.strerror
+                except NotReadyError as ex:
+                    errors["base"] = ex.strerror
+                finally:
+                    await homeduino.disconnect()
+
+                _LOGGER.info("Device %s available", serial_port)
+            except serial.SerialException as ex:
+                _LOGGER.exception(
+                    "Unable to connect to the device %s: %s", serial_port, ex
+                )
+                errors["base"] = "cannot_connect"
+            except Exception as ex:  # pylint: disable=broad-except
+                _LOGGER.exception(
+                    "Unable to connect to the device %s: %s", serial_port, ex
+                )
+                errors["base"] = "cannot_connect"
 
         # Return title, data, options.
         return (
-            f"Homeduino Tranceiver {serial_port}",
+            f"Homeduino Transceiver {serial_port}",
             {
                 CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_TRANSCEIVER,
                 CONF_SERIAL_PORT: serial_port,
@@ -261,12 +269,18 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     async def async_step_setup_rf_device(
-        self, user_input: dict[str, Any] | None = {}
+        self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         """Handle the setup rf switch step."""
         errors: dict[str, str] = {}
-        if not user_input:
-            user_input = {}
+
+        if user_input is not None:
+            title, data, options = await self.validate_input_setup_rf_device(
+                user_input, errors
+            )
+
+            if not errors:
+                return self.async_create_entry(title=title, data=data, options=options)
 
         protocol_names = Homeduino.get_protocols()
         protocol_names = [
@@ -275,54 +289,44 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             if protocol_name.startswith(("switch", "dimmer", "pir"))
         ]
 
-        self.STEP_SETUP_SCHEMA = vol.Schema(
+        self._step_setup_rf_device_schema = vol.Schema(
             {
-                vol.Required(
-                    CONF_RF_PROTOCOL, default=user_input.get(CONF_RF_PROTOCOL)
-                ): vol.In(protocol_names),
-                vol.Required(
-                    CONF_RF_ID, default=user_input.get(CONF_RF_ID)
-                ): cv.positive_int,
-                vol.Optional(
-                    CONF_RF_UNIT, default=user_input.get(CONF_RF_UNIT)
-                ): cv.positive_int,
+                vol.Required(CONF_RF_PROTOCOL, default=""): vol.In(protocol_names),
+                vol.Required(CONF_RF_ID): cv.positive_int,
+                vol.Optional(CONF_RF_UNIT): cv.positive_int,
                 vol.Optional(
                     CONF_RF_ID_IGNORE_ALL,
-                    default=user_input.get(CONF_RF_ID_IGNORE_ALL, False),
+                    default=False,
                 ): bool,
                 vol.Optional(
                     CONF_RF_UNIT_EXTRAPOLATE,
-                    default=user_input.get(CONF_RF_UNIT_EXTRAPOLATE, False),
+                    default=False,
                 ): bool,
             }
         )
 
-        if user_input is not None and len(user_input) > 0:
-            try:
-                title, data, options = await self.validate_input_setup_rf_device(
-                    user_input, errors
-                )
-            except Exception:  # pylint: disable=broad-except
-                _LOGGER.exception("Unexpected exception")
-                errors["base"] = "unknown"
-            else:
-                return self.async_create_entry(title=title, data=data, options=options)
+        if user_input is not None:
+            data_schema = self.add_suggested_values_to_schema(
+                self._step_setup_rf_device_schema, user_input
+            )
+        else:
+            data_schema = self._step_setup_rf_device_schema
 
         return self.async_show_form(
             step_id="setup_rf_device",
-            data_schema=self.STEP_SETUP_SCHEMA,
+            data_schema=data_schema,
             errors=errors,
         )
 
     async def validate_input_setup_rf_device(
         self, data: dict[str, Any], errors: dict[str, str]
     ) -> (str, dict[str, Any], dict[str, Any]):
-        """Validate the user input allows us to connect.
+        """Validate the user input and create data.
 
-        Data has the keys from STEP_SETUP_SCHEMA with values provided by the user.
+        Data has the keys from _step_setup_rf_device_schema with values provided by the user.
         """
-        # Validate the data can be used to set up a connection.
-        self.STEP_SETUP_SCHEMA(data)
+        # Validate the data.
+        self._step_setup_rf_device_schema(data)
 
         _LOGGER.debug(data)
         rf_protocol: str = data.get(CONF_RF_PROTOCOL).strip()
@@ -485,12 +489,14 @@ class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
                             CONF_RECEIVE_PIN, DEFAULT_RECEIVE_PIN
                         ),
                     ): vol.In(range(2, 4)),
+                    # ): vol.All(vol.Coerce(int), vol.Range(min=2, max=3)),
                     vol.Optional(
                         CONF_SEND_PIN,
                         default=self.config_entry.options.get(
                             CONF_SEND_PIN, DEFAULT_SEND_PIN
                         ),
                     ): vol.In(range(4, 14)),
+                    # ): vol.All(vol.Coerce(int), vol.Range(min=4, max=13)),
                 }
             )
 
@@ -538,7 +544,3 @@ def get_serial_by_id(dev_path: str) -> str:
         if os.path.realpath(path) == dev_path:
             return path
     return dev_path
-
-
-class CannotConnect(HomeAssistantError):
-    """Error to indicate we cannot connect."""
