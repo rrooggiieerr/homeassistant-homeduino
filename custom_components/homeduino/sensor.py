@@ -35,9 +35,9 @@ async def async_setup_entry(
 
     entities = []
 
-    if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-        coordinator: HomeduinoCoordinator = hass.data[DOMAIN][config_entry.entry_id]
+    coordinator = HomeduinoCoordinator.instance(hass)
 
+    if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
         for analog_sensor in coordinator.analog_sensors:
             entities.append(
                 HomeduinoTransceiverAnalogSensor(coordinator, analog_sensor.get("pin"))
