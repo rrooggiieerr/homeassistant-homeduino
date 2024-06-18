@@ -47,7 +47,7 @@ async def async_setup_entry(
             entities.append(HomeduinoTransceiverDHTTemperatureSensor(coordinator))
             entities.append(HomeduinoTransceiverDHTHumiditySensor(coordinator))
     elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
-        pass
+        entities.append(HomeduinoRFSensor(coordinator))
 
     async_add_entities(entities)
 
@@ -100,3 +100,12 @@ class HomeduinoTransceiverDHTHumiditySensor(HomeduinoTransceiverSensor):
         self._attr_name = "Humidity"
         self._attr_device_class = SensorDeviceClass.HUMIDITY
         self._attr_native_unit_of_measurement = PERCENTAGE
+
+
+class HomeduinoRFSensor(CoordinatorEntity, SensorEntity):
+    def __init__(self, coordinator: HomeduinoCoordinator):
+        """Pass coordinator to CoordinatorEntity."""
+        super().__init__(coordinator)
+
+        self._attr_device_info = coordinator.device_info
+        self._attr_unique_id = f"{coordinator.serial_port}-rf"
