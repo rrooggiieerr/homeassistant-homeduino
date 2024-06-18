@@ -11,9 +11,12 @@ import serial
 import serial.tools.list_ports
 import voluptuous as vol
 from homeassistant import config_entries
+from homeassistant.const import CONF_TYPE
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
+from homeassistant.helpers.selector import (SelectOptionDict, SelectSelector,
+                                            SelectSelectorConfig)
 from homeduino import (
     BAUD_RATES,
     DEFAULT_BAUD_RATE,
@@ -31,6 +34,16 @@ from .const import (
     CONF_ENTRY_TYPE_RF_DEVICE,
     CONF_ENTRY_TYPE_TRANSCEIVER,
     CONF_MANUAL_PATH,
+    CONF_LOCAL_DEVICE_GPIO,
+    CONF_LOCAL_DEVICE_INTERVAL,
+    CONF_LOCAL_DEVICE_TYPE,
+    CONF_LOCAL_DEVICE_TYPE_ANALOG_INPUT,
+    CONF_LOCAL_DEVICE_TYPE_DHT11,
+    CONF_LOCAL_DEVICE_TYPE_DHT22,
+    CONF_LOCAL_DEVICE_TYPE_DIGITAL_INPUT,
+    CONF_LOCAL_DEVICE_TYPE_DIGITAL_OUTPUT,
+    CONF_LOCAL_DEVICE_TYPE_DS18B20,
+    CONF_LOCAL_DEVICE_TYPE_PWM_OUTPUT,
     CONF_RECEIVE_PIN,
     CONF_RF_ID,
     CONF_RF_ID_IGNORE_ALL,
@@ -51,6 +64,45 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
     STEP_SETUP_SCHEMA = None
+    _STEP_SETUP_LOCAL_DEVICE_SCHEMA = vol.Schema(
+        {
+            vol.Required(CONF_LOCAL_DEVICE_GPIO, default=""): vol.In(range(4, 14)),
+            # vol.All(vol.Coerce(int), vol.Range(min=4, max=13)),
+            vol.Required(CONF_LOCAL_DEVICE_TYPE, default=""): SelectSelector(
+                SelectSelectorConfig(
+                    options=[
+                        SelectOptionDict(
+                            value=CONF_LOCAL_DEVICE_TYPE_DHT11, label="DHT11"
+                        ),
+                        SelectOptionDict(
+                            value=CONF_LOCAL_DEVICE_TYPE_DHT22, label="DHT22"
+                        ),
+                        SelectOptionDict(
+                            value=CONF_LOCAL_DEVICE_TYPE_DS18B20, label="Dallas DS18B20"
+                        ),
+                        SelectOptionDict(
+                            value=CONF_LOCAL_DEVICE_TYPE_ANALOG_INPUT,
+                            label="Analog Input",
+                        ),
+                        SelectOptionDict(
+                            value=CONF_LOCAL_DEVICE_TYPE_DIGITAL_INPUT,
+                            label="Digital Input",
+                        ),
+                        SelectOptionDict(
+                            value=CONF_LOCAL_DEVICE_TYPE_DIGITAL_OUTPUT,
+                            label="Digital Output",
+                        ),
+                        SelectOptionDict(
+                            value=CONF_LOCAL_DEVICE_TYPE_PWM_OUTPUT, label="PWM Output"
+                        ),
+                    ],
+                    custom_value=True,
+                    sort=True,
+                )
+            ),
+            vol.Optional(CONF_LOCAL_DEVICE_INTERVAL): cv.positive_int,
+        }
+    )
 
     async def async_step_user(
         self, user_input: dict[str, Any] | None = {}
@@ -60,7 +112,20 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if not HomeduinoCoordinator.instance(self.hass).has_transceiver():
             return await self.async_step_setup_transceiver(user_input)
 
-        return await self.async_step_setup_rf_device(user_input)
+        return await self.async_step_setup_rf_device()
+        # if user_input is not None:
+        #     user_selection = user_input[CONF_TYPE]
+        #     if user_selection == "Transceiver":
+        #         return await self.async_step_setup_transceiver()
+        #     elif user_selection == "RF Device":
+        #         return await self.async_step_setup_rf_device()
+        #     elif user_selection == "Local Device":
+        #         return await self.async_step_setup_local_device()
+        #
+        # list_of_types = ["RF Device", "Local Device"]
+        #
+        # schema = vol.Schema({vol.Required(CONF_TYPE): vol.In(list_of_types)})
+        # return self.async_show_form(step_id="user", data_schema=schema)
 
     async def async_step_setup_transceiver(
         self, user_input: dict[str, Any] | None = {}
@@ -288,6 +353,96 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if rf_protocol.startswith("switch") or rf_protocol.startswith("dimmer"):
             options[CONF_RF_ID_IGNORE_ALL] = rf_id_ignore_all
             options[CONF_RF_UNIT_EXTRAPOLATE] = rf_unit_extrapolate
+
+        # Return title, data, options.
+        return (
+            title,
+            data,
+            options,
+        )
+
+    async def async_step_setup_local_device(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        errors: dict[str, str] = {}
+
+        if user_input is not None:
+            title, data, options = await self.validate_input_setup_local_device(
+                user_input, errors
+            )
+
+            if not errors:
+                return self.async_create_entry(title=title, data=data, options=options)
+
+        if user_input is not None:
+            data_schema = self.add_suggested_values_to_schema(
+                self._STEP_SETUP_LOCAL_DEVICE_SCHEMA, user_input
+            )
+        else:
+            data_schema = self._STEP_SETUP_LOCAL_DEVICE_SCHEMA
+
+        return self.async_show_form(
+            step_id="setup_local_device",
+            data_schema=data_schema,
+            errors=errors,
+        )
+
+    async def validate_input_setup_local_device(
+        self, data: dict[str, Any], errors: dict[str, str]
+    ) -> (str, dict[str, Any], dict[str, Any]):
+        """Validate the user input and create data.
+
+        Data has the keys from _step_setup_rf_device_schema with values provided by the user.
+        """
+        # Validate the data.
+        self._STEP_SETUP_LOCAL_DEVICE_SCHEMA(data)
+
+        gpio = data.get(CONF_LOCAL_DEVICE_GPIO)
+        device_type = data.get(CONF_LOCAL_DEVICE_TYPE)
+        interval = data.get(CONF_LOCAL_DEVICE_INTERVAL)
+
+        if (
+            device_type
+            in (
+                CONF_LOCAL_DEVICE_TYPE_DS18B20,
+                CONF_LOCAL_DEVICE_TYPE_ANALOG_INPUT,
+                CONF_LOCAL_DEVICE_TYPE_DIGITAL_INPUT,
+                CONF_LOCAL_DEVICE_TYPE_DIGITAL_OUTPUT,
+                CONF_LOCAL_DEVICE_TYPE_PWM_OUTPUT,
+            )
+            and interval <= 0
+        ):
+            errors[CONF_LOCAL_DEVICE_INTERVAL] = "interval_not_set"
+
+        title = ""
+        if device_type == CONF_LOCAL_DEVICE_TYPE_DHT11:
+            title = f"DHT11 {gpio}"
+        elif device_type == CONF_LOCAL_DEVICE_TYPE_DHT22:
+            title = f"DHT22 {gpio}"
+        elif device_type == CONF_LOCAL_DEVICE_TYPE_DS18B20:
+            title = f"DS18B20 {gpio}"
+        elif device_type == CONF_LOCAL_DEVICE_TYPE_ANALOG_INPUT:
+            title = f"Analog {gpio}"
+        elif device_type == CONF_LOCAL_DEVICE_TYPE_DIGITAL_INPUT:
+            title = f"Digital {gpio}"
+        elif device_type == CONF_LOCAL_DEVICE_TYPE_DIGITAL_OUTPUT:
+            title = f"Digital {gpio}"
+        elif device_type == CONF_LOCAL_DEVICE_TYPE_PWM_OUTPUT:
+            title = f"PWM {gpio}"
+
+        data = {
+            CONF_ENTRY_TYPE: device_type,
+            CONF_LOCAL_DEVICE_GPIO: gpio,
+        }
+        options = {}
+        if device_type in (
+            CONF_LOCAL_DEVICE_TYPE_DS18B20,
+            CONF_LOCAL_DEVICE_TYPE_ANALOG_INPUT,
+            CONF_LOCAL_DEVICE_TYPE_DIGITAL_INPUT,
+            CONF_LOCAL_DEVICE_TYPE_DIGITAL_OUTPUT,
+            CONF_LOCAL_DEVICE_TYPE_PWM_OUTPUT,
+        ):
+            options[CONF_LOCAL_DEVICE_INTERVAL] = interval
 
         # Return title, data, options.
         return (
