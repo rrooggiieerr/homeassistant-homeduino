@@ -24,7 +24,6 @@ from .const import (
     CONF_RF_ID_IGNORE_ALL,
     CONF_RF_PROTOCOL,
     CONF_RF_UNIT,
-    CONF_RF_UNIT_EXTRAPOLATE,
     DOMAIN,
 )
 
@@ -55,10 +54,9 @@ async def async_setup_entry(
         id = config_entry.data.get(CONF_RF_ID)
         unit = config_entry.data.get(CONF_RF_UNIT)
         id_ignore_all = config_entry.options.get(CONF_RF_ID_IGNORE_ALL)
-        extrapolate = config_entry.options.get(CONF_RF_UNIT_EXTRAPOLATE)
 
         identifier = f"{protocol}-{id}"
-        if unit is not None and not extrapolate:
+        if unit is not None:
             identifier += f"-{unit}"
 
         device_info = DeviceInfo(
@@ -67,34 +65,14 @@ async def async_setup_entry(
             via_device=(DOMAIN, coordinator.serial_port),
         )
 
-        if extrapolate:
-            for i in range(unit + 1):
-                entity_description = SwitchEntityDescription(
-                    key=(protocol, id, i),
-                    name=f"Switch {i}",
-                    device_class=SwitchDeviceClass.SWITCH,
-                )
-                entities.append(
-                    HomeduinoRFSwitch(
-                        coordinator, device_info, entity_description, id_ignore_all
-                    )
-                )
-            if id_ignore_all:
-                entity_description = SwitchEntityDescription(
-                    key=(protocol, id, unit + 1), name=f"Switch {unit + 1}"
-                )
-                entities.append(
-                    HomeduinoRFSwitchAll(coordinator, device_info, entity_description)
-                )
-        else:
-            entity_description = SwitchEntityDescription(
-                key=(protocol, id, unit), name=f"Switch {unit}"
+        entity_description = SwitchEntityDescription(
+            key=(protocol, id, unit), name=f"Switch {unit}"
+        )
+        entities.append(
+            HomeduinoRFSwitch(
+                coordinator, device_info, entity_description, id_ignore_all
             )
-            entities.append(
-                HomeduinoRFSwitch(
-                    coordinator, device_info, entity_description, id_ignore_all
-                )
-            )
+        )
 
     async_add_entities(entities)
 

@@ -50,7 +50,6 @@ from .const import (
     CONF_RF_ID_IGNORE_ALL,
     CONF_RF_PROTOCOL,
     CONF_RF_UNIT,
-    CONF_RF_UNIT_EXTRAPOLATE,
     CONF_SEND_PIN,
     CONF_SERIAL_PORT,
     DOMAIN,
@@ -298,10 +297,6 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     CONF_RF_ID_IGNORE_ALL,
                     default=False,
                 ): bool,
-                vol.Optional(
-                    CONF_RF_UNIT_EXTRAPOLATE,
-                    default=False,
-                ): bool,
             }
         )
 
@@ -333,16 +328,15 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         rf_id: int = data.get(CONF_RF_ID)
         rf_unit: int = data.get(CONF_RF_UNIT, None)
         rf_id_ignore_all: bool = data.get(CONF_RF_ID_IGNORE_ALL, False)
-        rf_unit_extrapolate: bool = data.get(CONF_RF_UNIT_EXTRAPOLATE, False)
 
         unique_id = f"{DOMAIN}-{rf_protocol}-{rf_id}"
-        if rf_unit is not None and not rf_unit_extrapolate:
+        if rf_unit is not None:
             unique_id += f"-{rf_unit}"
         await self.async_set_unique_id(unique_id)
         self._abort_if_unique_id_configured()
 
         title = f"{rf_protocol} {rf_id}"
-        if rf_unit is not None and not rf_unit_extrapolate:
+        if rf_unit is not None:
             title += f" {rf_unit}"
         data = {
             CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_RF_DEVICE,
@@ -356,7 +350,6 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         if rf_protocol.startswith("switch") or rf_protocol.startswith("dimmer"):
             options[CONF_RF_ID_IGNORE_ALL] = rf_id_ignore_all
-            options[CONF_RF_UNIT_EXTRAPOLATE] = rf_unit_extrapolate
 
         # Return title, data, options.
         return (
@@ -515,12 +508,6 @@ class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
                         CONF_RF_ID_IGNORE_ALL,
                         default=self.config_entry.options.get(
                             CONF_RF_ID_IGNORE_ALL, False
-                        ),
-                    ): bool,
-                    vol.Optional(
-                        CONF_RF_UNIT_EXTRAPOLATE,
-                        default=self.config_entry.options.get(
-                            CONF_RF_UNIT_EXTRAPOLATE, False
                         ),
                     ): bool,
                 }
