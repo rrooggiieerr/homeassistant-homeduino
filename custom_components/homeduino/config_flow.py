@@ -15,6 +15,9 @@ from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.selector import (
+    NumberSelector,
+    NumberSelectorConfig,
+    NumberSelectorMode,
     SelectOptionDict,
     SelectSelector,
     SelectSelectorConfig,
@@ -67,8 +70,9 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     _step_setup_rf_device_schema: vol.Schema
     _STEP_SETUP_LOCAL_DEVICE_SCHEMA = vol.Schema(
         {
-            vol.Required(CONF_LOCAL_DEVICE_GPIO, default=""): vol.In(range(4, 14)),
-            # vol.All(vol.Coerce(int), vol.Range(min=4, max=13)),
+            vol.Required(CONF_LOCAL_DEVICE_GPIO, default=""): NumberSelector(
+                NumberSelectorConfig(min=4, max=13, mode=NumberSelectorMode.BOX)
+            ),
             vol.Required(CONF_LOCAL_DEVICE_TYPE, default=""): SelectSelector(
                 SelectSelectorConfig(
                     options=[
@@ -101,7 +105,9 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     sort=True,
                 )
             ),
-            vol.Optional(CONF_LOCAL_DEVICE_INTERVAL): cv.positive_int,
+            vol.Optional(CONF_LOCAL_DEVICE_INTERVAL): NumberSelector(
+                NumberSelectorConfig(min=0, mode=NumberSelectorMode.BOX)
+            ),
         }
     )
 
@@ -171,14 +177,14 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 vol.Required(CONF_BAUD_RATE, default=DEFAULT_BAUD_RATE): vol.In(
                     BAUD_RATES
                 ),
-                vol.Optional(CONF_RECEIVE_PIN, default=DEFAULT_RECEIVE_PIN): vol.In(
-                    range(2, 4)
+                vol.Optional(
+                    CONF_RECEIVE_PIN, default=DEFAULT_RECEIVE_PIN
+                ): NumberSelector(
+                    NumberSelectorConfig(min=2, max=3, mode=NumberSelectorMode.BOX)
                 ),
-                # vol.All(vol.Coerce(int), vol.Range(min=2, max=3)),
-                vol.Optional(CONF_SEND_PIN, default=DEFAULT_SEND_PIN): vol.In(
-                    range(4, 14)
+                vol.Optional(CONF_SEND_PIN, default=DEFAULT_SEND_PIN): NumberSelector(
+                    NumberSelectorConfig(min=4, max=13, mode=NumberSelectorMode.BOX)
                 ),
-                # vol.All(vol.Coerce(int), vol.Range(min=2, max=13)),
             }
         )
 
