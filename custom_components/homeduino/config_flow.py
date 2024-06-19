@@ -15,12 +15,14 @@ from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.selector import (
+    BooleanSelector,
     NumberSelector,
     NumberSelectorConfig,
     NumberSelectorMode,
     SelectOptionDict,
     SelectSelector,
     SelectSelectorConfig,
+    SelectSelectorMode,
 )
 from homeduino import (
     BAUD_RATES,
@@ -36,6 +38,7 @@ from . import HomeduinoCoordinator
 from .const import (
     CONF_BAUD_RATE,
     CONF_ENTRY_TYPE,
+    CONF_ENTRY_TYPE_LOCAL_DEVICE,
     CONF_ENTRY_TYPE_RF_DEVICE,
     CONF_ENTRY_TYPE_TRANSCEIVER,
     CONF_LOCAL_DEVICE_GPIO,
@@ -101,6 +104,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                             value=CONF_LOCAL_DEVICE_TYPE_PWM_OUTPUT, label="PWM Output"
                         ),
                     ],
+                    mode=SelectSelectorMode.DROPDOWN,
                     custom_value=True,
                     sort=True,
                 )
@@ -170,12 +174,21 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                             SelectOptionDict(value=k, label=v)
                             for k, v in list_of_ports.items()
                         ],
+                        mode=SelectSelectorMode.DROPDOWN,
                         custom_value=True,
                         sort=True,
                     )
                 ),
-                vol.Required(CONF_BAUD_RATE, default=DEFAULT_BAUD_RATE): vol.In(
-                    BAUD_RATES
+                vol.Required(
+                    CONF_BAUD_RATE, default=str(DEFAULT_BAUD_RATE)
+                ): SelectSelector(
+                    SelectSelectorConfig(
+                        options=[
+                            SelectOptionDict(value=str(baud_rate), label=str(baud_rate))
+                            for baud_rate in BAUD_RATES
+                        ],
+                        mode=SelectSelectorMode.DROPDOWN,
+                    )
                 ),
                 vol.Optional(
                     CONF_RECEIVE_PIN, default=DEFAULT_RECEIVE_PIN
@@ -232,13 +245,13 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             try:
                 homeduino = Homeduino(
                     serial_port,
-                    data[CONF_BAUD_RATE],
-                    data[CONF_RECEIVE_PIN],
-                    data[CONF_SEND_PIN],
+                    int(data[CONF_BAUD_RATE]),
+                    data.get(CONF_RECEIVE_PIN),
+                    data.get(CONF_SEND_PIN),
                 )
 
                 try:
-                    if not await homeduino.connect():
+                    if not await homeduino.connect(ping_interval=0):
                         errors["base"] = f"Unable to connect to device {serial_port}"
                 except SerialException as ex:
                     errors["base"] = ex.strerror
@@ -265,11 +278,11 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             {
                 CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_TRANSCEIVER,
                 CONF_SERIAL_PORT: serial_port,
-                CONF_RECEIVE_PIN: data[CONF_BAUD_RATE],
+                CONF_BAUD_RATE: int(data[CONF_BAUD_RATE]),
             },
             {
-                CONF_RECEIVE_PIN: data[CONF_RECEIVE_PIN],
-                CONF_SEND_PIN: data[CONF_SEND_PIN],
+                CONF_RECEIVE_PIN: data.get(CONF_RECEIVE_PIN),
+                CONF_SEND_PIN: data.get(CONF_SEND_PIN),
             },
         )
 
@@ -297,12 +310,16 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self._step_setup_rf_device_schema = vol.Schema(
             {
                 vol.Required(CONF_RF_PROTOCOL, default=""): vol.In(protocol_names),
-                vol.Required(CONF_RF_ID): cv.positive_int,
-                vol.Optional(CONF_RF_UNIT): cv.positive_int,
+                vol.Required(CONF_RF_ID): NumberSelector(
+                    NumberSelectorConfig(min=0, mode=NumberSelectorMode.BOX)
+                ),
+                vol.Optional(CONF_RF_UNIT): NumberSelector(
+                    NumberSelectorConfig(min=0, mode=NumberSelectorMode.BOX)
+                ),
                 vol.Optional(
                     CONF_RF_ID_IGNORE_ALL,
                     default=False,
-                ): bool,
+                ): BooleanSelector(),
             }
         )
 
@@ -466,13 +483,36 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
 
 class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
+    TRANSCEIVER_OPTIONS_SCHEMA = vol.Schema(
+        {
+            vol.Optional(CONF_RECEIVE_PIN): NumberSelector(
+                NumberSelectorConfig(min=2, max=3, mode=NumberSelectorMode.BOX)
+            ),
+            vol.Optional(CONF_SEND_PIN): NumberSelector(
+                NumberSelectorConfig(min=4, max=13, mode=NumberSelectorMode.BOX)
+            ),
+        }
+    )
+    RF_DEVICE_OPTIONS_SCHEMA = vol.Schema(
+        {
+            vol.Optional(CONF_RF_ID_IGNORE_ALL): BooleanSelector(),
+        }
+    )
+    LOCAL_DEVICE_OPTIONS_SCHEMA = vol.Schema(
+        {
+            vol.Optional(CONF_LOCAL_DEVICE_INTERVAL): NumberSelector(
+                NumberSelectorConfig(min=0, mode=NumberSelectorMode.BOX)
+            ),
+        }
+    )
+
     def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
         """Initialize options flow."""
         _LOGGER.debug(config_entry.data)
         self.config_entry = config_entry
 
     async def async_step_init(
-        self, user_input: dict[str, Any] | None = {}
+        self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         """Manage the options."""
         errors: dict[str, str] = {}
@@ -480,51 +520,25 @@ class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
         entry_type = self.config_entry.data.get(CONF_ENTRY_TYPE)
 
         if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-            schema = vol.Schema(
-                {
-                    vol.Optional(
-                        CONF_RECEIVE_PIN,
-                        default=self.config_entry.options.get(
-                            CONF_RECEIVE_PIN, DEFAULT_RECEIVE_PIN
-                        ),
-                    ): vol.In(range(2, 4)),
-                    # ): vol.All(vol.Coerce(int), vol.Range(min=2, max=3)),
-                    vol.Optional(
-                        CONF_SEND_PIN,
-                        default=self.config_entry.options.get(
-                            CONF_SEND_PIN, DEFAULT_SEND_PIN
-                        ),
-                    ): vol.In(range(4, 14)),
-                    # ): vol.All(vol.Coerce(int), vol.Range(min=4, max=13)),
-                }
+            data_schema = self.TRANSCEIVER_OPTIONS_SCHEMA
+        elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
+            data_schema = self.RF_DEVICE_OPTIONS_SCHEMA
+        elif entry_type == CONF_ENTRY_TYPE_LOCAL_DEVICE:
+            data_schema = self.LOCAL_DEVICE_OPTIONS_SCHEMA
+
+        if user_input is not None:
+            return self.async_create_entry(title="", data=user_input)
+
+        if user_input is not None:
+            data_schema = self.add_suggested_values_to_schema(data_schema, user_input)
+        else:
+            data_schema = self.add_suggested_values_to_schema(
+                data_schema, self.config_entry.options
             )
 
-            if user_input is not None and len(user_input) > 0:
-                return self.async_create_entry(title="", data=user_input)
-
-            return self.async_show_form(
-                step_id="init", data_schema=schema, errors=errors
-            )
-
-        if entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
-            rf_protocol = self.config_entry.data.get(CONF_RF_PROTOCOL)
-            schema = vol.Schema(
-                {
-                    vol.Optional(
-                        CONF_RF_ID_IGNORE_ALL,
-                        default=self.config_entry.options.get(
-                            CONF_RF_ID_IGNORE_ALL, False
-                        ),
-                    ): bool,
-                }
-            )
-
-            if user_input is not None and len(user_input) > 0:
-                return self.async_create_entry(title="", data=user_input)
-
-            return self.async_show_form(
-                step_id="init", data_schema=schema, errors=errors
-            )
+        return self.async_show_form(
+            step_id="init", data_schema=data_schema, errors=errors
+        )
 
 
 def get_serial_by_id(dev_path: str) -> str:
