@@ -30,6 +30,9 @@ from .const import (
     CONF_ENTRY_TYPE,
     CONF_ENTRY_TYPE_RF_DEVICE,
     CONF_ENTRY_TYPE_TRANSCEIVER,
+    CONF_IO_DIGITAL_,
+    CONF_IO_RF_RECEIVE,
+    CONF_IO_RF_SEND,
     CONF_RECEIVE_PIN,
     CONF_SEND_PIN,
     CONF_SERIAL_PORT,
@@ -41,6 +44,7 @@ _LOGGER = logging.getLogger(__name__)
 PLATFORMS: list[Platform] = [
     Platform.BINARY_SENSOR,
     Platform.LIGHT,
+    Platform.NUMBER,
     Platform.SENSOR,
     Platform.SWITCH,
 ]
@@ -60,14 +64,6 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
     """Homeduino Data Update Coordinator."""
 
     _instance = None
-
-    serial_port = None
-
-    binary_sensors = []
-    analog_sensors = []
-    dht_sensor = None
-
-    failed_pings = 0
 
     @staticmethod
     def instance(hass: HomeAssistant):
@@ -178,13 +174,21 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
         # Set up Homeduino 433 MHz RF transceiver
         try:
-            serial_port = entry.data.get(CONF_SERIAL_PORT, None)
+            serial_port = entry.data.get(CONF_SERIAL_PORT)
+            receive_pin = None
+            send_pin = None
+            for digital_io in range(2, 14):
+                value = entry.options.get(CONF_IO_DIGITAL_ + str(digital_io))
+                if value == CONF_IO_RF_RECEIVE:
+                    receive_pin = digital_io
+                elif value == CONF_IO_RF_SEND:
+                    send_pin = digital_io
 
             homeduino = Homeduino(
                 serial_port,
                 entry.options.get(CONF_BAUD_RATE, DEFAULT_BAUD_RATE),
-                entry.options.get(CONF_RECEIVE_PIN, DEFAULT_RECEIVE_PIN),
-                entry.options.get(CONF_SEND_PIN, DEFAULT_SEND_PIN),
+                receive_pin,
+                send_pin,
             )
 
             if not await homeduino.connect():
@@ -212,11 +216,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             ) from ex
 
         hass.data.setdefault(DOMAIN, {})
-        hass.data[DOMAIN][entry.entry_id] = homeduino_coordinator
+        hass.data[DOMAIN][entry.entry_id] = homeduino
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
-    entry.async_on_unload(entry.add_update_listener(options_update_listener))
+    entry.async_on_unload(entry.add_update_listener(update_listener))
 
     return True
 
@@ -237,7 +241,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     return unload_ok
 
 
-async def options_update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
+async def update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
     """Handle options update."""
     _LOGGER.debug("Configuration options updated, reloading Homeduino integration")
     entry_type = entry.data.get(CONF_ENTRY_TYPE)
@@ -251,3 +255,52 @@ async def async_remove_config_entry_device(
 ) -> bool:
     """Remove a config entry from a device."""
     return True
+
+
+async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
+    """Migrate old entry."""
+    if config_entry.version == 1:
+        _LOGGER.debug("Migrating config entry from 1 to 2")
+
+        entry_type = config_entry.data.get(CONF_ENTRY_TYPE)
+
+        if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
+            receive_pin = int(config_entry.options.get(CONF_RECEIVE_PIN))
+            send_pin = int(config_entry.options.get(CONF_SEND_PIN))
+
+            data = {
+                CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_TRANSCEIVER,
+                CONF_SERIAL_PORT: config_entry.data.get(CONF_SERIAL_PORT),
+                CONF_BAUD_RATE: config_entry.data.get(
+                    CONF_BAUD_RATE, DEFAULT_BAUD_RATE
+                ),
+            }
+
+            options = {}
+
+            for digital_io in range(2, 14):
+                if digital_io == receive_pin:
+                    options[CONF_IO_DIGITAL_ + str(digital_io)] = CONF_IO_RF_RECEIVE
+                elif digital_io == send_pin:
+                    options[CONF_IO_DIGITAL_ + str(digital_io)] = CONF_IO_RF_SEND
+                else:
+                    options[CONF_IO_DIGITAL_ + str(digital_io)] = None
+
+            for analog_input in range(0, 8):
+                options[CONF_IO_ANALOG_ + str(analog_input)] = False
+
+        if entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
+            data = config_entry.data
+            options = {
+                CONF_RF_ID_IGNORE_ALL: config_entry.options.get(
+                    CONF_RF_ID_IGNORE_ALL, False
+                )
+            }
+
+        hass.config_entries.async_update_entry(
+            config_entry, data=data, options=options, version=2
+        )
+
+        return True
+
+    return False

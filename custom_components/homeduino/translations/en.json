@@ -13,15 +13,31 @@
             	"title": "Homeduino Transceiver",
                 "data": {
                     "serial_port": "Serial port",
-                    "manual_path": "Manually entry",
-                    "receive_pin": "Receive pin",
-                    "send_pin": "Send pin"
+                    "baud_rate": "Baud rate",
+                    "digital_2": "Digital IO 2",
+                    "digital_3": "Digital IO 3",
+                    "digital_4": "Digital IO 4",
+                    "digital_5": "Digital IO 5",
+                    "digital_6": "Digital IO 6",
+                    "digital_7": "Digital IO 7",
+                    "digital_8": "Digital IO 8",
+                    "digital_9": "Digital IO 9",
+                    "digital_10": "Digital IO 10",
+                    "digital_11": "Digital IO 11",
+                    "digital_12": "Digital IO 12",
+                    "digital_13": "Digital IO 13",
+                    "analog_0": "Enable analog input 0",
+                    "analog_1": "Enable analog input 1",
+                    "analog_2": "Enable analog input 2",
+                    "analog_3": "Enable analog input 3",
+                    "analog_4": "Enable analog input 4",
+                    "analog_5": "Enable analog input 5",
+                    "analog_6": "Enable analog input 6",
+                    "analog_7": "Enable analog input 7"
                 },
                 "data_description": {
-                    "serial_port": "The serial port your Homeduino 433MHz transceiver is connected to.",
-                    "manual_path": "Device path",
-                    "receive_pin": "The Arduino digital pin the 433 MHz receiver is connected to.",
-                    "send_pin": "The Arduino digital pin the 433 MHz transmitter is connected to."
+                    "serial_port": "The serial port your Homeduino Transceiver is connected to.",
+                    "baud_rate": "The configured baud rate of your Homeduino Transceiver."
                 }
             },
             "setup_rf_device": {
@@ -30,46 +46,107 @@
             		"rf_id": "Device ID",
             		"rf_protocol": "Protocol",
             		"rf_unit": "Device unit",
-            		"rf_unit_extrapolate": "Extrapolate device units",
-            		"rf_id_ignore_all": "Ignore all",
-            		"rf_switch_as_button": "Switch as button"
+            		"rf_id_ignore_all": "Ignore all"
             	},
             	"data_description": {
-            		"rf_unit_extrapolate": "Enable if you want the generate devices for each unit ID from 0 till the given unit ID.",
-            		"rf_id_ignore_all": "Enable when you want your switch/light ignore the all/master button often found on RF remote controls.",
-            		"rf_switch_as_button": "Generate switches for each on/off state instead of a button."
-            	}
-            },
-            "setup_local_device": {
-            	"title": "Homeduino Local Device",
-            	"data": {
-            		"gpio": "GPIO",
-            		"type": "Device type",
-            		"interval": "Interval"
-            	},
-            	"data_description": {
+            		"rf_id_ignore_all": "Enable when your RF Device ignores the all/master button often found on RF remote controls."
             	}
             }
         }
     },
     "options": {
         "step": {
-            "init": {
+            "transceiver": {
+            	"title": "Homeduino Transceiver options",
                 "data": {
-                    "receive_pin": "Receive pin",
-                    "send_pin": "Send pin",
-            		"rf_unit_extrapolate": "Extrapolate device units",
-            		"rf_id_ignore_all": "Ignore all",
-            		"rf_switch_as_button": "Switch as button"
+                    "digital_2": "Digital IO 2",
+                    "digital_3": "Digital IO 3",
+                    "digital_4": "Digital IO 4",
+                    "digital_5": "Digital IO 5",
+                    "digital_6": "Digital IO 6",
+                    "digital_7": "Digital IO 7",
+                    "digital_8": "Digital IO 8",
+                    "digital_9": "Digital IO 9",
+                    "digital_10": "Digital IO 10",
+                    "digital_11": "Digital IO 11",
+                    "digital_12": "Digital IO 12",
+                    "digital_13": "Digital IO 13",
+                    "analog_0": "Enable analog input 0",
+                    "analog_1": "Enable analog input 1",
+                    "analog_2": "Enable analog input 2",
+                    "analog_3": "Enable analog input 3",
+                    "analog_4": "Enable analog input 4",
+                    "analog_5": "Enable analog input 5",
+                    "analog_6": "Enable analog input 6",
+                    "analog_7": "Enable analog input 7"
                 },
                 "data_description": {
-                    "receive_pin": "The Arduino digital pin the 433 MHz receiver is connected to.",
-                    "send_pin": "The Arduino digital pin the 433 MHz transmitter is connected to.",
-            		"rf_unit_extrapolate": "Enable if you want the generate devices for each unit ID from 0 till the given unit ID.",
-            		"rf_id_ignore_all": "Enable when you want your switch/light ignore the all/master button often found on RF remote controls.",
-            		"rf_switch_as_button": "Generate switches for each on/off state instead of a button."
+                }
+            },
+            "rf_device": {
+            	"title": "Homeduino RF Device options",
+                "data": {
+            		"rf_id_ignore_all": "Ignore all"
+                },
+                "data_description": {
+            		"rf_id_ignore_all": "Enable when your RF Device ignores the all/master button often found on RF remote controls."
                 }
             }
         }
+    },
+    "selector": {
+    	"device_types": {
+    		"options": {
+    			"transceiver": "Homeduino Transceiver",
+    			"rf_device": "Homeduino RF Device"
+    		}
+    	},
+    	"digital_io": {
+    		"options": {
+    			"none": "Not Connected",
+    			"rf_receive": "RF Receive",
+    			"rf_send": "RF Send",
+    			"dht11": "DHT11",
+    			"dht22": "DHT22",
+    			"1_wire": "1-Wire Bus",
+    			"digital_input": "Digital Input",
+    			"digital_output": "Digital Output",
+    			"pwm_output": "PWM Output"
+    		}
+    	}
+    },
+    "entity": {
+    	"binary_sensor": {
+    		"digital_input": {
+	    		"name": "Digital Input {digital_io}"
+    		}
+    	},
+    	"sensor": {
+    		"analog_input": {
+	    		"name": "Analog Input {analog_input}"
+    		},
+    		"dht11_temperature": {
+	    		"name": "DHT11 {digital_io} Temperature"
+    		},
+    		"dht11_humidity": {
+	    		"name": "DHT11 {digital_io} Humidity"
+    		},
+    		"dht22_temperature": {
+	    		"name": "DHT22 {digital_io} Temperature"
+    		},
+    		"dht22_humidity": {
+	    		"name": "DHT22 {digital_io} Humidity"
+    		}
+    	},
+    	"switch": {
+    		"digital_output": {
+	    		"name": "Digital Output {digital_io}"
+    		}
+    	},
+    	"light": {
+    		"pwm_output": {
+	    		"name": "PWM Output {digital_io}"
+    		}
+    	}
     }
 }
