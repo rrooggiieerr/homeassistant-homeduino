@@ -22,7 +22,7 @@ from homeduino import (
     DEFAULT_SEND_PIN,
     Homeduino,
     HomeduinoError,
-    ResponseTimeoutError,
+    HomeduinoResponseTimeoutError,
 )
 
 from .const import (
@@ -62,7 +62,6 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
     _instance = None
 
     serial_port = None
-    transceiver: Homeduino = None
 
     binary_sensors = []
     analog_sensors = []
@@ -84,28 +83,33 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
             # Name of the data. For logging purposes.
             name=__name__,
         )
+        self._transceivers = {}
 
-    def add_transceiver(self, transceiver: Homeduino):
+    def add_transceiver(self, config_entry_id, transceiver: Homeduino):
         """Add a Homeduino transceiver."""
 
-        self.transceiver = transceiver
-        self.transceiver.add_rf_receive_callback(self.rf_receive_callback)
+        self._transceivers[config_entry_id] = transceiver
+        transceiver.add_rf_receive_callback(self.rf_receive_callback)
 
         self.async_set_updated_data(None)
 
     def has_transceiver(self):
-        return self.transceiver is not None
+        return len(self._transceivers) > 0
+
+    def get_transceiver(self, config_entry_id):
+        return self._transceivers.get(config_entry_id)
 
     def connected(self):
-        if not self.transceiver:
+        if not self.has_transceiver():
             return False
 
-        return self.transceiver.connected()
+        for transceiver in self._transceivers.values():
+            return transceiver.connected()
 
-    async def remove_transceiver(self, serial_port):
-        _LOGGER.debug(self.transceiver)
-        if self.transceiver and await self.transceiver.disconnect():
-            self.transceiver = None
+    async def remove_transceiver(self, config_entry_id):
+        transceiver = self._transceivers.get(config_entry_id)
+        if transceiver is not None and await transceiver.disconnect():
+            self._transceivers.pop(config_entry_id)
 
     @callback
     def rf_receive_callback(self, decoded) -> None:
@@ -121,27 +125,32 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         self.hass.bus.async_fire(f"{DOMAIN}_event", event_data)
 
     async def rf_send(self, protocol: str, values):
-        if not self.transceiver:
+        if not self.has_transceiver():
             return False
 
-        if not self.transceiver.connected() and not await self.transceiver.connect():
-            return False
+        for transceiver in self._transceivers.values():
+            if not transceiver.connected() and not await transceiver.connect():
+                return False
 
-        if await self.transceiver.rf_send(protocol, values):
-            self.async_set_updated_data({"protocol": protocol, "values": values})
+            if await transceiver.rf_send(protocol, values):
+                self.async_set_updated_data({"protocol": protocol, "values": values})
 
-            return True
+                return True
 
         return False
 
-    async def send(self, command):
-        if not self.transceiver:
+    async def send(self, config_entry_id, command):
+        if not self.has_transceiver():
             return False
 
-        if not self.transceiver.connected() and not await self.transceiver.connect():
+        transceiver = self._transceivers.get(config_entry_id)
+        if transceiver is None:
             return False
 
-        return await self.transceiver.send(command)
+        if not transceiver.connected() and not await transceiver.connect():
+            return False
+
+        return await transceiver.send(command)
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType):
@@ -163,16 +172,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType):
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up Homeduino from a config entry."""
-    entry_type = entry.data.get(CONF_ENTRY_TYPE)
-
     homeduino_coordinator = HomeduinoCoordinator.instance(hass)
 
+    entry_type = entry.data.get(CONF_ENTRY_TYPE)
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-        if homeduino_coordinator.has_transceiver():
-            # We allow only one transceiver
-            _LOGGER.error("Only one Homeduino Transceiver is currently allowed")
-            return False
-
         # Set up Homeduino 433 MHz RF transceiver
         try:
             serial_port = entry.data.get(CONF_SERIAL_PORT, None)
@@ -187,7 +190,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             if not await homeduino.connect():
                 raise ConfigEntryNotReady(f"Unable to connect to device {serial_port}")
 
-            homeduino_coordinator.add_transceiver(homeduino)
+            homeduino_coordinator.add_transceiver(entry.entry_id, homeduino)
 
             # Create the device if not exists
             device_registry = dr.async_get(hass)
@@ -203,7 +206,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             raise ConfigEntryNotReady(
                 f"Unable to connect to Homeduino transceiver on {serial_port}"
             ) from ex
-        except ResponseTimeoutError as ex:
+        except HomeduinoResponseTimeoutError as ex:
             raise ConfigEntryNotReady(
                 f"Unable to connect to Homeduino transceiver on {serial_port}"
             ) from ex
@@ -223,8 +226,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     entry_type = entry.data.get(CONF_ENTRY_TYPE)
 
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-        serial_port = entry.data.get(CONF_SERIAL_PORT, None)
-        await HomeduinoCoordinator.instance(hass).remove_transceiver(serial_port)
+        await HomeduinoCoordinator.instance(hass).remove_transceiver(entry.entry_id)
         if unload_ok := await hass.config_entries.async_unload_platforms(
             entry, PLATFORMS
         ):
@@ -238,7 +240,10 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 async def options_update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
     """Handle options update."""
     _LOGGER.debug("Configuration options updated, reloading Homeduino integration")
-    await hass.config_entries.async_reload(entry.entry_id)
+    entry_type = entry.data.get(CONF_ENTRY_TYPE)
+    if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
+        await HomeduinoCoordinator.instance(hass).remove_transceiver(entry.entry_id)
+    hass.config_entries.async_schedule_reload(entry.entry_id)
 
 
 async def async_remove_config_entry_device(
