@@ -1,3 +1,4 @@
+# pylint: disable=R0801
 from __future__ import annotations
 
 import logging
@@ -65,7 +66,6 @@ async def async_setup_entry(
         device_info = DeviceInfo(
             identifiers={(DOMAIN, identifier)},
             name=config_entry.title,
-            via_device=(DOMAIN, coordinator.serial_port),
         )
 
         entity_description = LightEntityDescription(

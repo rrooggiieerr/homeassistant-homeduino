@@ -108,7 +108,6 @@ async def async_setup_entry(
         device_info = DeviceInfo(
             identifiers={(DOMAIN, f"{protocol}-{id}")},
             name=config_entry.title,
-            # via_device=(DOMAIN, config_entry.data.get(CONF_SERIAL_PORT)),
         )
 
         if protocol in ("weather7", "weather19"):

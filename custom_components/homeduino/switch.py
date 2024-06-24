@@ -83,7 +83,6 @@ async def async_setup_entry(
         device_info = DeviceInfo(
             identifiers={(DOMAIN, identifier)},
             name=config_entry.title,
-            # via_device=(DOMAIN, config_entry.data.get(CONF_SERIAL_PORT)),
         )
 
         entity_description = SwitchEntityDescription(
