@@ -24,6 +24,7 @@ This plugins supports all 433 MHz devices with [rfcontrolpy](https://github.com/
 * Sending and receiveing RF commands
 * Supports RF switches, lights and motion sensors
 * Read and write local IO connected to the Arduino
+* Allows multiple Homeduinos to be connected
 
 ## Hardware
 
