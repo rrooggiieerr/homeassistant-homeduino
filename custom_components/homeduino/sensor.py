@@ -73,8 +73,9 @@ async def async_setup_entry(
             key = CONF_IO_DIGITAL_ + str(digital_io)
             value = config_entry.options.get(key)
             if value in [CONF_IO_DHT11, CONF_IO_DHT22]:
+                dht_type = int(value[3:5])
                 entity_description = SensorEntityDescription(
-                    key=(config_entry.entry_id, digital_io),
+                    key=(config_entry.entry_id, digital_io, dht_type),
                     translation_key=f"{value}_temperature",
                     translation_placeholders={"digital_io": digital_io},
                     device_class=SensorDeviceClass.TEMPERATURE,
@@ -203,11 +204,28 @@ class HomeduinoTransceiverDHTTemperatureSensor(HomeduinoTransceiverSensor):
         """Pass coordinator to HomeduinoTransceiverSensor."""
         super().__init__(coordinator, device_info, entity_description)
 
-        config_entry_id = entity_description.key[0]
-        digital_io = entity_description.key[1]
-        self._attr_unique_id = (
-            f"{config_entry_id}-{CONF_IO_DIGITAL_INPUT}-{digital_io}-dhttemperature"
+        self._config_entry_id = entity_description.key[0]
+        self._digital_io = entity_description.key[1]
+        self._dht_type = entity_description.key[1]
+        self._attr_unique_id = f"{self._config_entry_id}-{CONF_IO_DIGITAL_INPUT}-{self._digital_io}-dhttemperature"
+
+    async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
+
+        homeduino = self.coordinator.get_transceiver(self._config_entry_id)
+        await homeduino.add_dht_read_callback(
+            self._dht_type, self._digital_io, self._handle_dht_read_update
         )
+
+        if homeduino.connected():
+            self._attr_available = True
+
+        self.async_write_ha_state()
+
+    @callback
+    def _handle_dht_read_update(self, temperature, _) -> None:
+        self._attr_native_value = temperature
+        self.async_write_ha_state()
 
 
 class HomeduinoTransceiverDHTHumiditySensor(HomeduinoTransceiverSensor):
@@ -220,11 +238,28 @@ class HomeduinoTransceiverDHTHumiditySensor(HomeduinoTransceiverSensor):
         """Pass coordinator to HomeduinoTransceiverSensor."""
         super().__init__(coordinator, device_info, entity_description)
 
-        config_entry_id = entity_description.key[0]
-        digital_io = entity_description.key[1]
-        self._attr_unique_id = (
-            f"{config_entry_id}-{CONF_IO_DIGITAL_INPUT}-{digital_io}-dhthumidity"
+        self._config_entry_id = entity_description.key[0]
+        self._digital_io = entity_description.key[1]
+        self._dht_type = entity_description.key[1]
+        self._attr_unique_id = f"{self._config_entry_id}-{CONF_IO_DIGITAL_INPUT}-{self._digital_io}-dhthumidity"
+
+    async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
+
+        homeduino = self.coordinator.get_transceiver(self._config_entry_id)
+        await homeduino.add_dht_read_callback(
+            self._dht_type, self._digital_io, self._handle_dht_read_update
         )
+
+        if homeduino.connected():
+            self._attr_available = True
+
+        self.async_write_ha_state()
+
+    @callback
+    def _handle_dht_read_update(self, _, humidity) -> None:
+        self._attr_native_value = humidity
+        self.async_write_ha_state()
 
 
 class HomeduinoRFSensor(CoordinatorEntity, SensorEntity):

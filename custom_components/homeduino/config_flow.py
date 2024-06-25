@@ -46,7 +46,7 @@ _DIGITAL_IO = [
 _DIGITAL_IO_DEVICES = [
     CONF_IO_DHT11,
     CONF_IO_DHT22,
-    CONF_IO_1_WIRE,
+    # CONF_IO_1_WIRE,
 ]
 
 
@@ -161,7 +161,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     CONF_IO_PWM_OUTPUT,
                 ]
 
-            # options += _DIGITAL_IO_DEVICES
+            options += _DIGITAL_IO_DEVICES
 
             default = CONF_IO_NONE
             if digital_io == DEFAULT_RECEIVE_PIN:
@@ -377,7 +377,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         rf_id: int = int(data.get(CONF_RF_ID))
         rf_unit: int = data.get(CONF_RF_UNIT, None)
         if rf_unit is not None:
-            rf_unit = int(rf_unit) 
+            rf_unit = int(rf_unit)
         rf_id_ignore_all: bool = data.get(CONF_RF_ID_IGNORE_ALL, False)
 
         unique_id = f"{DOMAIN}-{rf_protocol}-{rf_id}"
@@ -458,7 +458,7 @@ class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
                         CONF_IO_PWM_OUTPUT,
                     ]
 
-                # options += _DIGITAL_IO_DEVICES
+                options += _DIGITAL_IO_DEVICES
 
                 data_schema = data_schema.extend(
                     {
