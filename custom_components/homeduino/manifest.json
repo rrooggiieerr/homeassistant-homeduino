@@ -14,7 +14,7 @@
   	"rfcontrol"
   ],
   "requirements": [
-    "homeduino==0.0.17"
+    "homeduino@git+https://github.com/rrooggiieerr/homeduino.py.git@master"
   ],
   "version": "0.0.3"
 }
