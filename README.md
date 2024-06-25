@@ -21,9 +21,18 @@ This plugins supports all 433 MHz devices with [rfcontrolpy](https://github.com/
 
 ## Features
 
+* Sending and receiveing RF commands
+* Supports RF switches, lights and motion sensors
+* Read and write local IO connected to the Arduino
+
 ## Hardware
 
-ToDo
+A Homeduino exists of an Arduino Nano with homeduino sketch. An 433 MHz RF transmitter and receiver
+can be connected to communicate with 433 MHz devices and local IO can be used to read inputs or
+switch relays.
+
+![image](https://raw.githubusercontent.com/rrooggiieerr/homeassistant-homeduino/main/homeduino1.jpg)
+![image](https://raw.githubusercontent.com/rrooggiieerr/homeassistant-homeduino/main/homeduino2.jpg)
 
 ## Installation
 
