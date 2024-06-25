@@ -10,6 +10,50 @@ send:
       selector:
         text:
 rf_send:
+  name: Send RF command
+  description: Sends an RF command.
+  fields:
+    protocol:
+      name: Protocol
+      description: The protocol to use.
+      required: true
+      example:
+        protocol: switch1
+      selector:
+        text:
+    id:
+      name: Command
+      description: A command to send.
+      required: true
+      example:
+        id: 5
+      selector:
+        text:
+    unit:
+      name: Command
+      description: A command to send.
+      required: true
+      example:
+        unit: 12
+      selector:
+        text:
+    state:
+      name: Command
+      description: A command to send.
+      required: true
+      example:
+        state: true
+      selector:
+        text:
+    all:
+      name: Command
+      description: A command to send.
+      required: true
+      example:
+        all: true
+      selector:
+        boolean:
+raw_rf_send:
   name: Send raw RF command
   description: Sends a raw RF command.
   fields:
