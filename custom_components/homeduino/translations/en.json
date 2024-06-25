@@ -143,7 +143,7 @@
 	    		"name": "Digital Output {digital_io}"
     		}
     	},
-    	"light": {
+    	"number": {
     		"pwm_output": {
 	    		"name": "PWM Output {digital_io}"
     		}
