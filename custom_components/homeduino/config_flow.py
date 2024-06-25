@@ -374,8 +374,10 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         _LOGGER.debug(data)
         rf_protocol: str = data.get(CONF_RF_PROTOCOL).strip()
-        rf_id: int = data.get(CONF_RF_ID)
+        rf_id: int = int(data.get(CONF_RF_ID))
         rf_unit: int = data.get(CONF_RF_UNIT, None)
+        if rf_unit is not None:
+            rf_unit = int(rf_unit) 
         rf_id_ignore_all: bool = data.get(CONF_RF_ID_IGNORE_ALL, False)
 
         unique_id = f"{DOMAIN}-{rf_protocol}-{rf_id}"

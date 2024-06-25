@@ -72,8 +72,10 @@ async def async_setup_entry(
         CONF_RF_PROTOCOL
     ).startswith("switch"):
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
-        id = config_entry.data.get(CONF_RF_ID)
+        id = int(config_entry.data.get(CONF_RF_ID))
         unit = config_entry.data.get(CONF_RF_UNIT)
+        if unit is not None:
+            unit = int(unit)
         id_ignore_all = config_entry.options.get(CONF_RF_ID_IGNORE_ALL)
 
         identifier = f"{protocol}-{id}"

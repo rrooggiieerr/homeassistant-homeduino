@@ -102,8 +102,10 @@ async def async_setup_entry(
         CONF_RF_PROTOCOL
     ).startswith("weather"):
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
-        id = config_entry.data.get(CONF_RF_ID)
+        id = int(config_entry.data.get(CONF_RF_ID))
         unit = config_entry.data.get(CONF_RF_UNIT)
+        if unit is not None:
+            unit = int(unit)
 
         device_info = DeviceInfo(
             identifiers={(DOMAIN, f"{protocol}-{id}")},
