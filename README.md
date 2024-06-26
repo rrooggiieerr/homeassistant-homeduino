@@ -14,7 +14,7 @@
 ## Introduction
 
 Home Assistant integration for using various 433 MHz devices and sensors with a connected Arduino
-with homeduino sketch.
+Nano with homeduino sketch.
 
 This plugins supports all 433 MHz devices with [rfcontrolpy](https://github.com/rrooggiieerr/rfcontrolpy/)
 [protocol implementations](https://github.com/rrooggiieerr/rfcontrolpy/blob/master/protocols.md).
@@ -68,11 +68,28 @@ Or follow these instructions:
 - After restarting go to **Settings** then **Devices & Services**
 - Select **+ Add integration** and type in *Homeduino*
 - Select the *Serial port* or enter the path manually
+- Select the *Baud rate*
+- Define which digital and analog IO should be enabled.
 - Select **Submit**
 
 When your wiring is right a new Homeduino integration and device will now
 be added to your Integrations view. If your wiring is not right you will get a
 *Failed to connect* error message.
+
+### Digital an analog IO
+
+The Arduino Nano suports 12 digital IO and 8 analog inputs which can be used by the Homeduino integration
+
+The digital IO can be configured as:
+- RF receiver on digital IO 2 or 3
+- RF sender on all digital IO
+- Digital input on digital IO 2 till 12
+- Digital output on all digital IO
+- PWM output on digital IO 3, 5, 6, 9, 10 and 11 
+- DHT11/DHT22 sensor 2 till 12
+
+The analog input reads a value between 0V and 5V and reports the measured value as a value between 0 and 1023. You can use a template sensor to use this value according to your needs.
+
 
 ## Adding a new RF Actor
 
