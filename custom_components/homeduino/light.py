@@ -196,16 +196,18 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         """Turn the entity on."""
         _LOGGER.debug("Turning on %s", self.name)
         brightness = kwargs.get(ATTR_BRIGHTNESS)
+        state = None
         if not brightness:
             brightness = self._attr_brightness
+            state = True
 
         if not brightness:
             brightness = self._off_brightness
+            state = True
 
         if not brightness:
             brightness = 255
 
-        state = True
         brightness = int(brightness / 17)
 
         if await self.coordinator.rf_send(
