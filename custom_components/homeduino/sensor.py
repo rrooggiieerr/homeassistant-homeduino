@@ -312,20 +312,19 @@ class HomeduinoRFSensor(CoordinatorEntity, SensorEntity):
             if not self.coordinator.data:
                 return
 
-            if self.coordinator.data.get("protocol") not in self.protocols:
+            if self.coordinator.data.get("protocol") != self.protocol:
                 return
 
-            if self.coordinator.data.get("values", {}).get("id") != self.id:
+            values = self.coordinator.data.get("values", {})
+            if values.get("id") != self.id:
                 return
 
-            if self.coordinator.data.get("values", {}).get("unit") != self.unit:
+            if values.get("unit") != self.unit:
                 return
 
             _LOGGER.debug(self.coordinator.data)
             try:
-                self._attr_native_value = int(
-                    self.coordinator.data.get("values", {}).get(self._field)
-                )
+                self._attr_native_value = int(values.get(self._field))
                 self._attr_available = True
             except ValueError as ex:
                 _LOGGER.error(ex)

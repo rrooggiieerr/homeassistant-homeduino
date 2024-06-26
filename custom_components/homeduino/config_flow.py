@@ -325,7 +325,7 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         protocol_names = [
             protocol_name
             for protocol_name in protocol_names
-            if protocol_name.startswith(("switch", "dimmer", "pir"))
+            if protocol_name.startswith(("switch", "dimmer", "pir", "weather"))
         ]
 
         self._step_setup_rf_device_schema = vol.Schema(
