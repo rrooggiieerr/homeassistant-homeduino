@@ -329,7 +329,7 @@ class HomeduinoRFSensor(CoordinatorEntity, SensorEntity):
 
             _LOGGER.debug(self.coordinator.data)
             try:
-                self._attr_native_value = int(values.get(self.field))
+                self._attr_native_value = values.get(self.field)
                 self._attr_available = True
             except ValueError as ex:
                 _LOGGER.error(ex)
