@@ -117,7 +117,7 @@ async def async_setup_entry(
             name=config_entry.title,
         )
 
-        if "temperature" in protocol:
+        if protocol in ("weather4", "weather7", "weather19"):
             entity_description = SensorEntityDescription(
                 key=(protocol, id, unit, "temperature"),
                 translation_key="temperature",
@@ -129,7 +129,7 @@ async def async_setup_entry(
                 HomeduinoRFSensor(coordinator, device_info, entity_description)
             )
 
-        if "humidity" in protocol:
+        if protocol in ("weather4", "weather7"):
             entity_description = SensorEntityDescription(
                 key=(protocol, id, unit, "humidity"),
                 translation_key="humidity",
