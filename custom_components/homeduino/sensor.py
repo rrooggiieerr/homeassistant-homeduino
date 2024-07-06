@@ -108,28 +108,32 @@ async def async_setup_entry(
         if unit is not None:
             unit = int(unit)
 
+        identifier = f"{protocol}-{id}"
+        if unit is not None:
+            identifier += f"-{unit}"
+
         device_info = DeviceInfo(
-            identifiers={(DOMAIN, f"{protocol}-{id}")},
+            identifiers={(DOMAIN, identifier)},
             name=config_entry.title,
         )
 
         if "temperature" in protocol:
             entity_description = SensorEntityDescription(
                 key=(protocol, id, unit, "temperature"),
-                name=f"Temperature",
+                translation_key="temperature",
+                translation_placeholders={"unit": unit},
                 device_class=SensorDeviceClass.TEMPERATURE,
             )
 
             entities.append(
-                HomeduinoRFSensor(
-                    coordinator, device_info, entity_description
-                )
+                HomeduinoRFSensor(coordinator, device_info, entity_description)
             )
 
         if "humidity" in protocol:
             entity_description = SensorEntityDescription(
                 key=(protocol, id, unit, "humidity"),
-                name=f"Humidity",
+                translation_key="humidity",
+                translation_placeholders={"unit": unit},
                 device_class=SensorDeviceClass.HUMIDITY,
             )
 

@@ -88,7 +88,9 @@ async def async_setup_entry(
         )
 
         entity_description = SwitchEntityDescription(
-            key=(protocol, id, unit), name=f"Switch {unit}"
+            key=(protocol, id, unit),
+            translation_key="rf_switch",
+            translation_placeholders={"unit": unit},
         )
         entities.append(
             HomeduinoRFSwitch(

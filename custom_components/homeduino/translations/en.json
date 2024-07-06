@@ -117,11 +117,23 @@
     },
     "entity": {
     	"binary_sensor": {
+    		"rf_low_battery": {
+    			"name": "Low Battery {unit}"
+    		},
     		"digital_input": {
 	    		"name": "Digital Input {digital_io}"
     		}
     	},
     	"sensor": {
+    		"rf_temperature": {
+	    		"name": "Temperature {unit}"
+    		},
+    		"rf_humidity": {
+	    		"name": "Humidity {unit}"
+    		},
+    		"rf_battery": {
+    			"name": "Battery {unit}"
+    		},
     		"analog_input": {
 	    		"name": "Analog Input {analog_input}"
     		},
@@ -139,6 +151,9 @@
     		}
     	},
     	"switch": {
+    		"rf_switch": {
+    			"name": "Switch {unit}"
+    		},
     		"digital_output": {
 	    		"name": "Digital Output {digital_io}"
     		}
@@ -146,6 +161,11 @@
     	"number": {
     		"pwm_output": {
 	    		"name": "PWM Output {digital_io}"
+    		}
+    	},
+    	"light": {
+    		"rf_light": {
+    			"name": "Light {unit}"
     		}
     	}
     }

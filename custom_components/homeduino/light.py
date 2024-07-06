@@ -71,7 +71,9 @@ async def async_setup_entry(
         )
 
         entity_description = LightEntityDescription(
-            key=(protocol, id, unit), name="Light"
+            key=(protocol, id, unit),
+            translation_key="rf_light",
+            translation_placeholders={"unit": unit},
         )
 
         if config_entry.data.get(CONF_RF_PROTOCOL) == "dimmer1":

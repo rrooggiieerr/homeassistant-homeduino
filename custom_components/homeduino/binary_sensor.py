@@ -77,14 +77,19 @@ async def async_setup_entry(
         if unit is not None:
             unit = int(unit)
 
+        identifier = f"{protocol}-{id}"
+        if unit is not None:
+            identifier += f"-{unit}"
+
         device_info = DeviceInfo(
-            identifiers={(DOMAIN, f"{protocol}-{id}")},
+            identifiers={(DOMAIN, identifier)},
             name=config_entry.title,
         )
 
         entity_description = BinarySensorEntityDescription(
             key=(protocol, id, unit),
-            name=f"Switch {unit}",
+            translation_key="rf_motion",
+            translation_placeholders={"unit": unit},
             device_class=BinarySensorDeviceClass.MOTION,
         )
 
