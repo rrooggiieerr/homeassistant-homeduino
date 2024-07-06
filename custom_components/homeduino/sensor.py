@@ -113,28 +113,28 @@ async def async_setup_entry(
             name=config_entry.title,
         )
 
-        if protocol in ("weather7", "weather19"):
+        if "temperature" in protocol:
             entity_description = SensorEntityDescription(
-                key=(protocol, id, unit),
+                key=(protocol, id, unit, "temperature"),
                 name=f"Temperature",
                 device_class=SensorDeviceClass.TEMPERATURE,
             )
 
             entities.append(
-                HomeduinoRFTemperatureSensor(
+                HomeduinoRFSensor(
                     coordinator, device_info, entity_description
                 )
             )
 
-        if protocol in ("weather7"):
+        if "humidity" in protocol:
             entity_description = SensorEntityDescription(
-                key=(protocol, id, unit),
+                key=(protocol, id, unit, "humidity"),
                 name=f"Humidity",
                 device_class=SensorDeviceClass.HUMIDITY,
             )
 
             entities.append(
-                HomeduinoRFHumiditySensor(coordinator, device_info, entity_description)
+                HomeduinoRFSensor(coordinator, device_info, entity_description)
             )
 
     async_add_entities(entities)
@@ -275,10 +275,11 @@ class HomeduinoRFSensor(CoordinatorEntity, SensorEntity):
         self.protocol = entity_description.key[0]
         self.id = entity_description.key[1]
         self.unit = entity_description.key[2]
+        self.field = entity_description.key[3]
 
         self._attr_device_info = device_info
 
-        self._attr_unique_id = f"{self.protocol}-{self.id}-{self.unit}"
+        self._attr_unique_id = f"{self.protocol}-{self.id}-{self.unit}-{self.field}"
 
         self.entity_description = entity_description
 
@@ -324,18 +325,10 @@ class HomeduinoRFSensor(CoordinatorEntity, SensorEntity):
 
             _LOGGER.debug(self.coordinator.data)
             try:
-                self._attr_native_value = int(values.get(self._field))
+                self._attr_native_value = int(values.get(self.field))
                 self._attr_available = True
             except ValueError as ex:
                 _LOGGER.error(ex)
                 self._attr_available = False
 
         self.async_write_ha_state()
-
-
-class HomeduinoRFTemperatureSensor(HomeduinoRFSensor):
-    _field = "temperature"
-
-
-class HomeduinoRFHumiditySensor(HomeduinoRFSensor):
-    _field = "humidity"
