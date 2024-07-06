@@ -9,6 +9,12 @@
             "unknown": "Unexpected error"
         },
         "step": {
+			"user": {
+				"menu_options": {
+					"setup_transceiver": "Homeduino Transceiver",
+					"setup_rf_device": "RF Device"
+				}
+			},
             "setup_serial": {
             	"title": "Homeduino Transceiver",
                 "data": {
@@ -41,7 +47,7 @@
                 }
             },
             "setup_rf_device": {
-            	"title": "Homeduino RF Device",
+            	"title": "RF Device",
             	"data": {
             		"rf_id": "Device ID",
             		"rf_protocol": "Protocol",

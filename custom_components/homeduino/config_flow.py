@@ -66,27 +66,10 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if not HomeduinoCoordinator.instance(self.hass).has_transceiver():
             return await self.async_step_setup_transceiver(user_input)
 
-        if user_input is not None:
-            user_selection = user_input[CONF_TYPE]
-            if user_selection == "transceiver":
-                return await self.async_step_setup_transceiver()
-            if user_selection == "rf_device":
-                return await self.async_step_setup_rf_device()
-
-        device_types = ["transceiver", "rf_device"]
-
-        schema = vol.Schema(
-            {
-                vol.Required(CONF_TYPE): SelectSelector(
-                    SelectSelectorConfig(
-                        options=device_types,
-                        mode=SelectSelectorMode.LIST,
-                        translation_key="device_types",
-                    )
-                )
-            }
+        return self.async_show_menu(
+            step_id="user",
+            menu_options=["setup_transceiver", "setup_rf_device"],
         )
-        return self.async_show_form(step_id="user", data_schema=schema)
 
     async def async_step_setup_transceiver(
         self, user_input: dict[str, Any] | None = None
