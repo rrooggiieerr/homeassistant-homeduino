@@ -76,7 +76,7 @@ When your wiring is right a new Homeduino integration and device will now
 be added to your Integrations view. If your wiring is not right you will get a
 *Failed to connect* error message.
 
-### Digital an analog IO
+### Digital and analog IO
 
 The Arduino Nano suports 12 digital IO and 8 analog inputs which can be used by the Homeduino integration
 
@@ -89,7 +89,6 @@ The digital IO can be configured as:
 - DHT11/DHT22 sensor 2 till 12
 
 The analog input reads a value between 0V and 5V and reports the measured value as a value between 0 and 1023. You can use a template sensor to use this value according to your needs.
-
 
 ## Adding a new RF Actor
 
