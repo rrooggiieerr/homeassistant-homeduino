@@ -123,6 +123,7 @@ async def async_setup_entry(
                 translation_key="temperature",
                 translation_placeholders={"unit": unit},
                 device_class=SensorDeviceClass.TEMPERATURE,
+                native_unit_of_measurement=UnitOfTemperature.CELSIUS,
             )
 
             entities.append(
@@ -135,6 +136,7 @@ async def async_setup_entry(
                 translation_key="humidity",
                 translation_placeholders={"unit": unit},
                 device_class=SensorDeviceClass.HUMIDITY,
+                native_unit_of_measurement=PERCENTAGE,
             )
 
             entities.append(
