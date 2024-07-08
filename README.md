@@ -99,7 +99,7 @@ The analog input reads a value between 0V and 5V and reports the measured value 
 
 ## Contributing
 
-If you would like to use this Home Assistant integration in youw own language you can provide me
+If you would like to use this Home Assistant integration in your own language you can provide me
 with a translation file as found in the `custom_components/homeduino/translations` directory.
 Create a pull request (preferred) or issue with the file attached.
 
