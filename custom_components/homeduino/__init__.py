@@ -179,7 +179,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             serial_port = entry.data.get(CONF_SERIAL_PORT)
             receive_pin = None
             send_pin = None
-            for digital_io in range(2, 14):
+            for digital_io in range(2, 15):
                 value = entry.options.get(CONF_IO_DIGITAL_ + str(digital_io))
                 if value == CONF_IO_RF_RECEIVE:
                     receive_pin = digital_io
@@ -280,7 +280,7 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
 
             options = {}
 
-            for digital_io in range(2, 14):
+            for digital_io in range(2, 15):
                 if digital_io == receive_pin:
                     options[CONF_IO_DIGITAL_ + str(digital_io)] = CONF_IO_RF_RECEIVE
                 elif digital_io == send_pin:
