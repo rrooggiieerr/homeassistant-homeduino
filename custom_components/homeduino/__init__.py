@@ -51,10 +51,12 @@ PLATFORMS: list[Platform] = [
     Platform.SWITCH,
 ]
 
+CONF_SERVICE_DEVICE_ID = "device_id"
 CONF_SERVICE_COMMAND = "command"
 
 SERVICE_SEND_SCHEMA = vol.Schema(
     {
+        vol.Required(CONF_SERVICE_DEVICE_ID): cv.string,
         vol.Required(CONF_SERVICE_COMMAND): cv.string,
     }
 )
@@ -156,9 +158,12 @@ async def async_setup(hass: HomeAssistant, config: ConfigType):
 
     async def async_handle_send(call: ServiceCall):
         """Handle the service call."""
+        device_id: str = call.data.get(CONF_SERVICE_DEVICE_ID)
         command: str = call.data.get(CONF_SERVICE_COMMAND)
 
-        return await HomeduinoCoordinator.instance(hass).send(command.strip())
+        return await HomeduinoCoordinator.instance(hass).send(
+            device_id, command.strip()
+        )
 
     hass.services.async_register(
         DOMAIN, "send", async_handle_send, schema=SERVICE_SEND_SCHEMA

@@ -2,6 +2,16 @@ send:
   name: Send command
   description: Sends a command to Homeduino.
   fields:
+    device_id:
+      name: Device
+      description: The Homeduino device to send the command to.
+      required: true
+      selector:
+        device:
+          integration: homeduino
+          filter:
+            - integration: homeduino
+              model: transceiver
     command:
       name: Command
       description: A command to send.
