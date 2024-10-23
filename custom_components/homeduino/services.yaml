@@ -21,7 +21,6 @@ rf_send:
       selector:
         text:
     id:
-      description: 
       required: true
       example: 5
       selector:
