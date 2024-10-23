@@ -19,6 +19,7 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 from homeduino import (
     DEFAULT_BAUD_RATE,
     DEFAULT_RECEIVE_PIN,
+    DEFAULT_REPEATS,
     DEFAULT_SEND_PIN,
     Homeduino,
     HomeduinoError,
@@ -124,20 +125,24 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         event_data = {**{"protocol": decoded["protocol"]}, **decoded["values"]}
         self.hass.bus.async_fire(f"{DOMAIN}_event", event_data)
 
-    async def rf_send(self, protocol: str, values):
+    async def rf_send(self, protocol: str, values, repeats=DEFAULT_REPEATS):
         if not self.has_transceiver():
             return False
 
+        success = False
         for transceiver in self._transceivers.values():
-            if not transceiver.connected() and not await transceiver.connect():
-                return False
+            if not transceiver.supports_rf_send():
+                continue
 
-            if await transceiver.rf_send(protocol, values):
+            if not transceiver.connected() and not await transceiver.connect():
+                continue
+
+            if await transceiver.rf_send(protocol, values, repeats):
                 self.async_set_updated_data({"protocol": protocol, "values": values})
 
-                return True
+                success = True
 
-        return False
+        return success
 
     async def send(self, config_entry_id, command):
         if not self.has_transceiver():

@@ -26,6 +26,7 @@ from homeduino import (
     BAUD_RATES,
     DEFAULT_BAUD_RATE,
     DEFAULT_RECEIVE_PIN,
+    DEFAULT_REPEATS,
     DEFAULT_SEND_PIN,
     Homeduino,
     HomeduinoNotReadyError,
@@ -406,6 +407,9 @@ class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
     RF_DEVICE_OPTIONS_SCHEMA = vol.Schema(
         {
             vol.Optional(CONF_RF_ID_IGNORE_ALL): BooleanSelector(),
+            vol.Optional(CONF_RF_REPEATS, default=DEFAULT_REPEATS): NumberSelector(
+                NumberSelectorConfig(min=1, step=1, mode=NumberSelectorMode.BOX)
+            ),
         }
     )
 
@@ -488,6 +492,12 @@ class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
 
         if user_input is not None:
             data_schema(user_input)
+
+            if entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
+                user_input[CONF_RF_REPEATS] = int(
+                    user_input.get(CONF_RF_REPEATS, DEFAULT_REPEATS)
+                )
+
             return self.async_create_entry(title="", data=user_input)
 
         if user_input is not None:

@@ -15,7 +15,7 @@ from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from homeduino import Homeduino, HomeduinoPinMode
+from homeduino import DEFAULT_REPEATS, Homeduino, HomeduinoPinMode
 
 from . import HomeduinoCoordinator
 from .const import (
@@ -27,6 +27,7 @@ from .const import (
     CONF_RF_ID,
     CONF_RF_ID_IGNORE_ALL,
     CONF_RF_PROTOCOL,
+    CONF_RF_REPEATS,
     CONF_RF_UNIT,
     CONF_SERIAL_PORT,
     DOMAIN,
@@ -77,6 +78,7 @@ async def async_setup_entry(
         if unit is not None:
             unit = int(unit)
         id_ignore_all = config_entry.options.get(CONF_RF_ID_IGNORE_ALL)
+        repeats = config_entry.options.get(CONF_RF_REPEATS, DEFAULT_REPEATS)
 
         identifier = f"{protocol}-{id}"
         if unit is not None:
@@ -94,7 +96,7 @@ async def async_setup_entry(
         )
         entities.append(
             HomeduinoRFSwitch(
-                coordinator, device_info, entity_description, id_ignore_all
+                coordinator, device_info, entity_description, id_ignore_all, repeats
             )
         )
 
@@ -175,6 +177,7 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
         device_info: DeviceInfo,
         entity_description: SwitchEntityDescription,
         ignore_all: bool = False,
+        repeats: int = DEFAULT_REPEATS,
     ) -> None:
         """Initialize the switch."""
         super().__init__(coordinator, entity_description.key)
@@ -189,6 +192,7 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
 
         self.entity_description = entity_description
         self.ignore_all = ignore_all
+        self.repeats = repeats
 
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
@@ -249,7 +253,9 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
         """Turn the entity on."""
         _LOGGER.debug("Turning on %s", self.name)
         if await self.coordinator.rf_send(
-            self.protocol, {"id": self.id, "unit": self.unit, "state": True}
+            self.protocol,
+            {"id": self.id, "unit": self.unit, "state": True},
+            self.repeats,
         ):
             self._attr_is_on = True
             self.async_write_ha_state()
@@ -260,7 +266,9 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
         """Turn the entity off."""
         _LOGGER.debug("Turning off %s", self.name)
         if await self.coordinator.rf_send(
-            self.protocol, {"id": self.id, "unit": self.unit, "state": False}
+            self.protocol,
+            {"id": self.id, "unit": self.unit, "state": False},
+            self.repeats,
         ):
             self._attr_is_on = False
             self.async_write_ha_state()

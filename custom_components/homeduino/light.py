@@ -17,6 +17,7 @@ from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from homeduino import DEFAULT_REPEATS
 
 from . import HomeduinoCoordinator
 from .const import (
@@ -26,6 +27,7 @@ from .const import (
     CONF_RF_ID,
     CONF_RF_ID_IGNORE_ALL,
     CONF_RF_PROTOCOL,
+    CONF_RF_REPEATS,
     CONF_RF_UNIT,
     DOMAIN,
 )
@@ -60,6 +62,7 @@ async def async_setup_entry(
         if unit is not None:
             unit = int(unit)
         id_ignore_all = config_entry.options.get(CONF_RF_ID_IGNORE_ALL)
+        repeats = config_entry.options.get(CONF_RF_REPEATS, DEFAULT_REPEATS)
 
         identifier = f"{protocol}-{id}"
         if unit is not None:
@@ -79,13 +82,13 @@ async def async_setup_entry(
         if config_entry.data.get(CONF_RF_PROTOCOL) == "dimmer1":
             entities.append(
                 HomeduinoRFDimmer1(
-                    coordinator, device_info, entity_description, id_ignore_all
+                    coordinator, device_info, entity_description, id_ignore_all, repeats
                 )
             )
         else:
             entities.append(
                 HomeduinoRFDimmer(
-                    coordinator, device_info, entity_description, id_ignore_all
+                    coordinator, device_info, entity_description, id_ignore_all, repeats
                 )
             )
 
@@ -109,6 +112,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         device_info: DeviceInfo,
         entity_description: LightEntityDescription,
         ignore_all: bool = False,
+        repeats: int = DEFAULT_REPEATS,
     ) -> None:
         """Initialize the switch."""
         super().__init__(coordinator, entity_description.key)
@@ -124,6 +128,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
 
         self.entity_description = entity_description
         self.ignore_all = ignore_all
+        self.repeats = repeats
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
@@ -214,6 +219,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         if await self.coordinator.rf_send(
             self.protocol,
             {"id": self.id, "unit": self.unit, "state": state, "dimlevel": brightness},
+            self.repeats,
         ):
             self._attr_is_on = True
             self._attr_brightness = brightness * 17
@@ -228,6 +234,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         if await self.coordinator.rf_send(
             self.protocol,
             {"id": self.id, "unit": self.unit, "state": False, "dimlevel": 0},
+            self.repeats,
         ):
             self._attr_is_on = False
 
@@ -247,8 +254,11 @@ class HomeduinoRFDimmer1(HomeduinoRFDimmer):
         device_info: DeviceInfo,
         entity_description: LightEntityDescription,
         ignore_all: bool = False,
+        repeats: int = DEFAULT_REPEATS,
     ) -> None:
         """Initialize the switch."""
-        super().__init__(coordinator, device_info, entity_description, ignore_all)
+        super().__init__(
+            coordinator, device_info, entity_description, ignore_all, repeats
+        )
 
         self.protocols.append("switch1")
