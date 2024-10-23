@@ -1,10 +1,6 @@
 send:
-  name: Send command
-  description: Sends a command to Homeduino.
   fields:
     device_id:
-      name: Device
-      description: The Homeduino device to send the command to.
       required: true
       selector:
         device:
@@ -13,25 +9,19 @@ send:
             - integration: homeduino
               model: transceiver
     command:
-      name: Command
-      description: A command to send.
       required: true
       example: "RF send 4 3 453 1992 88 9228 0 0 0 0 01020102020201020101010101010102010101010202010202020202010102010102020203"
       selector:
         text:
 rf_send:
-  name: Send RF command
-  description: Sends an RF command.
   fields:
     protocol:
-      name: Protocol
-      description: The protocol to use.
       required: true
       example: switch1
       selector:
         text:
     id:
-      name: ID
+      description: 
       required: true
       example: 5
       selector:
@@ -39,7 +29,6 @@ rf_send:
           min: 0
           mode: box
     unit:
-      name: Unit
       required: true
       example: 12
       selector:
@@ -47,19 +36,16 @@ rf_send:
           min: 0
           mode: box
     state:
-      name: State
       required: true
       example: true
       selector:
         boolean:
     all:
-      name: All
       required: true
       example: true
       selector:
         boolean:
     repeats:
-      name: Repeats
       required: false
       example: 7
       selector:
@@ -67,13 +53,16 @@ rf_send:
           min: 1
           mode: box
 raw_rf_send:
-  name: Send raw RF command
-  description: Sends a raw RF command.
   fields:
     command:
-      name: Command
-      description: A command to send.
       required: true
       example: "453 1992 88 9228 0 0 0 0 01020102020201020101010101010102010101010202010202020202010102010102020203"
       selector:
         text:
+    repeats:
+      required: false
+      example: 7
+      selector:
+        number:
+          min: 1
+          mode: box

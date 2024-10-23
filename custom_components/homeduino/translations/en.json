@@ -176,5 +176,65 @@
 				"name": "Light {unit}"
 			}
 		}
+	},
+	"services": {
+		"send": {
+			"name": "Send command",
+			"description": "Sends a command to Homeduino.",
+			"fields": {
+				"device_id": {
+					"name": "Device",
+					"description": "The Homeduino transceiver to send the command to."
+				},
+				"command": {
+					"name": "Command",
+					"description": "A command to send."
+				}
+			}
+		},
+		"rf_send": {
+			"name": "Send RF command",
+			"description": "Sends a RF command.",
+			"fields": {
+				"protocol": {
+					"name": "Protocol",
+					"description": "The protocol to use."
+				},
+				"id": {
+					"name": "ID",
+					"description": "Device ID."
+				},
+				"unit": {
+					"name": "Unit",
+					"description": "Device Unit."
+				},
+				"state": {
+					"name": "State",
+					"description": "The state to send to the device."
+				},
+				"all": {
+					"name": "All",
+					"description": "If the all flag needs to be set, needs to be supported by the protocol."
+				},
+				"repeats": {
+					"name": "Repeats",
+					"description": "The number of time the RF command needs to be send."
+				}
+			}
+		},
+		"raw_rf_send": {
+			"name": "Send raw RF command",
+			"description": "Sends a raw RF command.",
+			"fields": {
+				"command": {
+					"name": "Command",
+					"description": "A command to send."
+				},
+				"repeats": {
+					"name": "Repeats",
+					"description": "The number of time the RF command needs to be send."
+				}
+			}
+		}
 	}
 }
