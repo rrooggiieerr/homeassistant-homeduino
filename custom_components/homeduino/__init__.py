@@ -200,8 +200,62 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         return await transceiver.send(command)
 
 
-async def async_setup(hass: HomeAssistant, config: ConfigType):
-    """Set up is called when Home Assistant is loading our component."""
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up Homeduino from a config entry."""
+    homeduino_coordinator = HomeduinoCoordinator.instance(hass)
+
+    entry_type = entry.data.get(CONF_ENTRY_TYPE)
+    if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
+        # Set up Homeduino 433 MHz RF transceiver
+        try:
+            serial_port = entry.data.get(CONF_SERIAL_PORT)
+            receive_pin = None
+            send_pin = None
+            for digital_io in range(2, 14):
+                value = entry.options.get(CONF_IO_DIGITAL_ + str(digital_io))
+                if value == CONF_IO_RF_RECEIVE:
+                    receive_pin = digital_io
+                elif value == CONF_IO_RF_SEND:
+                    send_pin = digital_io
+
+            homeduino = Homeduino(
+                serial_port,
+                entry.options.get(CONF_BAUD_RATE, DEFAULT_BAUD_RATE),
+                receive_pin,
+                send_pin,
+            )
+
+            if not await homeduino.connect():
+                raise ConfigEntryNotReady(f"Unable to connect to device {serial_port}")
+
+            # Create the device if not exists
+            device_registry = dr.async_get(hass)
+            device = device_registry.async_get_or_create(
+                config_entry_id=entry.entry_id,
+                identifiers={(DOMAIN, serial_port)},
+                manufacturer="pimatic",
+                name=entry.title,
+                model="transceiver",
+            )
+
+            homeduino_coordinator.add_transceiver(device.id, homeduino)
+
+            hass.data.setdefault(DOMAIN, {})
+            hass.data[DOMAIN][entry.entry_id] = device.id
+
+            _LOGGER.info("Homeduino transceiver on %s is available", serial_port)
+        except serial.SerialException as ex:
+            raise ConfigEntryNotReady(
+                f"Unable to connect to Homeduino transceiver on {serial_port}"
+            ) from ex
+        except HomeduinoResponseTimeoutError as ex:
+            raise ConfigEntryNotReady(
+                f"Unable to connect to Homeduino transceiver on {serial_port}"
+            ) from ex
+
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+
+    entry.async_on_unload(entry.add_update_listener(update_listener))
 
     async def async_handle_send(call: ServiceCall):
         """Handle the service call."""
@@ -275,67 +329,6 @@ async def async_setup(hass: HomeAssistant, config: ConfigType):
         async_handle_raw_rf_send,
         schema=SERVICE_RAW_RF_SEND_SCHEMA,
     )
-
-    # Return boolean to indicate that initialization was successful.
-    return True
-
-
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up Homeduino from a config entry."""
-    homeduino_coordinator = HomeduinoCoordinator.instance(hass)
-
-    entry_type = entry.data.get(CONF_ENTRY_TYPE)
-    if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-        # Set up Homeduino 433 MHz RF transceiver
-        try:
-            serial_port = entry.data.get(CONF_SERIAL_PORT)
-            receive_pin = None
-            send_pin = None
-            for digital_io in range(2, 14):
-                value = entry.options.get(CONF_IO_DIGITAL_ + str(digital_io))
-                if value == CONF_IO_RF_RECEIVE:
-                    receive_pin = digital_io
-                elif value == CONF_IO_RF_SEND:
-                    send_pin = digital_io
-
-            homeduino = Homeduino(
-                serial_port,
-                entry.options.get(CONF_BAUD_RATE, DEFAULT_BAUD_RATE),
-                receive_pin,
-                send_pin,
-            )
-
-            if not await homeduino.connect():
-                raise ConfigEntryNotReady(f"Unable to connect to device {serial_port}")
-
-            # Create the device if not exists
-            device_registry = dr.async_get(hass)
-            device = device_registry.async_get_or_create(
-                config_entry_id=entry.entry_id,
-                identifiers={(DOMAIN, serial_port)},
-                manufacturer="pimatic",
-                name=entry.title,
-                model="transceiver",
-            )
-
-            homeduino_coordinator.add_transceiver(device.id, homeduino)
-
-            hass.data.setdefault(DOMAIN, {})
-            hass.data[DOMAIN][entry.entry_id] = device.id
-
-            _LOGGER.info("Homeduino transceiver on %s is available", serial_port)
-        except serial.SerialException as ex:
-            raise ConfigEntryNotReady(
-                f"Unable to connect to Homeduino transceiver on {serial_port}"
-            ) from ex
-        except HomeduinoResponseTimeoutError as ex:
-            raise ConfigEntryNotReady(
-                f"Unable to connect to Homeduino transceiver on {serial_port}"
-            ) from ex
-
-    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
-
-    entry.async_on_unload(entry.add_update_listener(update_listener))
 
     return True
 
