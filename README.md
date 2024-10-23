@@ -14,7 +14,7 @@
 ## Introduction
 
 Home Assistant integration for using various 433 MHz devices and sensors with a connected Arduino
-Nano with homeduino sketch.
+Nano with [homeduino sketch](https://github.com/pimatic/homeduino).
 
 This plugins supports all 433 MHz devices with [rfcontrolpy](https://github.com/rrooggiieerr/rfcontrolpy/)
 [protocol implementations](https://github.com/rrooggiieerr/rfcontrolpy/blob/master/protocols.md).
@@ -22,10 +22,10 @@ This plugins supports all 433 MHz devices with [rfcontrolpy](https://github.com/
 ## Features
 
 * Sending and receiveing RF commands
-* Supports RF switches, lights and motion sensors
+* Supports RF switches, lights, motion and weather sensors
 * Read and write local IO connected to the Arduino Nano
-* Allows multiple Homeduinos to be connected
 * Reading DHT11/DHT22 sensors connected to the Arduino Nano
+* Allows multiple Homeduinos to be connected
 
 ## Hardware
 
@@ -63,10 +63,11 @@ Or follow these instructions:
 `config/custom_components/` directory of your Home Assistant installation
 - Restart Home Assistant
 
-## Adding a new Homeduino
+## Adding a new Homeduino Transceiver
 
 - After restarting go to **Settings** then **Devices & Services**
 - Select **+ Add integration** and type in *Homeduino*
+- Choose *Homeduino Transceiver*
 - Select the *Serial port* or enter the path manually
 - Select the *Baud rate*
 - Define which digital and analog IO should be enabled.
@@ -86,16 +87,53 @@ The digital IO can be configured as:
 - Digital input on digital IO 2 till 12
 - Digital output on all digital IO
 - PWM output on digital IO 3, 5, 6, 9, 10 and 11 
-- DHT11/DHT22 sensor 2 till 12
+- DHT11/DHT22 sensor IO 2 till 12
 
 The analog input reads a value between 0V and 5V and reports the measured value as a value between 0 and 1023. You can use a template sensor to use this value according to your needs.
 
-## Adding a new RF Actor
+## Adding a new RF Device
 
 - After adding your Homeduino go to **Settings** then **Devices & Services**
 - Select **+ Add integration** and type in *Homeduino*
+- Choose *RF Device*
 - Select the *Protocol* and give the *Device ID* and *Device unit* for your device
 - Select **Submit**
+
+## Actions
+
+The integration supports actions so commands can be send which are (not yet) implemented.
+
+`homeduino.send`
+This action allows you to send any supported command to the Homeduino Transceiver.
+
+```
+action: homeduino.send
+data:
+  device_id: 9889db9c137907826b591de9390fc584
+  command: RF send 4 3 453 1992 88 9228 0 0 0 0 01020102020201020101010101010102010101010202010202020202010102010102020203
+```
+
+`homeduino.rf_send`
+This action allows you to send a RF command for supported protocols.
+
+```
+action: homeduino.rf_send
+data:
+  protocol: switch1
+  id: 98765
+  unit: 0
+  state: true
+  all: false
+```
+
+`homeduino.raw_rf_send`
+This action allows you to send a raw RF command for unsupported protocols.
+
+```
+action: homeduino.raw_rf_send
+data:
+  command: 268 1282 2632 10168 0 0 0 0 020001000100010001000100010001000100010100010000010001000100010001000101000100010000010001010001000001010000010100000101000001000103
+```
 
 ## Contributing
 
