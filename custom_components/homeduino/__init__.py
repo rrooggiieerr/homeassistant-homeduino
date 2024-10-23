@@ -83,10 +83,10 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         )
         self._transceivers = {}
 
-    def add_transceiver(self, config_entry_id, transceiver: Homeduino):
+    def add_transceiver(self, device_id, transceiver: Homeduino):
         """Add a Homeduino transceiver."""
 
-        self._transceivers[config_entry_id] = transceiver
+        self._transceivers[device_id] = transceiver
         transceiver.add_rf_receive_callback(self.rf_receive_callback)
 
         self.async_set_updated_data(None)
@@ -94,8 +94,8 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
     def has_transceiver(self):
         return len(self._transceivers) > 0
 
-    def get_transceiver(self, config_entry_id):
-        return self._transceivers.get(config_entry_id)
+    def get_transceiver(self, device_id):
+        return self._transceivers.get(device_id)
 
     def connected(self):
         if not self.has_transceiver():
@@ -104,10 +104,10 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
         for transceiver in self._transceivers.values():
             return transceiver.connected()
 
-    async def remove_transceiver(self, config_entry_id):
-        transceiver = self._transceivers.get(config_entry_id)
+    async def remove_transceiver(self, device_id):
+        transceiver = self._transceivers.get(device_id)
         if transceiver is not None and await transceiver.disconnect():
-            self._transceivers.pop(config_entry_id)
+            self._transceivers.pop(device_id)
 
     @callback
     def rf_receive_callback(self, decoded) -> None:
@@ -196,16 +196,19 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             if not await homeduino.connect():
                 raise ConfigEntryNotReady(f"Unable to connect to device {serial_port}")
 
-            homeduino_coordinator.add_transceiver(entry.entry_id, homeduino)
-
             # Create the device if not exists
             device_registry = dr.async_get(hass)
-            device_registry.async_get_or_create(
+            device = device_registry.async_get_or_create(
                 config_entry_id=entry.entry_id,
                 identifiers={(DOMAIN, serial_port)},
                 manufacturer="pimatic",
                 name="Homeduino Transceiver",
             )
+
+            homeduino_coordinator.add_transceiver(device.id, homeduino)
+
+            hass.data.setdefault(DOMAIN, {})
+            hass.data[DOMAIN][entry.entry_id] = device.id
 
             _LOGGER.info("Homeduino transceiver on %s is available", serial_port)
         except serial.SerialException as ex:
@@ -216,9 +219,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             raise ConfigEntryNotReady(
                 f"Unable to connect to Homeduino transceiver on {serial_port}"
             ) from ex
-
-        hass.data.setdefault(DOMAIN, {})
-        hass.data[DOMAIN][entry.entry_id] = homeduino
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
@@ -232,7 +232,8 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     entry_type = entry.data.get(CONF_ENTRY_TYPE)
 
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-        await HomeduinoCoordinator.instance(hass).remove_transceiver(entry.entry_id)
+        device_id = hass.data[DOMAIN][entry.entry_id]
+        await HomeduinoCoordinator.instance(hass).remove_transceiver(device_id)
         if unload_ok := await hass.config_entries.async_unload_platforms(
             entry, PLATFORMS
         ):
@@ -248,7 +249,8 @@ async def update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
     _LOGGER.debug("Configuration options updated, reloading Homeduino integration")
     entry_type = entry.data.get(CONF_ENTRY_TYPE)
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-        await HomeduinoCoordinator.instance(hass).remove_transceiver(entry.entry_id)
+        device_id = hass.data[DOMAIN][entry.entry_id]
+        await HomeduinoCoordinator.instance(hass).remove_transceiver(device_id)
     hass.config_entries.async_schedule_reload(entry.entry_id)
 
 

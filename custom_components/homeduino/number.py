@@ -88,7 +88,6 @@ class HomeduinoTransceiverNumber(CoordinatorEntity, RestoreNumber):
 
         config_entry_id = entity_description.key[0]
         self._digital_io = entity_description.key[1]
-        self.homeduino = self.coordinator.get_transceiver(config_entry_id)
 
         self._attr_device_info = device_info
 
@@ -100,6 +99,8 @@ class HomeduinoTransceiverNumber(CoordinatorEntity, RestoreNumber):
 
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
+
+        self.homeduino = self.coordinator.get_transceiver(self.device_entry.id)
 
         if self.homeduino.connected():
             self._attr_available = True

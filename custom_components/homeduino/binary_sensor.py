@@ -126,7 +126,7 @@ class HomeduinoTransceiverBinarySensor(CoordinatorEntity, BinarySensorEntity):
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
-        homeduino = self.coordinator.get_transceiver(self._config_entry_id)
+        homeduino = self.coordinator.get_transceiver(self.device_entry.id)
         await homeduino.add_digital_read_callback(
             self._digital_io, self._handle_digital_read_update
         )

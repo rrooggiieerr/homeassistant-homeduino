@@ -184,7 +184,7 @@ class HomeduinoTransceiverAnalogSensor(HomeduinoTransceiverSensor):
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
-        homeduino = self.coordinator.get_transceiver(self._config_entry_id)
+        homeduino = self.coordinator.get_transceiver(self.device_entry.id)
         homeduino.add_analog_read_callback(
             self._analog_input, self._handle_analog_read_update
         )
@@ -218,7 +218,7 @@ class HomeduinoTransceiverDHTTemperatureSensor(HomeduinoTransceiverSensor):
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
-        homeduino = self.coordinator.get_transceiver(self._config_entry_id)
+        homeduino = self.coordinator.get_transceiver(self.device_entry.id)
         await homeduino.add_dht_read_callback(
             self._dht_type, self._digital_io, self._handle_dht_read_update
         )
@@ -252,7 +252,7 @@ class HomeduinoTransceiverDHTHumiditySensor(HomeduinoTransceiverSensor):
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
-        homeduino = self.coordinator.get_transceiver(self._config_entry_id)
+        homeduino = self.coordinator.get_transceiver(self.device_entry.id)
         await homeduino.add_dht_read_callback(
             self._dht_type, self._digital_io, self._handle_dht_read_update
         )
