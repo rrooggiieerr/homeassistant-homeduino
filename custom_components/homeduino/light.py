@@ -121,7 +121,6 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         self._attr_device_info = device_info
 
         self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}"
-        _LOGGER.debug(f"Unique ID: {self._attr_unique_id}")
 
         self.entity_description = entity_description
         self.ignore_all = ignore_all
