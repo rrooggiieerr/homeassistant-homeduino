@@ -79,6 +79,9 @@ SERVICE_SEND_SCHEMA = vol.Schema(
 SERVICE_RAW_RF_SEND_SCHEMA = vol.Schema(
     {
         vol.Required(CONF_SERVICE_COMMAND): cv.string,
+        vol.Optional(CONF_SERVICE_REPEATS, default=DEFAULT_REPEATS): NumberSelector(
+            NumberSelectorConfig(min=1, mode=NumberSelectorMode.BOX)
+        ),
     }
 )
 
@@ -225,8 +228,9 @@ async def async_setup(hass: HomeAssistant, config: ConfigType):
     async def async_handle_raw_rf_send(call: ServiceCall):
         """Handle the service call."""
         command: str = call.data.get(CONF_SERVICE_COMMAND)
+        repeats: int = int(call.data.get(CONF_SERVICE_REPEATS, DEFAULT_REPEATS))
 
-        return await HomeduinoCoordinator.instance(hass).raw_rf_send(command)
+        return await HomeduinoCoordinator.instance(hass).raw_rf_send(command, repeats)
 
     hass.services.async_register(
         DOMAIN, "send", async_handle_send, schema=SERVICE_SEND_SCHEMA
