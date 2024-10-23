@@ -37,6 +37,7 @@ rf_send:
       selector:
         number:
           min: 0
+          mode: box
     unit:
       name: Unit
       required: true
@@ -44,6 +45,7 @@ rf_send:
       selector:
         number:
           min: 0
+          mode: box
     state:
       name: State
       required: true
@@ -63,6 +65,7 @@ rf_send:
       selector:
         number:
           min: 1
+          mode: box
 raw_rf_send:
   name: Send raw RF command
   description: Sends a raw RF command.
