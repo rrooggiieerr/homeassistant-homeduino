@@ -207,7 +207,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 config_entry_id=entry.entry_id,
                 identifiers={(DOMAIN, serial_port)},
                 manufacturer="pimatic",
-                name="Homeduino Transceiver",
+                name=entry.title,
+                model="transceiver",
             )
 
             homeduino_coordinator.add_transceiver(device.id, homeduino)
