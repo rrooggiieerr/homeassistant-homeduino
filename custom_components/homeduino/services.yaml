@@ -27,42 +27,42 @@ rf_send:
       name: Protocol
       description: The protocol to use.
       required: true
-      example:
-        protocol: switch1
+      example: switch1
       selector:
         text:
     id:
-      name: Command
-      description: A command to send.
+      name: ID
       required: true
-      example:
-        id: 5
+      example: 5
       selector:
-        text:
+        number:
+          min: 0
     unit:
-      name: Command
-      description: A command to send.
+      name: Unit
       required: true
-      example:
-        unit: 12
+      example: 12
       selector:
-        text:
+        number:
+          min: 0
     state:
-      name: Command
-      description: A command to send.
+      name: State
       required: true
-      example:
-        state: true
-      selector:
-        text:
-    all:
-      name: Command
-      description: A command to send.
-      required: true
-      example:
-        all: true
+      example: true
       selector:
         boolean:
+    all:
+      name: All
+      required: true
+      example: true
+      selector:
+        boolean:
+    repeats:
+      name: Repeats
+      required: false
+      example: 7
+      selector:
+        number:
+          min: 1
 raw_rf_send:
   name: Send raw RF command
   description: Sends a raw RF command.
@@ -74,4 +74,3 @@ raw_rf_send:
       example: "453 1992 88 9228 0 0 0 0 01020102020201020101010101010102010101010202010202020202010102010102020203"
       selector:
         text:
-    

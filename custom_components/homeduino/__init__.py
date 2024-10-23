@@ -14,6 +14,15 @@ from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant, ServiceCall, callback
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import device_registry as dr
+from homeassistant.helpers.selector import (
+    BooleanSelector,
+    NumberSelector,
+    NumberSelectorConfig,
+    NumberSelectorMode,
+    SelectSelector,
+    SelectSelectorConfig,
+    SelectSelectorMode,
+)
 from homeassistant.helpers.typing import ConfigType
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from homeduino import (
@@ -54,6 +63,12 @@ PLATFORMS: list[Platform] = [
 
 CONF_SERVICE_DEVICE_ID = "device_id"
 CONF_SERVICE_COMMAND = "command"
+CONF_SERVICE_PROTOCOL = "protocol"
+CONF_SERVICE_ID = "id"
+CONF_SERVICE_UNIT = "unit"
+CONF_SERVICE_STATE = "state"
+CONF_SERVICE_ALL = "all"
+CONF_SERVICE_REPEATS = "repeats"
 
 SERVICE_SEND_SCHEMA = vol.Schema(
     {
@@ -61,8 +76,15 @@ SERVICE_SEND_SCHEMA = vol.Schema(
         vol.Required(CONF_SERVICE_COMMAND): cv.string,
     }
 )
+SERVICE_RAW_RF_SEND_SCHEMA = vol.Schema(
+    {
+        vol.Required(CONF_SERVICE_COMMAND): cv.string,
+    }
+)
 
 ALLOWED_FAILED_PINGS = 1
+
+_service_rf_send_schema: vol.Schema
 
 
 class HomeduinoCoordinator(DataUpdateCoordinator):
@@ -144,6 +166,23 @@ class HomeduinoCoordinator(DataUpdateCoordinator):
 
         return success
 
+    async def raw_rf_send(self, command: str, repeats=DEFAULT_REPEATS):
+        if not self.has_transceiver():
+            return False
+
+        success = False
+        for transceiver in self._transceivers.values():
+            if not transceiver.supports_rf_send():
+                continue
+
+            if not transceiver.connected() and not await transceiver.connect():
+                continue
+
+            if await transceiver.raw_rf_send(command, repeats) == "ACK":
+                success = True
+
+        return success
+
     async def send(self, config_entry_id, command):
         if not self.has_transceiver():
             return False
@@ -170,8 +209,67 @@ async def async_setup(hass: HomeAssistant, config: ConfigType):
             device_id, command.strip()
         )
 
+    async def async_handle_rf_send(call: ServiceCall):
+        """Handle the service call."""
+        protocol: str = call.data.get(CONF_SERVICE_PROTOCOL)
+        id_: int = call.data.get(CONF_SERVICE_ID)
+        unit: int = call.data.get(CONF_SERVICE_UNIT)
+        state: bool = call.data.get(CONF_SERVICE_STATE)
+        all_: bool = call.data.get(CONF_SERVICE_ALL)
+        repeats: int = call.data.get(CONF_SERVICE_REPEATS)
+
+        return await HomeduinoCoordinator.instance(hass).rf_send(
+            protocol, {"id": id_, "unit": unit, "state": state, "all": all_}, repeats
+        )
+
+    async def async_handle_raw_rf_send(call: ServiceCall):
+        """Handle the service call."""
+        command: str = call.data.get(CONF_SERVICE_COMMAND)
+
+        return await HomeduinoCoordinator.instance(hass).raw_rf_send(command)
+
     hass.services.async_register(
         DOMAIN, "send", async_handle_send, schema=SERVICE_SEND_SCHEMA
+    )
+
+    protocol_names = Homeduino.get_protocols()
+    protocol_names = [
+        protocol_name
+        for protocol_name in protocol_names
+        if protocol_name.startswith(("switch", "dimmer", "pir", "weather"))
+    ]
+
+    _service_rf_send_schema = vol.Schema(
+        {
+            vol.Required(CONF_SERVICE_PROTOCOL, default=""): SelectSelector(
+                SelectSelectorConfig(
+                    options=protocol_names,
+                    mode=SelectSelectorMode.DROPDOWN,
+                )
+            ),
+            vol.Required(CONF_SERVICE_ID): NumberSelector(
+                NumberSelectorConfig(min=0, mode=NumberSelectorMode.BOX)
+            ),
+            vol.Required(CONF_SERVICE_UNIT): NumberSelector(
+                NumberSelectorConfig(min=0, mode=NumberSelectorMode.BOX)
+            ),
+            vol.Required(CONF_SERVICE_STATE): cv.boolean,
+            vol.Optional(CONF_SERVICE_ALL): BooleanSelector(),
+            vol.Optional(CONF_SERVICE_REPEATS, default=DEFAULT_REPEATS): NumberSelector(
+                NumberSelectorConfig(min=1, mode=NumberSelectorMode.BOX)
+            ),
+        }
+    )
+
+    hass.services.async_register(
+        DOMAIN, "rf_send", async_handle_rf_send, schema=_service_rf_send_schema
+    )
+
+    hass.services.async_register(
+        DOMAIN,
+        "raw_rf_send",
+        async_handle_raw_rf_send,
+        schema=SERVICE_RAW_RF_SEND_SCHEMA,
     )
 
     # Return boolean to indicate that initialization was successful.
