@@ -219,7 +219,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType):
         unit: int = call.data.get(CONF_SERVICE_UNIT)
         state: bool = call.data.get(CONF_SERVICE_STATE)
         all_: bool = call.data.get(CONF_SERVICE_ALL)
-        repeats: int = call.data.get(CONF_SERVICE_REPEATS)
+        repeats: int = int(call.data.get(CONF_SERVICE_REPEATS, DEFAULT_REPEATS))
 
         return await HomeduinoCoordinator.instance(hass).rf_send(
             protocol, {"id": id_, "unit": unit, "state": state, "all": all_}, repeats
