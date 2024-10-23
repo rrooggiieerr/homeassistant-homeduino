@@ -92,10 +92,12 @@
             "rf_device": {
             	"title": "Homeduino RF Device options",
                 "data": {
-            		"rf_id_ignore_all": "Ignore all"
+            		"rf_id_ignore_all": "Ignore all",
+            		"rf_repeats": "RF repeats"
                 },
                 "data_description": {
-            		"rf_id_ignore_all": "Enable when your RF Device ignores the all/master button often found on RF remote controls."
+            		"rf_id_ignore_all": "Enable when your RF Device ignores the all/master button often found on RF remote controls.",
+            		"rf_repeats": "The number of times the RF signal need to be repeated."
                 }
             }
         }
