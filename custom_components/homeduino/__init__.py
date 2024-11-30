@@ -269,10 +269,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     async def async_handle_rf_send(call: ServiceCall):
         """Handle the service call."""
         protocol: str = call.data.get(CONF_SERVICE_PROTOCOL)
-        id_: int = call.data.get(CONF_SERVICE_ID)
-        unit: int = call.data.get(CONF_SERVICE_UNIT)
-        state: bool = call.data.get(CONF_SERVICE_STATE)
-        all_: bool = call.data.get(CONF_SERVICE_ALL)
+        id_: int = int(call.data.get(CONF_SERVICE_ID))
+        unit: int = int(call.data.get(CONF_SERVICE_UNIT))
+        state: bool = bool(call.data.get(CONF_SERVICE_STATE))
+        all_: bool = bool(call.data.get(CONF_SERVICE_ALL))
         repeats: int = int(call.data.get(CONF_SERVICE_REPEATS, DEFAULT_REPEATS))
 
         return await HomeduinoCoordinator.instance(hass).rf_send(
