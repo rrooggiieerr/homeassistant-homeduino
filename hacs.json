@@ -1,3 +1,4 @@
 {
-	"name": "Homeduino"
+	"name": "Homeduino",
+    "homeassistant": "2024.12.0"
 }
