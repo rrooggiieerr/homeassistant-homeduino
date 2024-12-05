@@ -8,7 +8,7 @@ from typing import Any
 
 import serial.tools.list_ports
 import voluptuous as vol
-from homeassistant import config_entries
+from homeassistant.config_entries import ConfigEntry, ConfigFlow, OptionsFlow
 from homeassistant.const import CONF_TYPE
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
@@ -51,7 +51,7 @@ _DIGITAL_IO_DEVICES = [
 ]
 
 
-class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
     """Handle a config flow for Homeduino 433 MHz RF transceiver."""
 
     VERSION = 2
@@ -396,13 +396,13 @@ class HomeduinoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     @staticmethod
     @callback
     def async_get_options_flow(
-        config_entry: config_entries.ConfigEntry,
-    ) -> config_entries.OptionsFlow:
+        config_entry: ConfigEntry,
+    ) -> OptionsFlow:
         """Create the options flow."""
-        return HomeduinoOptionsFlowHandler(config_entry)
+        return HomeduinoOptionsFlowHandler()
 
 
-class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
+class HomeduinoOptionsFlowHandler(OptionsFlow):
     TRANSCEIVER_OPTIONS_SCHEMA = vol.Schema({})
     RF_DEVICE_OPTIONS_SCHEMA = vol.Schema(
         {
@@ -412,11 +412,6 @@ class HomeduinoOptionsFlowHandler(config_entries.OptionsFlow):
             ),
         }
     )
-
-    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
-        """Initialize options flow."""
-        _LOGGER.debug(config_entry.data)
-        self.config_entry = config_entry
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
