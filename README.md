@@ -87,7 +87,7 @@ The digital IO can be configured as:
 - Digital input on digital IO 2 till 12
 - Digital output on all digital IO
 - PWM output on digital IO 3, 5, 6, 9, 10 and 11 
-- DHT11/DHT22 sensor IO 2 till 12
+- DHT11/DHT22 sensor on difital IO 2 till 12
 
 The analog input reads a value between 0V and 5V and reports the measured value as a value between 0 and 1023. You can use a template sensor to use this value according to your needs.
 
