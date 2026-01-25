@@ -2,19 +2,15 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
 
 from homeassistant.components.number import (
-    NumberEntity,
     NumberEntityDescription,
     RestoreNumber,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import STATE_ON
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeduino import Homeduino, HomeduinoPinMode
 

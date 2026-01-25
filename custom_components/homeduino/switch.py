@@ -4,7 +4,6 @@ from __future__ import annotations
 import logging
 
 from homeassistant.components.switch import (
-    SwitchDeviceClass,
     SwitchEntity,
     SwitchEntityDescription,
 )
