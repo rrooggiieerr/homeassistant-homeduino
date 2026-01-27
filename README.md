@@ -21,7 +21,7 @@ This plugins supports all 433 MHz devices with [rfcontrolpy](https://github.com/
 
 ## Features
 
-* Sending and receiveing RF commands
+* Sending and receiving RF commands
 * Supports RF switches, lights, motion and weather sensors
 * Read and write local IO connected to the Arduino Nano
 * Reading DHT11/DHT22 sensors connected to the Arduino Nano
@@ -79,7 +79,7 @@ be added to your Integrations view. If your wiring is not right you will get a
 
 ### Digital and analog IO
 
-The Arduino Nano suports 12 digital IO and 8 analog inputs which can be used by the Homeduino integration
+The Arduino Nano supports 12 digital IO and 8 analog inputs which can be used by the Homeduino integration
 
 The digital IO can be configured as:
 - RF receiver on digital IO 2 or 3
