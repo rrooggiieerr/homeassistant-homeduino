@@ -72,6 +72,8 @@ class HomeduinoTransceiverNumber(CoordinatorEntity, RestoreNumber):
     _attr_has_entity_name = True
     _attr_available = False
 
+    _homeduino: Homeduino = None
+
     def __init__(
         self,
         coordinator: HomeduinoCoordinator,
@@ -93,20 +95,20 @@ class HomeduinoTransceiverNumber(CoordinatorEntity, RestoreNumber):
 
         self.entity_description = entity_description
 
+        self._homeduino = self.coordinator.get_transceiver(self.device_entry.id)
+
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
-        self.homeduino = self.coordinator.get_transceiver(self.device_entry.id)
-
-        if self.homeduino.connected():
+        if self._homeduino.connected():
             self._attr_available = True
 
-            await self.homeduino.pin_mode(self._digital_io, HomeduinoPinMode.OUTPUT)
+            await self._homeduino.pin_mode(self._digital_io, HomeduinoPinMode.OUTPUT)
 
             if (last_state := await self.async_get_last_state()) is not None:
                 last_number_data = await self.async_get_last_number_data()
                 native_value = last_number_data.native_value or 0
-                if await self.homeduino.analog_write(
+                if await self._homeduino.analog_write(
                     self._digital_io, int(native_value)
                 ):
                     self._attr_native_value = native_value
@@ -115,7 +117,7 @@ class HomeduinoTransceiverNumber(CoordinatorEntity, RestoreNumber):
 
     async def async_set_native_value(self, value: float) -> None:
         """Update the current value."""
-        if await self.homeduino.analog_write(self._digital_io, int(value)):
+        if await self._homeduino.analog_write(self._digital_io, int(value)):
             self._attr_native_value = value
 
         self.async_write_ha_state()

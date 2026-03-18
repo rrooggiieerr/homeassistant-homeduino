@@ -107,6 +107,8 @@ class HomeduinoTransceiverSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity)
     _attr_available = False
     _attr_is_on = None
 
+    _homeduino: Homeduino = None
+
     def __init__(
         self,
         coordinator: HomeduinoCoordinator,
@@ -128,19 +130,19 @@ class HomeduinoTransceiverSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity)
 
         self.entity_description = entity_description
 
+        self._homeduino = self.coordinator.get_transceiver(self.device_entry.id)
+
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
 
-        self.homeduino = self.coordinator.get_transceiver(self.device_entry.id)
-
-        if self.homeduino.connected():
+        if self._homeduino.connected():
             self._attr_available = True
 
-            await self.homeduino.pin_mode(self._digital_io, HomeduinoPinMode.OUTPUT)
+            await self._homeduino.pin_mode(self._digital_io, HomeduinoPinMode.OUTPUT)
 
             if (last_state := await self.async_get_last_state()) is not None:
                 is_on = last_state.state == STATE_ON
-                if await self.homeduino.digital_write(self._digital_io, is_on):
+                if await self._homeduino.digital_write(self._digital_io, is_on):
                     self._attr_is_on = is_on
 
         self.async_write_ha_state()
@@ -148,7 +150,7 @@ class HomeduinoTransceiverSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity)
     async def async_turn_on(self, **kwargs) -> None:
         """Turn the entity on."""
         _LOGGER.debug("Turning on %s", self.name)
-        if await self.homeduino.digital_write(self._digital_io, True):
+        if await self._homeduino.digital_write(self._digital_io, True):
             self._attr_is_on = True
             self.async_write_ha_state()
         else:
@@ -157,7 +159,7 @@ class HomeduinoTransceiverSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity)
     async def async_turn_off(self, **kwargs) -> None:
         """Turn the entity off."""
         _LOGGER.debug("Turning off %s", self.name)
-        if await self.homeduino.digital_write(self._digital_io, False):
+        if await self._homeduino.digital_write(self._digital_io, False):
             self._attr_is_on = False
             self.async_write_ha_state()
         else:
