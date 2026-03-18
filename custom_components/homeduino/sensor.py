@@ -137,6 +137,7 @@ async def async_setup_entry(
                 translation_key="humidity",
                 translation_placeholders={"unit": unit},
                 device_class=SensorDeviceClass.HUMIDITY,
+                state_class="measurement",
                 native_unit_of_measurement=PERCENTAGE,
             )
 
