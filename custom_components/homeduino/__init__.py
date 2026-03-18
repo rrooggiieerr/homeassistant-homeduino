@@ -239,8 +239,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
             homeduino_coordinator.add_transceiver(device.id, homeduino)
 
-            hass.data.setdefault(DOMAIN, {})
-            hass.data[DOMAIN][entry.entry_id] = device.id
+            entry.runtime_data = device.id
 
             _LOGGER.info("Homeduino transceiver on %s is available", serial_port)
         except serial.SerialException as ex:
@@ -337,16 +336,10 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     entry_type = entry.data.get(CONF_ENTRY_TYPE)
 
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-        device_id = hass.data[DOMAIN][entry.entry_id]
+        device_id = entry.runtime_data
         await HomeduinoCoordinator.instance(hass).remove_transceiver(device_id)
-        if unload_ok := await hass.config_entries.async_unload_platforms(
-            entry, PLATFORMS
-        ):
-            hass.data[DOMAIN].pop(entry.entry_id)
-    elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
-        unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
 
-    return unload_ok
+    return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
 
 
 async def update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
@@ -354,7 +347,7 @@ async def update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
     _LOGGER.debug("Configuration options updated, reloading Homeduino integration")
     entry_type = entry.data.get(CONF_ENTRY_TYPE)
     if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-        device_id = hass.data[DOMAIN][entry.entry_id]
+        device_id = entry.runtime_data
         await HomeduinoCoordinator.instance(hass).remove_transceiver(device_id)
     hass.config_entries.async_schedule_reload(entry.entry_id)
 
