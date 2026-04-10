@@ -9,7 +9,12 @@ from homeassistant.components.sensor import (
     SensorEntityDescription,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import PERCENTAGE, UnitOfTemperature
+from homeassistant.const import (
+    PERCENTAGE,
+    UnitOfPrecipitationDepth,
+    UnitOfSpeed,
+    UnitOfTemperature,
+)
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
@@ -117,7 +122,7 @@ async def async_setup_entry(
             name=config_entry.title,
         )
 
-        if protocol in ("weather4", "weather7", "weather13", "weather19"):
+        if protocol in ("weather4", "weather5", "weather7", "weather13", "weather19"):
             entity_description = SensorEntityDescription(
                 key=(protocol, id, unit, "temperature"),
                 translation_key="temperature",
@@ -131,7 +136,7 @@ async def async_setup_entry(
                 HomeduinoRFSensor(coordinator, device_info, entity_description)
             )
 
-        if protocol in ("weather4", "weather7", "weather13"):
+        if protocol in ("weather4", "weather5", "weather7", "weather13"):
             entity_description = SensorEntityDescription(
                 key=(protocol, id, unit, "humidity"),
                 translation_key="humidity",
@@ -139,6 +144,59 @@ async def async_setup_entry(
                 device_class=SensorDeviceClass.HUMIDITY,
                 state_class="measurement",
                 native_unit_of_measurement=PERCENTAGE,
+            )
+
+            entities.append(
+                HomeduinoRFSensor(coordinator, device_info, entity_description)
+            )
+
+        if protocol in ("weather5",):
+            entity_description = SensorEntityDescription(
+                key=(protocol, id, unit, "avgAirspeed"),
+                translation_key="avg_airspeed",
+                translation_placeholders={"unit": unit},
+                device_class=SensorDeviceClass.WIND_SPEED,
+                state_class="measurement",
+                native_unit_of_measurement=UnitOfSpeed.METERS_PER_SECOND,
+            )
+
+            entities.append(
+                HomeduinoRFSensor(coordinator, device_info, entity_description)
+            )
+
+            entity_description = SensorEntityDescription(
+                key=(protocol, id, unit, "windGust"),
+                translation_key="wind_gust",
+                translation_placeholders={"unit": unit},
+                device_class=SensorDeviceClass.WIND_SPEED,
+                state_class="measurement",
+                native_unit_of_measurement=UnitOfSpeed.METERS_PER_SECOND,
+            )
+
+            entities.append(
+                HomeduinoRFSensor(coordinator, device_info, entity_description)
+            )
+
+            entity_description = SensorEntityDescription(
+                key=(protocol, id, unit, "windDirection"),
+                translation_key="wind_direction",
+                translation_placeholders={"unit": unit},
+                device_class=None,
+                state_class="measurement",
+                native_unit_of_measurement="°",
+            )
+
+            entities.append(
+                HomeduinoRFSensor(coordinator, device_info, entity_description)
+            )
+
+            entity_description = SensorEntityDescription(
+                key=(protocol, id, unit, "rain"),
+                translation_key="rain",
+                translation_placeholders={"unit": unit},
+                device_class=SensorDeviceClass.PRECIPITATION,
+                state_class="total_increasing",
+                native_unit_of_measurement=UnitOfPrecipitationDepth.MILLIMETERS,
             )
 
             entities.append(
