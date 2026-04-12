@@ -17,6 +17,7 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from homeassistant.helpers import entity_registry as er
 
 from . import HomeduinoCoordinator
 from .const import (
@@ -77,6 +78,28 @@ async def async_setup_entry(
         if unit is not None:
             unit = int(unit)
 
+        # --- Migration: alte unique_id -> neue unique_id ---
+        registry = er.async_get(hass)
+        old_base = f"{DOMAIN}-{protocol}-{id}-{unit}"
+
+        # New field naming: use "state" for both PIR and contact sensor state.
+        if protocol.startswith("pir"):
+            fields = ["state"]
+        elif protocol.startswith("contact"):
+            # map old single-field unique (no field suffix) -> new unique ids
+            # New field name is "state" (replaces old "contact") and keep "lowBattery"
+            fields = ["state", "lowBattery"]
+        else:
+            fields = []
+
+        for field in fields:
+            old_unique = old_base  # alte Form: DOMAIN-protocol-id-unit
+            new_unique = f"{DOMAIN}-{protocol}-{id}-{unit}-{field}"
+            entity_id = registry.async_get_entity_id("binary_sensor", DOMAIN, old_unique)
+            if entity_id:
+                registry.async_update_entity(entity_id, new_unique_id=new_unique)
+        # --- Ende Migration ---
+
         identifier = f"{protocol}-{id}"
         if unit is not None:
             identifier += f"-{unit}"
@@ -86,12 +109,19 @@ async def async_setup_entry(
             name=config_entry.title,
         )
 
+        # Determine device_class based on protocol
+        device_class = None
+        if protocol.startswith("pir"):
+            device_class = BinarySensorDeviceClass.MOTION
+        elif protocol.startswith("contact"):
+            device_class = BinarySensorDeviceClass.DOOR
+
         if protocol.startswith("pir"):
             entity_description = BinarySensorEntityDescription(
                 key=(protocol, id, unit, "state"),
                 translation_key="rf_motion",
                 translation_placeholders={"unit": unit},
-                device_class=BinarySensorDeviceClass.MOTION,
+                device_class=device_class,
             )
 
             entities.append(
@@ -99,10 +129,10 @@ async def async_setup_entry(
             )
         elif protocol.startswith("contact"):
             entity_description = BinarySensorEntityDescription(
-                key=(protocol, id, unit, "contact"),
+                key=(protocol, id, unit, "state"),
                 translation_key="rf_contact",
                 translation_placeholders={"unit": unit},
-                device_class=BinarySensorDeviceClass.DOOR,
+                device_class=device_class,
             )
 
             entities.append(
