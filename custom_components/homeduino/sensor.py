@@ -151,6 +151,19 @@ async def async_setup_entry(
             )
 
         if protocol in ("weather5",):
+
+            entity_description = SensorEntityDescription(
+                key=(protocol, id, unit, "lowBattery"),
+                translation_key="rf_low_battery",
+                translation_placeholders={"unit": unit},
+                device_class=SensorDeviceClass.BATTERY,
+            )
+
+            entities.append(
+                HomeduinoRFSensor(coordinator, device_info, entity_description)
+            )
+
+            
             entity_description = SensorEntityDescription(
                 key=(protocol, id, unit, "avgAirspeed"),
                 translation_key="avg_airspeed",
