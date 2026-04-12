@@ -78,28 +78,6 @@ async def async_setup_entry(
         if unit is not None:
             unit = int(unit)
 
-        # --- Migration: alte unique_id -> neue unique_id ---
-        registry = er.async_get(hass)
-        old_base = f"{DOMAIN}-{protocol}-{id}-{unit}"
-
-        # New field naming: use "state" for both PIR and contact sensor state.
-        if protocol.startswith("pir"):
-            fields = ["state"]
-        elif protocol.startswith("contact"):
-            # map old single-field unique (no field suffix) -> new unique ids
-            # New field name is "state" (replaces old "contact") and keep "lowBattery"
-            fields = ["state", "lowBattery"]
-        else:
-            fields = []
-
-        for field in fields:
-            old_unique = old_base  # alte Form: DOMAIN-protocol-id-unit
-            new_unique = f"{DOMAIN}-{protocol}-{id}-{unit}-{field}"
-            entity_id = registry.async_get_entity_id("binary_sensor", DOMAIN, old_unique)
-            if entity_id:
-                registry.async_update_entity(entity_id, new_unique_id=new_unique)
-
-
         identifier = f"{protocol}-{id}"
         if unit is not None:
             identifier += f"-{unit}"
@@ -207,7 +185,12 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
         self._attr_device_info = device_info
 
-        self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}-{self.field}"
+        # self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}-{self.field}"         
+        # unique_id: include field only if set to avoid renaming existing entities
+        unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}"
+        if self.field:
+            unique_id += f"-{self.field}"
+        self._attr_unique_id = unique_id
 
         self.entity_description = entity_description
 
