@@ -14,10 +14,10 @@ from homeassistant.components.binary_sensor import (
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from homeassistant.helpers import entity_registry as er
 
 from . import HomeduinoCoordinator
 from .const import (
@@ -82,12 +82,13 @@ async def async_setup_entry(
         registry = er.async_get(hass)
         old_base = f"{DOMAIN}-{protocol}-{id}-{unit}"
 
-        # New field naming: use "state" for both PIR and contact sensor state.
+        # Felder, die gleich als einzelne Entities angelegt werden
         if protocol.startswith("pir"):
             fields = ["state"]
         elif protocol.startswith("contact"):
-            # map old single-field unique (no field suffix) -> new unique ids
-            # New field name is "state" (replaces old "contact") and keep "lowBattery"
+            # Alte Implementierung nutzte "contact" als Feldname; wir mappen
+            # die alte unique_id auf das neue Hauptfeld "state" und behalten
+            # "lowBattery" als separate Entity.
             fields = ["state", "lowBattery"]
         else:
             fields = []
@@ -95,8 +96,10 @@ async def async_setup_entry(
         for field in fields:
             old_unique = old_base  # alte Form: DOMAIN-protocol-id-unit
             new_unique = f"{DOMAIN}-{protocol}-{id}-{unit}-{field}"
+            # Prüfe, ob ein Registry‑Eintrag mit alter unique_id existiert
             entity_id = registry.async_get_entity_id("binary_sensor", DOMAIN, old_unique)
             if entity_id:
+                # Migriere die alte unique_id zur neuen unique_id
                 registry.async_update_entity(entity_id, new_unique_id=new_unique)
         # --- Ende Migration ---
 
@@ -116,29 +119,20 @@ async def async_setup_entry(
         elif protocol.startswith("contact"):
             device_class = BinarySensorDeviceClass.DOOR
 
-        if protocol.startswith("pir"):
-            entity_description = BinarySensorEntityDescription(
-                key=(protocol, id, unit, "state"),
-                translation_key="rf_motion",
-                translation_placeholders={"unit": unit},
-                device_class=device_class,
-            )
+        # Main state entity: use field name "state" for both PIR and contact protocols
+        entity_description = BinarySensorEntityDescription(
+            key=(protocol, id, unit, "state"),
+            translation_key="rf_motion" if protocol.startswith("pir") else "rf_contact",
+            translation_placeholders={"unit": unit},
+            device_class=device_class,
+        )
 
-            entities.append(
-                HomeduinoRFBinarySensor(coordinator, device_info, entity_description)
-            )
-        elif protocol.startswith("contact"):
-            entity_description = BinarySensorEntityDescription(
-                key=(protocol, id, unit, "state"),
-                translation_key="rf_contact",
-                translation_placeholders={"unit": unit},
-                device_class=device_class,
-            )
+        entities.append(
+            HomeduinoRFBinarySensor(coordinator, device_info, entity_description)
+        )
 
-            entities.append(
-                HomeduinoRFBinarySensor(coordinator, device_info, entity_description)
-            )
-
+        # For contact devices also expose low battery as separate entity
+        if protocol.startswith("contact"):
             entity_description = BinarySensorEntityDescription(
                 key=(protocol, id, unit, "lowBattery"),
                 translation_key="rf_low_battery",
