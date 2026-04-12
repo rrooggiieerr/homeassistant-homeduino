@@ -82,13 +82,12 @@ async def async_setup_entry(
         registry = er.async_get(hass)
         old_base = f"{DOMAIN}-{protocol}-{id}-{unit}"
 
-        # Felder, die gleich als einzelne Entities angelegt werden
+        # New field naming: use "state" for both PIR and contact sensor state.
         if protocol.startswith("pir"):
             fields = ["state"]
         elif protocol.startswith("contact"):
-            # Alte Implementierung nutzte "contact" als Feldname; wir mappen
-            # die alte unique_id auf das neue Hauptfeld "state" und behalten
-            # "lowBattery" als separate Entity.
+            # map old single-field unique (no field suffix) -> new unique ids
+            # New field name is "state" (replaces old "contact") and keep "lowBattery"
             fields = ["state", "lowBattery"]
         else:
             fields = []
@@ -96,12 +95,10 @@ async def async_setup_entry(
         for field in fields:
             old_unique = old_base  # alte Form: DOMAIN-protocol-id-unit
             new_unique = f"{DOMAIN}-{protocol}-{id}-{unit}-{field}"
-            # Prüfe, ob ein Registry‑Eintrag mit alter unique_id existiert
             entity_id = registry.async_get_entity_id("binary_sensor", DOMAIN, old_unique)
             if entity_id:
-                # Migriere die alte unique_id zur neuen unique_id
                 registry.async_update_entity(entity_id, new_unique_id=new_unique)
-        # --- Ende Migration ---
+
 
         identifier = f"{protocol}-{id}"
         if unit is not None:
