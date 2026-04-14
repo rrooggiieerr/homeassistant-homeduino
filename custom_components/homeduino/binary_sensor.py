@@ -14,7 +14,6 @@ from homeassistant.components.binary_sensor import (
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
-from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -107,7 +106,7 @@ async def async_setup_entry(
         )
 
         # For contact devices also expose low battery as separate entity
-        if protocol.startswith("contact"):
+        if protocol in ["contact4", "weather4", "weather7", "weather13"]:
             entity_description = BinarySensorEntityDescription(
                 key=(protocol, id, unit, "lowBattery"),
                 translation_key="rf_low_battery",
@@ -181,8 +180,11 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self.protocol = entity_description.key[0]
         self.id = entity_description.key[1]
         self.unit = entity_description.key[2]
-        self.field = entity_description.key[3]
-
+        try:
+            self.field = entity_description.key[3]
+        except (AttributeError, TypeError, IndexError):
+            self.field = None
+        
         self._attr_device_info = device_info
 
         # self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}-{self.field}"         
@@ -228,6 +230,6 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
             _LOGGER.debug(self.coordinator.data)
 
-            self._attr_is_on = self.coordinator.data.get("values", {}).get(self.field)
+            self._attr_is_on = self.coordinator.data.get("values", {}).get(self.field if self.field else "state")
 
         self.async_write_ha_state()
