@@ -70,7 +70,7 @@ async def async_setup_entry(
                 )
     elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE and config_entry.data.get(
         CONF_RF_PROTOCOL
-    ).startswith("pir"):
+    ).startswith(("pir", "contact")):
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
         id = int(config_entry.data.get(CONF_RF_ID))
         unit = config_entry.data.get(CONF_RF_UNIT)
@@ -86,16 +86,37 @@ async def async_setup_entry(
             name=config_entry.title,
         )
 
+        # Determine device_class based on protocol
+        device_class = None
+        if protocol.startswith("pir"):
+            device_class = BinarySensorDeviceClass.MOTION
+        elif protocol.startswith("contact"):
+            device_class = BinarySensorDeviceClass.DOOR
+
+        # Main state entity: use field name "state" for both PIR and contact protocols
         entity_description = BinarySensorEntityDescription(
-            key=(protocol, id, unit),
-            translation_key="rf_motion",
+            key=(protocol, id, unit, "state"),
+            translation_key="rf_motion" if protocol.startswith("pir") else "rf_contact",
             translation_placeholders={"unit": unit},
-            device_class=BinarySensorDeviceClass.MOTION,
+            device_class=device_class,
         )
 
         entities.append(
             HomeduinoRFBinarySensor(coordinator, device_info, entity_description)
         )
+
+        # For contact devices also expose low battery as separate entity
+        if protocol in ["contact4", "weather4", "weather7", "weather13"]:
+            entity_description = BinarySensorEntityDescription(
+                key=(protocol, id, unit, "lowBattery"),
+                translation_key="rf_low_battery",
+                translation_placeholders={"unit": unit},
+                device_class=BinarySensorDeviceClass.BATTERY,
+            )
+
+            entities.append(
+                HomeduinoRFBinarySensor(coordinator, device_info, entity_description)
+            )
 
     async_add_entities(entities)
 
@@ -159,10 +180,19 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self.protocol = entity_description.key[0]
         self.id = entity_description.key[1]
         self.unit = entity_description.key[2]
-
+        try:
+            self.field = entity_description.key[3]
+        except (AttributeError, TypeError, IndexError):
+            self.field = None
+        
         self._attr_device_info = device_info
 
-        self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}"
+        # self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}-{self.field}"         
+        # unique_id: include field only if set to avoid renaming existing entities
+        unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}"
+        if self.field:
+            unique_id += f"-{self.field}"
+        self._attr_unique_id = unique_id
 
         self.entity_description = entity_description
 
@@ -200,6 +230,6 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
             _LOGGER.debug(self.coordinator.data)
 
-            self._attr_is_on = self.coordinator.data.get("values", {}).get("state")
+            self._attr_is_on = self.coordinator.data.get("values", {}).get(self.field if self.field else "state")
 
         self.async_write_ha_state()
