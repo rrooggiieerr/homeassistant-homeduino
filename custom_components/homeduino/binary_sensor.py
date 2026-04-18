@@ -68,49 +68,42 @@ async def async_setup_entry(
                         coordinator, device_info, entity_description
                     )
                 )
-    elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE and config_entry.data.get(
-        CONF_RF_PROTOCOL
-    ).startswith(("pir", "contact")):
+    elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
-        id = int(config_entry.data.get(CONF_RF_ID))
-        unit = config_entry.data.get(CONF_RF_UNIT)
-        if unit is not None:
-            unit = int(unit)
+        if protocol.startswith(("contact", "pir")):
+            id = int(config_entry.data.get(CONF_RF_ID))
+            unit = config_entry.data.get(CONF_RF_UNIT)
+            if unit is not None:
+                unit = int(unit)
 
-        identifier = f"{protocol}-{id}"
-        if unit is not None:
-            identifier += f"-{unit}"
+            identifier = f"{protocol}-{id}"
+            if unit is not None:
+                identifier += f"-{unit}"
 
-        device_info = DeviceInfo(
-            identifiers={(DOMAIN, identifier)},
-            name=config_entry.title,
-        )
+            device_info = DeviceInfo(
+                identifiers={(DOMAIN, identifier)},
+                name=config_entry.title,
+            )
 
-        # Determine device_class based on protocol
-        device_class = None
-        if protocol.startswith("pir"):
-            device_class = BinarySensorDeviceClass.MOTION
-        elif protocol.startswith("contact"):
-            device_class = BinarySensorDeviceClass.DOOR
+            # Determine device_class based on protocol
+            device_class = None
+            if protocol.startswith("contact"):
+                device_class = BinarySensorDeviceClass.DOOR
+            elif protocol.startswith("pir"):
+                device_class = BinarySensorDeviceClass.MOTION
 
-        # Main state entity: use field name "state" for both PIR and contact protocols
-        entity_description = BinarySensorEntityDescription(
-            key=(protocol, id, unit, "state"),
-            translation_key="rf_motion" if protocol.startswith("pir") else "rf_contact",
-            translation_placeholders={"unit": unit},
-            device_class=device_class,
-        )
+            entity_description = BinarySensorEntityDescription(
+                key=(protocol, id, unit),
+                device_class=device_class,
+            )
 
-        entities.append(
-            HomeduinoRFBinarySensor(coordinator, device_info, entity_description)
-        )
+            entities.append(
+                HomeduinoRFBinarySensor(coordinator, device_info, entity_description)
+            )
 
-        # For contact devices also expose low battery as separate entity
-        if protocol in ["contact4", "weather4", "weather7", "weather13"]:
+        if protocol in ["contact4", "weather4", "weather5", "weather7", "weather13"]:
             entity_description = BinarySensorEntityDescription(
                 key=(protocol, id, unit, "lowBattery"),
-                translation_key="rf_low_battery",
-                translation_placeholders={"unit": unit},
                 device_class=BinarySensorDeviceClass.BATTERY,
             )
 
@@ -168,6 +161,8 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
     _attr_available = False
 
+    fiel = None
+
     def __init__(
         self,
         coordinator: HomeduinoCoordinator,
@@ -180,15 +175,11 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self.protocol = entity_description.key[0]
         self.id = entity_description.key[1]
         self.unit = entity_description.key[2]
-        try:
+        if len(entity_description) >= 4:
             self.field = entity_description.key[3]
-        except (AttributeError, TypeError, IndexError):
-            self.field = None
-        
+
         self._attr_device_info = device_info
 
-        # self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}-{self.field}"         
-        # unique_id: include field only if set to avoid renaming existing entities
         unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}"
         if self.field:
             unique_id += f"-{self.field}"
@@ -230,6 +221,8 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
             _LOGGER.debug(self.coordinator.data)
 
-            self._attr_is_on = self.coordinator.data.get("values", {}).get(self.field if self.field else "state")
+            self._attr_is_on = self.coordinator.data.get("values", {}).get(
+                self.field if self.field else "state"
+            )
 
         self.async_write_ha_state()

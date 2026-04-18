@@ -125,23 +125,11 @@
 	},
 	"entity": {
 		"binary_sensor": {
-			"rf_low_battery": {
-				"name": "Low Battery {unit}"
-			},
 			"digital_input": {
 				"name": "Digital Input {digital_io}"
 			}
 		},
 		"sensor": {
-			"rf_temperature": {
-				"name": "Temperature {unit}"
-			},
-			"rf_humidity": {
-				"name": "Humidity {unit}"
-			},
-			"rf_battery": {
-				"name": "Battery {unit}"
-			},
 			"analog_input": {
 				"name": "Analog Input {analog_input}"
 			},
@@ -156,6 +144,9 @@
 			},
 			"dht22_humidity": {
 				"name": "DHT22 {digital_io} Humidity"
+			},
+			"wind_gust": {
+				"name": "Wind Gust"
 			}
 		},
 		"switch": {

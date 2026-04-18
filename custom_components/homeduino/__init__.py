@@ -292,7 +292,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     protocol_names = [
         protocol_name
         for protocol_name in protocol_names
-        if protocol_name.startswith(("switch", "dimmer", "pir", "contact", "weather"))
+        if protocol_name.startswith(("contact", "dimmer", "pir", "switch", "weather"))
     ]
 
     _service_rf_send_schema = vol.Schema(
