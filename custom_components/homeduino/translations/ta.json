@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "சாதனம் ஏற்கனவே உள்ளமைக்கப்பட்டுள்ளது"
+    },
+    "error": {
+      "cannot_connect": "இணைக்க முடியவில்லை",
+      "nonexisting_serial_port": "சீரியல் பூர்ட் இல்லை",
+      "unknown": "எதிர்பாராத பிழை"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "ஹோம்டுயினோ டிரான்ஸ்ஸீவர்",
+          "setup_rf_device": "RF சாதனம்"
+        }
+      },
+      "setup_serial": {
+        "title": "ஹோம்டுயினோ டிரான்ஸ்ஸீவர்",
+        "data": {
+          "serial_port": "தொடர் போர்ட்",
+          "baud_rate": "பாட் விகிதம்",
+          "digital_2": "டிஜிட்டல் IO 2",
+          "digital_3": "டிஜிட்டல் IO 3",
+          "digital_4": "டிஜிட்டல் IO 4",
+          "digital_5": "டிஜிட்டல் IO 5",
+          "digital_6": "டிஜிட்டல் IO 6",
+          "digital_7": "டிஜிட்டல் IO 7",
+          "digital_8": "டிஜிட்டல் IO 8",
+          "digital_9": "டிஜிட்டல் IO 9",
+          "digital_10": "டிஜிட்டல் IO 10",
+          "digital_11": "டிஜிட்டல் IO 11",
+          "digital_12": "டிஜிட்டல் IO 12",
+          "digital_13": "டிஜிட்டல் IO 13",
+          "analog_0": "அனலாக் உள்ளீடு 0 ஐ இயக்கு",
+          "analog_1": "அனலாக் உள்ளீட்டை இயக்கு 1",
+          "analog_2": "அனலாக் உள்ளீட்டை இயக்கு 2",
+          "analog_3": "அனலாக் உள்ளீட்டை இயக்கு 3",
+          "analog_4": "அனலாக் உள்ளீட்டை இயக்கு 4",
+          "analog_5": "அனலாக் உள்ளீட்டை இயக்கு 5",
+          "analog_6": "அனலாக் உள்ளீட்டை இயக்கு 6",
+          "analog_7": "அனலாக் உள்ளீட்டை இயக்கு 7"
+        },
+        "data_description": {
+          "serial_port": "உங்கள் Homeduino Transceiver இணைக்கப்பட்டுள்ள சீரியல் போர்ட்.",
+          "baud_rate": "உங்கள் Homeduino Transceiverன் உள்ளமைக்கப்பட்ட பாட் விகிதம்."
+        }
+      },
+      "setup_rf_device": {
+        "title": "RF சாதனம்",
+        "data": {
+          "rf_id": "சாதன ஐடி",
+          "rf_protocol": "நெறிமுறை",
+          "rf_unit": "சாதன அலகு",
+          "rf_id_ignore_all": "அனைத்தையும் புறக்கணிக்கவும்"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "RF ரிமோட் கண்ட்ரோல்களில் அடிக்கடி காணப்படும் அனைத்து/மாஸ்டர் பட்டனை உங்கள் RF சாதனம் புறக்கணிக்கும் போது இயக்கவும்."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "Homeduino Transceiver விருப்பங்கள்",
+        "data": {
+          "digital_2": "டிஜிட்டல் IO 2",
+          "digital_3": "டிஜிட்டல் IO 3",
+          "digital_4": "டிஜிட்டல் IO 4",
+          "digital_5": "டிஜிட்டல் IO 5",
+          "digital_6": "டிஜிட்டல் IO 6",
+          "digital_7": "டிஜிட்டல் IO 7",
+          "digital_8": "டிஜிட்டல் IO 8",
+          "digital_9": "டிஜிட்டல் IO 9",
+          "digital_10": "டிஜிட்டல் IO 10",
+          "digital_11": "டிஜிட்டல் IO 11",
+          "digital_12": "டிஜிட்டல் IO 12",
+          "digital_13": "டிஜிட்டல் IO 13",
+          "analog_0": "அனலாக் உள்ளீடு 0 ஐ இயக்கு",
+          "analog_1": "அனலாக் உள்ளீட்டை இயக்கு 1",
+          "analog_2": "அனலாக் உள்ளீட்டை இயக்கு 2",
+          "analog_3": "அனலாக் உள்ளீட்டை இயக்கு 3",
+          "analog_4": "அனலாக் உள்ளீட்டை இயக்கு 4",
+          "analog_5": "அனலாக் உள்ளீட்டை இயக்கு 5",
+          "analog_6": "அனலாக் உள்ளீட்டை இயக்கு 6",
+          "analog_7": "அனலாக் உள்ளீட்டை இயக்கு 7"
+        }
+      },
+      "rf_device": {
+        "title": "Homeduino RF சாதன விருப்பங்கள்",
+        "data": {
+          "rf_id_ignore_all": "அனைத்தையும் புறக்கணிக்கவும்",
+          "rf_repeats": "RF ரிபீட்ஸ்"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "RF ரிமோட் கண்ட்ரோல்களில் அடிக்கடி காணப்படும் அனைத்து/மாஸ்டர் பட்டனை உங்கள் RF சாதனம் புறக்கணிக்கும் போது இயக்கவும்.",
+          "rf_repeats": "எத்தனை முறை RF சிக்னல் திரும்பத் திரும்ப வேண்டும்."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "ஹோம்டுயினோ டிரான்ஸ்ஸீவர்",
+        "rf_device": "Homeduino RF சாதனம்"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "இணைக்கப்படவில்லை",
+        "rf_receive": "RF பெறுதல்",
+        "rf_send": "RF அனுப்பு",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "1-கம்பி பஸ்",
+        "digital_input": "டிஜிட்டல் உள்ளீடு",
+        "digital_output": "டிஜிட்டல் வெளியீடு",
+        "pwm_output": "PWM வெளியீடு"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "டிஜிட்டல் உள்ளீடு {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "அனலாக் உள்ளீடு {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} வெப்பநிலை"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} ஈரப்பதம்"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} வெப்பநிலை"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} ஈரப்பதம்"
+      },
+      "wind_gust": {
+        "name": "காற்று காற்று"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "{unit} மாறு"
+      },
+      "digital_output": {
+        "name": "டிஜிட்டல் வெளியீடு {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM வெளியீடு {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "ஒளி {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "கட்டளையை அனுப்பவும்",
+      "description": "Homeduino க்கு ஒரு கட்டளையை அனுப்புகிறது.",
+      "fields": {
+        "device_id": {
+          "name": "சாதனம்",
+          "description": "கட்டளையை அனுப்ப ஹோம்டுயினோ டிரான்ஸ்ஸீவர்."
+        },
+        "command": {
+          "name": "கட்டளை",
+          "description": "அனுப்ப ஒரு கட்டளை."
+        }
+      }
+    },
+    "rf_send": {
+      "name": "RF கட்டளையை அனுப்பவும்",
+      "description": "RF கட்டளையை அனுப்புகிறது.",
+      "fields": {
+        "protocol": {
+          "name": "நெறிமுறை",
+          "description": "பயன்படுத்த வேண்டிய நெறிமுறை."
+        },
+        "id": {
+          "name": "ஐடி",
+          "description": "சாதன ஐடி."
+        },
+        "unit": {
+          "name": "அலகு",
+          "description": "சாதன அலகு."
+        },
+        "state": {
+          "name": "மாநிலம்",
+          "description": "சாதனத்திற்கு அனுப்ப வேண்டிய நிலை."
+        },
+        "all": {
+          "name": "அனைத்து",
+          "description": "அனைத்து கொடியும் அமைக்கப்பட வேண்டும் என்றால், நெறிமுறையால் ஆதரிக்கப்பட வேண்டும்."
+        },
+        "repeats": {
+          "name": "மீண்டும் மீண்டும்",
+          "description": "RF கட்டளையை அனுப்ப வேண்டிய நேரத்தின் எண்ணிக்கை."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "மூல RF கட்டளையை அனுப்பவும்",
+      "description": "மூல RF கட்டளையை அனுப்புகிறது.",
+      "fields": {
+        "command": {
+          "name": "கட்டளை",
+          "description": "அனுப்ப ஒரு கட்டளை."
+        },
+        "repeats": {
+          "name": "மீண்டும் மீண்டும்",
+          "description": "RF கட்டளையை அனுப்ப வேண்டிய நேரத்தின் எண்ணிக்கை."
+        }
+      }
+    }
+  }
+}

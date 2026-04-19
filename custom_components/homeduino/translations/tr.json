@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Cihaz zaten yapılandırılmış"
+    },
+    "error": {
+      "cannot_connect": "Bağlantı başarısız oldu",
+      "nonexisting_serial_port": "Seri fakir mevcut değil",
+      "unknown": "Beklenmeyen hata"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "Homeduino Alıcı-Verici",
+          "setup_rf_device": "RF Cihazı"
+        }
+      },
+      "setup_serial": {
+        "title": "Homeduino Alıcı-Verici",
+        "data": {
+          "serial_port": "Seri bağlantı noktası",
+          "baud_rate": "Baud hızı",
+          "digital_2": "Dijital IO 2",
+          "digital_3": "Dijital IO 3",
+          "digital_4": "Dijital IO 4",
+          "digital_5": "Dijital IO 5",
+          "digital_6": "Dijital IO 6",
+          "digital_7": "Dijital IO 7",
+          "digital_8": "Dijital IO 8",
+          "digital_9": "Dijital IO 9",
+          "digital_10": "Dijital IO 10",
+          "digital_11": "Dijital IO 11",
+          "digital_12": "Dijital IO 12",
+          "digital_13": "Dijital IO 13",
+          "analog_0": "Analog girişi etkinleştir 0",
+          "analog_1": "Analog giriş 1'i etkinleştir",
+          "analog_2": "Analog giriş 2'yi etkinleştir",
+          "analog_3": "Analog giriş 3'ü etkinleştir",
+          "analog_4": "Analog girişi etkinleştir 4",
+          "analog_5": "Analog girişi etkinleştir 5",
+          "analog_6": "Analog giriş 6'yı etkinleştir",
+          "analog_7": "Analog girişi etkinleştir 7"
+        },
+        "data_description": {
+          "serial_port": "Homeduino Alıcı-Vericinizin bağlı olduğu seri port.",
+          "baud_rate": "Homeduino Alıcı-Vericinizin yapılandırılmış baud hızı."
+        }
+      },
+      "setup_rf_device": {
+        "title": "RF Cihazı",
+        "data": {
+          "rf_id": "Cihaz Kimliği",
+          "rf_protocol": "Protokol",
+          "rf_unit": "Cihaz ünitesi",
+          "rf_id_ignore_all": "Hepsini yoksay"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "RF Cihazınız, RF uzaktan kumandalarında sıklıkla bulunan tümü/ana düğmeyi göz ardı ettiğinde etkinleştirin."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "Homeduino Alıcı-Verici seçenekleri",
+        "data": {
+          "digital_2": "Dijital IO 2",
+          "digital_3": "Dijital IO 3",
+          "digital_4": "Dijital IO 4",
+          "digital_5": "Dijital IO 5",
+          "digital_6": "Dijital IO 6",
+          "digital_7": "Dijital IO 7",
+          "digital_8": "Dijital IO 8",
+          "digital_9": "Dijital IO 9",
+          "digital_10": "Dijital IO 10",
+          "digital_11": "Dijital IO 11",
+          "digital_12": "Dijital IO 12",
+          "digital_13": "Dijital IO 13",
+          "analog_0": "Analog girişi etkinleştir 0",
+          "analog_1": "Analog giriş 1'i etkinleştir",
+          "analog_2": "Analog giriş 2'yi etkinleştir",
+          "analog_3": "Analog giriş 3'ü etkinleştir",
+          "analog_4": "Analog girişi etkinleştir 4",
+          "analog_5": "Analog girişi etkinleştir 5",
+          "analog_6": "Analog giriş 6'yı etkinleştir",
+          "analog_7": "Analog girişi etkinleştir 7"
+        }
+      },
+      "rf_device": {
+        "title": "Homeduino RF Cihaz seçenekleri",
+        "data": {
+          "rf_id_ignore_all": "Hepsini yoksay",
+          "rf_repeats": "RF tekrarları"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "RF Cihazınız, RF uzaktan kumandalarında sıklıkla bulunan tümü/ana düğmeyi göz ardı ettiğinde etkinleştirin.",
+          "rf_repeats": "RF sinyalinin tekrarlanma sayısı."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "Homeduino Alıcı-Verici",
+        "rf_device": "Homeduino RF Cihazı"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "Bağlı Değil",
+        "rf_receive": "RF Alma",
+        "rf_send": "RF Gönderimi",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "1 Telli Otobüs",
+        "digital_input": "Dijital Giriş",
+        "digital_output": "Dijital Çıkış",
+        "pwm_output": "PWM Çıkışı"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Dijital Giriş {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analog Giriş {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Sıcaklık"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Nem"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Sıcaklık"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Nem"
+      },
+      "wind_gust": {
+        "name": "Rüzgar esintisi"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "{unit}'i değiştir"
+      },
+      "digital_output": {
+        "name": "Dijital Çıkış {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM Çıkışı {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Işık {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "Komut gönder",
+      "description": "Homeduino'ya bir komut gönderir.",
+      "fields": {
+        "device_id": {
+          "name": "Cihaz",
+          "description": "Komutun gönderileceği Homeduino alıcı-vericisi."
+        },
+        "command": {
+          "name": "Emretmek",
+          "description": "Gönderilecek bir komut."
+        }
+      }
+    },
+    "rf_send": {
+      "name": "RF komutunu gönder",
+      "description": "Bir RF komutu gönderir.",
+      "fields": {
+        "protocol": {
+          "name": "Protokol",
+          "description": "Kullanılacak protokol."
+        },
+        "id": {
+          "name": "İD",
+          "description": "Cihaz kimliği."
+        },
+        "unit": {
+          "name": "Birim",
+          "description": "Cihaz Birimi."
+        },
+        "state": {
+          "name": "Durum",
+          "description": "Cihaza gönderilecek durum."
+        },
+        "all": {
+          "name": "Tüm",
+          "description": "Tüm bayrağın ayarlanması gerekiyorsa, protokol tarafından desteklenmesi gerekir."
+        },
+        "repeats": {
+          "name": "Tekrarlar",
+          "description": "RF komutunun gönderilmesi gereken süre sayısı."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "Ham RF komutunu gönder",
+      "description": "Ham bir RF komutu gönderir.",
+      "fields": {
+        "command": {
+          "name": "Emretmek",
+          "description": "Gönderilecek bir komut."
+        },
+        "repeats": {
+          "name": "Tekrarlar",
+          "description": "RF komutunun gönderilmesi gereken süre sayısı."
+        }
+      }
+    }
+  }
+}

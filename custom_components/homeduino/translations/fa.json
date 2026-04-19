@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "دستگاه قبلاً پیکربندی شده است"
+    },
+    "error": {
+      "cannot_connect": "اتصال ناموفق بود",
+      "nonexisting_serial_port": "سریال ضعیف وجود ندارد",
+      "unknown": "خطای غیرمنتظره"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "فرستنده و گیرنده Homeduino",
+          "setup_rf_device": "دستگاه RF"
+        }
+      },
+      "setup_serial": {
+        "title": "فرستنده و گیرنده Homeduino",
+        "data": {
+          "serial_port": "پورت سریال",
+          "baud_rate": "نرخ باود",
+          "digital_2": "IO دیجیتال 2",
+          "digital_3": "IO دیجیتال 3",
+          "digital_4": "IO دیجیتال 4",
+          "digital_5": "IO دیجیتال 5",
+          "digital_6": "IO دیجیتال 6",
+          "digital_7": "دیجیتال IO 7",
+          "digital_8": "دیجیتال IO 8",
+          "digital_9": "IO دیجیتال 9",
+          "digital_10": "IO دیجیتال 10",
+          "digital_11": "IO دیجیتال 11",
+          "digital_12": "IO دیجیتال 12",
+          "digital_13": "IO دیجیتال 13",
+          "analog_0": "ورودی آنالوگ 0 را فعال کنید",
+          "analog_1": "ورودی آنالوگ 1 را فعال کنید",
+          "analog_2": "ورودی آنالوگ 2 را فعال کنید",
+          "analog_3": "ورودی آنالوگ 3 را فعال کنید",
+          "analog_4": "ورودی آنالوگ 4 را فعال کنید",
+          "analog_5": "ورودی آنالوگ 5 را فعال کنید",
+          "analog_6": "ورودی آنالوگ 6 را فعال کنید",
+          "analog_7": "ورودی آنالوگ 7 را فعال کنید"
+        },
+        "data_description": {
+          "serial_port": "پورت سریال فرستنده گیرنده Homeduino شما به آن متصل است.",
+          "baud_rate": "نرخ باود پیکربندی شده فرستنده گیرنده Homeduino شما."
+        }
+      },
+      "setup_rf_device": {
+        "title": "دستگاه RF",
+        "data": {
+          "rf_id": "شناسه دستگاه",
+          "rf_protocol": "پروتکل",
+          "rf_unit": "واحد دستگاه",
+          "rf_id_ignore_all": "همه را نادیده بگیرید"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "هنگامی که دستگاه RF شما دکمه all/master را که اغلب در کنترل از راه دور RF یافت می شود نادیده می گیرد، فعال کنید."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "گزینه های فرستنده و گیرنده Homeduino",
+        "data": {
+          "digital_2": "IO دیجیتال 2",
+          "digital_3": "IO دیجیتال 3",
+          "digital_4": "IO دیجیتال 4",
+          "digital_5": "IO دیجیتال 5",
+          "digital_6": "IO دیجیتال 6",
+          "digital_7": "دیجیتال IO 7",
+          "digital_8": "دیجیتال IO 8",
+          "digital_9": "IO دیجیتال 9",
+          "digital_10": "IO دیجیتال 10",
+          "digital_11": "IO دیجیتال 11",
+          "digital_12": "IO دیجیتال 12",
+          "digital_13": "IO دیجیتال 13",
+          "analog_0": "ورودی آنالوگ 0 را فعال کنید",
+          "analog_1": "ورودی آنالوگ 1 را فعال کنید",
+          "analog_2": "ورودی آنالوگ 2 را فعال کنید",
+          "analog_3": "ورودی آنالوگ 3 را فعال کنید",
+          "analog_4": "ورودی آنالوگ 4 را فعال کنید",
+          "analog_5": "ورودی آنالوگ 5 را فعال کنید",
+          "analog_6": "ورودی آنالوگ 6 را فعال کنید",
+          "analog_7": "ورودی آنالوگ 7 را فعال کنید"
+        }
+      },
+      "rf_device": {
+        "title": "گزینه های Homeduino RF Device",
+        "data": {
+          "rf_id_ignore_all": "همه را نادیده بگیرید",
+          "rf_repeats": "RF تکرار می شود"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "هنگامی که دستگاه RF شما دکمه all/master را که اغلب در کنترل از راه دور RF یافت می شود نادیده می گیرد، فعال کنید.",
+          "rf_repeats": "تعداد دفعاتی که سیگنال RF باید تکرار شود."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "فرستنده و گیرنده Homeduino",
+        "rf_device": "دستگاه RF Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "متصل نیست",
+        "rf_receive": "RF دریافت",
+        "rf_send": "RF ارسال",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "1-اتوبوس سیمی",
+        "digital_input": "ورودی دیجیتال",
+        "digital_output": "خروجی دیجیتال",
+        "pwm_output": "خروجی PWM"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "ورودی دیجیتال {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "ورودی آنالوگ {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} دما"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} رطوبت"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} دما"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} رطوبت"
+      },
+      "wind_gust": {
+        "name": "وزش باد"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "سوئیچ {unit}"
+      },
+      "digital_output": {
+        "name": "خروجی دیجیتال {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "خروجی PWM {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "نور {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "ارسال فرمان",
+      "description": "دستوری را به Homeduino ارسال می کند.",
+      "fields": {
+        "device_id": {
+          "name": "دستگاه",
+          "description": "فرستنده و گیرنده Homeduino برای ارسال فرمان به."
+        },
+        "command": {
+          "name": "فرمان",
+          "description": "دستوری برای ارسال"
+        }
+      }
+    },
+    "rf_send": {
+      "name": "دستور RF را ارسال کنید",
+      "description": "یک فرمان RF ارسال می کند.",
+      "fields": {
+        "protocol": {
+          "name": "پروتکل",
+          "description": "پروتکل مورد استفاده"
+        },
+        "id": {
+          "name": "شناسه",
+          "description": "شناسه دستگاه"
+        },
+        "unit": {
+          "name": "واحد",
+          "description": "واحد دستگاه"
+        },
+        "state": {
+          "name": "ایالت",
+          "description": "وضعیت ارسال به دستگاه."
+        },
+        "all": {
+          "name": "همه",
+          "description": "اگر پرچم همه باید تنظیم شود، باید توسط پروتکل پشتیبانی شود."
+        },
+        "repeats": {
+          "name": "تکرار می کند",
+          "description": "تعداد زمانی که دستور RF باید ارسال شود."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "دستور RF خام را ارسال کنید",
+      "description": "یک فرمان RF خام ارسال می کند.",
+      "fields": {
+        "command": {
+          "name": "فرمان",
+          "description": "دستوری برای ارسال"
+        },
+        "repeats": {
+          "name": "تکرار می کند",
+          "description": "تعداد زمانی که دستور RF باید ارسال شود."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Apparaat is al konfigurearre"
+    },
+    "error": {
+      "cannot_connect": "Ferbine mislearre",
+      "nonexisting_serial_port": "Serial poarte bestiet net",
+      "unknown": "Unferwachte flater"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "Homeduino Transceiver",
+          "setup_rf_device": "RF-apparaat"
+        }
+      },
+      "setup_serial": {
+        "title": "Homeduino Transceiver",
+        "data": {
+          "serial_port": "Serial haven",
+          "baud_rate": "Baud taryf",
+          "digital_2": "Digitale IO 2",
+          "digital_3": "Digitale IO 3",
+          "digital_4": "Digitale IO 4",
+          "digital_5": "Digitale IO 5",
+          "digital_6": "Digitale IO 6",
+          "digital_7": "Digitale IO 7",
+          "digital_8": "Digitale IO 8",
+          "digital_9": "Digitale IO 9",
+          "digital_10": "Digitale IO 10",
+          "digital_11": "Digitale IO 11",
+          "digital_12": "Digitale IO 12",
+          "digital_13": "Digitale IO 13",
+          "analog_0": "Analoge ynfier 0 ynskeakelje",
+          "analog_1": "Analoge ynfier ynskeakelje 1",
+          "analog_2": "Analoge ynfier ynskeakelje 2",
+          "analog_3": "Analoge ynfier ynskeakelje 3",
+          "analog_4": "Analoge ynfier ynskeakelje 4",
+          "analog_5": "Analoge ynfier ynskeakelje 5",
+          "analog_6": "Analoge ynfier ynskeakelje 6",
+          "analog_7": "Analoge ynfier ynskeakelje 7"
+        },
+        "data_description": {
+          "serial_port": "De seriële poarte wêrmei jo Homeduino Transceiver is ferbûn.",
+          "baud_rate": "De ynstelde baudrate fan jo Homeduino Transceiver."
+        }
+      },
+      "setup_rf_device": {
+        "title": "RF-apparaat",
+        "data": {
+          "rf_id": "Apparaat ID",
+          "rf_protocol": "Protokol",
+          "rf_unit": "Apparaat ienheid",
+          "rf_id_ignore_all": "Negearje alles"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Ynskeakelje as jo RF-apparaat de alles-/masterknop negeart dy't faaks fûn wurdt op RF-ôfstânskontrôles."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "Homeduino Transceiver opsjes",
+        "data": {
+          "digital_2": "Digitale IO 2",
+          "digital_3": "Digitale IO 3",
+          "digital_4": "Digitale IO 4",
+          "digital_5": "Digitale IO 5",
+          "digital_6": "Digitale IO 6",
+          "digital_7": "Digitale IO 7",
+          "digital_8": "Digitale IO 8",
+          "digital_9": "Digitale IO 9",
+          "digital_10": "Digitale IO 10",
+          "digital_11": "Digitale IO 11",
+          "digital_12": "Digitale IO 12",
+          "digital_13": "Digitale IO 13",
+          "analog_0": "Analoge ynfier 0 ynskeakelje",
+          "analog_1": "Analoge ynfier ynskeakelje 1",
+          "analog_2": "Analoge ynfier ynskeakelje 2",
+          "analog_3": "Analoge ynfier ynskeakelje 3",
+          "analog_4": "Analoge ynfier ynskeakelje 4",
+          "analog_5": "Analoge ynfier ynskeakelje 5",
+          "analog_6": "Analoge ynfier ynskeakelje 6",
+          "analog_7": "Analoge ynfier ynskeakelje 7"
+        }
+      },
+      "rf_device": {
+        "title": "Homeduino RF Device opsjes",
+        "data": {
+          "rf_id_ignore_all": "Negearje alles",
+          "rf_repeats": "RF werhellet"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Ynskeakelje as jo RF-apparaat de alles-/masterknop negeart dy't faaks fûn wurdt op RF-ôfstânskontrôles.",
+          "rf_repeats": "It oantal kearen dat it RF-sinjaal moat wurde werhelle."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "Homeduino Transceiver",
+        "rf_device": "Homeduino RF-apparaat"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "Net ferbûn",
+        "rf_receive": "RF ûntfange",
+        "rf_send": "RF Stjoer",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "1-Wire Bus",
+        "digital_input": "Digitale ynfier",
+        "digital_output": "Digitale útfier",
+        "pwm_output": "PWM útfier"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Digitale ynfier {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analoge ynfier {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Temperatuer"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Feuchte"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} temperatuer"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Feuchte"
+      },
+      "wind_gust": {
+        "name": "Wind Gust"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "Switch {unit}"
+      },
+      "digital_output": {
+        "name": "Digitale útfier {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM-útfier {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Ljocht {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "Stjoer kommando",
+      "description": "Stjoert in kommando nei Homeduino.",
+      "fields": {
+        "device_id": {
+          "name": "Apparaat",
+          "description": "De Homeduino-transceiver om it kommando nei te stjoeren."
+        },
+        "command": {
+          "name": "Befel",
+          "description": "In kommando om te stjoeren."
+        }
+      }
+    },
+    "rf_send": {
+      "name": "Stjoer RF kommando",
+      "description": "Stjoert in RF kommando.",
+      "fields": {
+        "protocol": {
+          "name": "Protokol",
+          "description": "It protokol om te brûken."
+        },
+        "id": {
+          "name": "ID",
+          "description": "Apparaat ID."
+        },
+        "unit": {
+          "name": "Ienheid",
+          "description": "Apparaat ienheid."
+        },
+        "state": {
+          "name": "Steat",
+          "description": "De steat te stjoeren nei it apparaat."
+        },
+        "all": {
+          "name": "Alle",
+          "description": "As de flagge alles moat wurde ynsteld, moat wurde stipe troch it protokol."
+        },
+        "repeats": {
+          "name": "Werhellet",
+          "description": "It oantal kearen dat it RF-kommando ferstjoerd wurde moat."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "Stjoer rau RF kommando",
+      "description": "Stjoert in rau RF kommando.",
+      "fields": {
+        "command": {
+          "name": "Befel",
+          "description": "In kommando om te stjoeren."
+        },
+        "repeats": {
+          "name": "Werhellet",
+          "description": "It oantal kearen dat it RF-kommando ferstjoerd wurde moat."
+        }
+      }
+    }
+  }
+}

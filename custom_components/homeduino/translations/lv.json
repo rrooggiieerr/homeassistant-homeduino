@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Ierīce jau ir konfigurēta"
+    },
+    "error": {
+      "cannot_connect": "Neizdevās izveidot savienojumu",
+      "nonexisting_serial_port": "Seriālā poga nepastāv",
+      "unknown": "Negaidīta kļūda"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "Homeduino raiduztvērējs",
+          "setup_rf_device": "RF ierīce"
+        }
+      },
+      "setup_serial": {
+        "title": "Homeduino raiduztvērējs",
+        "data": {
+          "serial_port": "Seriālais ports",
+          "baud_rate": "Pārbaudes ātrums",
+          "digital_2": "Digitālais IO 2",
+          "digital_3": "Digitālais IO 3",
+          "digital_4": "Digitālais IO 4",
+          "digital_5": "Digitālais IO 5",
+          "digital_6": "Digitālais IO 6",
+          "digital_7": "Digitālais IO 7",
+          "digital_8": "Digitālais IO 8",
+          "digital_9": "Digitālais IO 9",
+          "digital_10": "Digitālais IO 10",
+          "digital_11": "Digitālais IO 11",
+          "digital_12": "Digitālais IO 12",
+          "digital_13": "Digitālais IO 13",
+          "analog_0": "Iespējot analogo ieeju 0",
+          "analog_1": "Iespējot analogo ieeju 1",
+          "analog_2": "Iespējot analogo ieeju 2",
+          "analog_3": "Iespējot analogo ieeju 3",
+          "analog_4": "Iespējot analogo ieeju 4",
+          "analog_5": "Iespējot analogo ieeju 5",
+          "analog_6": "Iespējot analogo ieeju 6",
+          "analog_7": "Iespējot analogo ieeju 7"
+        },
+        "data_description": {
+          "serial_port": "Seriālais ports, kuram ir pievienots jūsu Homeduino raiduztvērējs.",
+          "baud_rate": "Jūsu Homeduino raiduztvērēja konfigurētais datu pārraides ātrums."
+        }
+      },
+      "setup_rf_device": {
+        "title": "RF ierīce",
+        "data": {
+          "rf_id": "Ierīces ID",
+          "rf_protocol": "Protokols",
+          "rf_unit": "Ierīces vienība",
+          "rf_id_ignore_all": "Ignorēt visus"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Iespējot, ja jūsu RF ierīce ignorē visu/galveno pogu, kas bieži atrodas uz RF tālvadības pultīm."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "Homeduino raiduztvērēja iespējas",
+        "data": {
+          "digital_2": "Digitālais IO 2",
+          "digital_3": "Digitālais IO 3",
+          "digital_4": "Digitālais IO 4",
+          "digital_5": "Digitālais IO 5",
+          "digital_6": "Digitālais IO 6",
+          "digital_7": "Digitālais IO 7",
+          "digital_8": "Digitālais IO 8",
+          "digital_9": "Digitālais IO 9",
+          "digital_10": "Digitālais IO 10",
+          "digital_11": "Digitālais IO 11",
+          "digital_12": "Digitālais IO 12",
+          "digital_13": "Digitālais IO 13",
+          "analog_0": "Iespējot analogo ieeju 0",
+          "analog_1": "Iespējot analogo ieeju 1",
+          "analog_2": "Iespējot analogo ieeju 2",
+          "analog_3": "Iespējot analogo ieeju 3",
+          "analog_4": "Iespējot analogo ieeju 4",
+          "analog_5": "Iespējot analogo ieeju 5",
+          "analog_6": "Iespējot analogo ieeju 6",
+          "analog_7": "Iespējot analogo ieeju 7"
+        }
+      },
+      "rf_device": {
+        "title": "Homeduino RF ierīces iespējas",
+        "data": {
+          "rf_id_ignore_all": "Ignorēt visus",
+          "rf_repeats": "RF atkārtojas"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Iespējot, ja jūsu RF ierīce ignorē visu/galveno pogu, kas bieži atrodas uz RF tālvadības pultīm.",
+          "rf_repeats": "Cik reižu RF signāls ir jāatkārto."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "Homeduino raiduztvērējs",
+        "rf_device": "Homeduino RF ierīce"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "Nav izveidots savienojums",
+        "rf_receive": "RF uztveršana",
+        "rf_send": "RF sūtīšana",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "1 vadu kopne",
+        "digital_input": "Digitālā ieeja",
+        "digital_output": "Digitālā izeja",
+        "pwm_output": "PWM izeja"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Digitālā ieeja {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analogā ieeja {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} temperatūra"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Mitrums"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} temperatūra"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Mitrums"
+      },
+      "wind_gust": {
+        "name": "Vēja brāzmas"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "Slēdzis {unit}"
+      },
+      "digital_output": {
+        "name": "Digitālā izvade {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM izeja {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Gaisma {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "Sūtīt komandu",
+      "description": "Nosūta komandu Homeduino.",
+      "fields": {
+        "device_id": {
+          "name": "Ierīce",
+          "description": "Homeduino raiduztvērējs, uz kuru nosūtīt komandu."
+        },
+        "command": {
+          "name": "Pavēli",
+          "description": "Komanda nosūtīt."
+        }
+      }
+    },
+    "rf_send": {
+      "name": "Nosūtiet RF komandu",
+      "description": "Nosūta RF komandu.",
+      "fields": {
+        "protocol": {
+          "name": "Protokols",
+          "description": "Izmantojamais protokols."
+        },
+        "id": {
+          "name": "ID",
+          "description": "Ierīces ID."
+        },
+        "unit": {
+          "name": "Vienība",
+          "description": "Ierīces vienība."
+        },
+        "state": {
+          "name": "valsts",
+          "description": "Stāvoklis, kas jānosūta uz ierīci."
+        },
+        "all": {
+          "name": "Visi",
+          "description": "Ja ir nepieciešams iestatīt visu karogu, tas ir jāatbalsta protokolam."
+        },
+        "repeats": {
+          "name": "Atkārtojas",
+          "description": "Reižu skaits, cik ilgi RF komanda ir jānosūta."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "Nosūtiet neapstrādātu RF komandu",
+      "description": "Nosūta neapstrādātu RF komandu.",
+      "fields": {
+        "command": {
+          "name": "Pavēli",
+          "description": "Komanda nosūtīt."
+        },
+        "repeats": {
+          "name": "Atkārtojas",
+          "description": "Reižu skaits, cik ilgi RF komanda ir jānosūta."
+        }
+      }
+    }
+  }
+}

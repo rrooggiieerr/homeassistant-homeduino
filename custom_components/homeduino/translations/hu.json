@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Az eszköz már konfigurálva van"
+    },
+    "error": {
+      "cannot_connect": "Nem sikerült csatlakozni",
+      "nonexisting_serial_port": "Serial poort nem létezik",
+      "unknown": "Váratlan hiba"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "Homeduino adó-vevő",
+          "setup_rf_device": "RF eszköz"
+        }
+      },
+      "setup_serial": {
+        "title": "Homeduino adó-vevő",
+        "data": {
+          "serial_port": "Soros port",
+          "baud_rate": "Átviteli sebesség",
+          "digital_2": "Digitális IO 2",
+          "digital_3": "Digitális IO 3",
+          "digital_4": "Digitális IO 4",
+          "digital_5": "Digitális IO 5",
+          "digital_6": "Digitális IO 6",
+          "digital_7": "Digitális IO 7",
+          "digital_8": "Digitális IO 8",
+          "digital_9": "Digitális IO 9",
+          "digital_10": "Digitális IO 10",
+          "digital_11": "Digitális IO 11",
+          "digital_12": "Digitális IO 12",
+          "digital_13": "Digitális IO 13",
+          "analog_0": "Engedélyezze a 0 analóg bemenetet",
+          "analog_1": "Engedélyezze az 1. analóg bemenetet",
+          "analog_2": "Engedélyezze az analóg bemenetet 2",
+          "analog_3": "Engedélyezze az analóg bemenetet 3",
+          "analog_4": "Engedélyezze az analóg bemenetet 4",
+          "analog_5": "Engedélyezze az analóg bemenetet 5",
+          "analog_6": "Engedélyezze az analóg bemenetet 6",
+          "analog_7": "Engedélyezze az analóg bemenetet 7"
+        },
+        "data_description": {
+          "serial_port": "A soros port, amelyhez a Homeduino adó-vevő csatlakozik.",
+          "baud_rate": "A Homeduino adó-vevő konfigurált adatátviteli sebessége."
+        }
+      },
+      "setup_rf_device": {
+        "title": "RF eszköz",
+        "data": {
+          "rf_id": "Eszközazonosító",
+          "rf_protocol": "Jegyzőkönyv",
+          "rf_unit": "Készülék egység",
+          "rf_id_ignore_all": "Figyelmen kívül hagyja az összeset"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Engedélyezze, ha az RF eszköz figyelmen kívül hagyja az RF távirányítókon gyakran megtalálható all/master gombot."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "Homeduino adó-vevő opciók",
+        "data": {
+          "digital_2": "Digitális IO 2",
+          "digital_3": "Digitális IO 3",
+          "digital_4": "Digitális IO 4",
+          "digital_5": "Digitális IO 5",
+          "digital_6": "Digitális IO 6",
+          "digital_7": "Digitális IO 7",
+          "digital_8": "Digitális IO 8",
+          "digital_9": "Digitális IO 9",
+          "digital_10": "Digitális IO 10",
+          "digital_11": "Digitális IO 11",
+          "digital_12": "Digitális IO 12",
+          "digital_13": "Digitális IO 13",
+          "analog_0": "Engedélyezze a 0 analóg bemenetet",
+          "analog_1": "Engedélyezze az 1. analóg bemenetet",
+          "analog_2": "Engedélyezze az analóg bemenetet 2",
+          "analog_3": "Engedélyezze az analóg bemenetet 3",
+          "analog_4": "Engedélyezze az analóg bemenetet 4",
+          "analog_5": "Engedélyezze az analóg bemenetet 5",
+          "analog_6": "Engedélyezze az analóg bemenetet 6",
+          "analog_7": "Engedélyezze az analóg bemenetet 7"
+        }
+      },
+      "rf_device": {
+        "title": "Homeduino RF eszköz opciók",
+        "data": {
+          "rf_id_ignore_all": "Figyelmen kívül hagyja az összeset",
+          "rf_repeats": "Az RF ismétlődik"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Engedélyezze, ha az RF eszköz figyelmen kívül hagyja az RF távirányítókon gyakran megtalálható all/master gombot.",
+          "rf_repeats": "Ahányszor meg kell ismételni az RF jelet."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "Homeduino adó-vevő",
+        "rf_device": "Homeduino RF eszköz"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "Nincs csatlakoztatva",
+        "rf_receive": "RF vétel",
+        "rf_send": "RF Send",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "1 vezetékes busz",
+        "digital_input": "Digitális bemenet",
+        "digital_output": "Digitális kimenet",
+        "pwm_output": "PWM kimenet"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Digitális bemenet {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analóg bemenet {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} hőmérséklet"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Páratartalom"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} hőmérséklet"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Páratartalom"
+      },
+      "wind_gust": {
+        "name": "Széllökés"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "Kapcsoló {unit}"
+      },
+      "digital_output": {
+        "name": "Digitális kimenet {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM kimenet {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Fény {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "Parancs küldése",
+      "description": "Parancsot küld a Homeduinónak.",
+      "fields": {
+        "device_id": {
+          "name": "Eszköz",
+          "description": "A Homeduino adó-vevő, amelyre a parancsot el kell küldeni."
+        },
+        "command": {
+          "name": "Parancs",
+          "description": "Küldendő parancs."
+        }
+      }
+    },
+    "rf_send": {
+      "name": "RF parancs küldése",
+      "description": "RF parancsot küld.",
+      "fields": {
+        "protocol": {
+          "name": "Jegyzőkönyv",
+          "description": "A használandó protokoll."
+        },
+        "id": {
+          "name": "ID",
+          "description": "Eszközazonosító."
+        },
+        "unit": {
+          "name": "Egység",
+          "description": "Készülékegység."
+        },
+        "state": {
+          "name": "Állami",
+          "description": "Az eszközre küldendő állapot."
+        },
+        "all": {
+          "name": "Minden",
+          "description": "Ha az összes jelzőt be kell állítani, akkor a protokollnak támogatnia kell."
+        },
+        "repeats": {
+          "name": "Ismétlődik",
+          "description": "Az RF parancs elküldésének időtartama."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "Nyers RF parancs küldése",
+      "description": "Nyers RF parancsot küld.",
+      "fields": {
+        "command": {
+          "name": "Parancs",
+          "description": "Küldendő parancs."
+        },
+        "repeats": {
+          "name": "Ismétlődik",
+          "description": "Az RF parancs elküldésének időtartama."
+        }
+      }
+    }
+  }
+}

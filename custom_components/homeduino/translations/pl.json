@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Urządzenie jest już skonfigurowane"
+    },
+    "error": {
+      "cannot_connect": "Nie udało się połączyć",
+      "nonexisting_serial_port": "Port szeregowy nie istnieje",
+      "unknown": "Nieoczekiwany błąd"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "Transceiver Homeduino",
+          "setup_rf_device": "Urządzenie RF"
+        }
+      },
+      "setup_serial": {
+        "title": "Transceiver Homeduino",
+        "data": {
+          "serial_port": "Port szeregowy",
+          "baud_rate": "Szybkość transmisji",
+          "digital_2": "Cyfrowe wejście/wyjście 2",
+          "digital_3": "Cyfrowe wejście/wyjście 3",
+          "digital_4": "Cyfrowe wejście/wyjście 4",
+          "digital_5": "Cyfrowe wejście/wyjście 5",
+          "digital_6": "Cyfrowe wejście/wyjście 6",
+          "digital_7": "Cyfrowe wejście/wyjście 7",
+          "digital_8": "Cyfrowe wejście/wyjście 8",
+          "digital_9": "Cyfrowe wejście/wyjście 9",
+          "digital_10": "Cyfrowe wejście/wyjście 10",
+          "digital_11": "Cyfrowe wejście/wyjście 11",
+          "digital_12": "Cyfrowe wejście/wyjście 12",
+          "digital_13": "Cyfrowe wejście/wyjście 13",
+          "analog_0": "Włącz wejście analogowe 0",
+          "analog_1": "Włącz wejście analogowe 1",
+          "analog_2": "Włącz wejście analogowe 2",
+          "analog_3": "Włącz wejście analogowe 3",
+          "analog_4": "Włącz wejście analogowe 4",
+          "analog_5": "Włącz wejście analogowe 5",
+          "analog_6": "Włącz wejście analogowe 6",
+          "analog_7": "Włącz wejście analogowe 7"
+        },
+        "data_description": {
+          "serial_port": "Port szeregowy, do którego podłączony jest nadajnik-odbiornik Homeduino.",
+          "baud_rate": "Skonfigurowana szybkość transmisji Twojego nadajnika-odbiornika Homeduino."
+        }
+      },
+      "setup_rf_device": {
+        "title": "Urządzenie RF",
+        "data": {
+          "rf_id": "Identyfikator urządzenia",
+          "rf_protocol": "Protokół",
+          "rf_unit": "Jednostka urządzenia",
+          "rf_id_ignore_all": "Ignoruj ​​wszystko"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Włącz, gdy urządzenie RF ignoruje przycisk wszystko/główny, często spotykany na pilotach RF."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "Opcje nadajnika-odbiornika Homeduino",
+        "data": {
+          "digital_2": "Cyfrowe wejście/wyjście 2",
+          "digital_3": "Cyfrowe wejście/wyjście 3",
+          "digital_4": "Cyfrowe wejście/wyjście 4",
+          "digital_5": "Cyfrowe wejście/wyjście 5",
+          "digital_6": "Cyfrowe wejście/wyjście 6",
+          "digital_7": "Cyfrowe wejście/wyjście 7",
+          "digital_8": "Cyfrowe wejście/wyjście 8",
+          "digital_9": "Cyfrowe wejście/wyjście 9",
+          "digital_10": "Cyfrowe wejście/wyjście 10",
+          "digital_11": "Cyfrowe wejście/wyjście 11",
+          "digital_12": "Cyfrowe wejście/wyjście 12",
+          "digital_13": "Cyfrowe wejście/wyjście 13",
+          "analog_0": "Włącz wejście analogowe 0",
+          "analog_1": "Włącz wejście analogowe 1",
+          "analog_2": "Włącz wejście analogowe 2",
+          "analog_3": "Włącz wejście analogowe 3",
+          "analog_4": "Włącz wejście analogowe 4",
+          "analog_5": "Włącz wejście analogowe 5",
+          "analog_6": "Włącz wejście analogowe 6",
+          "analog_7": "Włącz wejście analogowe 7"
+        }
+      },
+      "rf_device": {
+        "title": "Opcje urządzenia Homeduino RF",
+        "data": {
+          "rf_id_ignore_all": "Ignoruj ​​wszystko",
+          "rf_repeats": "RF się powtarza"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Włącz, gdy urządzenie RF ignoruje przycisk wszystko/główny, często spotykany na pilotach RF.",
+          "rf_repeats": "Liczba powtórzeń sygnału RF."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "Transceiver Homeduino",
+        "rf_device": "Urządzenie RF Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "Brak połączenia",
+        "rf_receive": "Odbiór RF",
+        "rf_send": "Wyślij RF",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "Magistrala 1-przewodowa",
+        "digital_input": "Wejście cyfrowe",
+        "digital_output": "Wyjście cyfrowe",
+        "pwm_output": "Wyjście PWM"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Wejście cyfrowe {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Wejście analogowe {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Temperatura"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Wilgotność"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Temperatura"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Wilgotność"
+      },
+      "wind_gust": {
+        "name": "Podmuch wiatru"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "Przełącz {unit}"
+      },
+      "digital_output": {
+        "name": "Wyjście cyfrowe {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "Wyjście PWM {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Światło {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "Wyślij polecenie",
+      "description": "Wysyła polecenie do Homeduino.",
+      "fields": {
+        "device_id": {
+          "name": "Urządzenie",
+          "description": "Transceiver Homeduino, do którego chcesz wysłać polecenie."
+        },
+        "command": {
+          "name": "Rozkaz",
+          "description": "Polecenie wysłania."
+        }
+      }
+    },
+    "rf_send": {
+      "name": "Wyślij polecenie RF",
+      "description": "Wysyła polecenie RF.",
+      "fields": {
+        "protocol": {
+          "name": "Protokół",
+          "description": "Protokół, którego należy używać."
+        },
+        "id": {
+          "name": "ID",
+          "description": "Identyfikator urządzenia."
+        },
+        "unit": {
+          "name": "Jednostka",
+          "description": "Jednostka urządzenia."
+        },
+        "state": {
+          "name": "Państwo",
+          "description": "Stan do wysłania do urządzenia."
+        },
+        "all": {
+          "name": "Wszystko",
+          "description": "Jeśli flaga all musi być ustawiona, musi być obsługiwana przez protokół."
+        },
+        "repeats": {
+          "name": "Powtarza",
+          "description": "Liczba razy, kiedy polecenie RF musi zostać wysłane."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "Wyślij nieprzetworzone polecenie RF",
+      "description": "Wysyła nieprzetworzone polecenie RF.",
+      "fields": {
+        "command": {
+          "name": "Rozkaz",
+          "description": "Polecenie wysłania."
+        },
+        "repeats": {
+          "name": "Powtarza",
+          "description": "Liczba razy, kiedy polecenie RF musi zostać wysłane."
+        }
+      }
+    }
+  }
+}

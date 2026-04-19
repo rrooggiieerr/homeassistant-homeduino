@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "장치가 이미 구성되었습니다."
+    },
+    "error": {
+      "cannot_connect": "연결하지 못했습니다.",
+      "nonexisting_serial_port": "직렬 불량이 존재하지 않습니다.",
+      "unknown": "예상치 못한 오류"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "홈두이노 트랜시버",
+          "setup_rf_device": "RF 장치"
+        }
+      },
+      "setup_serial": {
+        "title": "홈두이노 트랜시버",
+        "data": {
+          "serial_port": "직렬 포트",
+          "baud_rate": "전송 속도",
+          "digital_2": "디지털 IO 2",
+          "digital_3": "디지털 IO 3",
+          "digital_4": "디지털 IO 4",
+          "digital_5": "디지털 IO 5",
+          "digital_6": "디지털 IO 6",
+          "digital_7": "디지털 IO 7",
+          "digital_8": "디지털 IO 8",
+          "digital_9": "디지털 IO 9",
+          "digital_10": "디지털 IO 10",
+          "digital_11": "디지털 IO 11",
+          "digital_12": "디지털 IO 12",
+          "digital_13": "디지털 IO 13",
+          "analog_0": "아날로그 입력 0 활성화",
+          "analog_1": "아날로그 입력 1 활성화",
+          "analog_2": "아날로그 입력 2 활성화",
+          "analog_3": "아날로그 입력 3 활성화",
+          "analog_4": "아날로그 입력 4 활성화",
+          "analog_5": "아날로그 입력 5 활성화",
+          "analog_6": "아날로그 입력 6 활성화",
+          "analog_7": "아날로그 입력 7 활성화"
+        },
+        "data_description": {
+          "serial_port": "Homeduino 트랜시버가 연결된 직렬 포트입니다.",
+          "baud_rate": "Homeduino 트랜시버의 구성된 전송 속도."
+        }
+      },
+      "setup_rf_device": {
+        "title": "RF 장치",
+        "data": {
+          "rf_id": "장치 ID",
+          "rf_protocol": "규약",
+          "rf_unit": "장치 단위",
+          "rf_id_ignore_all": "모두 무시"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "RF 장치가 RF 리모컨에서 자주 발견되는 전체/마스터 버튼을 무시할 때 활성화됩니다."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "Homeduino 트랜시버 옵션",
+        "data": {
+          "digital_2": "디지털 IO 2",
+          "digital_3": "디지털 IO 3",
+          "digital_4": "디지털 IO 4",
+          "digital_5": "디지털 IO 5",
+          "digital_6": "디지털 IO 6",
+          "digital_7": "디지털 IO 7",
+          "digital_8": "디지털 IO 8",
+          "digital_9": "디지털 IO 9",
+          "digital_10": "디지털 IO 10",
+          "digital_11": "디지털 IO 11",
+          "digital_12": "디지털 IO 12",
+          "digital_13": "디지털 IO 13",
+          "analog_0": "아날로그 입력 0 활성화",
+          "analog_1": "아날로그 입력 1 활성화",
+          "analog_2": "아날로그 입력 2 활성화",
+          "analog_3": "아날로그 입력 3 활성화",
+          "analog_4": "아날로그 입력 4 활성화",
+          "analog_5": "아날로그 입력 5 활성화",
+          "analog_6": "아날로그 입력 6 활성화",
+          "analog_7": "아날로그 입력 7 활성화"
+        }
+      },
+      "rf_device": {
+        "title": "Homeduino RF 장치 옵션",
+        "data": {
+          "rf_id_ignore_all": "모두 무시",
+          "rf_repeats": "RF 반복"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "RF 장치가 RF 리모컨에서 자주 발견되는 전체/마스터 버튼을 무시할 때 활성화됩니다.",
+          "rf_repeats": "RF 신호를 반복해야 하는 횟수입니다."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "홈두이노 트랜시버",
+        "rf_device": "홈듀이노 RF 장치"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "연결되지 않음",
+        "rf_receive": "RF 수신",
+        "rf_send": "RF 보내기",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "1선 버스",
+        "digital_input": "디지털 입력",
+        "digital_output": "디지털 출력",
+        "pwm_output": "PWM 출력"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "디지털 입력 {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "아날로그 입력 {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} 온도"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} 습도"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} 온도"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} 습도"
+      },
+      "wind_gust": {
+        "name": "돌풍"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "스위치 {unit}"
+      },
+      "digital_output": {
+        "name": "디지털 출력 {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM 출력 {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "빛 {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "명령 보내기",
+      "description": "홈두이노에 명령을 보냅니다.",
+      "fields": {
+        "device_id": {
+          "name": "장치",
+          "description": "명령을 보낼 Homeduino 트랜시버입니다."
+        },
+        "command": {
+          "name": "명령",
+          "description": "보내라는 명령입니다."
+        }
+      }
+    },
+    "rf_send": {
+      "name": "RF 명령 보내기",
+      "description": "RF 명령을 보냅니다.",
+      "fields": {
+        "protocol": {
+          "name": "규약",
+          "description": "사용할 프로토콜입니다."
+        },
+        "id": {
+          "name": "ID",
+          "description": "장치 ID."
+        },
+        "unit": {
+          "name": "단위",
+          "description": "장치 단위."
+        },
+        "state": {
+          "name": "상태",
+          "description": "장치에 보낼 상태입니다."
+        },
+        "all": {
+          "name": "모두",
+          "description": "모든 플래그를 설정해야 하는 경우 프로토콜에서 지원해야 합니다."
+        },
+        "repeats": {
+          "name": "반복",
+          "description": "RF 명령을 전송해야 하는 시간입니다."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "원시 RF 명령 보내기",
+      "description": "원시 RF 명령을 보냅니다.",
+      "fields": {
+        "command": {
+          "name": "명령",
+          "description": "보내라는 명령입니다."
+        },
+        "repeats": {
+          "name": "반복",
+          "description": "RF 명령을 전송해야 하는 시간입니다."
+        }
+      }
+    }
+  }
+}

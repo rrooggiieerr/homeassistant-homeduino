@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "המכשיר כבר מוגדר"
+    },
+    "error": {
+      "cannot_connect": "החיבור נכשל",
+      "nonexisting_serial_port": "פורט סדרתי לא קיים",
+      "unknown": "שגיאה בלתי צפויה"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "משדר Homeduino",
+          "setup_rf_device": "מכשיר RF"
+        }
+      },
+      "setup_serial": {
+        "title": "משדר Homeduino",
+        "data": {
+          "serial_port": "יציאה טורית",
+          "baud_rate": "שיעור באוד",
+          "digital_2": "IO דיגיטלי 2",
+          "digital_3": "IO דיגיטלי 3",
+          "digital_4": "IO דיגיטלי 4",
+          "digital_5": "IO דיגיטלי 5",
+          "digital_6": "IO דיגיטלי 6",
+          "digital_7": "IO דיגיטלי 7",
+          "digital_8": "IO דיגיטלי 8",
+          "digital_9": "IO דיגיטלי 9",
+          "digital_10": "IO דיגיטלי 10",
+          "digital_11": "IO דיגיטלי 11",
+          "digital_12": "IO דיגיטלי 12",
+          "digital_13": "IO דיגיטלי 13",
+          "analog_0": "אפשר קלט אנלוגי 0",
+          "analog_1": "אפשר קלט אנלוגי 1",
+          "analog_2": "אפשר קלט אנלוגי 2",
+          "analog_3": "אפשר קלט אנלוגי 3",
+          "analog_4": "אפשר קלט אנלוגי 4",
+          "analog_5": "אפשר קלט אנלוגי 5",
+          "analog_6": "אפשר קלט אנלוגי 6",
+          "analog_7": "אפשר קלט אנלוגי 7"
+        },
+        "data_description": {
+          "serial_port": "היציאה הטורית אליה מחובר המשדר ההומדואינו.",
+          "baud_rate": "קצב הביאוד המוגדר של מקלט ה-Homeduino שלך."
+        }
+      },
+      "setup_rf_device": {
+        "title": "מכשיר RF",
+        "data": {
+          "rf_id": "מזהה מכשיר",
+          "rf_protocol": "פּרוֹטוֹקוֹל",
+          "rf_unit": "יחידת מכשיר",
+          "rf_id_ignore_all": "התעלם מהכל"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "הפעל כאשר התקן ה-RF שלך מתעלם מכפתור הכל/מאסטר שנמצא לעתים קרובות בשלטי RF."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "אפשרויות משדר Homeduino",
+        "data": {
+          "digital_2": "IO דיגיטלי 2",
+          "digital_3": "IO דיגיטלי 3",
+          "digital_4": "IO דיגיטלי 4",
+          "digital_5": "IO דיגיטלי 5",
+          "digital_6": "IO דיגיטלי 6",
+          "digital_7": "IO דיגיטלי 7",
+          "digital_8": "IO דיגיטלי 8",
+          "digital_9": "IO דיגיטלי 9",
+          "digital_10": "IO דיגיטלי 10",
+          "digital_11": "IO דיגיטלי 11",
+          "digital_12": "IO דיגיטלי 12",
+          "digital_13": "IO דיגיטלי 13",
+          "analog_0": "אפשר קלט אנלוגי 0",
+          "analog_1": "אפשר קלט אנלוגי 1",
+          "analog_2": "אפשר קלט אנלוגי 2",
+          "analog_3": "אפשר קלט אנלוגי 3",
+          "analog_4": "אפשר קלט אנלוגי 4",
+          "analog_5": "אפשר קלט אנלוגי 5",
+          "analog_6": "אפשר קלט אנלוגי 6",
+          "analog_7": "אפשר קלט אנלוגי 7"
+        }
+      },
+      "rf_device": {
+        "title": "אפשרויות התקן RF של Homeduino",
+        "data": {
+          "rf_id_ignore_all": "התעלם מהכל",
+          "rf_repeats": "RF חוזר"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "הפעל כאשר התקן ה-RF שלך מתעלם מכפתור הכל/מאסטר שנמצא לעתים קרובות בשלטי RF.",
+          "rf_repeats": "מספר הפעמים שצריך לחזור על אות ה-RF."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "משדר Homeduino",
+        "rf_device": "מכשיר RF Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "לא מחובר",
+        "rf_receive": "RF קליטה",
+        "rf_send": "שלח RF",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "אוטובוס 1 חוטי",
+        "digital_input": "קלט דיגיטלי",
+        "digital_output": "פלט דיגיטלי",
+        "pwm_output": "פלט PWM"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "קלט דיגיטלי {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "קלט אנלוגי {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "טמפרטורת DHT11 {digital_io}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} לחות"
+      },
+      "dht22_temperature": {
+        "name": "טמפרטורת DHT22 {digital_io}"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} לחות"
+      },
+      "wind_gust": {
+        "name": "משב רוח"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "החלף {unit}"
+      },
+      "digital_output": {
+        "name": "פלט דיגיטלי {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "פלט PWM {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "אור {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "שלח פקודה",
+      "description": "שולח פקודה להומדואינו.",
+      "fields": {
+        "device_id": {
+          "name": "הֶתקֵן",
+          "description": "מקלט המשדר Homeduino לשלוח אליו את הפקודה."
+        },
+        "command": {
+          "name": "פְּקוּדָה",
+          "description": "פקודה לשלוח."
+        }
+      }
+    },
+    "rf_send": {
+      "name": "שלח פקודת RF",
+      "description": "שולח פקודת RF.",
+      "fields": {
+        "protocol": {
+          "name": "פּרוֹטוֹקוֹל",
+          "description": "הפרוטוקול לשימוש."
+        },
+        "id": {
+          "name": "תְעוּדַת זֶהוּת",
+          "description": "מזהה מכשיר."
+        },
+        "unit": {
+          "name": "יְחִידָה",
+          "description": "יחידת מכשיר."
+        },
+        "state": {
+          "name": "מְדִינָה",
+          "description": "המדינה לשלוח למכשיר."
+        },
+        "all": {
+          "name": "כֹּל",
+          "description": "אם צריך להגדיר את הדגל הכל, צריך להיות נתמך על ידי הפרוטוקול."
+        },
+        "repeats": {
+          "name": "חוזר",
+          "description": "מספר הפעמים שפקודת ה-RF צריכה להישלח."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "שלח פקודת RF גולמית",
+      "description": "שולח פקודת RF גולמית.",
+      "fields": {
+        "command": {
+          "name": "פְּקוּדָה",
+          "description": "פקודה לשלוח."
+        },
+        "repeats": {
+          "name": "חוזר",
+          "description": "מספר הפעמים שפקודת ה-RF צריכה להישלח."
+        }
+      }
+    }
+  }
+}

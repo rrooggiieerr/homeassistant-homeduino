@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Enheden er allerede konfigureret"
+    },
+    "error": {
+      "cannot_connect": "Kunne ikke oprette forbindelse",
+      "nonexisting_serial_port": "Seriel poort findes ikke",
+      "unknown": "Uventet fejl"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "Homeduino transceiver",
+          "setup_rf_device": "RF-enhed"
+        }
+      },
+      "setup_serial": {
+        "title": "Homeduino transceiver",
+        "data": {
+          "serial_port": "Seriel port",
+          "baud_rate": "Baud rate",
+          "digital_2": "Digital IO 2",
+          "digital_3": "Digital IO 3",
+          "digital_4": "Digital IO 4",
+          "digital_5": "Digital IO 5",
+          "digital_6": "Digital IO 6",
+          "digital_7": "Digital IO 7",
+          "digital_8": "Digital IO 8",
+          "digital_9": "Digital IO 9",
+          "digital_10": "Digital IO 10",
+          "digital_11": "Digital IO 11",
+          "digital_12": "Digital IO 12",
+          "digital_13": "Digital IO 13",
+          "analog_0": "Aktiver analog indgang 0",
+          "analog_1": "Aktiver analog indgang 1",
+          "analog_2": "Aktiver analog indgang 2",
+          "analog_3": "Aktiver analog indgang 3",
+          "analog_4": "Aktiver analog indgang 4",
+          "analog_5": "Aktiver analog indgang 5",
+          "analog_6": "Aktiver analog indgang 6",
+          "analog_7": "Aktiver analog indgang 7"
+        },
+        "data_description": {
+          "serial_port": "Den serielle port din Homeduino Transceiver er tilsluttet.",
+          "baud_rate": "Den konfigurerede baudrate for din Homeduino Transceiver."
+        }
+      },
+      "setup_rf_device": {
+        "title": "RF-enhed",
+        "data": {
+          "rf_id": "Enheds-id",
+          "rf_protocol": "Protokol",
+          "rf_unit": "Enhedsenhed",
+          "rf_id_ignore_all": "Ignorer alle"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktiver, når din RF-enhed ignorerer alle/master-knappen, der ofte findes på RF-fjernbetjeninger."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "Homeduino Transceiver muligheder",
+        "data": {
+          "digital_2": "Digital IO 2",
+          "digital_3": "Digital IO 3",
+          "digital_4": "Digital IO 4",
+          "digital_5": "Digital IO 5",
+          "digital_6": "Digital IO 6",
+          "digital_7": "Digital IO 7",
+          "digital_8": "Digital IO 8",
+          "digital_9": "Digital IO 9",
+          "digital_10": "Digital IO 10",
+          "digital_11": "Digital IO 11",
+          "digital_12": "Digital IO 12",
+          "digital_13": "Digital IO 13",
+          "analog_0": "Aktiver analog indgang 0",
+          "analog_1": "Aktiver analog indgang 1",
+          "analog_2": "Aktiver analog indgang 2",
+          "analog_3": "Aktiver analog indgang 3",
+          "analog_4": "Aktiver analog indgang 4",
+          "analog_5": "Aktiver analog indgang 5",
+          "analog_6": "Aktiver analog indgang 6",
+          "analog_7": "Aktiver analog indgang 7"
+        }
+      },
+      "rf_device": {
+        "title": "Homeduino RF-enhedsmuligheder",
+        "data": {
+          "rf_id_ignore_all": "Ignorer alle",
+          "rf_repeats": "RF gentager sig"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktiver, når din RF-enhed ignorerer alle/master-knappen, der ofte findes på RF-fjernbetjeninger.",
+          "rf_repeats": "Antallet af gange RF-signalet skal gentages."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "Homeduino transceiver",
+        "rf_device": "Homeduino RF-enhed"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "Ikke forbundet",
+        "rf_receive": "RF-modtagelse",
+        "rf_send": "RF Send",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "1-leder bus",
+        "digital_input": "Digital indgang",
+        "digital_output": "Digital udgang",
+        "pwm_output": "PWM udgang"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Digital indgang {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analog input {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} temperatur"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Fugtighed"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} temperatur"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Fugtighed"
+      },
+      "wind_gust": {
+        "name": "Vindstød"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "Skift {unit}"
+      },
+      "digital_output": {
+        "name": "Digitalt output {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM-udgang {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Lys {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "Send kommando",
+      "description": "Sender en kommando til Homeduino.",
+      "fields": {
+        "device_id": {
+          "name": "Enhed",
+          "description": "Homeduino-transceiveren at sende kommandoen til."
+        },
+        "command": {
+          "name": "Kommando",
+          "description": "En kommando til at sende."
+        }
+      }
+    },
+    "rf_send": {
+      "name": "Send RF-kommando",
+      "description": "Sender en RF-kommando.",
+      "fields": {
+        "protocol": {
+          "name": "Protokol",
+          "description": "Protokollen der skal bruges."
+        },
+        "id": {
+          "name": "ID",
+          "description": "Enheds-id."
+        },
+        "unit": {
+          "name": "Enhed",
+          "description": "Enhedsenhed."
+        },
+        "state": {
+          "name": "Tilstand",
+          "description": "Den tilstand, der skal sendes til enheden."
+        },
+        "all": {
+          "name": "Alle",
+          "description": "Hvis alle flag skal indstilles, skal det understøttes af protokollen."
+        },
+        "repeats": {
+          "name": "Gentager",
+          "description": "Det antal gange, RF-kommandoen skal sendes."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "Send rå RF-kommando",
+      "description": "Sender en rå RF-kommando.",
+      "fields": {
+        "command": {
+          "name": "Kommando",
+          "description": "En kommando til at sende."
+        },
+        "repeats": {
+          "name": "Gentager",
+          "description": "Det antal gange, RF-kommandoen skal sendes."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Uređaj je već konfiguriran"
+    },
+    "error": {
+      "cannot_connect": "Povezivanje nije uspjelo",
+      "nonexisting_serial_port": "Serijski port ne postoji",
+      "unknown": "Neočekivana pogreška"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "Homeduino primopredajnik",
+          "setup_rf_device": "RF uređaj"
+        }
+      },
+      "setup_serial": {
+        "title": "Homeduino primopredajnik",
+        "data": {
+          "serial_port": "Serijski priključak",
+          "baud_rate": "Brzina prijenosa podataka",
+          "digital_2": "Digitalni IO 2",
+          "digital_3": "Digitalni IO 3",
+          "digital_4": "Digitalni IO 4",
+          "digital_5": "Digitalni IO 5",
+          "digital_6": "Digitalni IO 6",
+          "digital_7": "Digitalni IO 7",
+          "digital_8": "Digitalni IO 8",
+          "digital_9": "Digitalni IO 9",
+          "digital_10": "Digitalni IO 10",
+          "digital_11": "Digitalni IO 11",
+          "digital_12": "Digitalni IO 12",
+          "digital_13": "Digitalni IO 13",
+          "analog_0": "Omogući analogni ulaz 0",
+          "analog_1": "Omogući analogni ulaz 1",
+          "analog_2": "Omogući analogni ulaz 2",
+          "analog_3": "Omogući analogni ulaz 3",
+          "analog_4": "Omogući analogni ulaz 4",
+          "analog_5": "Omogući analogni ulaz 5",
+          "analog_6": "Omogući analogni ulaz 6",
+          "analog_7": "Omogući analogni ulaz 7"
+        },
+        "data_description": {
+          "serial_port": "Serijski priključak na koji je spojen vaš Homeduino primopredajnik.",
+          "baud_rate": "Konfigurirana brzina prijenosa podataka vašeg Homeduino primopredajnika."
+        }
+      },
+      "setup_rf_device": {
+        "title": "RF uređaj",
+        "data": {
+          "rf_id": "ID uređaja",
+          "rf_protocol": "Protokol",
+          "rf_unit": "Jedinica uređaja",
+          "rf_id_ignore_all": "Ignoriraj sve"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Omogućite kada vaš RF uređaj ignorira sve/glavni gumb koji se često nalazi na RF daljinskim upravljačima."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "Opcije primopredajnika Homeduino",
+        "data": {
+          "digital_2": "Digitalni IO 2",
+          "digital_3": "Digitalni IO 3",
+          "digital_4": "Digitalni IO 4",
+          "digital_5": "Digitalni IO 5",
+          "digital_6": "Digitalni IO 6",
+          "digital_7": "Digitalni IO 7",
+          "digital_8": "Digitalni IO 8",
+          "digital_9": "Digitalni IO 9",
+          "digital_10": "Digitalni IO 10",
+          "digital_11": "Digitalni IO 11",
+          "digital_12": "Digitalni IO 12",
+          "digital_13": "Digitalni IO 13",
+          "analog_0": "Omogući analogni ulaz 0",
+          "analog_1": "Omogući analogni ulaz 1",
+          "analog_2": "Omogući analogni ulaz 2",
+          "analog_3": "Omogući analogni ulaz 3",
+          "analog_4": "Omogući analogni ulaz 4",
+          "analog_5": "Omogući analogni ulaz 5",
+          "analog_6": "Omogući analogni ulaz 6",
+          "analog_7": "Omogući analogni ulaz 7"
+        }
+      },
+      "rf_device": {
+        "title": "Opcije Homeduino RF uređaja",
+        "data": {
+          "rf_id_ignore_all": "Ignoriraj sve",
+          "rf_repeats": "RF se ponavlja"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Omogućite kada vaš RF uređaj ignorira sve/glavni gumb koji se često nalazi na RF daljinskim upravljačima.",
+          "rf_repeats": "Broj ponavljanja RF signala."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "Homeduino primopredajnik",
+        "rf_device": "Homeduino RF uređaj"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "Nije povezano",
+        "rf_receive": "RF prijem",
+        "rf_send": "RF slanje",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "1-žična sabirnica",
+        "digital_input": "Digitalni ulaz",
+        "digital_output": "Digitalni izlaz",
+        "pwm_output": "PWM izlaz"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Digitalni ulaz {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analogni ulaz {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Temperatura"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Vlažnost"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Temperatura"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Vlažnost"
+      },
+      "wind_gust": {
+        "name": "Udar vjetra"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "Promijeni {unit}"
+      },
+      "digital_output": {
+        "name": "Digitalni izlaz {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM izlaz {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Svjetlo {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "Pošalji naredbu",
+      "description": "Šalje naredbu Homeduinu.",
+      "fields": {
+        "device_id": {
+          "name": "Uređaj",
+          "description": "Homeduino primopredajnik na koji treba poslati naredbu."
+        },
+        "command": {
+          "name": "Naredba",
+          "description": "Naredba za slanje."
+        }
+      }
+    },
+    "rf_send": {
+      "name": "Pošalji RF naredbu",
+      "description": "Šalje RF naredbu.",
+      "fields": {
+        "protocol": {
+          "name": "Protokol",
+          "description": "Protokol za korištenje."
+        },
+        "id": {
+          "name": "ID",
+          "description": "ID uređaja."
+        },
+        "unit": {
+          "name": "Jedinica",
+          "description": "Jedinica uređaja."
+        },
+        "state": {
+          "name": "Stanje",
+          "description": "Stanje za slanje na uređaj."
+        },
+        "all": {
+          "name": "Sve",
+          "description": "Ako je potrebno postaviti zastavu sve, mora biti podržana od strane protokola."
+        },
+        "repeats": {
+          "name": "Ponavlja se",
+          "description": "Broj vremena koje RF naredba treba poslati."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "Pošalji neobrađenu RF naredbu",
+      "description": "Šalje neobrađenu RF naredbu.",
+      "fields": {
+        "command": {
+          "name": "Naredba",
+          "description": "Naredba za slanje."
+        },
+        "repeats": {
+          "name": "Ponavlja se",
+          "description": "Broj vremena koje RF naredba treba poslati."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "El dispositivo ya está configurado"
+    },
+    "error": {
+      "cannot_connect": "No se pudo conectar",
+      "nonexisting_serial_port": "El puerto serial no existe",
+      "unknown": "error inesperado"
+    },
+    "step": {
+      "user": {
+        "menu_options": {
+          "setup_transceiver": "Transceptor Homeduino",
+          "setup_rf_device": "Dispositivo de radiofrecuencia"
+        }
+      },
+      "setup_serial": {
+        "title": "Transceptor Homeduino",
+        "data": {
+          "serial_port": "Puerto serie",
+          "baud_rate": "Velocidad de baudios",
+          "digital_2": "E/S digitales 2",
+          "digital_3": "E/S digitales 3",
+          "digital_4": "E/S digitales 4",
+          "digital_5": "E/S digitales 5",
+          "digital_6": "E/S digitales 6",
+          "digital_7": "E/S digitales 7",
+          "digital_8": "E/S digitales 8",
+          "digital_9": "E/S digitales 9",
+          "digital_10": "E/S digitales 10",
+          "digital_11": "E/S digitales 11",
+          "digital_12": "E/S digitales 12",
+          "digital_13": "E/S digitales 13",
+          "analog_0": "Habilitar entrada analógica 0",
+          "analog_1": "Habilitar entrada analógica 1",
+          "analog_2": "Habilitar entrada analógica 2",
+          "analog_3": "Habilitar entrada analógica 3",
+          "analog_4": "Habilitar entrada analógica 4",
+          "analog_5": "Habilitar entrada analógica 5",
+          "analog_6": "Habilitar entrada analógica 6",
+          "analog_7": "Habilitar entrada analógica 7"
+        },
+        "data_description": {
+          "serial_port": "El puerto serie al que está conectado su transceptor Homeduino.",
+          "baud_rate": "La velocidad en baudios configurada de su transceptor Homeduino."
+        }
+      },
+      "setup_rf_device": {
+        "title": "Dispositivo de radiofrecuencia",
+        "data": {
+          "rf_id": "ID del dispositivo",
+          "rf_protocol": "Protocolo",
+          "rf_unit": "Unidad de dispositivo",
+          "rf_id_ignore_all": "ignorar todo"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Habilítelo cuando su dispositivo RF ignore el botón todo/maestro que a menudo se encuentra en los controles remotos RF."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "transceiver": {
+        "title": "Opciones del transceptor Homeduino",
+        "data": {
+          "digital_2": "E/S digitales 2",
+          "digital_3": "E/S digitales 3",
+          "digital_4": "E/S digitales 4",
+          "digital_5": "E/S digitales 5",
+          "digital_6": "E/S digitales 6",
+          "digital_7": "E/S digitales 7",
+          "digital_8": "E/S digitales 8",
+          "digital_9": "E/S digitales 9",
+          "digital_10": "E/S digitales 10",
+          "digital_11": "E/S digitales 11",
+          "digital_12": "E/S digitales 12",
+          "digital_13": "E/S digitales 13",
+          "analog_0": "Habilitar entrada analógica 0",
+          "analog_1": "Habilitar entrada analógica 1",
+          "analog_2": "Habilitar entrada analógica 2",
+          "analog_3": "Habilitar entrada analógica 3",
+          "analog_4": "Habilitar entrada analógica 4",
+          "analog_5": "Habilitar entrada analógica 5",
+          "analog_6": "Habilitar entrada analógica 6",
+          "analog_7": "Habilitar entrada analógica 7"
+        }
+      },
+      "rf_device": {
+        "title": "Opciones del dispositivo RF de Homeduino",
+        "data": {
+          "rf_id_ignore_all": "ignorar todo",
+          "rf_repeats": "repeticiones de radiofrecuencia"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Habilítelo cuando su dispositivo RF ignore el botón todo/maestro que a menudo se encuentra en los controles remotos RF.",
+          "rf_repeats": "El número de veces que es necesario repetir la señal de RF."
+        }
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "transceiver": "Transceptor Homeduino",
+        "rf_device": "Dispositivo RF Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "none": "No conectado",
+        "rf_receive": "Recepción RF",
+        "rf_send": "Envío RF",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "1_wire": "Autobús de 1 cable",
+        "digital_input": "Entrada digital",
+        "digital_output": "Salida digital",
+        "pwm_output": "Salida PWM"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Entrada digital {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Entrada analógica {analog_input}"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Temperatura"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Humedad"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Temperatura"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Humedad"
+      },
+      "wind_gust": {
+        "name": "Ráfaga de viento"
+      }
+    },
+    "switch": {
+      "rf_switch": {
+        "name": "Cambiar {unit}"
+      },
+      "digital_output": {
+        "name": "Salida digital {digital_io}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "Salida PWM {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Luz {unit}"
+      }
+    }
+  },
+  "services": {
+    "send": {
+      "name": "enviar comando",
+      "description": "Envía un comando a Homeduino.",
+      "fields": {
+        "device_id": {
+          "name": "Dispositivo",
+          "description": "El transceptor Homeduino al que enviar el comando."
+        },
+        "command": {
+          "name": "Dominio",
+          "description": "Un comando para enviar."
+        }
+      }
+    },
+    "rf_send": {
+      "name": "Enviar comando RF",
+      "description": "Envía un comando RF.",
+      "fields": {
+        "protocol": {
+          "name": "Protocolo",
+          "description": "El protocolo a utilizar."
+        },
+        "id": {
+          "name": "IDENTIFICACIÓN",
+          "description": "Identificación del dispositivo."
+        },
+        "unit": {
+          "name": "Unidad",
+          "description": "Unidad de dispositivo."
+        },
+        "state": {
+          "name": "Estado",
+          "description": "El estado a enviar al dispositivo."
+        },
+        "all": {
+          "name": "Todo",
+          "description": "Si es necesario establecer el indicador de todos, el protocolo debe admitirlo."
+        },
+        "repeats": {
+          "name": "Se repite",
+          "description": "La cantidad de veces que se debe enviar el comando RF."
+        }
+      }
+    },
+    "raw_rf_send": {
+      "name": "Enviar comando RF sin formato",
+      "description": "Envía un comando RF sin formato.",
+      "fields": {
+        "command": {
+          "name": "Dominio",
+          "description": "Un comando para enviar."
+        },
+        "repeats": {
+          "name": "Se repite",
+          "description": "La cantidad de veces que se debe enviar el comando RF."
+        }
+      }
+    }
+  }
+}
