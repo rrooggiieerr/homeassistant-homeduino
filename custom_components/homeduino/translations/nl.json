@@ -17,7 +17,7 @@
           "rf_unit": "Apparaateenheid"
         },
         "data_description": {
-          "rf_id_ignore_all": "Inschakelen wanneer uw RF-apparaat de all/master knop negeert die vaak op RF afstandsbedieningen te vinden is."
+          "rf_id_ignore_all": "Inschakelen wanneer uw RF apparaat de all/master knop negeert die vaak op RF afstandsbedieningen te vinden is."
         },
         "title": "RF Apparaat"
       },
@@ -113,7 +113,7 @@
           "rf_repeats": "RF herhalingen"
         },
         "data_description": {
-          "rf_id_ignore_all": "Inschakelen wanneer uw RF-apparaat de all/master-knop negeert die vaak op RF afstandsbedieningen te vinden is.",
+          "rf_id_ignore_all": "Inschakelen wanneer uw RF apparaat de all/master-knop negeert die vaak op RF afstandsbedieningen te vinden is.",
           "rf_repeats": "Het aantal keren dat het RF signaal moet worden herhaald."
         },
         "title": "Homeduino RF apparaatopties"
@@ -154,15 +154,15 @@
     },
     "digital_io": {
       "options": {
-        "1_wire": "1-draads bus",
+        "1_wire": "1 draads bus",
         "dht11": "DHT11",
         "dht22": "DHT22",
         "digital_input": "Digitale ingang",
         "digital_output": "Digitale uitgang",
         "none": "Niet verbonden",
-        "pwm_output": "PWM-uitvoer",
-        "rf_receive": "RF-ontvangst",
-        "rf_send": "RF-verzending"
+        "pwm_output": "PWM uitgang",
+        "rf_receive": "RF ontvangst",
+        "rf_send": "RF verzending"
       }
     }
   },
@@ -185,7 +185,7 @@
       "description": "Verzendt een RF commando.",
       "fields": {
         "all": {
-          "description": "Als de all-vlag moet worden ingesteld, moet deze door het protocol worden ondersteund.",
+          "description": "Als de all vlag moet worden ingesteld, moet deze door het protocol worden ondersteund.",
           "name": "All"
         },
         "id": {
@@ -197,7 +197,7 @@
           "name": "Protocol"
         },
         "repeats": {
-          "description": "Het aantal keren dat het RF-commando moet worden verzonden.",
+          "description": "Het aantal keren dat het RF commando moet worden verzonden.",
           "name": "Herhalingen"
         },
         "state": {
