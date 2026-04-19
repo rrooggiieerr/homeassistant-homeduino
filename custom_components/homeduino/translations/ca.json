@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "No s'ha pogut connectar",
-      "nonexisting_serial_port": "No existeix el pobre en sèrie",
+      "nonexisting_serial_port": "El port sèrie no existeix",
       "unknown": "Error inesperat"
     },
     "step": {

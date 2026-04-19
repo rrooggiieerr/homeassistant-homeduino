@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Չհաջողվեց միանալ",
-      "nonexisting_serial_port": "Սերիական աղքատություն գոյություն չունի",
+      "nonexisting_serial_port": "Սերիական միացք գոյություն չունի",
       "unknown": "Անսպասելի սխալ"
     },
     "step": {

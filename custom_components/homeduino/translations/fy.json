@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Ferbine mislearre",
-      "nonexisting_serial_port": "Serial poarte bestiet net",
+      "nonexisting_serial_port": "Serial haven bestiet net",
       "unknown": "Unferwachte flater"
     },
     "step": {

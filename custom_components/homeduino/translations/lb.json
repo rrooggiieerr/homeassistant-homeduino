@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Konnt net konnektéieren",
-      "nonexisting_serial_port": "Serial poort existéiert net",
+      "nonexisting_serial_port": "Serial port existéiert net",
       "unknown": "Onerwaarte Feeler"
     },
     "step": {

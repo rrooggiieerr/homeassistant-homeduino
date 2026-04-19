@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Tókst ekki að tengjast",
-      "nonexisting_serial_port": "Serial poort er ekki til",
+      "nonexisting_serial_port": "Raðtengi er ekki til",
       "unknown": "Óvænt villa"
     },
     "step": {

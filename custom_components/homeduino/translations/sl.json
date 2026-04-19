@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Povezava ni uspela",
-      "nonexisting_serial_port": "Serial poort ne obstaja",
+      "nonexisting_serial_port": "Serijska vrata ne obstajajo",
       "unknown": "Nepričakovana napaka"
     },
     "step": {

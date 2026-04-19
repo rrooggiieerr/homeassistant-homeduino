@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "დაკავშირება ვერ მოხერხდა",
-      "nonexisting_serial_port": "სერიული ღარიბი არ არსებობს",
+      "nonexisting_serial_port": "სერიული პორტი არ არსებობს",
       "unknown": "მოულოდნელი შეცდომა"
     },
     "step": {

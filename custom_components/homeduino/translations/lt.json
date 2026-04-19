@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Nepavyko prisijungti",
-      "nonexisting_serial_port": "Serial badt neegzistuoja",
+      "nonexisting_serial_port": "Serijinis prievadas neegzistuoja",
       "unknown": "Netikėta klaida"
     },
     "step": {

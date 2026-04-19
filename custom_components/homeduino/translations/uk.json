@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Не вдалося підключитися",
-      "nonexisting_serial_port": "Serial poor не існує",
+      "nonexisting_serial_port": "Послідовний порт не існує",
       "unknown": "Несподівана помилка"
     },
     "step": {

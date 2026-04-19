@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Falha ao conectar",
-      "nonexisting_serial_port": "Pobret serial não existe",
+      "nonexisting_serial_port": "Porta serial não existe",
       "unknown": "Erro inesperado"
     },
     "step": {

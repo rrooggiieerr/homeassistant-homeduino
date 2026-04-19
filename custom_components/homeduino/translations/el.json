@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Αποτυχία σύνδεσης",
-      "nonexisting_serial_port": "Το σειριακό φτωχό δεν υπάρχει",
+      "nonexisting_serial_port": "Η σειριακή θύρα δεν υπάρχει",
       "unknown": "Απροσδόκητο σφάλμα"
     },
     "step": {

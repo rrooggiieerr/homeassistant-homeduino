@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Lidhja dështoi",
-      "nonexisting_serial_port": "Seriali varfër nuk ekziston",
+      "nonexisting_serial_port": "Porta serike nuk ekziston",
       "unknown": "Gabim i papritur"
     },
     "step": {

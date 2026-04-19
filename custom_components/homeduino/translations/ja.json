@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "接続に失敗しました",
-      "nonexisting_serial_port": "シリアルポートは存在しません",
+      "nonexisting_serial_port": "シリアルポートが存在しません",
       "unknown": "予期しないエラー"
     },
     "step": {

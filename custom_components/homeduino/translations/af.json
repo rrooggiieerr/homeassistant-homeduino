@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Kon nie koppel nie",
-      "nonexisting_serial_port": "Serial poort bestaan ​​nie",
+      "nonexisting_serial_port": "Seriële poort bestaan ​​nie",
       "unknown": "Onverwagte fout"
     },
     "step": {

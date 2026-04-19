@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "اتصال ناموفق بود",
-      "nonexisting_serial_port": "سریال ضعیف وجود ندارد",
+      "nonexisting_serial_port": "پورت سریال وجود ندارد",
       "unknown": "خطای غیرمنتظره"
     },
     "step": {

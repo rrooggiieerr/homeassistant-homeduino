@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Připojení se nezdařilo",
-      "nonexisting_serial_port": "Sériová chudoba neexistuje",
+      "nonexisting_serial_port": "Sériový port neexistuje",
       "unknown": "Neočekávaná chyba"
     },
     "step": {

@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "رابطہ قائم کرنے میں ناکام",
-      "nonexisting_serial_port": "سیریل غریب موجود نہیں ہے۔",
+      "nonexisting_serial_port": "سیریل پورٹ موجود نہیں ہے۔",
       "unknown": "غیر متوقع غلطی"
     },
     "step": {

@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Nu s-a putut conecta",
-      "nonexisting_serial_port": "Serial poort nu există",
+      "nonexisting_serial_port": "Portul serial nu există",
       "unknown": "Eroare neașteptată"
     },
     "step": {

@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Malsukcesis konekti",
-      "nonexisting_serial_port": "Seria malriĉo ne ekzistas",
+      "nonexisting_serial_port": "Seria haveno ne ekzistas",
       "unknown": "Neatendita eraro"
     },
     "step": {

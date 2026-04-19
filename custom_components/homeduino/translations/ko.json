@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "연결하지 못했습니다.",
-      "nonexisting_serial_port": "직렬 불량이 존재하지 않습니다.",
+      "nonexisting_serial_port": "직렬 포트가 존재하지 않습니다.",
       "unknown": "예상치 못한 오류"
     },
     "step": {

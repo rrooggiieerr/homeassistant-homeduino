@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "కనెక్ట్ చేయడంలో విఫలమైంది",
-      "nonexisting_serial_port": "సీరియల్ పూర్ట్ ఉనికిలో లేదు",
+      "nonexisting_serial_port": "సీరియల్ పోర్ట్ ఉనికిలో లేదు",
       "unknown": "ఊహించని లోపం"
     },
     "step": {

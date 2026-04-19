@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Не удалось подключиться",
-      "nonexisting_serial_port": "Серийный порт не существует",
+      "nonexisting_serial_port": "Последовательный порт не существует",
       "unknown": "Неожиданная ошибка"
     },
     "step": {

@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "No se pudo conectar",
-      "nonexisting_serial_port": "El puerto serial no existe",
+      "nonexisting_serial_port": "El puerto serie no existe",
       "unknown": "error inesperado"
     },
     "step": {

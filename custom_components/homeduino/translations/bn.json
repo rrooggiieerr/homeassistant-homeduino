@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "সংযোগ করতে ব্যর্থ হয়েছে",
-      "nonexisting_serial_port": "সিরিয়াল দরিদ্র অস্তিত্ব নেই",
+      "nonexisting_serial_port": "সিরিয়াল পোর্ট বিদ্যমান নেই",
       "unknown": "অপ্রত্যাশিত ত্রুটি"
     },
     "step": {

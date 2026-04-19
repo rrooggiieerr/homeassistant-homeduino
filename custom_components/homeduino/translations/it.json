@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Impossibile connettersi",
-      "nonexisting_serial_port": "Il povero seriale non esiste",
+      "nonexisting_serial_port": "La porta seriale non esiste",
       "unknown": "Errore imprevisto"
     },
     "step": {

@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "فشل الاتصال",
-      "nonexisting_serial_port": "مسلسل الفقراء غير موجود",
+      "nonexisting_serial_port": "المنفذ التسلسلي غير موجود",
       "unknown": "خطأ غير متوقع"
     },
     "step": {

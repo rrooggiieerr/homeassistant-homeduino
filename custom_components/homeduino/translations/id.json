@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Gagal terhubung",
-      "nonexisting_serial_port": "Serial miskin tidak ada",
+      "nonexisting_serial_port": "Port serial tidak ada",
       "unknown": "Kesalahan yang tidak terduga"
     },
     "step": {

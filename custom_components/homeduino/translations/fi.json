@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Yhteyden muodostaminen epäonnistui",
-      "nonexisting_serial_port": "Serial poortia ei ole olemassa",
+      "nonexisting_serial_port": "Sarjaporttia ei ole olemassa",
       "unknown": "Odottamaton virhe"
     },
     "step": {

@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Не успеа да се поврзе",
-      "nonexisting_serial_port": "Сериски лош не постои",
+      "nonexisting_serial_port": "Сериската порта не постои",
       "unknown": "Неочекувана грешка"
     },
     "step": {

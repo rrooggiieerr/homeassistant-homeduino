@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "连接失败",
-      "nonexisting_serial_port": "序列号不存在",
+      "nonexisting_serial_port": "串口不存在",
       "unknown": "意外错误"
     },
     "step": {

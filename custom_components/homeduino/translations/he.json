@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "החיבור נכשל",
-      "nonexisting_serial_port": "פורט סדרתי לא קיים",
+      "nonexisting_serial_port": "יציאה טורית לא קיימת",
       "unknown": "שגיאה בלתי צפויה"
     },
     "step": {

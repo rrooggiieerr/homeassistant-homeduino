@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Verbindung konnte nicht hergestellt werden",
-      "nonexisting_serial_port": "Serielle Schnittstelle nicht vorhanden",
+      "nonexisting_serial_port": "Serieller Port existiert nicht",
       "unknown": "Unerwarteter Fehler"
     },
     "step": {

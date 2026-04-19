@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Neizdevās izveidot savienojumu",
-      "nonexisting_serial_port": "Seriālā poga nepastāv",
+      "nonexisting_serial_port": "Seriālais ports nepastāv",
       "unknown": "Negaidīta kļūda"
     },
     "step": {

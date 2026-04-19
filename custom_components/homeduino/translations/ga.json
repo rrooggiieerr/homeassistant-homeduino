@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Theip ar nascadh",
-      "nonexisting_serial_port": "Níl an sraithuimhir ann",
+      "nonexisting_serial_port": "Níl port srathach ann",
       "unknown": "Earráid gan choinne"
     },
     "step": {

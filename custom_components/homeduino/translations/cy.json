@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Wedi methu cysylltu",
-      "nonexisting_serial_port": "Nid yw serial poort yn bodoli",
+      "nonexisting_serial_port": "Nid yw porthladd cyfresol yn bodoli",
       "unknown": "Gwall annisgwyl"
     },
     "step": {

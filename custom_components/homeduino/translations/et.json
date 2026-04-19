@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Ühenduse loomine ebaõnnestus",
-      "nonexisting_serial_port": "Serial poort ei eksisteeri",
+      "nonexisting_serial_port": "Jadaporti pole olemas",
       "unknown": "Ootamatu viga"
     },
     "step": {

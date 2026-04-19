@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Bağlantı başarısız oldu",
-      "nonexisting_serial_port": "Seri fakir mevcut değil",
+      "nonexisting_serial_port": "Seri bağlantı noktası mevcut değil",
       "unknown": "Beklenmeyen hata"
     },
     "step": {

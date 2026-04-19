@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "இணைக்க முடியவில்லை",
-      "nonexisting_serial_port": "சீரியல் பூர்ட் இல்லை",
+      "nonexisting_serial_port": "தொடர் போர்ட் இல்லை",
       "unknown": "எதிர்பாராத பிழை"
     },
     "step": {

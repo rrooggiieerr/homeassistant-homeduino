@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Kunne ikke koble til",
-      "nonexisting_serial_port": "Seriell port eksisterer ikke",
+      "nonexisting_serial_port": "Seriell port finnes ikke",
       "unknown": "Uventet feil"
     },
     "step": {

@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Неуспешно свързване",
-      "nonexisting_serial_port": "Serial poor не съществува",
+      "nonexisting_serial_port": "Сериен порт не съществува",
       "unknown": "Неочаквана грешка"
     },
     "step": {

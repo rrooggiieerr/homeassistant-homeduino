@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Không thể kết nối",
-      "nonexisting_serial_port": "Lỗi nối tiếp không tồn tại",
+      "nonexisting_serial_port": "Cổng nối tiếp không tồn tại",
       "unknown": "Lỗi không mong muốn"
     },
     "step": {

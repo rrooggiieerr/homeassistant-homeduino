@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "Nem sikerült csatlakozni",
-      "nonexisting_serial_port": "Serial poort nem létezik",
+      "nonexisting_serial_port": "A soros port nem létezik",
       "unknown": "Váratlan hiba"
     },
     "step": {

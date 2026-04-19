@@ -5,7 +5,7 @@
     },
     "error": {
       "cannot_connect": "ไม่สามารถเชื่อมต่อได้",
-      "nonexisting_serial_port": "ไม่มีพอร์ตอนุกรมอยู่",
+      "nonexisting_serial_port": "ไม่มีพอร์ตอนุกรม",
       "unknown": "ข้อผิดพลาดที่ไม่คาดคิด"
     },
     "step": {
