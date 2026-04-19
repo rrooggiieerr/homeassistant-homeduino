@@ -9,62 +9,33 @@
       "unknown": "Kesalahan yang tidak terduga"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Pemancar Homeduino",
-          "setup_rf_device": "Perangkat RF"
-        }
-      },
-      "setup_serial": {
-        "title": "Pemancar Homeduino",
-        "data": {
-          "serial_port": "Pelabuhan seri",
-          "baud_rate": "Tingkat baud",
-          "digital_2": "IO Digital 2",
-          "digital_3": "IO Digital 3",
-          "digital_4": "IO Digital 4",
-          "digital_5": "IO Digital 5",
-          "digital_6": "IO Digital 6",
-          "digital_7": "Digital IO 7",
-          "digital_8": "IO Digital 8",
-          "digital_9": "IO Digital 9",
-          "digital_10": "Digital IO 10",
-          "digital_11": "IO Digital 11",
-          "digital_12": "IO Digital 12",
-          "digital_13": "IO Digital 13",
-          "analog_0": "Aktifkan masukan analog 0",
-          "analog_1": "Aktifkan masukan analog 1",
-          "analog_2": "Aktifkan masukan analog 2",
-          "analog_3": "Aktifkan masukan analog 3",
-          "analog_4": "Aktifkan masukan analog 4",
-          "analog_5": "Aktifkan masukan analog 5",
-          "analog_6": "Aktifkan masukan analog 6",
-          "analog_7": "Aktifkan masukan analog 7"
-        },
-        "data_description": {
-          "serial_port": "Port serial yang terhubung dengan Homeduino Transceiver Anda.",
-          "baud_rate": "Tingkat baud yang dikonfigurasi dari Homeduino Transceiver Anda."
-        }
-      },
       "setup_rf_device": {
-        "title": "Perangkat RF",
         "data": {
           "rf_id": "ID Perangkat",
+          "rf_id_ignore_all": "Abaikan semuanya",
           "rf_protocol": "Protokol",
-          "rf_unit": "Satuan perangkat",
-          "rf_id_ignore_all": "Abaikan semuanya"
+          "rf_unit": "Satuan perangkat"
         },
         "data_description": {
           "rf_id_ignore_all": "Aktifkan ketika Perangkat RF Anda mengabaikan tombol semua/master yang sering ditemukan pada kendali jarak jauh RF."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Opsi Pemancar Homeduino",
+        },
+        "title": "Perangkat RF"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Aktifkan masukan analog 0",
+          "analog_1": "Aktifkan masukan analog 1",
+          "analog_2": "Aktifkan masukan analog 2",
+          "analog_3": "Aktifkan masukan analog 3",
+          "analog_4": "Aktifkan masukan analog 4",
+          "analog_5": "Aktifkan masukan analog 5",
+          "analog_6": "Aktifkan masukan analog 6",
+          "analog_7": "Aktifkan masukan analog 7",
+          "baud_rate": "Tingkat baud",
+          "digital_10": "Digital IO 10",
+          "digital_11": "IO Digital 11",
+          "digital_12": "IO Digital 12",
+          "digital_13": "IO Digital 13",
           "digital_2": "IO Digital 2",
           "digital_3": "IO Digital 3",
           "digital_4": "IO Digital 4",
@@ -73,51 +44,19 @@
           "digital_7": "Digital IO 7",
           "digital_8": "IO Digital 8",
           "digital_9": "IO Digital 9",
-          "digital_10": "Digital IO 10",
-          "digital_11": "IO Digital 11",
-          "digital_12": "IO Digital 12",
-          "digital_13": "IO Digital 13",
-          "analog_0": "Aktifkan masukan analog 0",
-          "analog_1": "Aktifkan masukan analog 1",
-          "analog_2": "Aktifkan masukan analog 2",
-          "analog_3": "Aktifkan masukan analog 3",
-          "analog_4": "Aktifkan masukan analog 4",
-          "analog_5": "Aktifkan masukan analog 5",
-          "analog_6": "Aktifkan masukan analog 6",
-          "analog_7": "Aktifkan masukan analog 7"
-        }
-      },
-      "rf_device": {
-        "title": "Opsi Perangkat RF Homeduino",
-        "data": {
-          "rf_id_ignore_all": "Abaikan semuanya",
-          "rf_repeats": "RF berulang"
+          "serial_port": "Pelabuhan seri"
         },
         "data_description": {
-          "rf_id_ignore_all": "Aktifkan ketika Perangkat RF Anda mengabaikan tombol semua/master yang sering ditemukan pada kendali jarak jauh RF.",
-          "rf_repeats": "Berapa kali sinyal RF perlu diulang."
+          "baud_rate": "Tingkat baud yang dikonfigurasi dari Homeduino Transceiver Anda.",
+          "serial_port": "Port serial yang terhubung dengan Homeduino Transceiver Anda."
+        },
+        "title": "Pemancar Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "Perangkat RF",
+          "setup_transceiver": "Pemancar Homeduino"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Pemancar Homeduino",
-        "rf_device": "Perangkat RF Homeduino"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Tidak Terhubung",
-        "rf_receive": "Penerimaan RF",
-        "rf_send": "Kirim RF",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "Bus 1 Kawat",
-        "digital_input": "Masukan Digital",
-        "digital_output": "Keluaran Digital",
-        "pwm_output": "Keluaran PWM"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Masukan Digital {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Masukan Analog {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} Suhu"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Kelembapan"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} Suhu"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Kelembapan"
-      },
-      "wind_gust": {
-        "name": "Hembusan Angin"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Beralih {unit}"
-      },
-      "digital_output": {
-        "name": "Keluaran Digital {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "Cahaya {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "Keluaran PWM {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "Cahaya {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Masukan Analog {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Kelembapan"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Suhu"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Kelembapan"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Suhu"
+      },
+      "wind_gust": {
+        "name": "Hembusan Angin"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Keluaran Digital {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Beralih {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Abaikan semuanya",
+          "rf_repeats": "RF berulang"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktifkan ketika Perangkat RF Anda mengabaikan tombol semua/master yang sering ditemukan pada kendali jarak jauh RF.",
+          "rf_repeats": "Berapa kali sinyal RF perlu diulang."
+        },
+        "title": "Opsi Perangkat RF Homeduino"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Aktifkan masukan analog 0",
+          "analog_1": "Aktifkan masukan analog 1",
+          "analog_2": "Aktifkan masukan analog 2",
+          "analog_3": "Aktifkan masukan analog 3",
+          "analog_4": "Aktifkan masukan analog 4",
+          "analog_5": "Aktifkan masukan analog 5",
+          "analog_6": "Aktifkan masukan analog 6",
+          "analog_7": "Aktifkan masukan analog 7",
+          "digital_10": "Digital IO 10",
+          "digital_11": "IO Digital 11",
+          "digital_12": "IO Digital 12",
+          "digital_13": "IO Digital 13",
+          "digital_2": "IO Digital 2",
+          "digital_3": "IO Digital 3",
+          "digital_4": "IO Digital 4",
+          "digital_5": "IO Digital 5",
+          "digital_6": "IO Digital 6",
+          "digital_7": "Digital IO 7",
+          "digital_8": "IO Digital 8",
+          "digital_9": "IO Digital 9"
+        },
+        "title": "Opsi Pemancar Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Perangkat RF Homeduino",
+        "transceiver": "Pemancar Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "Bus 1 Kawat",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Masukan Digital",
+        "digital_output": "Keluaran Digital",
+        "none": "Tidak Terhubung",
+        "pwm_output": "Keluaran PWM",
+        "rf_receive": "Penerimaan RF",
+        "rf_send": "Kirim RF"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Kirim perintah",
-      "description": "Mengirimkan perintah ke Homeduino.",
-      "fields": {
-        "device_id": {
-          "name": "Perangkat",
-          "description": "Transceiver Homeduino untuk mengirim perintah."
-        },
-        "command": {
-          "name": "Memerintah",
-          "description": "Perintah untuk dikirim."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Kirim perintah RF",
-      "description": "Mengirimkan perintah RF.",
-      "fields": {
-        "protocol": {
-          "name": "Protokol",
-          "description": "Protokol yang akan digunakan."
-        },
-        "id": {
-          "name": "PENGENAL",
-          "description": "ID Perangkat."
-        },
-        "unit": {
-          "name": "Satuan",
-          "description": "Satuan Perangkat."
-        },
-        "state": {
-          "name": "Negara",
-          "description": "Status yang akan dikirim ke perangkat."
-        },
-        "all": {
-          "name": "Semua",
-          "description": "Jika semua flag perlu diset, perlu didukung oleh protokol."
-        },
-        "repeats": {
-          "name": "Berulang",
-          "description": "Jumlah waktu perintah RF perlu dikirim."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Kirim perintah RF mentah",
       "description": "Mengirimkan perintah RF mentah.",
       "fields": {
         "command": {
-          "name": "Memerintah",
-          "description": "Perintah untuk dikirim."
+          "description": "Perintah untuk dikirim.",
+          "name": "Memerintah"
         },
         "repeats": {
-          "name": "Berulang",
-          "description": "Jumlah waktu perintah RF perlu dikirim."
+          "description": "Jumlah waktu perintah RF perlu dikirim.",
+          "name": "Berulang"
         }
-      }
+      },
+      "name": "Kirim perintah RF mentah"
+    },
+    "rf_send": {
+      "description": "Mengirimkan perintah RF.",
+      "fields": {
+        "all": {
+          "description": "Jika semua flag perlu diset, perlu didukung oleh protokol.",
+          "name": "Semua"
+        },
+        "id": {
+          "description": "ID Perangkat.",
+          "name": "PENGENAL"
+        },
+        "protocol": {
+          "description": "Protokol yang akan digunakan.",
+          "name": "Protokol"
+        },
+        "repeats": {
+          "description": "Jumlah waktu perintah RF perlu dikirim.",
+          "name": "Berulang"
+        },
+        "state": {
+          "description": "Status yang akan dikirim ke perangkat.",
+          "name": "Negara"
+        },
+        "unit": {
+          "description": "Satuan Perangkat.",
+          "name": "Satuan"
+        }
+      },
+      "name": "Kirim perintah RF"
+    },
+    "send": {
+      "description": "Mengirimkan perintah ke Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Perintah untuk dikirim.",
+          "name": "Memerintah"
+        },
+        "device_id": {
+          "description": "Transceiver Homeduino untuk mengirim perintah.",
+          "name": "Perangkat"
+        }
+      },
+      "name": "Kirim perintah"
     }
   }
 }

@@ -9,62 +9,33 @@
       "unknown": "Netikėta klaida"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Homeduino siųstuvas-imtuvas",
-          "setup_rf_device": "RF įrenginys"
-        }
-      },
-      "setup_serial": {
-        "title": "Homeduino siųstuvas-imtuvas",
-        "data": {
-          "serial_port": "Serijinis prievadas",
-          "baud_rate": "Perdavimo greitis",
-          "digital_2": "Skaitmeninis IO 2",
-          "digital_3": "Skaitmeninis IO 3",
-          "digital_4": "Skaitmeninis IO 4",
-          "digital_5": "Skaitmeninis IO 5",
-          "digital_6": "Skaitmeninis IO 6",
-          "digital_7": "Skaitmeninis IO 7",
-          "digital_8": "Skaitmeninis IO 8",
-          "digital_9": "Skaitmeninis IO 9",
-          "digital_10": "Skaitmeninis IO 10",
-          "digital_11": "Skaitmeninis IO 11",
-          "digital_12": "Skaitmeninis IO 12",
-          "digital_13": "Skaitmeninis IO 13",
-          "analog_0": "Įjungti analoginę įvestį 0",
-          "analog_1": "Įjungti analoginę įvestį 1",
-          "analog_2": "Įjungti analoginę įvestį 2",
-          "analog_3": "Įjungti analoginę įvestį 3",
-          "analog_4": "Įjungti analoginę įvestį 4",
-          "analog_5": "Įjungti analoginę įvestį 5",
-          "analog_6": "Įjungti analoginę įvestį 6",
-          "analog_7": "Įjungti analoginę įvestį 7"
-        },
-        "data_description": {
-          "serial_port": "Nuoseklus prievadas, prie kurio prijungtas „Homeduino“ siųstuvas-imtuvas.",
-          "baud_rate": "Sukonfigūruotas „Homeduino“ siųstuvo imtuvo sparta."
-        }
-      },
       "setup_rf_device": {
-        "title": "RF įrenginys",
         "data": {
           "rf_id": "Įrenginio ID",
+          "rf_id_ignore_all": "Ignoruoti visus",
           "rf_protocol": "protokolas",
-          "rf_unit": "Įrenginio vienetas",
-          "rf_id_ignore_all": "Ignoruoti visus"
+          "rf_unit": "Įrenginio vienetas"
         },
         "data_description": {
           "rf_id_ignore_all": "Įjunkite, kai jūsų RF įrenginys nepaiso RF nuotolinio valdymo pultelių dažnai esančio mygtuko viskas / pagrindinis."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Homeduino siųstuvo-imtuvo parinktys",
+        },
+        "title": "RF įrenginys"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Įjungti analoginę įvestį 0",
+          "analog_1": "Įjungti analoginę įvestį 1",
+          "analog_2": "Įjungti analoginę įvestį 2",
+          "analog_3": "Įjungti analoginę įvestį 3",
+          "analog_4": "Įjungti analoginę įvestį 4",
+          "analog_5": "Įjungti analoginę įvestį 5",
+          "analog_6": "Įjungti analoginę įvestį 6",
+          "analog_7": "Įjungti analoginę įvestį 7",
+          "baud_rate": "Perdavimo greitis",
+          "digital_10": "Skaitmeninis IO 10",
+          "digital_11": "Skaitmeninis IO 11",
+          "digital_12": "Skaitmeninis IO 12",
+          "digital_13": "Skaitmeninis IO 13",
           "digital_2": "Skaitmeninis IO 2",
           "digital_3": "Skaitmeninis IO 3",
           "digital_4": "Skaitmeninis IO 4",
@@ -73,51 +44,19 @@
           "digital_7": "Skaitmeninis IO 7",
           "digital_8": "Skaitmeninis IO 8",
           "digital_9": "Skaitmeninis IO 9",
-          "digital_10": "Skaitmeninis IO 10",
-          "digital_11": "Skaitmeninis IO 11",
-          "digital_12": "Skaitmeninis IO 12",
-          "digital_13": "Skaitmeninis IO 13",
-          "analog_0": "Įjungti analoginę įvestį 0",
-          "analog_1": "Įjungti analoginę įvestį 1",
-          "analog_2": "Įjungti analoginę įvestį 2",
-          "analog_3": "Įjungti analoginę įvestį 3",
-          "analog_4": "Įjungti analoginę įvestį 4",
-          "analog_5": "Įjungti analoginę įvestį 5",
-          "analog_6": "Įjungti analoginę įvestį 6",
-          "analog_7": "Įjungti analoginę įvestį 7"
-        }
-      },
-      "rf_device": {
-        "title": "Homeduino RF įrenginio parinktys",
-        "data": {
-          "rf_id_ignore_all": "Ignoruoti visus",
-          "rf_repeats": "RF kartojasi"
+          "serial_port": "Serijinis prievadas"
         },
         "data_description": {
-          "rf_id_ignore_all": "Įjunkite, kai jūsų RF įrenginys nepaiso RF nuotolinio valdymo pultelių dažnai esančio mygtuko viskas / pagrindinis.",
-          "rf_repeats": "Kiek kartų reikia kartoti RF signalą."
+          "baud_rate": "Sukonfigūruotas „Homeduino“ siųstuvo imtuvo sparta.",
+          "serial_port": "Nuoseklus prievadas, prie kurio prijungtas „Homeduino“ siųstuvas-imtuvas."
+        },
+        "title": "Homeduino siųstuvas-imtuvas"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF įrenginys",
+          "setup_transceiver": "Homeduino siųstuvas-imtuvas"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Homeduino siųstuvas-imtuvas",
-        "rf_device": "Homeduino RF įrenginys"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Neprisijungta",
-        "rf_receive": "RF priėmimas",
-        "rf_send": "RF siuntimas",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "1 laidų magistralė",
-        "digital_input": "Skaitmeninis įėjimas",
-        "digital_output": "Skaitmeninė išvestis",
-        "pwm_output": "PWM išvestis"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Skaitmeninė įvestis {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Analoginė įvestis {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} temperatūra"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Drėgmė"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} temperatūra"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Drėgmė"
-      },
-      "wind_gust": {
-        "name": "Vėjo gūsis"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Perjungti {unit}"
-      },
-      "digital_output": {
-        "name": "Skaitmeninė išvestis {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "Šviesa {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "PWM išvestis {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "Šviesa {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Analoginė įvestis {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Drėgmė"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} temperatūra"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Drėgmė"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} temperatūra"
+      },
+      "wind_gust": {
+        "name": "Vėjo gūsis"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Skaitmeninė išvestis {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Perjungti {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ignoruoti visus",
+          "rf_repeats": "RF kartojasi"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Įjunkite, kai jūsų RF įrenginys nepaiso RF nuotolinio valdymo pultelių dažnai esančio mygtuko viskas / pagrindinis.",
+          "rf_repeats": "Kiek kartų reikia kartoti RF signalą."
+        },
+        "title": "Homeduino RF įrenginio parinktys"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Įjungti analoginę įvestį 0",
+          "analog_1": "Įjungti analoginę įvestį 1",
+          "analog_2": "Įjungti analoginę įvestį 2",
+          "analog_3": "Įjungti analoginę įvestį 3",
+          "analog_4": "Įjungti analoginę įvestį 4",
+          "analog_5": "Įjungti analoginę įvestį 5",
+          "analog_6": "Įjungti analoginę įvestį 6",
+          "analog_7": "Įjungti analoginę įvestį 7",
+          "digital_10": "Skaitmeninis IO 10",
+          "digital_11": "Skaitmeninis IO 11",
+          "digital_12": "Skaitmeninis IO 12",
+          "digital_13": "Skaitmeninis IO 13",
+          "digital_2": "Skaitmeninis IO 2",
+          "digital_3": "Skaitmeninis IO 3",
+          "digital_4": "Skaitmeninis IO 4",
+          "digital_5": "Skaitmeninis IO 5",
+          "digital_6": "Skaitmeninis IO 6",
+          "digital_7": "Skaitmeninis IO 7",
+          "digital_8": "Skaitmeninis IO 8",
+          "digital_9": "Skaitmeninis IO 9"
+        },
+        "title": "Homeduino siųstuvo-imtuvo parinktys"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF įrenginys",
+        "transceiver": "Homeduino siųstuvas-imtuvas"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1 laidų magistralė",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Skaitmeninis įėjimas",
+        "digital_output": "Skaitmeninė išvestis",
+        "none": "Neprisijungta",
+        "pwm_output": "PWM išvestis",
+        "rf_receive": "RF priėmimas",
+        "rf_send": "RF siuntimas"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Siųsti komandą",
-      "description": "Siunčia komandą į Homeduino.",
-      "fields": {
-        "device_id": {
-          "name": "Įrenginys",
-          "description": "„Homeduino“ siųstuvas-imtuvas, kuriam reikia siųsti komandą."
-        },
-        "command": {
-          "name": "komandą",
-          "description": "Komanda siųsti."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Siųsti RF komandą",
-      "description": "Siunčia RF komandą.",
-      "fields": {
-        "protocol": {
-          "name": "protokolas",
-          "description": "Naudojamas protokolas."
-        },
-        "id": {
-          "name": "ID",
-          "description": "Įrenginio ID."
-        },
-        "unit": {
-          "name": "Vienetas",
-          "description": "Įrenginio vienetas."
-        },
-        "state": {
-          "name": "valstybė",
-          "description": "Būsena, kurią reikia siųsti į įrenginį."
-        },
-        "all": {
-          "name": "Visi",
-          "description": "Jei reikia nustatyti visų vėliavėlę, turi būti palaikomas protokolas."
-        },
-        "repeats": {
-          "name": "Pasikartoja",
-          "description": "Kiek kartų reikia išsiųsti RF komandą."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Siųsti neapdorotą RF komandą",
       "description": "Siunčia neapdorotą RF komandą.",
       "fields": {
         "command": {
-          "name": "komandą",
-          "description": "Komanda siųsti."
+          "description": "Komanda siųsti.",
+          "name": "komandą"
         },
         "repeats": {
-          "name": "Pasikartoja",
-          "description": "Kiek kartų reikia išsiųsti RF komandą."
+          "description": "Kiek kartų reikia išsiųsti RF komandą.",
+          "name": "Pasikartoja"
         }
-      }
+      },
+      "name": "Siųsti neapdorotą RF komandą"
+    },
+    "rf_send": {
+      "description": "Siunčia RF komandą.",
+      "fields": {
+        "all": {
+          "description": "Jei reikia nustatyti visų vėliavėlę, turi būti palaikomas protokolas.",
+          "name": "Visi"
+        },
+        "id": {
+          "description": "Įrenginio ID.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Naudojamas protokolas.",
+          "name": "protokolas"
+        },
+        "repeats": {
+          "description": "Kiek kartų reikia išsiųsti RF komandą.",
+          "name": "Pasikartoja"
+        },
+        "state": {
+          "description": "Būsena, kurią reikia siųsti į įrenginį.",
+          "name": "valstybė"
+        },
+        "unit": {
+          "description": "Įrenginio vienetas.",
+          "name": "Vienetas"
+        }
+      },
+      "name": "Siųsti RF komandą"
+    },
+    "send": {
+      "description": "Siunčia komandą į Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Komanda siųsti.",
+          "name": "komandą"
+        },
+        "device_id": {
+          "description": "„Homeduino“ siųstuvas-imtuvas, kuriam reikia siųsti komandą.",
+          "name": "Įrenginys"
+        }
+      },
+      "name": "Siųsti komandą"
     }
   }
 }

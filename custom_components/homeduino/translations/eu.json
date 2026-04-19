@@ -9,62 +9,33 @@
       "unknown": "Ustekabeko errorea"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Homeduino Transceptor",
-          "setup_rf_device": "RF Gailua"
-        }
-      },
-      "setup_serial": {
-        "title": "Homeduino Transceptor",
-        "data": {
-          "serial_port": "Serie ataka",
-          "baud_rate": "Baud-abiadura",
-          "digital_2": "IO digitala 2",
-          "digital_3": "IO digitala 3",
-          "digital_4": "IO digitala 4",
-          "digital_5": "IO digitala 5",
-          "digital_6": "IO digitala 6",
-          "digital_7": "IO digitala 7",
-          "digital_8": "IO digitala 8",
-          "digital_9": "IO digitala 9",
-          "digital_10": "IO digitala 10",
-          "digital_11": "IO digitala 11",
-          "digital_12": "IO digitala 12",
-          "digital_13": "IO digitala 13",
-          "analog_0": "Gaitu sarrera analogikoa 0",
-          "analog_1": "Gaitu sarrera analogikoa 1",
-          "analog_2": "Gaitu sarrera analogikoa 2",
-          "analog_3": "Gaitu sarrera analogikoa 3",
-          "analog_4": "Gaitu sarrera analogikoa 4",
-          "analog_5": "Gaitu sarrera analogikoa 5",
-          "analog_6": "Gaitu sarrera analogikoa 6",
-          "analog_7": "Gaitu sarrera analogikoa 7"
-        },
-        "data_description": {
-          "serial_port": "Zure Homeduino Transceiver konektatuta dagoen serie ataka.",
-          "baud_rate": "Zure Homeduino Transceiver-en konfiguratutako baud-tasa."
-        }
-      },
       "setup_rf_device": {
-        "title": "RF Gailua",
         "data": {
           "rf_id": "Gailuaren IDa",
+          "rf_id_ignore_all": "Guztiei jaramonik egin",
           "rf_protocol": "Protokoloa",
-          "rf_unit": "Gailu unitatea",
-          "rf_id_ignore_all": "Guztiei jaramonik egin"
+          "rf_unit": "Gailu unitatea"
         },
         "data_description": {
           "rf_id_ignore_all": "Gaitu zure RF gailuak RF urruneko kontroletan aurkitu ohi den guztia/maisu botoia alde batera uzten duenean."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Homeduino Transceiver aukerak",
+        },
+        "title": "RF Gailua"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Gaitu sarrera analogikoa 0",
+          "analog_1": "Gaitu sarrera analogikoa 1",
+          "analog_2": "Gaitu sarrera analogikoa 2",
+          "analog_3": "Gaitu sarrera analogikoa 3",
+          "analog_4": "Gaitu sarrera analogikoa 4",
+          "analog_5": "Gaitu sarrera analogikoa 5",
+          "analog_6": "Gaitu sarrera analogikoa 6",
+          "analog_7": "Gaitu sarrera analogikoa 7",
+          "baud_rate": "Baud-abiadura",
+          "digital_10": "IO digitala 10",
+          "digital_11": "IO digitala 11",
+          "digital_12": "IO digitala 12",
+          "digital_13": "IO digitala 13",
           "digital_2": "IO digitala 2",
           "digital_3": "IO digitala 3",
           "digital_4": "IO digitala 4",
@@ -73,51 +44,19 @@
           "digital_7": "IO digitala 7",
           "digital_8": "IO digitala 8",
           "digital_9": "IO digitala 9",
-          "digital_10": "IO digitala 10",
-          "digital_11": "IO digitala 11",
-          "digital_12": "IO digitala 12",
-          "digital_13": "IO digitala 13",
-          "analog_0": "Gaitu sarrera analogikoa 0",
-          "analog_1": "Gaitu sarrera analogikoa 1",
-          "analog_2": "Gaitu sarrera analogikoa 2",
-          "analog_3": "Gaitu sarrera analogikoa 3",
-          "analog_4": "Gaitu sarrera analogikoa 4",
-          "analog_5": "Gaitu sarrera analogikoa 5",
-          "analog_6": "Gaitu sarrera analogikoa 6",
-          "analog_7": "Gaitu sarrera analogikoa 7"
-        }
-      },
-      "rf_device": {
-        "title": "Homeduino RF Gailuaren aukerak",
-        "data": {
-          "rf_id_ignore_all": "Guztiei jaramonik egin",
-          "rf_repeats": "RF errepikatzen da"
+          "serial_port": "Serie ataka"
         },
         "data_description": {
-          "rf_id_ignore_all": "Gaitu zure RF gailuak RF urruneko kontroletan aurkitu ohi den guztia/maisu botoia alde batera uzten duenean.",
-          "rf_repeats": "RF seinalea errepikatu behar den aldi kopurua."
+          "baud_rate": "Zure Homeduino Transceiver-en konfiguratutako baud-tasa.",
+          "serial_port": "Zure Homeduino Transceiver konektatuta dagoen serie ataka."
+        },
+        "title": "Homeduino Transceptor"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF Gailua",
+          "setup_transceiver": "Homeduino Transceptor"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Homeduino Transceptor",
-        "rf_device": "Homeduino RF Gailua"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Ez dago konektatuta",
-        "rf_receive": "RF jaso",
-        "rf_send": "RF Bidali",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "1-Hari Autobusa",
-        "digital_input": "Sarrera digitala",
-        "digital_output": "Irteera digitala",
-        "pwm_output": "PWM irteera"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Sarrera digitala {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Sarrera analogikoa {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} Tenperatura"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Hezetasuna"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} Tenperatura"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Hezetasuna"
-      },
-      "wind_gust": {
-        "name": "Haize-bolada"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Aldatu {unit}"
-      },
-      "digital_output": {
-        "name": "Irteera digitala {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "Argia {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "PWM irteera {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "Argia {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Sarrera analogikoa {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Hezetasuna"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Tenperatura"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Hezetasuna"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Tenperatura"
+      },
+      "wind_gust": {
+        "name": "Haize-bolada"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Irteera digitala {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Aldatu {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Guztiei jaramonik egin",
+          "rf_repeats": "RF errepikatzen da"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Gaitu zure RF gailuak RF urruneko kontroletan aurkitu ohi den guztia/maisu botoia alde batera uzten duenean.",
+          "rf_repeats": "RF seinalea errepikatu behar den aldi kopurua."
+        },
+        "title": "Homeduino RF Gailuaren aukerak"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Gaitu sarrera analogikoa 0",
+          "analog_1": "Gaitu sarrera analogikoa 1",
+          "analog_2": "Gaitu sarrera analogikoa 2",
+          "analog_3": "Gaitu sarrera analogikoa 3",
+          "analog_4": "Gaitu sarrera analogikoa 4",
+          "analog_5": "Gaitu sarrera analogikoa 5",
+          "analog_6": "Gaitu sarrera analogikoa 6",
+          "analog_7": "Gaitu sarrera analogikoa 7",
+          "digital_10": "IO digitala 10",
+          "digital_11": "IO digitala 11",
+          "digital_12": "IO digitala 12",
+          "digital_13": "IO digitala 13",
+          "digital_2": "IO digitala 2",
+          "digital_3": "IO digitala 3",
+          "digital_4": "IO digitala 4",
+          "digital_5": "IO digitala 5",
+          "digital_6": "IO digitala 6",
+          "digital_7": "IO digitala 7",
+          "digital_8": "IO digitala 8",
+          "digital_9": "IO digitala 9"
+        },
+        "title": "Homeduino Transceiver aukerak"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF Gailua",
+        "transceiver": "Homeduino Transceptor"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-Hari Autobusa",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Sarrera digitala",
+        "digital_output": "Irteera digitala",
+        "none": "Ez dago konektatuta",
+        "pwm_output": "PWM irteera",
+        "rf_receive": "RF jaso",
+        "rf_send": "RF Bidali"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Bidali komandoa",
-      "description": "Komando bat bidaltzen dio Homeduinora.",
-      "fields": {
-        "device_id": {
-          "name": "Gailua",
-          "description": "Komandoa bidaltzeko Homeduino transceptor-a."
-        },
-        "command": {
-          "name": "Agindua",
-          "description": "Bidaltzeko komando bat."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Bidali RF komandoa",
-      "description": "RF komando bat bidaltzen du.",
-      "fields": {
-        "protocol": {
-          "name": "Protokoloa",
-          "description": "Erabili beharreko protokoloa."
-        },
-        "id": {
-          "name": "ID",
-          "description": "Gailuaren IDa."
-        },
-        "unit": {
-          "name": "Unitatea",
-          "description": "Gailu Unitatea."
-        },
-        "state": {
-          "name": "Estatua",
-          "description": "Gailura bidali beharreko egoera."
-        },
-        "all": {
-          "name": "Denak",
-          "description": "Bandera guztiak ezarri behar badira, protokoloak onartu behar du."
-        },
-        "repeats": {
-          "name": "Errepikatzen",
-          "description": "RF komandoa bidali behar den denbora kopurua."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Bidali RF komando gordina",
       "description": "RF komando gordina bidaltzen du.",
       "fields": {
         "command": {
-          "name": "Agindua",
-          "description": "Bidaltzeko komando bat."
+          "description": "Bidaltzeko komando bat.",
+          "name": "Agindua"
         },
         "repeats": {
-          "name": "Errepikatzen",
-          "description": "RF komandoa bidali behar den denbora kopurua."
+          "description": "RF komandoa bidali behar den denbora kopurua.",
+          "name": "Errepikatzen"
         }
-      }
+      },
+      "name": "Bidali RF komando gordina"
+    },
+    "rf_send": {
+      "description": "RF komando bat bidaltzen du.",
+      "fields": {
+        "all": {
+          "description": "Bandera guztiak ezarri behar badira, protokoloak onartu behar du.",
+          "name": "Denak"
+        },
+        "id": {
+          "description": "Gailuaren IDa.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Erabili beharreko protokoloa.",
+          "name": "Protokoloa"
+        },
+        "repeats": {
+          "description": "RF komandoa bidali behar den denbora kopurua.",
+          "name": "Errepikatzen"
+        },
+        "state": {
+          "description": "Gailura bidali beharreko egoera.",
+          "name": "Estatua"
+        },
+        "unit": {
+          "description": "Gailu Unitatea.",
+          "name": "Unitatea"
+        }
+      },
+      "name": "Bidali RF komandoa"
+    },
+    "send": {
+      "description": "Komando bat bidaltzen dio Homeduinora.",
+      "fields": {
+        "command": {
+          "description": "Bidaltzeko komando bat.",
+          "name": "Agindua"
+        },
+        "device_id": {
+          "description": "Komandoa bidaltzeko Homeduino transceptor-a.",
+          "name": "Gailua"
+        }
+      },
+      "name": "Bidali komandoa"
     }
   }
 }

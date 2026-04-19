@@ -9,62 +9,33 @@
       "unknown": "Ootamatu viga"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Homeduino transiiver",
-          "setup_rf_device": "RF seade"
-        }
-      },
-      "setup_serial": {
-        "title": "Homeduino transiiver",
-        "data": {
-          "serial_port": "Jadaport",
-          "baud_rate": "Baudi kiirus",
-          "digital_2": "Digitaalne IO 2",
-          "digital_3": "Digitaalne IO 3",
-          "digital_4": "Digitaalne IO 4",
-          "digital_5": "Digitaalne IO 5",
-          "digital_6": "Digitaalne IO 6",
-          "digital_7": "Digitaalne IO 7",
-          "digital_8": "Digitaalne IO 8",
-          "digital_9": "Digitaalne IO 9",
-          "digital_10": "Digitaalne IO 10",
-          "digital_11": "Digitaalne IO 11",
-          "digital_12": "Digitaalne IO 12",
-          "digital_13": "Digitaalne IO 13",
-          "analog_0": "Luba analoogsisend 0",
-          "analog_1": "Luba analoogsisend 1",
-          "analog_2": "Luba analoogsisend 2",
-          "analog_3": "Luba analoogsisend 3",
-          "analog_4": "Luba analoogsisend 4",
-          "analog_5": "Luba analoogsisend 5",
-          "analog_6": "Luba analoogsisend 6",
-          "analog_7": "Luba analoogsisend 7"
-        },
-        "data_description": {
-          "serial_port": "Jadaport, millega teie Homeduino transiiver on ühendatud.",
-          "baud_rate": "Teie Homeduino transiiveri konfigureeritud edastuskiirus."
-        }
-      },
       "setup_rf_device": {
-        "title": "RF seade",
         "data": {
           "rf_id": "Seadme ID",
+          "rf_id_ignore_all": "Ignoreeri kõiki",
           "rf_protocol": "Protokoll",
-          "rf_unit": "Seadme üksus",
-          "rf_id_ignore_all": "Ignoreeri kõiki"
+          "rf_unit": "Seadme üksus"
         },
         "data_description": {
           "rf_id_ignore_all": "Lubage, kui teie RF-seade ignoreerib RF-kaugjuhtimispultidel sageli leiduvat nuppu kõik/ülemine."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Homeduino transiiveri valikud",
+        },
+        "title": "RF seade"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Luba analoogsisend 0",
+          "analog_1": "Luba analoogsisend 1",
+          "analog_2": "Luba analoogsisend 2",
+          "analog_3": "Luba analoogsisend 3",
+          "analog_4": "Luba analoogsisend 4",
+          "analog_5": "Luba analoogsisend 5",
+          "analog_6": "Luba analoogsisend 6",
+          "analog_7": "Luba analoogsisend 7",
+          "baud_rate": "Baudi kiirus",
+          "digital_10": "Digitaalne IO 10",
+          "digital_11": "Digitaalne IO 11",
+          "digital_12": "Digitaalne IO 12",
+          "digital_13": "Digitaalne IO 13",
           "digital_2": "Digitaalne IO 2",
           "digital_3": "Digitaalne IO 3",
           "digital_4": "Digitaalne IO 4",
@@ -73,51 +44,19 @@
           "digital_7": "Digitaalne IO 7",
           "digital_8": "Digitaalne IO 8",
           "digital_9": "Digitaalne IO 9",
-          "digital_10": "Digitaalne IO 10",
-          "digital_11": "Digitaalne IO 11",
-          "digital_12": "Digitaalne IO 12",
-          "digital_13": "Digitaalne IO 13",
-          "analog_0": "Luba analoogsisend 0",
-          "analog_1": "Luba analoogsisend 1",
-          "analog_2": "Luba analoogsisend 2",
-          "analog_3": "Luba analoogsisend 3",
-          "analog_4": "Luba analoogsisend 4",
-          "analog_5": "Luba analoogsisend 5",
-          "analog_6": "Luba analoogsisend 6",
-          "analog_7": "Luba analoogsisend 7"
-        }
-      },
-      "rf_device": {
-        "title": "Homeduino RF-seadme valikud",
-        "data": {
-          "rf_id_ignore_all": "Ignoreeri kõiki",
-          "rf_repeats": "RF kordub"
+          "serial_port": "Jadaport"
         },
         "data_description": {
-          "rf_id_ignore_all": "Lubage, kui teie RF-seade ignoreerib RF-kaugjuhtimispultidel sageli leiduvat nuppu kõik/ülemine.",
-          "rf_repeats": "RF-signaali kordamiste arv."
+          "baud_rate": "Teie Homeduino transiiveri konfigureeritud edastuskiirus.",
+          "serial_port": "Jadaport, millega teie Homeduino transiiver on ühendatud."
+        },
+        "title": "Homeduino transiiver"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF seade",
+          "setup_transceiver": "Homeduino transiiver"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Homeduino transiiver",
-        "rf_device": "Homeduino raadiosagedusseade"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Pole ühendatud",
-        "rf_receive": "RF vastuvõtt",
-        "rf_send": "RF-i saatmine",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "1-juhtmeline buss",
-        "digital_input": "Digitaalne sisend",
-        "digital_output": "Digitaalne väljund",
-        "pwm_output": "PWM väljund"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Digitaalne sisend {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Analoogsisend {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} temperatuur"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Niiskus"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} temperatuur"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Niiskus"
-      },
-      "wind_gust": {
-        "name": "Tuule puhangud"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Lüliti {unit}"
-      },
-      "digital_output": {
-        "name": "Digitaalne väljund {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "Valgus {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "PWM väljund {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "Valgus {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Analoogsisend {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Niiskus"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} temperatuur"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Niiskus"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} temperatuur"
+      },
+      "wind_gust": {
+        "name": "Tuule puhangud"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Digitaalne väljund {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Lüliti {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ignoreeri kõiki",
+          "rf_repeats": "RF kordub"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Lubage, kui teie RF-seade ignoreerib RF-kaugjuhtimispultidel sageli leiduvat nuppu kõik/ülemine.",
+          "rf_repeats": "RF-signaali kordamiste arv."
+        },
+        "title": "Homeduino RF-seadme valikud"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Luba analoogsisend 0",
+          "analog_1": "Luba analoogsisend 1",
+          "analog_2": "Luba analoogsisend 2",
+          "analog_3": "Luba analoogsisend 3",
+          "analog_4": "Luba analoogsisend 4",
+          "analog_5": "Luba analoogsisend 5",
+          "analog_6": "Luba analoogsisend 6",
+          "analog_7": "Luba analoogsisend 7",
+          "digital_10": "Digitaalne IO 10",
+          "digital_11": "Digitaalne IO 11",
+          "digital_12": "Digitaalne IO 12",
+          "digital_13": "Digitaalne IO 13",
+          "digital_2": "Digitaalne IO 2",
+          "digital_3": "Digitaalne IO 3",
+          "digital_4": "Digitaalne IO 4",
+          "digital_5": "Digitaalne IO 5",
+          "digital_6": "Digitaalne IO 6",
+          "digital_7": "Digitaalne IO 7",
+          "digital_8": "Digitaalne IO 8",
+          "digital_9": "Digitaalne IO 9"
+        },
+        "title": "Homeduino transiiveri valikud"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino raadiosagedusseade",
+        "transceiver": "Homeduino transiiver"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-juhtmeline buss",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Digitaalne sisend",
+        "digital_output": "Digitaalne väljund",
+        "none": "Pole ühendatud",
+        "pwm_output": "PWM väljund",
+        "rf_receive": "RF vastuvõtt",
+        "rf_send": "RF-i saatmine"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Saada käsk",
-      "description": "Saadab Homeduinole käsu.",
-      "fields": {
-        "device_id": {
-          "name": "Seade",
-          "description": "Homeduino transiiver, kuhu käsk saata."
-        },
-        "command": {
-          "name": "Käsk",
-          "description": "Käsk saata."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Saada RF käsk",
-      "description": "Saadab raadiosagedusliku käsu.",
-      "fields": {
-        "protocol": {
-          "name": "Protokoll",
-          "description": "Kasutatav protokoll."
-        },
-        "id": {
-          "name": "ID",
-          "description": "Seadme ID."
-        },
-        "unit": {
-          "name": "Üksus",
-          "description": "Seadme üksus."
-        },
-        "state": {
-          "name": "osariik",
-          "description": "Seadmesse saatmise olek."
-        },
-        "all": {
-          "name": "Kõik",
-          "description": "Kui on vaja seada lipp kõik, peab protokoll seda toetama."
-        },
-        "repeats": {
-          "name": "Kordub",
-          "description": "RF-käsu saatmise aeg."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Saada töötlemata RF-käsk",
       "description": "Saadab töötlemata RF-käsu.",
       "fields": {
         "command": {
-          "name": "Käsk",
-          "description": "Käsk saata."
+          "description": "Käsk saata.",
+          "name": "Käsk"
         },
         "repeats": {
-          "name": "Kordub",
-          "description": "RF-käsu saatmise aeg."
+          "description": "RF-käsu saatmise aeg.",
+          "name": "Kordub"
         }
-      }
+      },
+      "name": "Saada töötlemata RF-käsk"
+    },
+    "rf_send": {
+      "description": "Saadab raadiosagedusliku käsu.",
+      "fields": {
+        "all": {
+          "description": "Kui on vaja seada lipp kõik, peab protokoll seda toetama.",
+          "name": "Kõik"
+        },
+        "id": {
+          "description": "Seadme ID.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Kasutatav protokoll.",
+          "name": "Protokoll"
+        },
+        "repeats": {
+          "description": "RF-käsu saatmise aeg.",
+          "name": "Kordub"
+        },
+        "state": {
+          "description": "Seadmesse saatmise olek.",
+          "name": "osariik"
+        },
+        "unit": {
+          "description": "Seadme üksus.",
+          "name": "Üksus"
+        }
+      },
+      "name": "Saada RF käsk"
+    },
+    "send": {
+      "description": "Saadab Homeduinole käsu.",
+      "fields": {
+        "command": {
+          "description": "Käsk saata.",
+          "name": "Käsk"
+        },
+        "device_id": {
+          "description": "Homeduino transiiver, kuhu käsk saata.",
+          "name": "Seade"
+        }
+      },
+      "name": "Saada käsk"
     }
   }
 }

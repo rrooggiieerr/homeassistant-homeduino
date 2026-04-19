@@ -9,62 +9,33 @@
       "unknown": "Eroare neașteptată"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Transceiver Homeduino",
-          "setup_rf_device": "Dispozitiv RF"
-        }
-      },
-      "setup_serial": {
-        "title": "Transceiver Homeduino",
-        "data": {
-          "serial_port": "Port serial",
-          "baud_rate": "Rata baud",
-          "digital_2": "IO digitală 2",
-          "digital_3": "IO digitală 3",
-          "digital_4": "IO digitală 4",
-          "digital_5": "IO digitală 5",
-          "digital_6": "IO digitală 6",
-          "digital_7": "IO digitală 7",
-          "digital_8": "IO digitală 8",
-          "digital_9": "IO digitală 9",
-          "digital_10": "IO digitală 10",
-          "digital_11": "IO digitală 11",
-          "digital_12": "IO digitală 12",
-          "digital_13": "IO digitală 13",
-          "analog_0": "Activați intrarea analogică 0",
-          "analog_1": "Activați intrarea analogică 1",
-          "analog_2": "Activați intrarea analogică 2",
-          "analog_3": "Activați intrarea analogică 3",
-          "analog_4": "Activați intrarea analogică 4",
-          "analog_5": "Activați intrarea analogică 5",
-          "analog_6": "Activați intrarea analogică 6",
-          "analog_7": "Activați intrarea analogică 7"
-        },
-        "data_description": {
-          "serial_port": "Portul serial la care este conectat transceiver-ul dvs. Homeduino.",
-          "baud_rate": "Rata baud configurată a transceiver-ului dvs. Homeduino."
-        }
-      },
       "setup_rf_device": {
-        "title": "Dispozitiv RF",
         "data": {
           "rf_id": "ID dispozitiv",
+          "rf_id_ignore_all": "Ignorați toate",
           "rf_protocol": "Protocol",
-          "rf_unit": "Unitatea dispozitivului",
-          "rf_id_ignore_all": "Ignorați toate"
+          "rf_unit": "Unitatea dispozitivului"
         },
         "data_description": {
           "rf_id_ignore_all": "Activați atunci când dispozitivul dvs. RF ignoră butonul all/master care se găsește adesea pe telecomenzile RF."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Opțiuni pentru transceiver Homeduino",
+        },
+        "title": "Dispozitiv RF"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Activați intrarea analogică 0",
+          "analog_1": "Activați intrarea analogică 1",
+          "analog_2": "Activați intrarea analogică 2",
+          "analog_3": "Activați intrarea analogică 3",
+          "analog_4": "Activați intrarea analogică 4",
+          "analog_5": "Activați intrarea analogică 5",
+          "analog_6": "Activați intrarea analogică 6",
+          "analog_7": "Activați intrarea analogică 7",
+          "baud_rate": "Rata baud",
+          "digital_10": "IO digitală 10",
+          "digital_11": "IO digitală 11",
+          "digital_12": "IO digitală 12",
+          "digital_13": "IO digitală 13",
           "digital_2": "IO digitală 2",
           "digital_3": "IO digitală 3",
           "digital_4": "IO digitală 4",
@@ -73,51 +44,19 @@
           "digital_7": "IO digitală 7",
           "digital_8": "IO digitală 8",
           "digital_9": "IO digitală 9",
-          "digital_10": "IO digitală 10",
-          "digital_11": "IO digitală 11",
-          "digital_12": "IO digitală 12",
-          "digital_13": "IO digitală 13",
-          "analog_0": "Activați intrarea analogică 0",
-          "analog_1": "Activați intrarea analogică 1",
-          "analog_2": "Activați intrarea analogică 2",
-          "analog_3": "Activați intrarea analogică 3",
-          "analog_4": "Activați intrarea analogică 4",
-          "analog_5": "Activați intrarea analogică 5",
-          "analog_6": "Activați intrarea analogică 6",
-          "analog_7": "Activați intrarea analogică 7"
-        }
-      },
-      "rf_device": {
-        "title": "Opțiuni pentru dispozitivul Homeduino RF",
-        "data": {
-          "rf_id_ignore_all": "Ignorați toate",
-          "rf_repeats": "RF se repetă"
+          "serial_port": "Port serial"
         },
         "data_description": {
-          "rf_id_ignore_all": "Activați atunci când dispozitivul dvs. RF ignoră butonul all/master care se găsește adesea pe telecomenzile RF.",
-          "rf_repeats": "De câte ori trebuie repetat semnalul RF."
+          "baud_rate": "Rata baud configurată a transceiver-ului dvs. Homeduino.",
+          "serial_port": "Portul serial la care este conectat transceiver-ul dvs. Homeduino."
+        },
+        "title": "Transceiver Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "Dispozitiv RF",
+          "setup_transceiver": "Transceiver Homeduino"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Transceiver Homeduino",
-        "rf_device": "Dispozitiv RF Homeduino"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Nu este conectat",
-        "rf_receive": "Recepție RF",
-        "rf_send": "Trimitere RF",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "Autobuz cu 1 fir",
-        "digital_input": "Intrare digitală",
-        "digital_output": "Ieșire digitală",
-        "pwm_output": "Ieșire PWM"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Intrare digitală {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Intrare analogică {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} Temperatura"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Umiditate"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} Temperatura"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Umiditate"
-      },
-      "wind_gust": {
-        "name": "Rafală de vânt"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Comutați {unit}"
-      },
-      "digital_output": {
-        "name": "Ieșire digitală {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "Lumină {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "Ieșire PWM {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "Lumină {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Intrare analogică {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Umiditate"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Temperatura"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Umiditate"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Temperatura"
+      },
+      "wind_gust": {
+        "name": "Rafală de vânt"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Ieșire digitală {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Comutați {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ignorați toate",
+          "rf_repeats": "RF se repetă"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Activați atunci când dispozitivul dvs. RF ignoră butonul all/master care se găsește adesea pe telecomenzile RF.",
+          "rf_repeats": "De câte ori trebuie repetat semnalul RF."
+        },
+        "title": "Opțiuni pentru dispozitivul Homeduino RF"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Activați intrarea analogică 0",
+          "analog_1": "Activați intrarea analogică 1",
+          "analog_2": "Activați intrarea analogică 2",
+          "analog_3": "Activați intrarea analogică 3",
+          "analog_4": "Activați intrarea analogică 4",
+          "analog_5": "Activați intrarea analogică 5",
+          "analog_6": "Activați intrarea analogică 6",
+          "analog_7": "Activați intrarea analogică 7",
+          "digital_10": "IO digitală 10",
+          "digital_11": "IO digitală 11",
+          "digital_12": "IO digitală 12",
+          "digital_13": "IO digitală 13",
+          "digital_2": "IO digitală 2",
+          "digital_3": "IO digitală 3",
+          "digital_4": "IO digitală 4",
+          "digital_5": "IO digitală 5",
+          "digital_6": "IO digitală 6",
+          "digital_7": "IO digitală 7",
+          "digital_8": "IO digitală 8",
+          "digital_9": "IO digitală 9"
+        },
+        "title": "Opțiuni pentru transceiver Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Dispozitiv RF Homeduino",
+        "transceiver": "Transceiver Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "Autobuz cu 1 fir",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Intrare digitală",
+        "digital_output": "Ieșire digitală",
+        "none": "Nu este conectat",
+        "pwm_output": "Ieșire PWM",
+        "rf_receive": "Recepție RF",
+        "rf_send": "Trimitere RF"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Trimite comanda",
-      "description": "Trimite o comandă către Homeduino.",
-      "fields": {
-        "device_id": {
-          "name": "Dispozitiv",
-          "description": "Transceiver-ul Homeduino la care trimite comanda."
-        },
-        "command": {
-          "name": "Comanda",
-          "description": "O comandă de trimis."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Trimiteți comanda RF",
-      "description": "Trimite o comandă RF.",
-      "fields": {
-        "protocol": {
-          "name": "Protocol",
-          "description": "Protocolul de utilizat."
-        },
-        "id": {
-          "name": "ID",
-          "description": "ID dispozitiv."
-        },
-        "unit": {
-          "name": "Unitate",
-          "description": "Unitatea de dispozitiv."
-        },
-        "state": {
-          "name": "Stat",
-          "description": "Starea de trimis către dispozitiv."
-        },
-        "all": {
-          "name": "Toate",
-          "description": "Dacă semnalul all trebuie setat, trebuie să fie acceptat de protocol."
-        },
-        "repeats": {
-          "name": "Se repetă",
-          "description": "De câte ori trebuie trimisă comanda RF."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Trimiteți comanda RF brută",
       "description": "Trimite o comandă RF brută.",
       "fields": {
         "command": {
-          "name": "Comanda",
-          "description": "O comandă de trimis."
+          "description": "O comandă de trimis.",
+          "name": "Comanda"
         },
         "repeats": {
-          "name": "Se repetă",
-          "description": "De câte ori trebuie trimisă comanda RF."
+          "description": "De câte ori trebuie trimisă comanda RF.",
+          "name": "Se repetă"
         }
-      }
+      },
+      "name": "Trimiteți comanda RF brută"
+    },
+    "rf_send": {
+      "description": "Trimite o comandă RF.",
+      "fields": {
+        "all": {
+          "description": "Dacă semnalul all trebuie setat, trebuie să fie acceptat de protocol.",
+          "name": "Toate"
+        },
+        "id": {
+          "description": "ID dispozitiv.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Protocolul de utilizat.",
+          "name": "Protocol"
+        },
+        "repeats": {
+          "description": "De câte ori trebuie trimisă comanda RF.",
+          "name": "Se repetă"
+        },
+        "state": {
+          "description": "Starea de trimis către dispozitiv.",
+          "name": "Stat"
+        },
+        "unit": {
+          "description": "Unitatea de dispozitiv.",
+          "name": "Unitate"
+        }
+      },
+      "name": "Trimiteți comanda RF"
+    },
+    "send": {
+      "description": "Trimite o comandă către Homeduino.",
+      "fields": {
+        "command": {
+          "description": "O comandă de trimis.",
+          "name": "Comanda"
+        },
+        "device_id": {
+          "description": "Transceiver-ul Homeduino la care trimite comanda.",
+          "name": "Dispozitiv"
+        }
+      },
+      "name": "Trimite comanda"
     }
   }
 }

@@ -9,62 +9,33 @@
       "unknown": "ఊహించని లోపం"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Homeduino ట్రాన్స్‌సీవర్",
-          "setup_rf_device": "RF పరికరం"
-        }
-      },
-      "setup_serial": {
-        "title": "Homeduino ట్రాన్స్‌సీవర్",
-        "data": {
-          "serial_port": "సీరియల్ పోర్ట్",
-          "baud_rate": "బాడ్ రేటు",
-          "digital_2": "డిజిటల్ IO 2",
-          "digital_3": "డిజిటల్ IO 3",
-          "digital_4": "డిజిటల్ IO 4",
-          "digital_5": "డిజిటల్ IO 5",
-          "digital_6": "డిజిటల్ IO 6",
-          "digital_7": "డిజిటల్ IO 7",
-          "digital_8": "డిజిటల్ IO 8",
-          "digital_9": "డిజిటల్ IO 9",
-          "digital_10": "డిజిటల్ IO 10",
-          "digital_11": "డిజిటల్ IO 11",
-          "digital_12": "డిజిటల్ IO 12",
-          "digital_13": "డిజిటల్ IO 13",
-          "analog_0": "అనలాగ్ ఇన్‌పుట్ 0ని ప్రారంభించండి",
-          "analog_1": "అనలాగ్ ఇన్‌పుట్ 1ని ప్రారంభించండి",
-          "analog_2": "అనలాగ్ ఇన్‌పుట్ 2ని ప్రారంభించండి",
-          "analog_3": "అనలాగ్ ఇన్‌పుట్ 3ని ప్రారంభించండి",
-          "analog_4": "అనలాగ్ ఇన్‌పుట్ 4ని ప్రారంభించండి",
-          "analog_5": "అనలాగ్ ఇన్‌పుట్ 5ని ప్రారంభించండి",
-          "analog_6": "అనలాగ్ ఇన్‌పుట్ 6ని ప్రారంభించండి",
-          "analog_7": "అనలాగ్ ఇన్‌పుట్ 7ని ప్రారంభించండి"
-        },
-        "data_description": {
-          "serial_port": "మీ Homeduino ట్రాన్స్‌సీవర్ కనెక్ట్ చేయబడిన సీరియల్ పోర్ట్.",
-          "baud_rate": "మీ Homeduino ట్రాన్స్‌సీవర్ యొక్క కాన్ఫిగర్ చేయబడిన బాడ్ రేట్."
-        }
-      },
       "setup_rf_device": {
-        "title": "RF పరికరం",
         "data": {
           "rf_id": "పరికరం ID",
+          "rf_id_ignore_all": "అన్నింటినీ విస్మరించండి",
           "rf_protocol": "ప్రోటోకాల్",
-          "rf_unit": "పరికర యూనిట్",
-          "rf_id_ignore_all": "అన్నింటినీ విస్మరించండి"
+          "rf_unit": "పరికర యూనిట్"
         },
         "data_description": {
           "rf_id_ignore_all": "RF రిమోట్ కంట్రోల్‌లలో తరచుగా కనిపించే ఆల్/మాస్టర్ బటన్‌ను మీ RF పరికరం విస్మరించినప్పుడు ప్రారంభించండి."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Homeduino ట్రాన్స్‌సీవర్ ఎంపికలు",
+        },
+        "title": "RF పరికరం"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "అనలాగ్ ఇన్‌పుట్ 0ని ప్రారంభించండి",
+          "analog_1": "అనలాగ్ ఇన్‌పుట్ 1ని ప్రారంభించండి",
+          "analog_2": "అనలాగ్ ఇన్‌పుట్ 2ని ప్రారంభించండి",
+          "analog_3": "అనలాగ్ ఇన్‌పుట్ 3ని ప్రారంభించండి",
+          "analog_4": "అనలాగ్ ఇన్‌పుట్ 4ని ప్రారంభించండి",
+          "analog_5": "అనలాగ్ ఇన్‌పుట్ 5ని ప్రారంభించండి",
+          "analog_6": "అనలాగ్ ఇన్‌పుట్ 6ని ప్రారంభించండి",
+          "analog_7": "అనలాగ్ ఇన్‌పుట్ 7ని ప్రారంభించండి",
+          "baud_rate": "బాడ్ రేటు",
+          "digital_10": "డిజిటల్ IO 10",
+          "digital_11": "డిజిటల్ IO 11",
+          "digital_12": "డిజిటల్ IO 12",
+          "digital_13": "డిజిటల్ IO 13",
           "digital_2": "డిజిటల్ IO 2",
           "digital_3": "డిజిటల్ IO 3",
           "digital_4": "డిజిటల్ IO 4",
@@ -73,51 +44,19 @@
           "digital_7": "డిజిటల్ IO 7",
           "digital_8": "డిజిటల్ IO 8",
           "digital_9": "డిజిటల్ IO 9",
-          "digital_10": "డిజిటల్ IO 10",
-          "digital_11": "డిజిటల్ IO 11",
-          "digital_12": "డిజిటల్ IO 12",
-          "digital_13": "డిజిటల్ IO 13",
-          "analog_0": "అనలాగ్ ఇన్‌పుట్ 0ని ప్రారంభించండి",
-          "analog_1": "అనలాగ్ ఇన్‌పుట్ 1ని ప్రారంభించండి",
-          "analog_2": "అనలాగ్ ఇన్‌పుట్ 2ని ప్రారంభించండి",
-          "analog_3": "అనలాగ్ ఇన్‌పుట్ 3ని ప్రారంభించండి",
-          "analog_4": "అనలాగ్ ఇన్‌పుట్ 4ని ప్రారంభించండి",
-          "analog_5": "అనలాగ్ ఇన్‌పుట్ 5ని ప్రారంభించండి",
-          "analog_6": "అనలాగ్ ఇన్‌పుట్ 6ని ప్రారంభించండి",
-          "analog_7": "అనలాగ్ ఇన్‌పుట్ 7ని ప్రారంభించండి"
-        }
-      },
-      "rf_device": {
-        "title": "Homeduino RF పరికర ఎంపికలు",
-        "data": {
-          "rf_id_ignore_all": "అన్నింటినీ విస్మరించండి",
-          "rf_repeats": "RF పునరావృతమవుతుంది"
+          "serial_port": "సీరియల్ పోర్ట్"
         },
         "data_description": {
-          "rf_id_ignore_all": "RF రిమోట్ కంట్రోల్‌లలో తరచుగా కనిపించే ఆల్/మాస్టర్ బటన్‌ను మీ RF పరికరం విస్మరించినప్పుడు ప్రారంభించండి.",
-          "rf_repeats": "RF సిగ్నల్‌ని ఎన్నిసార్లు పునరావృతం చేయాలి."
+          "baud_rate": "మీ Homeduino ట్రాన్స్‌సీవర్ యొక్క కాన్ఫిగర్ చేయబడిన బాడ్ రేట్.",
+          "serial_port": "మీ Homeduino ట్రాన్స్‌సీవర్ కనెక్ట్ చేయబడిన సీరియల్ పోర్ట్."
+        },
+        "title": "Homeduino ట్రాన్స్‌సీవర్"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF పరికరం",
+          "setup_transceiver": "Homeduino ట్రాన్స్‌సీవర్"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Homeduino ట్రాన్స్‌సీవర్",
-        "rf_device": "Homeduino RF పరికరం"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "కనెక్ట్ కాలేదు",
-        "rf_receive": "RF స్వీకరించండి",
-        "rf_send": "RF పంపండి",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "1-వైర్ బస్సు",
-        "digital_input": "డిజిటల్ ఇన్‌పుట్",
-        "digital_output": "డిజిటల్ అవుట్‌పుట్",
-        "pwm_output": "PWM అవుట్‌పుట్"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "డిజిటల్ ఇన్‌పుట్ {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "అనలాగ్ ఇన్‌పుట్ {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} ఉష్ణోగ్రత"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} తేమ"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} ఉష్ణోగ్రత"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} తేమ"
-      },
-      "wind_gust": {
-        "name": "విండ్ గస్ట్"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "{unit} మారండి"
-      },
-      "digital_output": {
-        "name": "డిజిటల్ అవుట్‌పుట్ {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "కాంతి {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "PWM అవుట్‌పుట్ {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "కాంతి {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "అనలాగ్ ఇన్‌పుట్ {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} తేమ"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} ఉష్ణోగ్రత"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} తేమ"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} ఉష్ణోగ్రత"
+      },
+      "wind_gust": {
+        "name": "విండ్ గస్ట్"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "డిజిటల్ అవుట్‌పుట్ {digital_io}"
+      },
+      "rf_switch": {
+        "name": "{unit} మారండి"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "అన్నింటినీ విస్మరించండి",
+          "rf_repeats": "RF పునరావృతమవుతుంది"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "RF రిమోట్ కంట్రోల్‌లలో తరచుగా కనిపించే ఆల్/మాస్టర్ బటన్‌ను మీ RF పరికరం విస్మరించినప్పుడు ప్రారంభించండి.",
+          "rf_repeats": "RF సిగ్నల్‌ని ఎన్నిసార్లు పునరావృతం చేయాలి."
+        },
+        "title": "Homeduino RF పరికర ఎంపికలు"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "అనలాగ్ ఇన్‌పుట్ 0ని ప్రారంభించండి",
+          "analog_1": "అనలాగ్ ఇన్‌పుట్ 1ని ప్రారంభించండి",
+          "analog_2": "అనలాగ్ ఇన్‌పుట్ 2ని ప్రారంభించండి",
+          "analog_3": "అనలాగ్ ఇన్‌పుట్ 3ని ప్రారంభించండి",
+          "analog_4": "అనలాగ్ ఇన్‌పుట్ 4ని ప్రారంభించండి",
+          "analog_5": "అనలాగ్ ఇన్‌పుట్ 5ని ప్రారంభించండి",
+          "analog_6": "అనలాగ్ ఇన్‌పుట్ 6ని ప్రారంభించండి",
+          "analog_7": "అనలాగ్ ఇన్‌పుట్ 7ని ప్రారంభించండి",
+          "digital_10": "డిజిటల్ IO 10",
+          "digital_11": "డిజిటల్ IO 11",
+          "digital_12": "డిజిటల్ IO 12",
+          "digital_13": "డిజిటల్ IO 13",
+          "digital_2": "డిజిటల్ IO 2",
+          "digital_3": "డిజిటల్ IO 3",
+          "digital_4": "డిజిటల్ IO 4",
+          "digital_5": "డిజిటల్ IO 5",
+          "digital_6": "డిజిటల్ IO 6",
+          "digital_7": "డిజిటల్ IO 7",
+          "digital_8": "డిజిటల్ IO 8",
+          "digital_9": "డిజిటల్ IO 9"
+        },
+        "title": "Homeduino ట్రాన్స్‌సీవర్ ఎంపికలు"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF పరికరం",
+        "transceiver": "Homeduino ట్రాన్స్‌సీవర్"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-వైర్ బస్సు",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "డిజిటల్ ఇన్‌పుట్",
+        "digital_output": "డిజిటల్ అవుట్‌పుట్",
+        "none": "కనెక్ట్ కాలేదు",
+        "pwm_output": "PWM అవుట్‌పుట్",
+        "rf_receive": "RF స్వీకరించండి",
+        "rf_send": "RF పంపండి"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "ఆదేశాన్ని పంపండి",
-      "description": "Homeduinoకి ఆదేశాన్ని పంపుతుంది.",
-      "fields": {
-        "device_id": {
-          "name": "పరికరం",
-          "description": "ఆదేశాన్ని పంపడానికి Homeduino ట్రాన్స్‌సీవర్."
-        },
-        "command": {
-          "name": "ఆదేశం",
-          "description": "పంపడానికి ఒక ఆదేశం."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "RF ఆదేశాన్ని పంపండి",
-      "description": "RF ఆదేశాన్ని పంపుతుంది.",
-      "fields": {
-        "protocol": {
-          "name": "ప్రోటోకాల్",
-          "description": "ఉపయోగించాల్సిన ప్రోటోకాల్."
-        },
-        "id": {
-          "name": "ID",
-          "description": "పరికరం ID."
-        },
-        "unit": {
-          "name": "యూనిట్",
-          "description": "పరికర యూనిట్."
-        },
-        "state": {
-          "name": "రాష్ట్రం",
-          "description": "పరికరానికి పంపాల్సిన రాష్ట్రం."
-        },
-        "all": {
-          "name": "అన్నీ",
-          "description": "అన్ని ఫ్లాగ్‌లను సెట్ చేయాలంటే, ప్రోటోకాల్ ద్వారా సపోర్ట్ చేయాలి."
-        },
-        "repeats": {
-          "name": "పునరావృతమవుతుంది",
-          "description": "RF కమాండ్‌ని పంపాల్సిన సమయం సంఖ్య."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "రా RF ఆదేశాన్ని పంపండి",
       "description": "రా RF ఆదేశాన్ని పంపుతుంది.",
       "fields": {
         "command": {
-          "name": "ఆదేశం",
-          "description": "పంపడానికి ఒక ఆదేశం."
+          "description": "పంపడానికి ఒక ఆదేశం.",
+          "name": "ఆదేశం"
         },
         "repeats": {
-          "name": "పునరావృతమవుతుంది",
-          "description": "RF కమాండ్‌ని పంపాల్సిన సమయం సంఖ్య."
+          "description": "RF కమాండ్‌ని పంపాల్సిన సమయం సంఖ్య.",
+          "name": "పునరావృతమవుతుంది"
         }
-      }
+      },
+      "name": "రా RF ఆదేశాన్ని పంపండి"
+    },
+    "rf_send": {
+      "description": "RF ఆదేశాన్ని పంపుతుంది.",
+      "fields": {
+        "all": {
+          "description": "అన్ని ఫ్లాగ్‌లను సెట్ చేయాలంటే, ప్రోటోకాల్ ద్వారా సపోర్ట్ చేయాలి.",
+          "name": "అన్నీ"
+        },
+        "id": {
+          "description": "పరికరం ID.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "ఉపయోగించాల్సిన ప్రోటోకాల్.",
+          "name": "ప్రోటోకాల్"
+        },
+        "repeats": {
+          "description": "RF కమాండ్‌ని పంపాల్సిన సమయం సంఖ్య.",
+          "name": "పునరావృతమవుతుంది"
+        },
+        "state": {
+          "description": "పరికరానికి పంపాల్సిన రాష్ట్రం.",
+          "name": "రాష్ట్రం"
+        },
+        "unit": {
+          "description": "పరికర యూనిట్.",
+          "name": "యూనిట్"
+        }
+      },
+      "name": "RF ఆదేశాన్ని పంపండి"
+    },
+    "send": {
+      "description": "Homeduinoకి ఆదేశాన్ని పంపుతుంది.",
+      "fields": {
+        "command": {
+          "description": "పంపడానికి ఒక ఆదేశం.",
+          "name": "ఆదేశం"
+        },
+        "device_id": {
+          "description": "ఆదేశాన్ని పంపడానికి Homeduino ట్రాన్స్‌సీవర్.",
+          "name": "పరికరం"
+        }
+      },
+      "name": "ఆదేశాన్ని పంపండి"
     }
   }
 }

@@ -9,62 +9,33 @@
       "unknown": "Несподівана помилка"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Трансивер Homeduino",
-          "setup_rf_device": "радіочастотний пристрій"
-        }
-      },
-      "setup_serial": {
-        "title": "Трансивер Homeduino",
-        "data": {
-          "serial_port": "Послідовний порт",
-          "baud_rate": "Швидкість передачі даних",
-          "digital_2": "Цифровий IO 2",
-          "digital_3": "Цифровий IO 3",
-          "digital_4": "Цифровий IO 4",
-          "digital_5": "Цифровий IO 5",
-          "digital_6": "Цифровий IO 6",
-          "digital_7": "Цифровий IO 7",
-          "digital_8": "Цифровий IO 8",
-          "digital_9": "Цифровий IO 9",
-          "digital_10": "Цифровий IO 10",
-          "digital_11": "Цифровий IO 11",
-          "digital_12": "Цифровий IO 12",
-          "digital_13": "Цифровий IO 13",
-          "analog_0": "Увімкнути аналоговий вхід 0",
-          "analog_1": "Увімкнути аналоговий вхід 1",
-          "analog_2": "Увімкнути аналоговий вхід 2",
-          "analog_3": "Увімкнути аналоговий вхід 3",
-          "analog_4": "Увімкнути аналоговий вхід 4",
-          "analog_5": "Увімкнути аналоговий вхід 5",
-          "analog_6": "Увімкнути аналоговий вхід 6",
-          "analog_7": "Увімкнути аналоговий вхід 7"
-        },
-        "data_description": {
-          "serial_port": "Послідовний порт, до якого підключено трансивер Homeduino.",
-          "baud_rate": "Налаштована швидкість передачі даних вашого трансивера Homeduino."
-        }
-      },
       "setup_rf_device": {
-        "title": "радіочастотний пристрій",
         "data": {
           "rf_id": "ID пристрою",
+          "rf_id_ignore_all": "Ігнорувати всіх",
           "rf_protocol": "Протокол",
-          "rf_unit": "Блок пристрою",
-          "rf_id_ignore_all": "Ігнорувати всіх"
+          "rf_unit": "Блок пристрою"
         },
         "data_description": {
           "rf_id_ignore_all": "Увімкніть, коли ваш РЧ-пристрій ігнорує кнопку «Усі/головна», яка часто зустрічається на РЧ-пультах дистанційного керування."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Параметри трансивера Homeduino",
+        },
+        "title": "радіочастотний пристрій"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Увімкнути аналоговий вхід 0",
+          "analog_1": "Увімкнути аналоговий вхід 1",
+          "analog_2": "Увімкнути аналоговий вхід 2",
+          "analog_3": "Увімкнути аналоговий вхід 3",
+          "analog_4": "Увімкнути аналоговий вхід 4",
+          "analog_5": "Увімкнути аналоговий вхід 5",
+          "analog_6": "Увімкнути аналоговий вхід 6",
+          "analog_7": "Увімкнути аналоговий вхід 7",
+          "baud_rate": "Швидкість передачі даних",
+          "digital_10": "Цифровий IO 10",
+          "digital_11": "Цифровий IO 11",
+          "digital_12": "Цифровий IO 12",
+          "digital_13": "Цифровий IO 13",
           "digital_2": "Цифровий IO 2",
           "digital_3": "Цифровий IO 3",
           "digital_4": "Цифровий IO 4",
@@ -73,51 +44,19 @@
           "digital_7": "Цифровий IO 7",
           "digital_8": "Цифровий IO 8",
           "digital_9": "Цифровий IO 9",
-          "digital_10": "Цифровий IO 10",
-          "digital_11": "Цифровий IO 11",
-          "digital_12": "Цифровий IO 12",
-          "digital_13": "Цифровий IO 13",
-          "analog_0": "Увімкнути аналоговий вхід 0",
-          "analog_1": "Увімкнути аналоговий вхід 1",
-          "analog_2": "Увімкнути аналоговий вхід 2",
-          "analog_3": "Увімкнути аналоговий вхід 3",
-          "analog_4": "Увімкнути аналоговий вхід 4",
-          "analog_5": "Увімкнути аналоговий вхід 5",
-          "analog_6": "Увімкнути аналоговий вхід 6",
-          "analog_7": "Увімкнути аналоговий вхід 7"
-        }
-      },
-      "rf_device": {
-        "title": "Параметри пристрою Homeduino RF",
-        "data": {
-          "rf_id_ignore_all": "Ігнорувати всіх",
-          "rf_repeats": "RF повторює"
+          "serial_port": "Послідовний порт"
         },
         "data_description": {
-          "rf_id_ignore_all": "Увімкніть, коли ваш РЧ-пристрій ігнорує кнопку «Усі/головна», яка часто зустрічається на РЧ-пультах дистанційного керування.",
-          "rf_repeats": "Кількість повторень РЧ-сигналу."
+          "baud_rate": "Налаштована швидкість передачі даних вашого трансивера Homeduino.",
+          "serial_port": "Послідовний порт, до якого підключено трансивер Homeduino."
+        },
+        "title": "Трансивер Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "радіочастотний пристрій",
+          "setup_transceiver": "Трансивер Homeduino"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Трансивер Homeduino",
-        "rf_device": "Радіочастотний пристрій Homeduino"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Не підключено",
-        "rf_receive": "RF прийом",
-        "rf_send": "RF Send",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "1-провідна шина",
-        "digital_input": "Цифровий вхід",
-        "digital_output": "Цифровий вихід",
-        "pwm_output": "Вихід ШІМ"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Цифровий вхід {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Аналоговий вхід {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} Температура"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Вологість"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} Температура"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Вологість"
-      },
-      "wind_gust": {
-        "name": "Порив вітру"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Перемикач {unit}"
-      },
-      "digital_output": {
-        "name": "Цифровий вихід {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "Світло {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "Вихід ШІМ {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "Світло {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Аналоговий вхід {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Вологість"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Температура"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Вологість"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Температура"
+      },
+      "wind_gust": {
+        "name": "Порив вітру"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Цифровий вихід {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Перемикач {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ігнорувати всіх",
+          "rf_repeats": "RF повторює"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Увімкніть, коли ваш РЧ-пристрій ігнорує кнопку «Усі/головна», яка часто зустрічається на РЧ-пультах дистанційного керування.",
+          "rf_repeats": "Кількість повторень РЧ-сигналу."
+        },
+        "title": "Параметри пристрою Homeduino RF"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Увімкнути аналоговий вхід 0",
+          "analog_1": "Увімкнути аналоговий вхід 1",
+          "analog_2": "Увімкнути аналоговий вхід 2",
+          "analog_3": "Увімкнути аналоговий вхід 3",
+          "analog_4": "Увімкнути аналоговий вхід 4",
+          "analog_5": "Увімкнути аналоговий вхід 5",
+          "analog_6": "Увімкнути аналоговий вхід 6",
+          "analog_7": "Увімкнути аналоговий вхід 7",
+          "digital_10": "Цифровий IO 10",
+          "digital_11": "Цифровий IO 11",
+          "digital_12": "Цифровий IO 12",
+          "digital_13": "Цифровий IO 13",
+          "digital_2": "Цифровий IO 2",
+          "digital_3": "Цифровий IO 3",
+          "digital_4": "Цифровий IO 4",
+          "digital_5": "Цифровий IO 5",
+          "digital_6": "Цифровий IO 6",
+          "digital_7": "Цифровий IO 7",
+          "digital_8": "Цифровий IO 8",
+          "digital_9": "Цифровий IO 9"
+        },
+        "title": "Параметри трансивера Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Радіочастотний пристрій Homeduino",
+        "transceiver": "Трансивер Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-провідна шина",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Цифровий вхід",
+        "digital_output": "Цифровий вихід",
+        "none": "Не підключено",
+        "pwm_output": "Вихід ШІМ",
+        "rf_receive": "RF прийом",
+        "rf_send": "RF Send"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Відправити команду",
-      "description": "Надсилає команду Homeduino.",
-      "fields": {
-        "device_id": {
-          "name": "пристрій",
-          "description": "Трансивер Homeduino, на який потрібно надіслати команду."
-        },
-        "command": {
-          "name": "Команда",
-          "description": "Команда для надсилання."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Надіслати радіочастотну команду",
-      "description": "Надсилає радіочастотну команду.",
-      "fields": {
-        "protocol": {
-          "name": "Протокол",
-          "description": "Протокол для використання."
-        },
-        "id": {
-          "name": "ID",
-          "description": "ID пристрою."
-        },
-        "unit": {
-          "name": "одиниця",
-          "description": "Блок пристрою."
-        },
-        "state": {
-          "name": "Держава",
-          "description": "Стан, який потрібно надіслати на пристрій."
-        },
-        "all": {
-          "name": "все",
-          "description": "Якщо потрібно встановити прапорець all, він має підтримуватися протоколом."
-        },
-        "repeats": {
-          "name": "Повтори",
-          "description": "Кількість часу, протягом якого необхідно надіслати РЧ-команду."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Надіслати необроблену RF-команду",
       "description": "Надсилає необроблену RF-команду.",
       "fields": {
         "command": {
-          "name": "Команда",
-          "description": "Команда для надсилання."
+          "description": "Команда для надсилання.",
+          "name": "Команда"
         },
         "repeats": {
-          "name": "Повтори",
-          "description": "Кількість часу, протягом якого необхідно надіслати РЧ-команду."
+          "description": "Кількість часу, протягом якого необхідно надіслати РЧ-команду.",
+          "name": "Повтори"
         }
-      }
+      },
+      "name": "Надіслати необроблену RF-команду"
+    },
+    "rf_send": {
+      "description": "Надсилає радіочастотну команду.",
+      "fields": {
+        "all": {
+          "description": "Якщо потрібно встановити прапорець all, він має підтримуватися протоколом.",
+          "name": "все"
+        },
+        "id": {
+          "description": "ID пристрою.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Протокол для використання.",
+          "name": "Протокол"
+        },
+        "repeats": {
+          "description": "Кількість часу, протягом якого необхідно надіслати РЧ-команду.",
+          "name": "Повтори"
+        },
+        "state": {
+          "description": "Стан, який потрібно надіслати на пристрій.",
+          "name": "Держава"
+        },
+        "unit": {
+          "description": "Блок пристрою.",
+          "name": "одиниця"
+        }
+      },
+      "name": "Надіслати радіочастотну команду"
+    },
+    "send": {
+      "description": "Надсилає команду Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Команда для надсилання.",
+          "name": "Команда"
+        },
+        "device_id": {
+          "description": "Трансивер Homeduino, на який потрібно надіслати команду.",
+          "name": "пристрій"
+        }
+      },
+      "name": "Відправити команду"
     }
   }
 }

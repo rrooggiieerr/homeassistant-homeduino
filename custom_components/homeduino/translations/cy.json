@@ -9,62 +9,33 @@
       "unknown": "Gwall annisgwyl"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Trosglwyddydd Homeduino",
-          "setup_rf_device": "Dyfais RF"
-        }
-      },
-      "setup_serial": {
-        "title": "Trosglwyddydd Homeduino",
-        "data": {
-          "serial_port": "Porth cyfresol",
-          "baud_rate": "Cyfradd Baud",
-          "digital_2": "IO Digidol 2",
-          "digital_3": "IO Digidol 3",
-          "digital_4": "IO Digidol 4",
-          "digital_5": "IO digidol 5",
-          "digital_6": "IO digidol 6",
-          "digital_7": "IO Digidol 7",
-          "digital_8": "IO Digidol 8",
-          "digital_9": "IO Digidol 9",
-          "digital_10": "IO digidol 10",
-          "digital_11": "IO digidol 11",
-          "digital_12": "IO digidol 12",
-          "digital_13": "IO digidol 13",
-          "analog_0": "Galluogi mewnbwn analog 0",
-          "analog_1": "Galluogi mewnbwn analog 1",
-          "analog_2": "Galluogi mewnbwn analog 2",
-          "analog_3": "Galluogi mewnbwn analog 3",
-          "analog_4": "Galluogi mewnbwn analog 4",
-          "analog_5": "Galluogi mewnbwn analog 5",
-          "analog_6": "Galluogi mewnbwn analog 6",
-          "analog_7": "Galluogi mewnbwn analog 7"
-        },
-        "data_description": {
-          "serial_port": "Y porthladd cyfresol y mae eich Homeduino Transceiver wedi'i gysylltu ag ef.",
-          "baud_rate": "Cyfradd baud wedi'i ffurfweddu eich Homeduino Transceiver."
-        }
-      },
       "setup_rf_device": {
-        "title": "Dyfais RF",
         "data": {
           "rf_id": "ID dyfais",
+          "rf_id_ignore_all": "Anwybyddu'r cyfan",
           "rf_protocol": "Protocol",
-          "rf_unit": "Uned ddyfais",
-          "rf_id_ignore_all": "Anwybyddu'r cyfan"
+          "rf_unit": "Uned ddyfais"
         },
         "data_description": {
           "rf_id_ignore_all": "Galluogi pan fydd eich Dyfais RF yn anwybyddu'r botwm cyfan/meistr a geir yn aml ar reolyddion o bell RF."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Dewisiadau Homeduino Transceiver",
+        },
+        "title": "Dyfais RF"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Galluogi mewnbwn analog 0",
+          "analog_1": "Galluogi mewnbwn analog 1",
+          "analog_2": "Galluogi mewnbwn analog 2",
+          "analog_3": "Galluogi mewnbwn analog 3",
+          "analog_4": "Galluogi mewnbwn analog 4",
+          "analog_5": "Galluogi mewnbwn analog 5",
+          "analog_6": "Galluogi mewnbwn analog 6",
+          "analog_7": "Galluogi mewnbwn analog 7",
+          "baud_rate": "Cyfradd Baud",
+          "digital_10": "IO digidol 10",
+          "digital_11": "IO digidol 11",
+          "digital_12": "IO digidol 12",
+          "digital_13": "IO digidol 13",
           "digital_2": "IO Digidol 2",
           "digital_3": "IO Digidol 3",
           "digital_4": "IO Digidol 4",
@@ -73,51 +44,19 @@
           "digital_7": "IO Digidol 7",
           "digital_8": "IO Digidol 8",
           "digital_9": "IO Digidol 9",
-          "digital_10": "IO digidol 10",
-          "digital_11": "IO digidol 11",
-          "digital_12": "IO digidol 12",
-          "digital_13": "IO digidol 13",
-          "analog_0": "Galluogi mewnbwn analog 0",
-          "analog_1": "Galluogi mewnbwn analog 1",
-          "analog_2": "Galluogi mewnbwn analog 2",
-          "analog_3": "Galluogi mewnbwn analog 3",
-          "analog_4": "Galluogi mewnbwn analog 4",
-          "analog_5": "Galluogi mewnbwn analog 5",
-          "analog_6": "Galluogi mewnbwn analog 6",
-          "analog_7": "Galluogi mewnbwn analog 7"
-        }
-      },
-      "rf_device": {
-        "title": "Opsiynau Dyfais RF Homeduino",
-        "data": {
-          "rf_id_ignore_all": "Anwybyddu'r cyfan",
-          "rf_repeats": "RF yn ailadrodd"
+          "serial_port": "Porth cyfresol"
         },
         "data_description": {
-          "rf_id_ignore_all": "Galluogi pan fydd eich Dyfais RF yn anwybyddu'r botwm cyfan/meistr a geir yn aml ar reolyddion o bell RF.",
-          "rf_repeats": "Y nifer o weithiau y mae angen ailadrodd y signal RF."
+          "baud_rate": "Cyfradd baud wedi'i ffurfweddu eich Homeduino Transceiver.",
+          "serial_port": "Y porthladd cyfresol y mae eich Homeduino Transceiver wedi'i gysylltu ag ef."
+        },
+        "title": "Trosglwyddydd Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "Dyfais RF",
+          "setup_transceiver": "Trosglwyddydd Homeduino"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Trosglwyddydd Homeduino",
-        "rf_device": "Dyfais RF Homeduino"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Heb ei gysylltu",
-        "rf_receive": "RF Derbyn",
-        "rf_send": "RF Anfon",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "Bws 1-Wire",
-        "digital_input": "Mewnbwn Digidol",
-        "digital_output": "Allbwn Digidol",
-        "pwm_output": "Allbwn PWM"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Mewnbwn digidol {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Mewnbwn Analog {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} Tymheredd"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Lleithder"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} Tymheredd"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Lleithder"
-      },
-      "wind_gust": {
-        "name": "Swyn y Gwynt"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Newid {unit}"
-      },
-      "digital_output": {
-        "name": "Allbwn Digidol {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "{unit} ysgafn"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "Allbwn PWM {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "{unit} ysgafn"
+    "sensor": {
+      "analog_input": {
+        "name": "Mewnbwn Analog {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Lleithder"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Tymheredd"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Lleithder"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Tymheredd"
+      },
+      "wind_gust": {
+        "name": "Swyn y Gwynt"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Allbwn Digidol {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Newid {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Anwybyddu'r cyfan",
+          "rf_repeats": "RF yn ailadrodd"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Galluogi pan fydd eich Dyfais RF yn anwybyddu'r botwm cyfan/meistr a geir yn aml ar reolyddion o bell RF.",
+          "rf_repeats": "Y nifer o weithiau y mae angen ailadrodd y signal RF."
+        },
+        "title": "Opsiynau Dyfais RF Homeduino"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Galluogi mewnbwn analog 0",
+          "analog_1": "Galluogi mewnbwn analog 1",
+          "analog_2": "Galluogi mewnbwn analog 2",
+          "analog_3": "Galluogi mewnbwn analog 3",
+          "analog_4": "Galluogi mewnbwn analog 4",
+          "analog_5": "Galluogi mewnbwn analog 5",
+          "analog_6": "Galluogi mewnbwn analog 6",
+          "analog_7": "Galluogi mewnbwn analog 7",
+          "digital_10": "IO digidol 10",
+          "digital_11": "IO digidol 11",
+          "digital_12": "IO digidol 12",
+          "digital_13": "IO digidol 13",
+          "digital_2": "IO Digidol 2",
+          "digital_3": "IO Digidol 3",
+          "digital_4": "IO Digidol 4",
+          "digital_5": "IO digidol 5",
+          "digital_6": "IO digidol 6",
+          "digital_7": "IO Digidol 7",
+          "digital_8": "IO Digidol 8",
+          "digital_9": "IO Digidol 9"
+        },
+        "title": "Dewisiadau Homeduino Transceiver"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Dyfais RF Homeduino",
+        "transceiver": "Trosglwyddydd Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "Bws 1-Wire",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Mewnbwn Digidol",
+        "digital_output": "Allbwn Digidol",
+        "none": "Heb ei gysylltu",
+        "pwm_output": "Allbwn PWM",
+        "rf_receive": "RF Derbyn",
+        "rf_send": "RF Anfon"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Anfon gorchymyn",
-      "description": "Yn anfon gorchymyn i Homeduino.",
-      "fields": {
-        "device_id": {
-          "name": "Dyfais",
-          "description": "Y transceiver Homeduino i anfon y gorchymyn i."
-        },
-        "command": {
-          "name": "Gorchymyn",
-          "description": "Gorchymyn i anfon."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Anfon gorchymyn RF",
-      "description": "Yn anfon gorchymyn RF.",
-      "fields": {
-        "protocol": {
-          "name": "Protocol",
-          "description": "Y protocol i'w ddefnyddio."
-        },
-        "id": {
-          "name": "ID",
-          "description": "ID dyfais."
-        },
-        "unit": {
-          "name": "Uned",
-          "description": "Uned Dyfais."
-        },
-        "state": {
-          "name": "Cyflwr",
-          "description": "Y wladwriaeth i anfon at y ddyfais."
-        },
-        "all": {
-          "name": "Pawb",
-          "description": "Os oes angen gosod y faner popeth, mae angen ei chefnogi gan y protocol."
-        },
-        "repeats": {
-          "name": "Yn ailadrodd",
-          "description": "Y nifer o amser y mae angen anfon y gorchymyn RF."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Anfon gorchymyn RF amrwd",
       "description": "Yn anfon gorchymyn RF amrwd.",
       "fields": {
         "command": {
-          "name": "Gorchymyn",
-          "description": "Gorchymyn i anfon."
+          "description": "Gorchymyn i anfon.",
+          "name": "Gorchymyn"
         },
         "repeats": {
-          "name": "Yn ailadrodd",
-          "description": "Y nifer o amser y mae angen anfon y gorchymyn RF."
+          "description": "Y nifer o amser y mae angen anfon y gorchymyn RF.",
+          "name": "Yn ailadrodd"
         }
-      }
+      },
+      "name": "Anfon gorchymyn RF amrwd"
+    },
+    "rf_send": {
+      "description": "Yn anfon gorchymyn RF.",
+      "fields": {
+        "all": {
+          "description": "Os oes angen gosod y faner popeth, mae angen ei chefnogi gan y protocol.",
+          "name": "Pawb"
+        },
+        "id": {
+          "description": "ID dyfais.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Y protocol i'w ddefnyddio.",
+          "name": "Protocol"
+        },
+        "repeats": {
+          "description": "Y nifer o amser y mae angen anfon y gorchymyn RF.",
+          "name": "Yn ailadrodd"
+        },
+        "state": {
+          "description": "Y wladwriaeth i anfon at y ddyfais.",
+          "name": "Cyflwr"
+        },
+        "unit": {
+          "description": "Uned Dyfais.",
+          "name": "Uned"
+        }
+      },
+      "name": "Anfon gorchymyn RF"
+    },
+    "send": {
+      "description": "Yn anfon gorchymyn i Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Gorchymyn i anfon.",
+          "name": "Gorchymyn"
+        },
+        "device_id": {
+          "description": "Y transceiver Homeduino i anfon y gorchymyn i.",
+          "name": "Dyfais"
+        }
+      },
+      "name": "Anfon gorchymyn"
     }
   }
 }

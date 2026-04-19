@@ -9,62 +9,33 @@
       "unknown": "Неочекувана грешка"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Homeduino трансивер",
-          "setup_rf_device": "RF уред"
-        }
-      },
-      "setup_serial": {
-        "title": "Homeduino трансивер",
-        "data": {
-          "serial_port": "Сериска порта",
-          "baud_rate": "Бауд стапка",
-          "digital_2": "Дигитален IO 2",
-          "digital_3": "Дигитален IO 3",
-          "digital_4": "Дигитален IO 4",
-          "digital_5": "Дигитален IO 5",
-          "digital_6": "Дигитален IO 6",
-          "digital_7": "Дигитален IO 7",
-          "digital_8": "Дигитален IO 8",
-          "digital_9": "Дигитален IO 9",
-          "digital_10": "Дигитален IO 10",
-          "digital_11": "Дигитален IO 11",
-          "digital_12": "Дигитален IO 12",
-          "digital_13": "Дигитален IO 13",
-          "analog_0": "Овозможете аналоген влез 0",
-          "analog_1": "Овозможете аналоген влез 1",
-          "analog_2": "Овозможи аналоген влез 2",
-          "analog_3": "Овозможи аналоген влез 3",
-          "analog_4": "Овозможи аналоген влез 4",
-          "analog_5": "Овозможете аналоген влез 5",
-          "analog_6": "Овозможете аналоген влез 6",
-          "analog_7": "Овозможи аналоген влез 7"
-        },
-        "data_description": {
-          "serial_port": "Сериската порта на која е поврзан вашиот Homeduino трансивер.",
-          "baud_rate": "Конфигурираната брзина на бауд на вашиот Homeduino трансивер."
-        }
-      },
       "setup_rf_device": {
-        "title": "RF уред",
         "data": {
           "rf_id": "ID на уред",
+          "rf_id_ignore_all": "Игнорирај ги сите",
           "rf_protocol": "Протокол",
-          "rf_unit": "Уредна единица",
-          "rf_id_ignore_all": "Игнорирај ги сите"
+          "rf_unit": "Уредна единица"
         },
         "data_description": {
           "rf_id_ignore_all": "Овозможете кога вашиот RF уред го игнорира копчето all/master што често се наоѓа на далечинските управувачи со RF."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Опции за примопредавател на Homeduino",
+        },
+        "title": "RF уред"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Овозможете аналоген влез 0",
+          "analog_1": "Овозможете аналоген влез 1",
+          "analog_2": "Овозможи аналоген влез 2",
+          "analog_3": "Овозможи аналоген влез 3",
+          "analog_4": "Овозможи аналоген влез 4",
+          "analog_5": "Овозможете аналоген влез 5",
+          "analog_6": "Овозможете аналоген влез 6",
+          "analog_7": "Овозможи аналоген влез 7",
+          "baud_rate": "Бауд стапка",
+          "digital_10": "Дигитален IO 10",
+          "digital_11": "Дигитален IO 11",
+          "digital_12": "Дигитален IO 12",
+          "digital_13": "Дигитален IO 13",
           "digital_2": "Дигитален IO 2",
           "digital_3": "Дигитален IO 3",
           "digital_4": "Дигитален IO 4",
@@ -73,51 +44,19 @@
           "digital_7": "Дигитален IO 7",
           "digital_8": "Дигитален IO 8",
           "digital_9": "Дигитален IO 9",
-          "digital_10": "Дигитален IO 10",
-          "digital_11": "Дигитален IO 11",
-          "digital_12": "Дигитален IO 12",
-          "digital_13": "Дигитален IO 13",
-          "analog_0": "Овозможете аналоген влез 0",
-          "analog_1": "Овозможете аналоген влез 1",
-          "analog_2": "Овозможи аналоген влез 2",
-          "analog_3": "Овозможи аналоген влез 3",
-          "analog_4": "Овозможи аналоген влез 4",
-          "analog_5": "Овозможете аналоген влез 5",
-          "analog_6": "Овозможете аналоген влез 6",
-          "analog_7": "Овозможи аналоген влез 7"
-        }
-      },
-      "rf_device": {
-        "title": "Опции за Homeduino RF Device",
-        "data": {
-          "rf_id_ignore_all": "Игнорирај ги сите",
-          "rf_repeats": "RF се повторува"
+          "serial_port": "Сериска порта"
         },
         "data_description": {
-          "rf_id_ignore_all": "Овозможете кога вашиот RF уред го игнорира копчето all/master што често се наоѓа на далечинските управувачи со RF.",
-          "rf_repeats": "Колку пати треба да се повтори RF сигналот."
+          "baud_rate": "Конфигурираната брзина на бауд на вашиот Homeduino трансивер.",
+          "serial_port": "Сериската порта на која е поврзан вашиот Homeduino трансивер."
+        },
+        "title": "Homeduino трансивер"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF уред",
+          "setup_transceiver": "Homeduino трансивер"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Homeduino трансивер",
-        "rf_device": "Homeduino RF уред"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Не е поврзан",
-        "rf_receive": "RF Примање",
-        "rf_send": "RF Испрати",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "1-жичен автобус",
-        "digital_input": "Дигитален влез",
-        "digital_output": "Дигитален излез",
-        "pwm_output": "PWM излез"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Дигитален влез {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Аналоген влез {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} Температура"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Влажност"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} Температура"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Влажност"
-      },
-      "wind_gust": {
-        "name": "Ветер налет"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Префрли {unit}"
-      },
-      "digital_output": {
-        "name": "Дигитален излез {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "Светло {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "PWM излез {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "Светло {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Аналоген влез {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Влажност"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Температура"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Влажност"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Температура"
+      },
+      "wind_gust": {
+        "name": "Ветер налет"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Дигитален излез {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Префрли {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Игнорирај ги сите",
+          "rf_repeats": "RF се повторува"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Овозможете кога вашиот RF уред го игнорира копчето all/master што често се наоѓа на далечинските управувачи со RF.",
+          "rf_repeats": "Колку пати треба да се повтори RF сигналот."
+        },
+        "title": "Опции за Homeduino RF Device"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Овозможете аналоген влез 0",
+          "analog_1": "Овозможете аналоген влез 1",
+          "analog_2": "Овозможи аналоген влез 2",
+          "analog_3": "Овозможи аналоген влез 3",
+          "analog_4": "Овозможи аналоген влез 4",
+          "analog_5": "Овозможете аналоген влез 5",
+          "analog_6": "Овозможете аналоген влез 6",
+          "analog_7": "Овозможи аналоген влез 7",
+          "digital_10": "Дигитален IO 10",
+          "digital_11": "Дигитален IO 11",
+          "digital_12": "Дигитален IO 12",
+          "digital_13": "Дигитален IO 13",
+          "digital_2": "Дигитален IO 2",
+          "digital_3": "Дигитален IO 3",
+          "digital_4": "Дигитален IO 4",
+          "digital_5": "Дигитален IO 5",
+          "digital_6": "Дигитален IO 6",
+          "digital_7": "Дигитален IO 7",
+          "digital_8": "Дигитален IO 8",
+          "digital_9": "Дигитален IO 9"
+        },
+        "title": "Опции за примопредавател на Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF уред",
+        "transceiver": "Homeduino трансивер"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-жичен автобус",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Дигитален влез",
+        "digital_output": "Дигитален излез",
+        "none": "Не е поврзан",
+        "pwm_output": "PWM излез",
+        "rf_receive": "RF Примање",
+        "rf_send": "RF Испрати"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Испрати команда",
-      "description": "Испраќа команда до Homeduino.",
-      "fields": {
-        "device_id": {
-          "name": "Уред",
-          "description": "Примопредавачот Homeduino до кој треба да се испрати командата."
-        },
-        "command": {
-          "name": "Команда",
-          "description": "Команда за испраќање."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Испрати RF команда",
-      "description": "Испраќа команда RF.",
-      "fields": {
-        "protocol": {
-          "name": "Протокол",
-          "description": "Протоколот што треба да се користи."
-        },
-        "id": {
-          "name": "ИД",
-          "description": "ID на уред."
-        },
-        "unit": {
-          "name": "Единица",
-          "description": "Уредна единица."
-        },
-        "state": {
-          "name": "држава",
-          "description": "Државата да се испрати на уредот."
-        },
-        "all": {
-          "name": "Сите",
-          "description": "Ако треба да се постави знаменцето за сите, треба да биде поддржано од протоколот."
-        },
-        "repeats": {
-          "name": "Се повторува",
-          "description": "Колку време треба да се испрати командата RF."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Испратете необработена RF команда",
       "description": "Испраќа необработена RF команда.",
       "fields": {
         "command": {
-          "name": "Команда",
-          "description": "Команда за испраќање."
+          "description": "Команда за испраќање.",
+          "name": "Команда"
         },
         "repeats": {
-          "name": "Се повторува",
-          "description": "Колку време треба да се испрати командата RF."
+          "description": "Колку време треба да се испрати командата RF.",
+          "name": "Се повторува"
         }
-      }
+      },
+      "name": "Испратете необработена RF команда"
+    },
+    "rf_send": {
+      "description": "Испраќа команда RF.",
+      "fields": {
+        "all": {
+          "description": "Ако треба да се постави знаменцето за сите, треба да биде поддржано од протоколот.",
+          "name": "Сите"
+        },
+        "id": {
+          "description": "ID на уред.",
+          "name": "ИД"
+        },
+        "protocol": {
+          "description": "Протоколот што треба да се користи.",
+          "name": "Протокол"
+        },
+        "repeats": {
+          "description": "Колку време треба да се испрати командата RF.",
+          "name": "Се повторува"
+        },
+        "state": {
+          "description": "Државата да се испрати на уредот.",
+          "name": "држава"
+        },
+        "unit": {
+          "description": "Уредна единица.",
+          "name": "Единица"
+        }
+      },
+      "name": "Испрати RF команда"
+    },
+    "send": {
+      "description": "Испраќа команда до Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Команда за испраќање.",
+          "name": "Команда"
+        },
+        "device_id": {
+          "description": "Примопредавачот Homeduino до кој треба да се испрати командата.",
+          "name": "Уред"
+        }
+      },
+      "name": "Испрати команда"
     }
   }
 }

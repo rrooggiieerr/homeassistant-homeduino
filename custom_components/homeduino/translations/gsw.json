@@ -9,62 +9,33 @@
       "unknown": "Unerwarteter Fehler"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Homeduino-Transceiver",
-          "setup_rf_device": "RF-Gerät"
-        }
-      },
-      "setup_serial": {
-        "title": "Homeduino-Transceiver",
-        "data": {
-          "serial_port": "Serieller Anschluss",
-          "baud_rate": "Baudrate",
-          "digital_2": "Digitales IO 2",
-          "digital_3": "Digitales IO 3",
-          "digital_4": "Digitales IO 4",
-          "digital_5": "Digitales IO 5",
-          "digital_6": "Digitales IO 6",
-          "digital_7": "Digitales IO 7",
-          "digital_8": "Digitales IO 8",
-          "digital_9": "Digitales IO 9",
-          "digital_10": "Digitales IO 10",
-          "digital_11": "Digitales IO 11",
-          "digital_12": "Digitales IO 12",
-          "digital_13": "Digitales IO 13",
-          "analog_0": "Analogeingang 0 aktivieren",
-          "analog_1": "Analogeingang 1 aktivieren",
-          "analog_2": "Analogeingang 2 aktivieren",
-          "analog_3": "Analogeingang 3 aktivieren",
-          "analog_4": "Analogeingang 4 aktivieren",
-          "analog_5": "Analogeingang 5 aktivieren",
-          "analog_6": "Analogeingang 6 aktivieren",
-          "analog_7": "Analogeingang 7 aktivieren"
-        },
-        "data_description": {
-          "serial_port": "Der serielle Port, an den Ihr Homeduino-Transceiver angeschlossen ist.",
-          "baud_rate": "Die konfigurierte Baudrate Ihres Homeduino-Transceivers."
-        }
-      },
       "setup_rf_device": {
-        "title": "RF-Gerät",
         "data": {
           "rf_id": "Geräte-ID",
+          "rf_id_ignore_all": "Alles ignorieren",
           "rf_protocol": "Protokoll",
-          "rf_unit": "Geräteeinheit",
-          "rf_id_ignore_all": "Alles ignorieren"
+          "rf_unit": "Geräteeinheit"
         },
         "data_description": {
           "rf_id_ignore_all": "Aktivieren Sie diese Option, wenn Ihr RF-Gerät die All-/Master-Taste ignoriert, die häufig auf RF-Fernbedienungen zu finden ist."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Homeduino-Transceiver-Optionen",
+        },
+        "title": "RF-Gerät"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Analogeingang 0 aktivieren",
+          "analog_1": "Analogeingang 1 aktivieren",
+          "analog_2": "Analogeingang 2 aktivieren",
+          "analog_3": "Analogeingang 3 aktivieren",
+          "analog_4": "Analogeingang 4 aktivieren",
+          "analog_5": "Analogeingang 5 aktivieren",
+          "analog_6": "Analogeingang 6 aktivieren",
+          "analog_7": "Analogeingang 7 aktivieren",
+          "baud_rate": "Baudrate",
+          "digital_10": "Digitales IO 10",
+          "digital_11": "Digitales IO 11",
+          "digital_12": "Digitales IO 12",
+          "digital_13": "Digitales IO 13",
           "digital_2": "Digitales IO 2",
           "digital_3": "Digitales IO 3",
           "digital_4": "Digitales IO 4",
@@ -73,51 +44,19 @@
           "digital_7": "Digitales IO 7",
           "digital_8": "Digitales IO 8",
           "digital_9": "Digitales IO 9",
-          "digital_10": "Digitales IO 10",
-          "digital_11": "Digitales IO 11",
-          "digital_12": "Digitales IO 12",
-          "digital_13": "Digitales IO 13",
-          "analog_0": "Analogeingang 0 aktivieren",
-          "analog_1": "Analogeingang 1 aktivieren",
-          "analog_2": "Analogeingang 2 aktivieren",
-          "analog_3": "Analogeingang 3 aktivieren",
-          "analog_4": "Analogeingang 4 aktivieren",
-          "analog_5": "Analogeingang 5 aktivieren",
-          "analog_6": "Analogeingang 6 aktivieren",
-          "analog_7": "Analogeingang 7 aktivieren"
-        }
-      },
-      "rf_device": {
-        "title": "Homeduino RF-Geräteoptionen",
-        "data": {
-          "rf_id_ignore_all": "Alles ignorieren",
-          "rf_repeats": "RF-Wiederholungen"
+          "serial_port": "Serieller Anschluss"
         },
         "data_description": {
-          "rf_id_ignore_all": "Aktivieren Sie diese Option, wenn Ihr RF-Gerät die All-/Master-Taste ignoriert, die häufig auf RF-Fernbedienungen zu finden ist.",
-          "rf_repeats": "Die Häufigkeit, mit der das HF-Signal wiederholt werden muss."
+          "baud_rate": "Die konfigurierte Baudrate Ihres Homeduino-Transceivers.",
+          "serial_port": "Der serielle Port, an den Ihr Homeduino-Transceiver angeschlossen ist."
+        },
+        "title": "Homeduino-Transceiver"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF-Gerät",
+          "setup_transceiver": "Homeduino-Transceiver"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Homeduino-Transceiver",
-        "rf_device": "Homeduino RF-Gerät"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Nicht verbunden",
-        "rf_receive": "RF-Empfang",
-        "rf_send": "RF-Senden",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "1-Draht-Bus",
-        "digital_input": "Digitaler Eingang",
-        "digital_output": "Digitaler Ausgang",
-        "pwm_output": "PWM-Ausgang"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Digitaler Eingang {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Analoger Eingang {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} Temperatur"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Luftfeuchtigkeit"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} Temperatur"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Luftfeuchtigkeit"
-      },
-      "wind_gust": {
-        "name": "Windböe"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "{unit} wechseln"
-      },
-      "digital_output": {
-        "name": "Digitaler Ausgang {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "Licht {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "PWM-Ausgang {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "Licht {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Analoger Eingang {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Luftfeuchtigkeit"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Temperatur"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Luftfeuchtigkeit"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Temperatur"
+      },
+      "wind_gust": {
+        "name": "Windböe"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Digitaler Ausgang {digital_io}"
+      },
+      "rf_switch": {
+        "name": "{unit} wechseln"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Alles ignorieren",
+          "rf_repeats": "RF-Wiederholungen"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktivieren Sie diese Option, wenn Ihr RF-Gerät die All-/Master-Taste ignoriert, die häufig auf RF-Fernbedienungen zu finden ist.",
+          "rf_repeats": "Die Häufigkeit, mit der das HF-Signal wiederholt werden muss."
+        },
+        "title": "Homeduino RF-Geräteoptionen"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Analogeingang 0 aktivieren",
+          "analog_1": "Analogeingang 1 aktivieren",
+          "analog_2": "Analogeingang 2 aktivieren",
+          "analog_3": "Analogeingang 3 aktivieren",
+          "analog_4": "Analogeingang 4 aktivieren",
+          "analog_5": "Analogeingang 5 aktivieren",
+          "analog_6": "Analogeingang 6 aktivieren",
+          "analog_7": "Analogeingang 7 aktivieren",
+          "digital_10": "Digitales IO 10",
+          "digital_11": "Digitales IO 11",
+          "digital_12": "Digitales IO 12",
+          "digital_13": "Digitales IO 13",
+          "digital_2": "Digitales IO 2",
+          "digital_3": "Digitales IO 3",
+          "digital_4": "Digitales IO 4",
+          "digital_5": "Digitales IO 5",
+          "digital_6": "Digitales IO 6",
+          "digital_7": "Digitales IO 7",
+          "digital_8": "Digitales IO 8",
+          "digital_9": "Digitales IO 9"
+        },
+        "title": "Homeduino-Transceiver-Optionen"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF-Gerät",
+        "transceiver": "Homeduino-Transceiver"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-Draht-Bus",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Digitaler Eingang",
+        "digital_output": "Digitaler Ausgang",
+        "none": "Nicht verbunden",
+        "pwm_output": "PWM-Ausgang",
+        "rf_receive": "RF-Empfang",
+        "rf_send": "RF-Senden"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Befehl senden",
-      "description": "Sendet einen Befehl an Homeduino.",
-      "fields": {
-        "device_id": {
-          "name": "Gerät",
-          "description": "Der Homeduino-Transceiver, an den der Befehl gesendet werden soll."
-        },
-        "command": {
-          "name": "Befehl",
-          "description": "Ein Befehl zum Senden."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "RF-Befehl senden",
-      "description": "Sendet einen RF-Befehl.",
-      "fields": {
-        "protocol": {
-          "name": "Protokoll",
-          "description": "Das zu verwendende Protokoll."
-        },
-        "id": {
-          "name": "AUSWEIS",
-          "description": "Geräte-ID."
-        },
-        "unit": {
-          "name": "Einheit",
-          "description": "Geräteeinheit."
-        },
-        "state": {
-          "name": "Zustand",
-          "description": "Der Status, der an das Gerät gesendet werden soll."
-        },
-        "all": {
-          "name": "Alle",
-          "description": "Wenn das All-Flag gesetzt werden muss, muss es vom Protokoll unterstützt werden."
-        },
-        "repeats": {
-          "name": "Wiederholt",
-          "description": "Die Häufigkeit, mit der der RF-Befehl gesendet werden muss."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Senden Sie einen rohen RF-Befehl",
       "description": "Sendet einen rohen RF-Befehl.",
       "fields": {
         "command": {
-          "name": "Befehl",
-          "description": "Ein Befehl zum Senden."
+          "description": "Ein Befehl zum Senden.",
+          "name": "Befehl"
         },
         "repeats": {
-          "name": "Wiederholt",
-          "description": "Die Häufigkeit, mit der der RF-Befehl gesendet werden muss."
+          "description": "Die Häufigkeit, mit der der RF-Befehl gesendet werden muss.",
+          "name": "Wiederholt"
         }
-      }
+      },
+      "name": "Senden Sie einen rohen RF-Befehl"
+    },
+    "rf_send": {
+      "description": "Sendet einen RF-Befehl.",
+      "fields": {
+        "all": {
+          "description": "Wenn das All-Flag gesetzt werden muss, muss es vom Protokoll unterstützt werden.",
+          "name": "Alle"
+        },
+        "id": {
+          "description": "Geräte-ID.",
+          "name": "AUSWEIS"
+        },
+        "protocol": {
+          "description": "Das zu verwendende Protokoll.",
+          "name": "Protokoll"
+        },
+        "repeats": {
+          "description": "Die Häufigkeit, mit der der RF-Befehl gesendet werden muss.",
+          "name": "Wiederholt"
+        },
+        "state": {
+          "description": "Der Status, der an das Gerät gesendet werden soll.",
+          "name": "Zustand"
+        },
+        "unit": {
+          "description": "Geräteeinheit.",
+          "name": "Einheit"
+        }
+      },
+      "name": "RF-Befehl senden"
+    },
+    "send": {
+      "description": "Sendet einen Befehl an Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Ein Befehl zum Senden.",
+          "name": "Befehl"
+        },
+        "device_id": {
+          "description": "Der Homeduino-Transceiver, an den der Befehl gesendet werden soll.",
+          "name": "Gerät"
+        }
+      },
+      "name": "Befehl senden"
     }
   }
 }

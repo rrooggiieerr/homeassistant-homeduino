@@ -9,62 +9,33 @@
       "unknown": "Gabim i papritur"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Transmetues Homeduino",
-          "setup_rf_device": "Pajisja RF"
-        }
-      },
-      "setup_serial": {
-        "title": "Transmetues Homeduino",
-        "data": {
-          "serial_port": "Porta serike",
-          "baud_rate": "Norma Baud",
-          "digital_2": "IO dixhitale 2",
-          "digital_3": "IO dixhitale 3",
-          "digital_4": "IO dixhitale 4",
-          "digital_5": "IO dixhitale 5",
-          "digital_6": "IO dixhitale 6",
-          "digital_7": "IO dixhitale 7",
-          "digital_8": "IO dixhitale 8",
-          "digital_9": "IO dixhitale 9",
-          "digital_10": "IO dixhitale 10",
-          "digital_11": "IO dixhitale 11",
-          "digital_12": "IO dixhitale 12",
-          "digital_13": "IO dixhitale 13",
-          "analog_0": "Aktivizo hyrjen analoge 0",
-          "analog_1": "Aktivizo hyrjen analoge 1",
-          "analog_2": "Aktivizo hyrjen analoge 2",
-          "analog_3": "Aktivizo hyrjen analoge 3",
-          "analog_4": "Aktivizo hyrjen analoge 4",
-          "analog_5": "Aktivizo hyrjen analoge 5",
-          "analog_6": "Aktivizo hyrjen analoge 6",
-          "analog_7": "Aktivizo hyrjen analoge 7"
-        },
-        "data_description": {
-          "serial_port": "Porta serike me të cilën është i lidhur Transmetuesi juaj Homeduino.",
-          "baud_rate": "Shpejtësia e konfiguruar e baud-it të marrës tuaj Homeduino."
-        }
-      },
       "setup_rf_device": {
-        "title": "Pajisja RF",
         "data": {
           "rf_id": "ID e pajisjes",
+          "rf_id_ignore_all": "Injoroni të gjitha",
           "rf_protocol": "Protokolli",
-          "rf_unit": "Njësia e pajisjes",
-          "rf_id_ignore_all": "Injoroni të gjitha"
+          "rf_unit": "Njësia e pajisjes"
         },
         "data_description": {
           "rf_id_ignore_all": "Aktivizoni kur pajisja juaj RF injoron butonin të gjitha/master që shpesh gjendet në telekomandat RF."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Opsionet e transmetuesit Homeduino",
+        },
+        "title": "Pajisja RF"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Aktivizo hyrjen analoge 0",
+          "analog_1": "Aktivizo hyrjen analoge 1",
+          "analog_2": "Aktivizo hyrjen analoge 2",
+          "analog_3": "Aktivizo hyrjen analoge 3",
+          "analog_4": "Aktivizo hyrjen analoge 4",
+          "analog_5": "Aktivizo hyrjen analoge 5",
+          "analog_6": "Aktivizo hyrjen analoge 6",
+          "analog_7": "Aktivizo hyrjen analoge 7",
+          "baud_rate": "Norma Baud",
+          "digital_10": "IO dixhitale 10",
+          "digital_11": "IO dixhitale 11",
+          "digital_12": "IO dixhitale 12",
+          "digital_13": "IO dixhitale 13",
           "digital_2": "IO dixhitale 2",
           "digital_3": "IO dixhitale 3",
           "digital_4": "IO dixhitale 4",
@@ -73,51 +44,19 @@
           "digital_7": "IO dixhitale 7",
           "digital_8": "IO dixhitale 8",
           "digital_9": "IO dixhitale 9",
-          "digital_10": "IO dixhitale 10",
-          "digital_11": "IO dixhitale 11",
-          "digital_12": "IO dixhitale 12",
-          "digital_13": "IO dixhitale 13",
-          "analog_0": "Aktivizo hyrjen analoge 0",
-          "analog_1": "Aktivizo hyrjen analoge 1",
-          "analog_2": "Aktivizo hyrjen analoge 2",
-          "analog_3": "Aktivizo hyrjen analoge 3",
-          "analog_4": "Aktivizo hyrjen analoge 4",
-          "analog_5": "Aktivizo hyrjen analoge 5",
-          "analog_6": "Aktivizo hyrjen analoge 6",
-          "analog_7": "Aktivizo hyrjen analoge 7"
-        }
-      },
-      "rf_device": {
-        "title": "Opsionet e pajisjes Homeduino RF",
-        "data": {
-          "rf_id_ignore_all": "Injoroni të gjitha",
-          "rf_repeats": "RF përsëritet"
+          "serial_port": "Porta serike"
         },
         "data_description": {
-          "rf_id_ignore_all": "Aktivizoni kur pajisja juaj RF injoron butonin të gjitha/master që shpesh gjendet në telekomandat RF.",
-          "rf_repeats": "Sa herë duhet të përsëritet sinjali RF."
+          "baud_rate": "Shpejtësia e konfiguruar e baud-it të marrës tuaj Homeduino.",
+          "serial_port": "Porta serike me të cilën është i lidhur Transmetuesi juaj Homeduino."
+        },
+        "title": "Transmetues Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "Pajisja RF",
+          "setup_transceiver": "Transmetues Homeduino"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Transmetues Homeduino",
-        "rf_device": "Pajisja RF Homeduino"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Nuk është i lidhur",
-        "rf_receive": "RF Marrja",
-        "rf_send": "Dërgo RF",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "1-Autobus me tela",
-        "digital_input": "Hyrja dixhitale",
-        "digital_output": "Prodhimi dixhital",
-        "pwm_output": "Dalja PWM"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Hyrja dixhitale {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Hyrja analoge {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "Temperatura DHT11 {digital_io}"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Lagështia"
-      },
-      "dht22_temperature": {
-        "name": "Temperatura DHT22 {digital_io}"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Lagështia"
-      },
-      "wind_gust": {
-        "name": "Shpërthim i erës"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Ndërro {unit}"
-      },
-      "digital_output": {
-        "name": "Dalja dixhitale {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "Dritë {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "Dalja PWM {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "Dritë {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Hyrja analoge {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Lagështia"
+      },
+      "dht11_temperature": {
+        "name": "Temperatura DHT11 {digital_io}"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Lagështia"
+      },
+      "dht22_temperature": {
+        "name": "Temperatura DHT22 {digital_io}"
+      },
+      "wind_gust": {
+        "name": "Shpërthim i erës"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Dalja dixhitale {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Ndërro {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Injoroni të gjitha",
+          "rf_repeats": "RF përsëritet"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktivizoni kur pajisja juaj RF injoron butonin të gjitha/master që shpesh gjendet në telekomandat RF.",
+          "rf_repeats": "Sa herë duhet të përsëritet sinjali RF."
+        },
+        "title": "Opsionet e pajisjes Homeduino RF"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Aktivizo hyrjen analoge 0",
+          "analog_1": "Aktivizo hyrjen analoge 1",
+          "analog_2": "Aktivizo hyrjen analoge 2",
+          "analog_3": "Aktivizo hyrjen analoge 3",
+          "analog_4": "Aktivizo hyrjen analoge 4",
+          "analog_5": "Aktivizo hyrjen analoge 5",
+          "analog_6": "Aktivizo hyrjen analoge 6",
+          "analog_7": "Aktivizo hyrjen analoge 7",
+          "digital_10": "IO dixhitale 10",
+          "digital_11": "IO dixhitale 11",
+          "digital_12": "IO dixhitale 12",
+          "digital_13": "IO dixhitale 13",
+          "digital_2": "IO dixhitale 2",
+          "digital_3": "IO dixhitale 3",
+          "digital_4": "IO dixhitale 4",
+          "digital_5": "IO dixhitale 5",
+          "digital_6": "IO dixhitale 6",
+          "digital_7": "IO dixhitale 7",
+          "digital_8": "IO dixhitale 8",
+          "digital_9": "IO dixhitale 9"
+        },
+        "title": "Opsionet e transmetuesit Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Pajisja RF Homeduino",
+        "transceiver": "Transmetues Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-Autobus me tela",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Hyrja dixhitale",
+        "digital_output": "Prodhimi dixhital",
+        "none": "Nuk është i lidhur",
+        "pwm_output": "Dalja PWM",
+        "rf_receive": "RF Marrja",
+        "rf_send": "Dërgo RF"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Dërgo komandën",
-      "description": "Dërgon një komandë në Homeduino.",
-      "fields": {
-        "device_id": {
-          "name": "Pajisja",
-          "description": "Transmetuesi Homeduino për të dërguar komandën."
-        },
-        "command": {
-          "name": "Komanda",
-          "description": "Një komandë për të dërguar."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Dërgo komandën RF",
-      "description": "Dërgon një komandë RF.",
-      "fields": {
-        "protocol": {
-          "name": "Protokolli",
-          "description": "Protokolli për t'u përdorur."
-        },
-        "id": {
-          "name": "ID",
-          "description": "ID e pajisjes."
-        },
-        "unit": {
-          "name": "Njësia",
-          "description": "Njësia e pajisjes."
-        },
-        "state": {
-          "name": "Shtetit",
-          "description": "Gjendja për të dërguar në pajisje."
-        },
-        "all": {
-          "name": "Të gjitha",
-          "description": "Nëse flamuri i të gjithë duhet të vendoset, duhet të mbështetet nga protokolli."
-        },
-        "repeats": {
-          "name": "Përsëritet",
-          "description": "Numri i kohës që duhet të dërgohet komanda RF."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Dërgo komandën RF të papërpunuar",
       "description": "Dërgon një komandë të papërpunuar RF.",
       "fields": {
         "command": {
-          "name": "Komanda",
-          "description": "Një komandë për të dërguar."
+          "description": "Një komandë për të dërguar.",
+          "name": "Komanda"
         },
         "repeats": {
-          "name": "Përsëritet",
-          "description": "Numri i kohës që duhet të dërgohet komanda RF."
+          "description": "Numri i kohës që duhet të dërgohet komanda RF.",
+          "name": "Përsëritet"
         }
-      }
+      },
+      "name": "Dërgo komandën RF të papërpunuar"
+    },
+    "rf_send": {
+      "description": "Dërgon një komandë RF.",
+      "fields": {
+        "all": {
+          "description": "Nëse flamuri i të gjithë duhet të vendoset, duhet të mbështetet nga protokolli.",
+          "name": "Të gjitha"
+        },
+        "id": {
+          "description": "ID e pajisjes.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Protokolli për t'u përdorur.",
+          "name": "Protokolli"
+        },
+        "repeats": {
+          "description": "Numri i kohës që duhet të dërgohet komanda RF.",
+          "name": "Përsëritet"
+        },
+        "state": {
+          "description": "Gjendja për të dërguar në pajisje.",
+          "name": "Shtetit"
+        },
+        "unit": {
+          "description": "Njësia e pajisjes.",
+          "name": "Njësia"
+        }
+      },
+      "name": "Dërgo komandën RF"
+    },
+    "send": {
+      "description": "Dërgon një komandë në Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Një komandë për të dërguar.",
+          "name": "Komanda"
+        },
+        "device_id": {
+          "description": "Transmetuesi Homeduino për të dërguar komandën.",
+          "name": "Pajisja"
+        }
+      },
+      "name": "Dërgo komandën"
     }
   }
 }

@@ -9,62 +9,33 @@
       "unknown": "Neočakávaná chyba"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Vysielač Homeduino",
-          "setup_rf_device": "RF zariadenie"
-        }
-      },
-      "setup_serial": {
-        "title": "Vysielač Homeduino",
-        "data": {
-          "serial_port": "Sériový port",
-          "baud_rate": "Prenosová rýchlosť",
-          "digital_2": "Digitálne IO 2",
-          "digital_3": "Digitálne IO 3",
-          "digital_4": "Digitálne IO 4",
-          "digital_5": "Digitálne IO 5",
-          "digital_6": "Digitálne IO 6",
-          "digital_7": "Digitálne IO 7",
-          "digital_8": "Digitálne IO 8",
-          "digital_9": "Digitálne IO 9",
-          "digital_10": "Digitálne IO 10",
-          "digital_11": "Digitálne IO 11",
-          "digital_12": "Digitálne IO 12",
-          "digital_13": "Digitálne IO 13",
-          "analog_0": "Povoliť analógový vstup 0",
-          "analog_1": "Povoliť analógový vstup 1",
-          "analog_2": "Povoliť analógový vstup 2",
-          "analog_3": "Povoliť analógový vstup 3",
-          "analog_4": "Povoliť analógový vstup 4",
-          "analog_5": "Povoliť analógový vstup 5",
-          "analog_6": "Povoliť analógový vstup 6",
-          "analog_7": "Povoliť analógový vstup 7"
-        },
-        "data_description": {
-          "serial_port": "Sériový port, ku ktorému je pripojený váš Homeduino Transceiver.",
-          "baud_rate": "Konfigurovaná prenosová rýchlosť vášho Homeduino Transceiveru."
-        }
-      },
       "setup_rf_device": {
-        "title": "RF zariadenie",
         "data": {
           "rf_id": "ID zariadenia",
+          "rf_id_ignore_all": "Ignorovať všetko",
           "rf_protocol": "Protokol",
-          "rf_unit": "Jednotka zariadenia",
-          "rf_id_ignore_all": "Ignorovať všetko"
+          "rf_unit": "Jednotka zariadenia"
         },
         "data_description": {
           "rf_id_ignore_all": "Aktivujte, keď vaše zariadenie RF ignoruje tlačidlo všetko/hlavné, ktoré sa často nachádza na diaľkových ovládačoch RF."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Možnosti vysielača Homeduino",
+        },
+        "title": "RF zariadenie"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Povoliť analógový vstup 0",
+          "analog_1": "Povoliť analógový vstup 1",
+          "analog_2": "Povoliť analógový vstup 2",
+          "analog_3": "Povoliť analógový vstup 3",
+          "analog_4": "Povoliť analógový vstup 4",
+          "analog_5": "Povoliť analógový vstup 5",
+          "analog_6": "Povoliť analógový vstup 6",
+          "analog_7": "Povoliť analógový vstup 7",
+          "baud_rate": "Prenosová rýchlosť",
+          "digital_10": "Digitálne IO 10",
+          "digital_11": "Digitálne IO 11",
+          "digital_12": "Digitálne IO 12",
+          "digital_13": "Digitálne IO 13",
           "digital_2": "Digitálne IO 2",
           "digital_3": "Digitálne IO 3",
           "digital_4": "Digitálne IO 4",
@@ -73,51 +44,19 @@
           "digital_7": "Digitálne IO 7",
           "digital_8": "Digitálne IO 8",
           "digital_9": "Digitálne IO 9",
-          "digital_10": "Digitálne IO 10",
-          "digital_11": "Digitálne IO 11",
-          "digital_12": "Digitálne IO 12",
-          "digital_13": "Digitálne IO 13",
-          "analog_0": "Povoliť analógový vstup 0",
-          "analog_1": "Povoliť analógový vstup 1",
-          "analog_2": "Povoliť analógový vstup 2",
-          "analog_3": "Povoliť analógový vstup 3",
-          "analog_4": "Povoliť analógový vstup 4",
-          "analog_5": "Povoliť analógový vstup 5",
-          "analog_6": "Povoliť analógový vstup 6",
-          "analog_7": "Povoliť analógový vstup 7"
-        }
-      },
-      "rf_device": {
-        "title": "Možnosti zariadenia Homeduino RF",
-        "data": {
-          "rf_id_ignore_all": "Ignorovať všetko",
-          "rf_repeats": "RF sa opakuje"
+          "serial_port": "Sériový port"
         },
         "data_description": {
-          "rf_id_ignore_all": "Aktivujte, keď vaše zariadenie RF ignoruje tlačidlo všetko/hlavné, ktoré sa často nachádza na diaľkových ovládačoch RF.",
-          "rf_repeats": "Počet opakovaní RF signálu."
+          "baud_rate": "Konfigurovaná prenosová rýchlosť vášho Homeduino Transceiveru.",
+          "serial_port": "Sériový port, ku ktorému je pripojený váš Homeduino Transceiver."
+        },
+        "title": "Vysielač Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF zariadenie",
+          "setup_transceiver": "Vysielač Homeduino"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Vysielač Homeduino",
-        "rf_device": "Homeduino RF zariadenie"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Nepripojené",
-        "rf_receive": "RF príjem",
-        "rf_send": "RF Odoslať",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "1-Wire Bus",
-        "digital_input": "Digitálny vstup",
-        "digital_output": "Digitálny výstup",
-        "pwm_output": "Výstup PWM"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Digitálny vstup {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Analógový vstup {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} Teplota"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Vlhkosť"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} Teplota"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Vlhkosť"
-      },
-      "wind_gust": {
-        "name": "Náraz vetra"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Prepnúť {unit}"
-      },
-      "digital_output": {
-        "name": "Digitálny výstup {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "svetlo {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "Výstup PWM {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "svetlo {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Analógový vstup {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Vlhkosť"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Teplota"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Vlhkosť"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Teplota"
+      },
+      "wind_gust": {
+        "name": "Náraz vetra"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Digitálny výstup {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Prepnúť {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ignorovať všetko",
+          "rf_repeats": "RF sa opakuje"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktivujte, keď vaše zariadenie RF ignoruje tlačidlo všetko/hlavné, ktoré sa často nachádza na diaľkových ovládačoch RF.",
+          "rf_repeats": "Počet opakovaní RF signálu."
+        },
+        "title": "Možnosti zariadenia Homeduino RF"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Povoliť analógový vstup 0",
+          "analog_1": "Povoliť analógový vstup 1",
+          "analog_2": "Povoliť analógový vstup 2",
+          "analog_3": "Povoliť analógový vstup 3",
+          "analog_4": "Povoliť analógový vstup 4",
+          "analog_5": "Povoliť analógový vstup 5",
+          "analog_6": "Povoliť analógový vstup 6",
+          "analog_7": "Povoliť analógový vstup 7",
+          "digital_10": "Digitálne IO 10",
+          "digital_11": "Digitálne IO 11",
+          "digital_12": "Digitálne IO 12",
+          "digital_13": "Digitálne IO 13",
+          "digital_2": "Digitálne IO 2",
+          "digital_3": "Digitálne IO 3",
+          "digital_4": "Digitálne IO 4",
+          "digital_5": "Digitálne IO 5",
+          "digital_6": "Digitálne IO 6",
+          "digital_7": "Digitálne IO 7",
+          "digital_8": "Digitálne IO 8",
+          "digital_9": "Digitálne IO 9"
+        },
+        "title": "Možnosti vysielača Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF zariadenie",
+        "transceiver": "Vysielač Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-Wire Bus",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Digitálny vstup",
+        "digital_output": "Digitálny výstup",
+        "none": "Nepripojené",
+        "pwm_output": "Výstup PWM",
+        "rf_receive": "RF príjem",
+        "rf_send": "RF Odoslať"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Odoslať príkaz",
-      "description": "Odošle príkaz do Homeduina.",
-      "fields": {
-        "device_id": {
-          "name": "Zariadenie",
-          "description": "Homeduino transceiver, do ktorého chcete odoslať príkaz."
-        },
-        "command": {
-          "name": "Príkaz",
-          "description": "Príkaz na odoslanie."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Odoslať RF príkaz",
-      "description": "Odošle RF príkaz.",
-      "fields": {
-        "protocol": {
-          "name": "Protokol",
-          "description": "Protokol, ktorý sa má použiť."
-        },
-        "id": {
-          "name": "ID",
-          "description": "ID zariadenia."
-        },
-        "unit": {
-          "name": "Jednotka",
-          "description": "Jednotka zariadenia."
-        },
-        "state": {
-          "name": "štátu",
-          "description": "Štát, ktorý sa má odoslať do zariadenia."
-        },
-        "all": {
-          "name": "Všetky",
-          "description": "Ak je potrebné nastaviť príznak all, musí byť podporovaný protokolom."
-        },
-        "repeats": {
-          "name": "Opakuje sa",
-          "description": "Počet, koľkokrát je potrebné odoslať RF príkaz."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Odoslať nespracovaný RF príkaz",
       "description": "Odošle nespracovaný RF príkaz.",
       "fields": {
         "command": {
-          "name": "Príkaz",
-          "description": "Príkaz na odoslanie."
+          "description": "Príkaz na odoslanie.",
+          "name": "Príkaz"
         },
         "repeats": {
-          "name": "Opakuje sa",
-          "description": "Počet, koľkokrát je potrebné odoslať RF príkaz."
+          "description": "Počet, koľkokrát je potrebné odoslať RF príkaz.",
+          "name": "Opakuje sa"
         }
-      }
+      },
+      "name": "Odoslať nespracovaný RF príkaz"
+    },
+    "rf_send": {
+      "description": "Odošle RF príkaz.",
+      "fields": {
+        "all": {
+          "description": "Ak je potrebné nastaviť príznak all, musí byť podporovaný protokolom.",
+          "name": "Všetky"
+        },
+        "id": {
+          "description": "ID zariadenia.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Protokol, ktorý sa má použiť.",
+          "name": "Protokol"
+        },
+        "repeats": {
+          "description": "Počet, koľkokrát je potrebné odoslať RF príkaz.",
+          "name": "Opakuje sa"
+        },
+        "state": {
+          "description": "Štát, ktorý sa má odoslať do zariadenia.",
+          "name": "štátu"
+        },
+        "unit": {
+          "description": "Jednotka zariadenia.",
+          "name": "Jednotka"
+        }
+      },
+      "name": "Odoslať RF príkaz"
+    },
+    "send": {
+      "description": "Odošle príkaz do Homeduina.",
+      "fields": {
+        "command": {
+          "description": "Príkaz na odoslanie.",
+          "name": "Príkaz"
+        },
+        "device_id": {
+          "description": "Homeduino transceiver, do ktorého chcete odoslať príkaz.",
+          "name": "Zariadenie"
+        }
+      },
+      "name": "Odoslať príkaz"
     }
   }
 }

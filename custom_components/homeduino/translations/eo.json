@@ -9,62 +9,33 @@
       "unknown": "Neatendita eraro"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Homeduino Transceiver",
-          "setup_rf_device": "RF Aparato"
-        }
-      },
-      "setup_serial": {
-        "title": "Homeduino Transceiver",
-        "data": {
-          "serial_port": "Seria haveno",
-          "baud_rate": "Baudrapideco",
-          "digital_2": "Cifereca IO 2",
-          "digital_3": "Cifereca IO 3",
-          "digital_4": "Cifereca IO 4",
-          "digital_5": "Cifereca IO 5",
-          "digital_6": "Cifereca IO 6",
-          "digital_7": "Cifereca IO 7",
-          "digital_8": "Cifereca IO 8",
-          "digital_9": "Cifereca IO 9",
-          "digital_10": "Cifereca IO 10",
-          "digital_11": "Cifereca IO 11",
-          "digital_12": "Cifereca IO 12",
-          "digital_13": "Cifereca IO 13",
-          "analog_0": "Ebligu analogan enigon 0",
-          "analog_1": "Ebligu analogan enigon 1",
-          "analog_2": "Ebligu analogan enigon 2",
-          "analog_3": "Ebligu analogan enigon 3",
-          "analog_4": "Ebligu analogan enigon 4",
-          "analog_5": "Ebligu analogan enigon 5",
-          "analog_6": "Ebligu analogan enigon 6",
-          "analog_7": "Ebligu analogan enigon 7"
-        },
-        "data_description": {
-          "serial_port": "La seria haveno al kiu estas konektita via Homeduino Transceiver.",
-          "baud_rate": "La agordita baudrapideco de via Homeduino Transceiver."
-        }
-      },
       "setup_rf_device": {
-        "title": "RF Aparato",
         "data": {
           "rf_id": "Aparato ID",
+          "rf_id_ignore_all": "Ignoru ĉion",
           "rf_protocol": "Protokolo",
-          "rf_unit": "Aparato unuo",
-          "rf_id_ignore_all": "Ignoru ĉion"
+          "rf_unit": "Aparato unuo"
         },
         "data_description": {
           "rf_id_ignore_all": "Ebligu kiam via RF-Aparato ignoras la tutan/majstran butonon ofte trovitan sur RF-regiloj."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Opcioj de Homeduino Transceiver",
+        },
+        "title": "RF Aparato"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Ebligu analogan enigon 0",
+          "analog_1": "Ebligu analogan enigon 1",
+          "analog_2": "Ebligu analogan enigon 2",
+          "analog_3": "Ebligu analogan enigon 3",
+          "analog_4": "Ebligu analogan enigon 4",
+          "analog_5": "Ebligu analogan enigon 5",
+          "analog_6": "Ebligu analogan enigon 6",
+          "analog_7": "Ebligu analogan enigon 7",
+          "baud_rate": "Baudrapideco",
+          "digital_10": "Cifereca IO 10",
+          "digital_11": "Cifereca IO 11",
+          "digital_12": "Cifereca IO 12",
+          "digital_13": "Cifereca IO 13",
           "digital_2": "Cifereca IO 2",
           "digital_3": "Cifereca IO 3",
           "digital_4": "Cifereca IO 4",
@@ -73,51 +44,19 @@
           "digital_7": "Cifereca IO 7",
           "digital_8": "Cifereca IO 8",
           "digital_9": "Cifereca IO 9",
-          "digital_10": "Cifereca IO 10",
-          "digital_11": "Cifereca IO 11",
-          "digital_12": "Cifereca IO 12",
-          "digital_13": "Cifereca IO 13",
-          "analog_0": "Ebligu analogan enigon 0",
-          "analog_1": "Ebligu analogan enigon 1",
-          "analog_2": "Ebligu analogan enigon 2",
-          "analog_3": "Ebligu analogan enigon 3",
-          "analog_4": "Ebligu analogan enigon 4",
-          "analog_5": "Ebligu analogan enigon 5",
-          "analog_6": "Ebligu analogan enigon 6",
-          "analog_7": "Ebligu analogan enigon 7"
-        }
-      },
-      "rf_device": {
-        "title": "Opcioj de Homeduino RF Aparato",
-        "data": {
-          "rf_id_ignore_all": "Ignoru ĉion",
-          "rf_repeats": "RF ripetas"
+          "serial_port": "Seria haveno"
         },
         "data_description": {
-          "rf_id_ignore_all": "Ebligu kiam via RF-Aparato ignoras la tutan/majstran butonon ofte trovitan sur RF-regiloj.",
-          "rf_repeats": "La nombro da fojoj la RF-signalo devas esti ripetita."
+          "baud_rate": "La agordita baudrapideco de via Homeduino Transceiver.",
+          "serial_port": "La seria haveno al kiu estas konektita via Homeduino Transceiver."
+        },
+        "title": "Homeduino Transceiver"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF Aparato",
+          "setup_transceiver": "Homeduino Transceiver"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Homeduino Transceiver",
-        "rf_device": "Homeduino RF Aparato"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Ne Konektita",
-        "rf_receive": "RF Ricevu",
-        "rf_send": "RF Sendu",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "1-Drata Buso",
-        "digital_input": "Cifereca Enigo",
-        "digital_output": "Cifereca Eligo",
-        "pwm_output": "PWM-Eligo"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Cifereca Enigo {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Analoga enigo {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} Temperaturo"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Humideco"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} Temperaturo"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Humideco"
-      },
-      "wind_gust": {
-        "name": "Ventovento"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Ŝaltu {unit}"
-      },
-      "digital_output": {
-        "name": "Cifereca Eligo {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "Lumo {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "PWM-Eligo {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "Lumo {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Analoga enigo {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Humideco"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Temperaturo"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Humideco"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Temperaturo"
+      },
+      "wind_gust": {
+        "name": "Ventovento"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Cifereca Eligo {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Ŝaltu {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ignoru ĉion",
+          "rf_repeats": "RF ripetas"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Ebligu kiam via RF-Aparato ignoras la tutan/majstran butonon ofte trovitan sur RF-regiloj.",
+          "rf_repeats": "La nombro da fojoj la RF-signalo devas esti ripetita."
+        },
+        "title": "Opcioj de Homeduino RF Aparato"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Ebligu analogan enigon 0",
+          "analog_1": "Ebligu analogan enigon 1",
+          "analog_2": "Ebligu analogan enigon 2",
+          "analog_3": "Ebligu analogan enigon 3",
+          "analog_4": "Ebligu analogan enigon 4",
+          "analog_5": "Ebligu analogan enigon 5",
+          "analog_6": "Ebligu analogan enigon 6",
+          "analog_7": "Ebligu analogan enigon 7",
+          "digital_10": "Cifereca IO 10",
+          "digital_11": "Cifereca IO 11",
+          "digital_12": "Cifereca IO 12",
+          "digital_13": "Cifereca IO 13",
+          "digital_2": "Cifereca IO 2",
+          "digital_3": "Cifereca IO 3",
+          "digital_4": "Cifereca IO 4",
+          "digital_5": "Cifereca IO 5",
+          "digital_6": "Cifereca IO 6",
+          "digital_7": "Cifereca IO 7",
+          "digital_8": "Cifereca IO 8",
+          "digital_9": "Cifereca IO 9"
+        },
+        "title": "Opcioj de Homeduino Transceiver"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF Aparato",
+        "transceiver": "Homeduino Transceiver"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-Drata Buso",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Cifereca Enigo",
+        "digital_output": "Cifereca Eligo",
+        "none": "Ne Konektita",
+        "pwm_output": "PWM-Eligo",
+        "rf_receive": "RF Ricevu",
+        "rf_send": "RF Sendu"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Sendu komandon",
-      "description": "Sendas komandon al Homeduino.",
-      "fields": {
-        "device_id": {
-          "name": "Aparato",
-          "description": "La Homeduino-ricevilo al kiu sendi la komandon."
-        },
-        "command": {
-          "name": "Komando",
-          "description": "Ordono por sendi."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Sendu RF-komandon",
-      "description": "Sendas RF-komandon.",
-      "fields": {
-        "protocol": {
-          "name": "Protokolo",
-          "description": "La protokolo por uzi."
-        },
-        "id": {
-          "name": "ID",
-          "description": "Aparato ID."
-        },
-        "unit": {
-          "name": "Unuo",
-          "description": "Aparato Unuo."
-        },
-        "state": {
-          "name": "Ŝtato",
-          "description": "La stato por sendi al la aparato."
-        },
-        "all": {
-          "name": "Ĉiuj",
-          "description": "Se la all flago devas esti agordita, devas esti subtenata de la protokolo."
-        },
-        "repeats": {
-          "name": "Ripetas",
-          "description": "La nombro da tempo, kiam la RF-komando devas esti sendita."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Sendu krudan RF-komandon",
       "description": "Sendas krudan RF-komandon.",
       "fields": {
         "command": {
-          "name": "Komando",
-          "description": "Ordono por sendi."
+          "description": "Ordono por sendi.",
+          "name": "Komando"
         },
         "repeats": {
-          "name": "Ripetas",
-          "description": "La nombro da tempo, kiam la RF-komando devas esti sendita."
+          "description": "La nombro da tempo, kiam la RF-komando devas esti sendita.",
+          "name": "Ripetas"
         }
-      }
+      },
+      "name": "Sendu krudan RF-komandon"
+    },
+    "rf_send": {
+      "description": "Sendas RF-komandon.",
+      "fields": {
+        "all": {
+          "description": "Se la all flago devas esti agordita, devas esti subtenata de la protokolo.",
+          "name": "Ĉiuj"
+        },
+        "id": {
+          "description": "Aparato ID.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "La protokolo por uzi.",
+          "name": "Protokolo"
+        },
+        "repeats": {
+          "description": "La nombro da tempo, kiam la RF-komando devas esti sendita.",
+          "name": "Ripetas"
+        },
+        "state": {
+          "description": "La stato por sendi al la aparato.",
+          "name": "Ŝtato"
+        },
+        "unit": {
+          "description": "Aparato Unuo.",
+          "name": "Unuo"
+        }
+      },
+      "name": "Sendu RF-komandon"
+    },
+    "send": {
+      "description": "Sendas komandon al Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Ordono por sendi.",
+          "name": "Komando"
+        },
+        "device_id": {
+          "description": "La Homeduino-ricevilo al kiu sendi la komandon.",
+          "name": "Aparato"
+        }
+      },
+      "name": "Sendu komandon"
     }
   }
 }

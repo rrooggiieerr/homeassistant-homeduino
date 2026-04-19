@@ -9,62 +9,33 @@
       "unknown": "意外錯誤"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Homeduino 收發器",
-          "setup_rf_device": "射頻裝置"
-        }
-      },
-      "setup_serial": {
-        "title": "Homeduino 收發器",
-        "data": {
-          "serial_port": "序列埠",
-          "baud_rate": "波特率",
-          "digital_2": "數位IO 2",
-          "digital_3": "數位IO 3",
-          "digital_4": "數位IO 4",
-          "digital_5": "數位IO 5",
-          "digital_6": "數位IO 6",
-          "digital_7": "數位IO 7",
-          "digital_8": "數位IO 8",
-          "digital_9": "數位IO 9",
-          "digital_10": "數位IO 10",
-          "digital_11": "數位IO 11",
-          "digital_12": "數位IO 12",
-          "digital_13": "數位IO 13",
-          "analog_0": "啟用類比輸入0",
-          "analog_1": "啟用類比輸入 1",
-          "analog_2": "啟用類比輸入 2",
-          "analog_3": "啟用類比輸入 3",
-          "analog_4": "啟用類比輸入 4",
-          "analog_5": "啟用類比輸入 5",
-          "analog_6": "啟用類比輸入 6",
-          "analog_7": "啟用類比輸入 7"
-        },
-        "data_description": {
-          "serial_port": "Homeduino 收發器連接的序列埠。",
-          "baud_rate": "Homeduino 收發器配置的波特率。"
-        }
-      },
       "setup_rf_device": {
-        "title": "射頻裝置",
         "data": {
           "rf_id": "設備ID",
+          "rf_id_ignore_all": "全部忽略",
           "rf_protocol": "協定",
-          "rf_unit": "裝置單位",
-          "rf_id_ignore_all": "全部忽略"
+          "rf_unit": "裝置單位"
         },
         "data_description": {
           "rf_id_ignore_all": "當您的 RF 裝置忽略 RF 遙控器上常見的全部/主按鈕時啟用。"
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Homeduino 收發器選項",
+        },
+        "title": "射頻裝置"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "啟用類比輸入0",
+          "analog_1": "啟用類比輸入 1",
+          "analog_2": "啟用類比輸入 2",
+          "analog_3": "啟用類比輸入 3",
+          "analog_4": "啟用類比輸入 4",
+          "analog_5": "啟用類比輸入 5",
+          "analog_6": "啟用類比輸入 6",
+          "analog_7": "啟用類比輸入 7",
+          "baud_rate": "波特率",
+          "digital_10": "數位IO 10",
+          "digital_11": "數位IO 11",
+          "digital_12": "數位IO 12",
+          "digital_13": "數位IO 13",
           "digital_2": "數位IO 2",
           "digital_3": "數位IO 3",
           "digital_4": "數位IO 4",
@@ -73,51 +44,19 @@
           "digital_7": "數位IO 7",
           "digital_8": "數位IO 8",
           "digital_9": "數位IO 9",
-          "digital_10": "數位IO 10",
-          "digital_11": "數位IO 11",
-          "digital_12": "數位IO 12",
-          "digital_13": "數位IO 13",
-          "analog_0": "啟用類比輸入0",
-          "analog_1": "啟用類比輸入 1",
-          "analog_2": "啟用類比輸入 2",
-          "analog_3": "啟用類比輸入 3",
-          "analog_4": "啟用類比輸入 4",
-          "analog_5": "啟用類比輸入 5",
-          "analog_6": "啟用類比輸入 6",
-          "analog_7": "啟用類比輸入 7"
-        }
-      },
-      "rf_device": {
-        "title": "Homeduino 射頻設備選項",
-        "data": {
-          "rf_id_ignore_all": "全部忽略",
-          "rf_repeats": "射頻重複"
+          "serial_port": "序列埠"
         },
         "data_description": {
-          "rf_id_ignore_all": "當您的 RF 裝置忽略 RF 遙控器上常見的全部/主按鈕時啟用。",
-          "rf_repeats": "RF 訊號需要重複的次數。"
+          "baud_rate": "Homeduino 收發器配置的波特率。",
+          "serial_port": "Homeduino 收發器連接的序列埠。"
+        },
+        "title": "Homeduino 收發器"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "射頻裝置",
+          "setup_transceiver": "Homeduino 收發器"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Homeduino 收發器",
-        "rf_device": "Homeduino 射頻設備"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "未連接",
-        "rf_receive": "射頻接收",
-        "rf_send": "射頻發送",
-        "dht11": "雙氫睪酮11",
-        "dht22": "雙氫睪酮22",
-        "1_wire": "1線總線",
-        "digital_input": "數位輸入",
-        "digital_output": "數位輸出",
-        "pwm_output": "脈寬調變輸出"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "數位輸入 {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "類比輸入 {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} 溫度"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} 濕度"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} 溫度"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} 濕度"
-      },
-      "wind_gust": {
-        "name": "陣風"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "開關{unit}"
-      },
-      "digital_output": {
-        "name": "數位輸出 {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "光{unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "脈寬調變輸出 {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "光{unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "類比輸入 {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} 濕度"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} 溫度"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} 濕度"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} 溫度"
+      },
+      "wind_gust": {
+        "name": "陣風"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "數位輸出 {digital_io}"
+      },
+      "rf_switch": {
+        "name": "開關{unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "全部忽略",
+          "rf_repeats": "射頻重複"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "當您的 RF 裝置忽略 RF 遙控器上常見的全部/主按鈕時啟用。",
+          "rf_repeats": "RF 訊號需要重複的次數。"
+        },
+        "title": "Homeduino 射頻設備選項"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "啟用類比輸入0",
+          "analog_1": "啟用類比輸入 1",
+          "analog_2": "啟用類比輸入 2",
+          "analog_3": "啟用類比輸入 3",
+          "analog_4": "啟用類比輸入 4",
+          "analog_5": "啟用類比輸入 5",
+          "analog_6": "啟用類比輸入 6",
+          "analog_7": "啟用類比輸入 7",
+          "digital_10": "數位IO 10",
+          "digital_11": "數位IO 11",
+          "digital_12": "數位IO 12",
+          "digital_13": "數位IO 13",
+          "digital_2": "數位IO 2",
+          "digital_3": "數位IO 3",
+          "digital_4": "數位IO 4",
+          "digital_5": "數位IO 5",
+          "digital_6": "數位IO 6",
+          "digital_7": "數位IO 7",
+          "digital_8": "數位IO 8",
+          "digital_9": "數位IO 9"
+        },
+        "title": "Homeduino 收發器選項"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino 射頻設備",
+        "transceiver": "Homeduino 收發器"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1線總線",
+        "dht11": "雙氫睪酮11",
+        "dht22": "雙氫睪酮22",
+        "digital_input": "數位輸入",
+        "digital_output": "數位輸出",
+        "none": "未連接",
+        "pwm_output": "脈寬調變輸出",
+        "rf_receive": "射頻接收",
+        "rf_send": "射頻發送"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "發送命令",
-      "description": "向 Homeduino 發送命令。",
-      "fields": {
-        "device_id": {
-          "name": "裝置",
-          "description": "要向其發送命令的 Homeduino 收發器。"
-        },
-        "command": {
-          "name": "命令",
-          "description": "要發送的命令。"
-        }
-      }
-    },
-    "rf_send": {
-      "name": "發送射頻命令",
-      "description": "發送 RF 命令。",
-      "fields": {
-        "protocol": {
-          "name": "協定",
-          "description": "要使用的協定。"
-        },
-        "id": {
-          "name": "ID",
-          "description": "設備 ID。"
-        },
-        "unit": {
-          "name": "單元",
-          "description": "設備單位。"
-        },
-        "state": {
-          "name": "狀態",
-          "description": "要傳送到設備的狀態。"
-        },
-        "all": {
-          "name": "全部",
-          "description": "如果需要設定all標誌，需要協定支援。"
-        },
-        "repeats": {
-          "name": "重複",
-          "description": "RF命令需要發送的次數。"
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "發送原始 RF 命令",
       "description": "發送原始 RF 命令。",
       "fields": {
         "command": {
-          "name": "命令",
-          "description": "要發送的命令。"
+          "description": "要發送的命令。",
+          "name": "命令"
         },
         "repeats": {
-          "name": "重複",
-          "description": "RF命令需要發送的次數。"
+          "description": "RF命令需要發送的次數。",
+          "name": "重複"
         }
-      }
+      },
+      "name": "發送原始 RF 命令"
+    },
+    "rf_send": {
+      "description": "發送 RF 命令。",
+      "fields": {
+        "all": {
+          "description": "如果需要設定all標誌，需要協定支援。",
+          "name": "全部"
+        },
+        "id": {
+          "description": "設備 ID。",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "要使用的協定。",
+          "name": "協定"
+        },
+        "repeats": {
+          "description": "RF命令需要發送的次數。",
+          "name": "重複"
+        },
+        "state": {
+          "description": "要傳送到設備的狀態。",
+          "name": "狀態"
+        },
+        "unit": {
+          "description": "設備單位。",
+          "name": "單元"
+        }
+      },
+      "name": "發送射頻命令"
+    },
+    "send": {
+      "description": "向 Homeduino 發送命令。",
+      "fields": {
+        "command": {
+          "description": "要發送的命令。",
+          "name": "命令"
+        },
+        "device_id": {
+          "description": "要向其發送命令的 Homeduino 收發器。",
+          "name": "裝置"
+        }
+      },
+      "name": "發送命令"
     }
   }
 }

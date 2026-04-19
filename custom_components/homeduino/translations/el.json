@@ -9,62 +9,33 @@
       "unknown": "Απροσδόκητο σφάλμα"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Πομποδέκτης Homeduino",
-          "setup_rf_device": "Συσκευή RF"
-        }
-      },
-      "setup_serial": {
-        "title": "Πομποδέκτης Homeduino",
-        "data": {
-          "serial_port": "Σειριακή θύρα",
-          "baud_rate": "Ρυθμός Baud",
-          "digital_2": "Ψηφιακή IO 2",
-          "digital_3": "Ψηφιακή IO 3",
-          "digital_4": "Ψηφιακή IO 4",
-          "digital_5": "Ψηφιακή IO 5",
-          "digital_6": "Ψηφιακή IO 6",
-          "digital_7": "Ψηφιακή IO 7",
-          "digital_8": "Ψηφιακή IO 8",
-          "digital_9": "Ψηφιακή IO 9",
-          "digital_10": "Ψηφιακή IO 10",
-          "digital_11": "Ψηφιακή IO 11",
-          "digital_12": "Ψηφιακή IO 12",
-          "digital_13": "Ψηφιακή IO 13",
-          "analog_0": "Ενεργοποίηση αναλογικής εισόδου 0",
-          "analog_1": "Ενεργοποίηση αναλογικής εισόδου 1",
-          "analog_2": "Ενεργοποίηση αναλογικής εισόδου 2",
-          "analog_3": "Ενεργοποίηση αναλογικής εισόδου 3",
-          "analog_4": "Ενεργοποίηση αναλογικής εισόδου 4",
-          "analog_5": "Ενεργοποίηση αναλογικής εισόδου 5",
-          "analog_6": "Ενεργοποίηση αναλογικής εισόδου 6",
-          "analog_7": "Ενεργοποίηση αναλογικής εισόδου 7"
-        },
-        "data_description": {
-          "serial_port": "Η σειριακή θύρα στην οποία είναι συνδεδεμένος ο πομποδέκτης Homeduino.",
-          "baud_rate": "Ο διαμορφωμένος ρυθμός baud του πομποδέκτη Homeduino."
-        }
-      },
       "setup_rf_device": {
-        "title": "Συσκευή RF",
         "data": {
           "rf_id": "Αναγνωριστικό συσκευής",
+          "rf_id_ignore_all": "Αγνοήστε όλα",
           "rf_protocol": "Πρωτόκολλο",
-          "rf_unit": "Μονάδα συσκευής",
-          "rf_id_ignore_all": "Αγνοήστε όλα"
+          "rf_unit": "Μονάδα συσκευής"
         },
         "data_description": {
           "rf_id_ignore_all": "Ενεργοποιήστε όταν η Συσκευή RF σας αγνοεί το κουμπί all/master που βρίσκεται συχνά στα τηλεχειριστήρια RF."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Επιλογές πομποδέκτη Homeduino",
+        },
+        "title": "Συσκευή RF"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Ενεργοποίηση αναλογικής εισόδου 0",
+          "analog_1": "Ενεργοποίηση αναλογικής εισόδου 1",
+          "analog_2": "Ενεργοποίηση αναλογικής εισόδου 2",
+          "analog_3": "Ενεργοποίηση αναλογικής εισόδου 3",
+          "analog_4": "Ενεργοποίηση αναλογικής εισόδου 4",
+          "analog_5": "Ενεργοποίηση αναλογικής εισόδου 5",
+          "analog_6": "Ενεργοποίηση αναλογικής εισόδου 6",
+          "analog_7": "Ενεργοποίηση αναλογικής εισόδου 7",
+          "baud_rate": "Ρυθμός Baud",
+          "digital_10": "Ψηφιακή IO 10",
+          "digital_11": "Ψηφιακή IO 11",
+          "digital_12": "Ψηφιακή IO 12",
+          "digital_13": "Ψηφιακή IO 13",
           "digital_2": "Ψηφιακή IO 2",
           "digital_3": "Ψηφιακή IO 3",
           "digital_4": "Ψηφιακή IO 4",
@@ -73,51 +44,19 @@
           "digital_7": "Ψηφιακή IO 7",
           "digital_8": "Ψηφιακή IO 8",
           "digital_9": "Ψηφιακή IO 9",
-          "digital_10": "Ψηφιακή IO 10",
-          "digital_11": "Ψηφιακή IO 11",
-          "digital_12": "Ψηφιακή IO 12",
-          "digital_13": "Ψηφιακή IO 13",
-          "analog_0": "Ενεργοποίηση αναλογικής εισόδου 0",
-          "analog_1": "Ενεργοποίηση αναλογικής εισόδου 1",
-          "analog_2": "Ενεργοποίηση αναλογικής εισόδου 2",
-          "analog_3": "Ενεργοποίηση αναλογικής εισόδου 3",
-          "analog_4": "Ενεργοποίηση αναλογικής εισόδου 4",
-          "analog_5": "Ενεργοποίηση αναλογικής εισόδου 5",
-          "analog_6": "Ενεργοποίηση αναλογικής εισόδου 6",
-          "analog_7": "Ενεργοποίηση αναλογικής εισόδου 7"
-        }
-      },
-      "rf_device": {
-        "title": "Επιλογές συσκευής Homeduino RF",
-        "data": {
-          "rf_id_ignore_all": "Αγνοήστε όλα",
-          "rf_repeats": "Το RF επαναλαμβάνει"
+          "serial_port": "Σειριακή θύρα"
         },
         "data_description": {
-          "rf_id_ignore_all": "Ενεργοποιήστε όταν η Συσκευή RF σας αγνοεί το κουμπί all/master που βρίσκεται συχνά στα τηλεχειριστήρια RF.",
-          "rf_repeats": "Πόσες φορές χρειάζεται να επαναληφθεί το σήμα RF."
+          "baud_rate": "Ο διαμορφωμένος ρυθμός baud του πομποδέκτη Homeduino.",
+          "serial_port": "Η σειριακή θύρα στην οποία είναι συνδεδεμένος ο πομποδέκτης Homeduino."
+        },
+        "title": "Πομποδέκτης Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "Συσκευή RF",
+          "setup_transceiver": "Πομποδέκτης Homeduino"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Πομποδέκτης Homeduino",
-        "rf_device": "Συσκευή RF Homeduino"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Δεν έχει συνδεθεί",
-        "rf_receive": "Λήψη RF",
-        "rf_send": "Αποστολή RF",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "1-Wire Bus",
-        "digital_input": "Ψηφιακή είσοδος",
-        "digital_output": "Ψηφιακή έξοδος",
-        "pwm_output": "Έξοδος PWM"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Ψηφιακή είσοδος {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Αναλογική είσοδος {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} Θερμοκρασία"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Υγρασία"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} Θερμοκρασία"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Υγρασία"
-      },
-      "wind_gust": {
-        "name": "Ριή ανέμου"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Εναλλαγή {unit}"
-      },
-      "digital_output": {
-        "name": "Ψηφιακή έξοδος {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "Φως {unit}"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "Έξοδος PWM {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "Φως {unit}"
+    "sensor": {
+      "analog_input": {
+        "name": "Αναλογική είσοδος {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Υγρασία"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Θερμοκρασία"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Υγρασία"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Θερμοκρασία"
+      },
+      "wind_gust": {
+        "name": "Ριή ανέμου"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Ψηφιακή έξοδος {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Εναλλαγή {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Αγνοήστε όλα",
+          "rf_repeats": "Το RF επαναλαμβάνει"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Ενεργοποιήστε όταν η Συσκευή RF σας αγνοεί το κουμπί all/master που βρίσκεται συχνά στα τηλεχειριστήρια RF.",
+          "rf_repeats": "Πόσες φορές χρειάζεται να επαναληφθεί το σήμα RF."
+        },
+        "title": "Επιλογές συσκευής Homeduino RF"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Ενεργοποίηση αναλογικής εισόδου 0",
+          "analog_1": "Ενεργοποίηση αναλογικής εισόδου 1",
+          "analog_2": "Ενεργοποίηση αναλογικής εισόδου 2",
+          "analog_3": "Ενεργοποίηση αναλογικής εισόδου 3",
+          "analog_4": "Ενεργοποίηση αναλογικής εισόδου 4",
+          "analog_5": "Ενεργοποίηση αναλογικής εισόδου 5",
+          "analog_6": "Ενεργοποίηση αναλογικής εισόδου 6",
+          "analog_7": "Ενεργοποίηση αναλογικής εισόδου 7",
+          "digital_10": "Ψηφιακή IO 10",
+          "digital_11": "Ψηφιακή IO 11",
+          "digital_12": "Ψηφιακή IO 12",
+          "digital_13": "Ψηφιακή IO 13",
+          "digital_2": "Ψηφιακή IO 2",
+          "digital_3": "Ψηφιακή IO 3",
+          "digital_4": "Ψηφιακή IO 4",
+          "digital_5": "Ψηφιακή IO 5",
+          "digital_6": "Ψηφιακή IO 6",
+          "digital_7": "Ψηφιακή IO 7",
+          "digital_8": "Ψηφιακή IO 8",
+          "digital_9": "Ψηφιακή IO 9"
+        },
+        "title": "Επιλογές πομποδέκτη Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Συσκευή RF Homeduino",
+        "transceiver": "Πομποδέκτης Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-Wire Bus",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Ψηφιακή είσοδος",
+        "digital_output": "Ψηφιακή έξοδος",
+        "none": "Δεν έχει συνδεθεί",
+        "pwm_output": "Έξοδος PWM",
+        "rf_receive": "Λήψη RF",
+        "rf_send": "Αποστολή RF"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Αποστολή εντολής",
-      "description": "Στέλνει μια εντολή στο Homeduino.",
-      "fields": {
-        "device_id": {
-          "name": "Συσκευή",
-          "description": "Ο πομποδέκτης Homeduino στον οποίο θα στείλετε την εντολή."
-        },
-        "command": {
-          "name": "Εντολή",
-          "description": "Μια εντολή για αποστολή."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Αποστολή εντολής RF",
-      "description": "Στέλνει μια εντολή RF.",
-      "fields": {
-        "protocol": {
-          "name": "Πρωτόκολλο",
-          "description": "Το πρωτόκολλο προς χρήση."
-        },
-        "id": {
-          "name": "ταυτότητα",
-          "description": "Αναγνωριστικό συσκευής."
-        },
-        "unit": {
-          "name": "Μονάδα",
-          "description": "Μονάδα συσκευής."
-        },
-        "state": {
-          "name": "Κατάσταση",
-          "description": "Η κατάσταση για αποστολή στη συσκευή."
-        },
-        "all": {
-          "name": "Ολοι",
-          "description": "Εάν πρέπει να οριστεί η σημαία όλων, πρέπει να υποστηρίζεται από το πρωτόκολλο."
-        },
-        "repeats": {
-          "name": "Επαναλαμβάνει",
-          "description": "Ο χρόνος που χρειάζεται να σταλεί η εντολή RF."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Αποστολή raw εντολής RF",
       "description": "Στέλνει μια ακατέργαστη εντολή RF.",
       "fields": {
         "command": {
-          "name": "Εντολή",
-          "description": "Μια εντολή για αποστολή."
+          "description": "Μια εντολή για αποστολή.",
+          "name": "Εντολή"
         },
         "repeats": {
-          "name": "Επαναλαμβάνει",
-          "description": "Ο χρόνος που χρειάζεται να σταλεί η εντολή RF."
+          "description": "Ο χρόνος που χρειάζεται να σταλεί η εντολή RF.",
+          "name": "Επαναλαμβάνει"
         }
-      }
+      },
+      "name": "Αποστολή raw εντολής RF"
+    },
+    "rf_send": {
+      "description": "Στέλνει μια εντολή RF.",
+      "fields": {
+        "all": {
+          "description": "Εάν πρέπει να οριστεί η σημαία όλων, πρέπει να υποστηρίζεται από το πρωτόκολλο.",
+          "name": "Ολοι"
+        },
+        "id": {
+          "description": "Αναγνωριστικό συσκευής.",
+          "name": "ταυτότητα"
+        },
+        "protocol": {
+          "description": "Το πρωτόκολλο προς χρήση.",
+          "name": "Πρωτόκολλο"
+        },
+        "repeats": {
+          "description": "Ο χρόνος που χρειάζεται να σταλεί η εντολή RF.",
+          "name": "Επαναλαμβάνει"
+        },
+        "state": {
+          "description": "Η κατάσταση για αποστολή στη συσκευή.",
+          "name": "Κατάσταση"
+        },
+        "unit": {
+          "description": "Μονάδα συσκευής.",
+          "name": "Μονάδα"
+        }
+      },
+      "name": "Αποστολή εντολής RF"
+    },
+    "send": {
+      "description": "Στέλνει μια εντολή στο Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Μια εντολή για αποστολή.",
+          "name": "Εντολή"
+        },
+        "device_id": {
+          "description": "Ο πομποδέκτης Homeduino στον οποίο θα στείλετε την εντολή.",
+          "name": "Συσκευή"
+        }
+      },
+      "name": "Αποστολή εντολής"
     }
   }
 }

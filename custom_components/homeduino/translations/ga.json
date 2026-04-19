@@ -9,62 +9,33 @@
       "unknown": "Earráid gan choinne"
     },
     "step": {
-      "user": {
-        "menu_options": {
-          "setup_transceiver": "Aistritheoir Homeduino",
-          "setup_rf_device": "Gléas RF"
-        }
-      },
-      "setup_serial": {
-        "title": "Aistritheoir Homeduino",
-        "data": {
-          "serial_port": "Port sraitheach",
-          "baud_rate": "Ráta Baud",
-          "digital_2": "IO Digiteach 2",
-          "digital_3": "IO Digiteach 3",
-          "digital_4": "IO Digiteach 4",
-          "digital_5": "Digiteach IO 5",
-          "digital_6": "Digiteach IO 6",
-          "digital_7": "IO Digiteach 7",
-          "digital_8": "IO Digiteach 8",
-          "digital_9": "IO Digiteach 9",
-          "digital_10": "IO Digiteach 10",
-          "digital_11": "IO Digiteach 11",
-          "digital_12": "IO Digiteach 12",
-          "digital_13": "IO Digiteach 13",
-          "analog_0": "Cumasaigh ionchur analógach 0",
-          "analog_1": "Cumasaigh ionchur analógach 1",
-          "analog_2": "Cumasaigh ionchur analógach 2",
-          "analog_3": "Cumasaigh ionchur analógach 3",
-          "analog_4": "Cumasaigh ionchur analógach 4",
-          "analog_5": "Cumasaigh ionchur analógach 5",
-          "analog_6": "Cumasaigh ionchur analógach 6",
-          "analog_7": "Cumasaigh ionchur analógach 7"
-        },
-        "data_description": {
-          "serial_port": "An port srathach a bhfuil do Homeduino Transceiver ceangailte leis.",
-          "baud_rate": "An ráta baud cumraithe de do Homeduino Transceiver."
-        }
-      },
       "setup_rf_device": {
-        "title": "Gléas RF",
         "data": {
           "rf_id": "Aitheantas an Ghléis",
+          "rf_id_ignore_all": "Déan neamhaird de gach",
           "rf_protocol": "Prótacal",
-          "rf_unit": "Aonad gléas",
-          "rf_id_ignore_all": "Déan neamhaird de gach"
+          "rf_unit": "Aonad gléas"
         },
         "data_description": {
           "rf_id_ignore_all": "Cumasaigh nuair a dhéanann do Ghléas RF neamhaird den chnaipe uile/mháistir a fhaightear go minic ar chianrialtáin RF."
-        }
-      }
-    }
-  },
-  "options": {
-    "step": {
-      "transceiver": {
-        "title": "Roghanna Homeduino Transceiver",
+        },
+        "title": "Gléas RF"
+      },
+      "setup_serial": {
         "data": {
+          "analog_0": "Cumasaigh ionchur analógach 0",
+          "analog_1": "Cumasaigh ionchur analógach 1",
+          "analog_2": "Cumasaigh ionchur analógach 2",
+          "analog_3": "Cumasaigh ionchur analógach 3",
+          "analog_4": "Cumasaigh ionchur analógach 4",
+          "analog_5": "Cumasaigh ionchur analógach 5",
+          "analog_6": "Cumasaigh ionchur analógach 6",
+          "analog_7": "Cumasaigh ionchur analógach 7",
+          "baud_rate": "Ráta Baud",
+          "digital_10": "IO Digiteach 10",
+          "digital_11": "IO Digiteach 11",
+          "digital_12": "IO Digiteach 12",
+          "digital_13": "IO Digiteach 13",
           "digital_2": "IO Digiteach 2",
           "digital_3": "IO Digiteach 3",
           "digital_4": "IO Digiteach 4",
@@ -73,51 +44,19 @@
           "digital_7": "IO Digiteach 7",
           "digital_8": "IO Digiteach 8",
           "digital_9": "IO Digiteach 9",
-          "digital_10": "IO Digiteach 10",
-          "digital_11": "IO Digiteach 11",
-          "digital_12": "IO Digiteach 12",
-          "digital_13": "IO Digiteach 13",
-          "analog_0": "Cumasaigh ionchur analógach 0",
-          "analog_1": "Cumasaigh ionchur analógach 1",
-          "analog_2": "Cumasaigh ionchur analógach 2",
-          "analog_3": "Cumasaigh ionchur analógach 3",
-          "analog_4": "Cumasaigh ionchur analógach 4",
-          "analog_5": "Cumasaigh ionchur analógach 5",
-          "analog_6": "Cumasaigh ionchur analógach 6",
-          "analog_7": "Cumasaigh ionchur analógach 7"
-        }
-      },
-      "rf_device": {
-        "title": "Roghanna Gléas Homeduino RF",
-        "data": {
-          "rf_id_ignore_all": "Déan neamhaird de gach",
-          "rf_repeats": "RF athrá"
+          "serial_port": "Port sraitheach"
         },
         "data_description": {
-          "rf_id_ignore_all": "Cumasaigh nuair a dhéanann do Ghléas RF neamhaird den chnaipe uile/mháistir a fhaightear go minic ar chianrialtáin RF.",
-          "rf_repeats": "An líon uaireanta is gá an comhartha RF a athdhéanamh."
+          "baud_rate": "An ráta baud cumraithe de do Homeduino Transceiver.",
+          "serial_port": "An port srathach a bhfuil do Homeduino Transceiver ceangailte leis."
+        },
+        "title": "Aistritheoir Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "Gléas RF",
+          "setup_transceiver": "Aistritheoir Homeduino"
         }
-      }
-    }
-  },
-  "selector": {
-    "device_types": {
-      "options": {
-        "transceiver": "Aistritheoir Homeduino",
-        "rf_device": "Gléas RF Homeduino"
-      }
-    },
-    "digital_io": {
-      "options": {
-        "none": "Gan Ceangailte",
-        "rf_receive": "RF Faigh",
-        "rf_send": "RF Seol",
-        "dht11": "DHT11",
-        "dht22": "DHT22",
-        "1_wire": "Bus 1-Sreang",
-        "digital_input": "Ionchur Digiteach",
-        "digital_output": "Aschur Digiteach",
-        "pwm_output": "Aschur PWM"
       }
     }
   },
@@ -127,32 +66,9 @@
         "name": "Ionchur Digiteach {digital_io}"
       }
     },
-    "sensor": {
-      "analog_input": {
-        "name": "Ionchur Analógach {analog_input}"
-      },
-      "dht11_temperature": {
-        "name": "DHT11 {digital_io} Teocht"
-      },
-      "dht11_humidity": {
-        "name": "DHT11 {digital_io} Bogthaise"
-      },
-      "dht22_temperature": {
-        "name": "DHT22 {digital_io} Teocht"
-      },
-      "dht22_humidity": {
-        "name": "DHT22 {digital_io} Bogthaise"
-      },
-      "wind_gust": {
-        "name": "Séideán Gaoithe"
-      }
-    },
-    "switch": {
-      "rf_switch": {
-        "name": "Athraigh {unit}"
-      },
-      "digital_output": {
-        "name": "Aschur Digiteach {digital_io}"
+    "light": {
+      "rf_light": {
+        "name": "{unit} éadrom"
       }
     },
     "number": {
@@ -160,70 +76,154 @@
         "name": "Aschur PWM {digital_io}"
       }
     },
-    "light": {
-      "rf_light": {
-        "name": "{unit} éadrom"
+    "sensor": {
+      "analog_input": {
+        "name": "Ionchur Analógach {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Bogthaise"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Teocht"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Bogthaise"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Teocht"
+      },
+      "wind_gust": {
+        "name": "Séideán Gaoithe"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Aschur Digiteach {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Athraigh {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Déan neamhaird de gach",
+          "rf_repeats": "RF athrá"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Cumasaigh nuair a dhéanann do Ghléas RF neamhaird den chnaipe uile/mháistir a fhaightear go minic ar chianrialtáin RF.",
+          "rf_repeats": "An líon uaireanta is gá an comhartha RF a athdhéanamh."
+        },
+        "title": "Roghanna Gléas Homeduino RF"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Cumasaigh ionchur analógach 0",
+          "analog_1": "Cumasaigh ionchur analógach 1",
+          "analog_2": "Cumasaigh ionchur analógach 2",
+          "analog_3": "Cumasaigh ionchur analógach 3",
+          "analog_4": "Cumasaigh ionchur analógach 4",
+          "analog_5": "Cumasaigh ionchur analógach 5",
+          "analog_6": "Cumasaigh ionchur analógach 6",
+          "analog_7": "Cumasaigh ionchur analógach 7",
+          "digital_10": "IO Digiteach 10",
+          "digital_11": "IO Digiteach 11",
+          "digital_12": "IO Digiteach 12",
+          "digital_13": "IO Digiteach 13",
+          "digital_2": "IO Digiteach 2",
+          "digital_3": "IO Digiteach 3",
+          "digital_4": "IO Digiteach 4",
+          "digital_5": "Digiteach IO 5",
+          "digital_6": "Digiteach IO 6",
+          "digital_7": "IO Digiteach 7",
+          "digital_8": "IO Digiteach 8",
+          "digital_9": "IO Digiteach 9"
+        },
+        "title": "Roghanna Homeduino Transceiver"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Gléas RF Homeduino",
+        "transceiver": "Aistritheoir Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "Bus 1-Sreang",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Ionchur Digiteach",
+        "digital_output": "Aschur Digiteach",
+        "none": "Gan Ceangailte",
+        "pwm_output": "Aschur PWM",
+        "rf_receive": "RF Faigh",
+        "rf_send": "RF Seol"
       }
     }
   },
   "services": {
-    "send": {
-      "name": "Seol ordú",
-      "description": "Seolann ordú chuig Homeduino.",
-      "fields": {
-        "device_id": {
-          "name": "Gléas",
-          "description": "An trasghlacadóir Homeduino chun an t-ordú a sheoladh chuig."
-        },
-        "command": {
-          "name": "Ordú",
-          "description": "Ordú a sheoladh."
-        }
-      }
-    },
-    "rf_send": {
-      "name": "Seol ordú RF",
-      "description": "Seolann ordú RF.",
-      "fields": {
-        "protocol": {
-          "name": "Prótacal",
-          "description": "An prótacal le húsáid."
-        },
-        "id": {
-          "name": "ID",
-          "description": "Aitheantas an Ghléis."
-        },
-        "unit": {
-          "name": "Aonad",
-          "description": "Aonad Gléas."
-        },
-        "state": {
-          "name": "Stáit",
-          "description": "An stát a sheoladh chuig an gléas."
-        },
-        "all": {
-          "name": "Gach",
-          "description": "Más gá an bhratach uile a shocrú, caithfidh an prótacal tacú leis."
-        },
-        "repeats": {
-          "name": "Athdhéantar seo",
-          "description": "An líon ama is gá an t-ordú RF a sheoladh."
-        }
-      }
-    },
     "raw_rf_send": {
-      "name": "Seol ordú RF amh",
       "description": "Seolann ordú RF amh.",
       "fields": {
         "command": {
-          "name": "Ordú",
-          "description": "Ordú a sheoladh."
+          "description": "Ordú a sheoladh.",
+          "name": "Ordú"
         },
         "repeats": {
-          "name": "Athdhéantar seo",
-          "description": "An líon ama is gá an t-ordú RF a sheoladh."
+          "description": "An líon ama is gá an t-ordú RF a sheoladh.",
+          "name": "Athdhéantar seo"
         }
-      }
+      },
+      "name": "Seol ordú RF amh"
+    },
+    "rf_send": {
+      "description": "Seolann ordú RF.",
+      "fields": {
+        "all": {
+          "description": "Más gá an bhratach uile a shocrú, caithfidh an prótacal tacú leis.",
+          "name": "Gach"
+        },
+        "id": {
+          "description": "Aitheantas an Ghléis.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "An prótacal le húsáid.",
+          "name": "Prótacal"
+        },
+        "repeats": {
+          "description": "An líon ama is gá an t-ordú RF a sheoladh.",
+          "name": "Athdhéantar seo"
+        },
+        "state": {
+          "description": "An stát a sheoladh chuig an gléas.",
+          "name": "Stáit"
+        },
+        "unit": {
+          "description": "Aonad Gléas.",
+          "name": "Aonad"
+        }
+      },
+      "name": "Seol ordú RF"
+    },
+    "send": {
+      "description": "Seolann ordú chuig Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Ordú a sheoladh.",
+          "name": "Ordú"
+        },
+        "device_id": {
+          "description": "An trasghlacadóir Homeduino chun an t-ordú a sheoladh chuig.",
+          "name": "Gléas"
+        }
+      },
+      "name": "Seol ordú"
     }
   }
 }
