@@ -2,19 +2,25 @@
 from __future__ import annotations
 
 import logging
+from datetime import timedelta
 from typing import Any
 
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
+    ATTR_FLASH,
+    FLASH_LONG,
+    FLASH_SHORT,
     ColorMode,
     LightEntity,
-    LightEntityDescription,
+    LightEntityDescription, ATTR_TRANSITION,
 )
+from homeassistant.components.light.const import LightEntityFeature
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import STATE_ON
+from homeassistant.const import ATTR_ENTITY_ID, SERVICE_TOGGLE, STATE_ON
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
+from homeassistant.helpers.event import async_track_time_interval
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeduino import DEFAULT_REPEATS
@@ -31,6 +37,9 @@ from .const import (
     CONF_RF_UNIT,
     DOMAIN,
 )
+
+LONG_FLASH_LENGTH = timedelta(seconds=1)
+SHORT_FLASH_LENGTH = timedelta(seconds=0.5)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -87,7 +96,7 @@ async def async_setup_entry(
             )
         else:
             entities.append(
-                HomeduinoRFDimmer(
+                HomeduinoRFLight(
                     coordinator, device_info, entity_description, id_ignore_all, repeats
                 )
             )
@@ -95,16 +104,22 @@ async def async_setup_entry(
     async_add_entities(entities)
 
 
-class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
+class HomeduinoRFLight(CoordinatorEntity, LightEntity, RestoreEntity):
     _attr_has_entity_name = True
     _attr_available = False
 
-    _attr_color_mode = ColorMode.BRIGHTNESS
-    _attr_supported_color_modes = {ColorMode.BRIGHTNESS}
+    # _attr_color_mode = ColorMode.BRIGHTNESS
+    # _attr_supported_color_modes = {ColorMode.BRIGHTNESS}
 
-    _attr_is_on = None
-    _attr_brightness = None
     _off_brightness = None
+
+    _flash_interval = None
+    _flash_updater = None
+    _flash_state = None
+    _transition_interval = None
+    _transition_updater = None
+    _transition_brightness = None
+    _transition_step = None
 
     def __init__(
         self,
@@ -125,6 +140,19 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         self._attr_device_info = device_info
 
         self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}"
+
+        supported_color_modes = {ColorMode.ONOFF}
+        color_mode = ColorMode.ONOFF
+        if self.protocol.startswith("dimmer"):
+            supported_color_modes = {ColorMode.BRIGHTNESS}
+            color_mode = ColorMode.BRIGHTNESS
+        self._attr_supported_color_modes = supported_color_modes
+        self._attr_color_mode = color_mode
+
+        supported_features = LightEntityFeature.FLASH
+        if ColorMode.BRIGHTNESS in self.supported_color_modes():
+            supported_features |= LightEntityFeature.TRANSITION
+        self._attr_supported_features = supported_features
 
         self.entity_description = entity_description
         self.ignore_all = ignore_all
@@ -198,10 +226,76 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
 
         self.async_write_ha_state()
 
-    async def async_turn_on(self, **kwargs) -> None:
-        """Turn the entity on."""
-        _LOGGER.debug("Turning on %s", self.name)
-        brightness = kwargs.get(ATTR_BRIGHTNESS)
+    def start_flash(self, flash_interval):
+        """Start flashing the wrapped light."""
+        if self._flash_updater and self._flash_interval == flash_interval:
+            return
+
+        self.stop_flash()
+
+        self._flash_interval = flash_interval
+        self._flash_updater = async_track_time_interval(
+            self.hass, self.flash_hook, flash_interval
+        )
+
+    async def flash_hook(self, now):
+        """Flash the wrapped light."""
+        if (self._flash_state and await self._async_turn_off()) or (
+            await self._async_turn_on()
+        ):
+            self._flash_state = not self._flash_state
+        else:
+            self._attr_available = False
+            _LOGGER.error("Failed to flash %s", self.name)
+
+        self.async_write_ha_state()
+
+    def stop_flash(self):
+        """Stop flashing the wrapped light."""
+        if self._flash_updater is not None:
+            self._flash_updater()
+            self._flash_updater = None
+            self._flash_interval = None
+
+    def start_transition(self, target_brightness, transition_time):
+        """Start transitioning the wrapped light."""
+        self.stop_transition()
+
+        target_brightness = round(target_brightness / 17)
+
+        transition_delta = target_brightness - round(self._attr_brightness / 17)
+        transition_steps = abs(transition_delta)
+        transition_interval = timedelta(seconds=abs(transition_time / transition_steps))
+        self._transition_step = transition_delta/abs(transition_delta)
+
+        self._attr_brightness = target_brightness * 17
+        self.async_write_ha_state()
+
+        if self._transition_updater is None:
+            self._transition_interval = transition_interval
+            self._transition_updater = async_track_time_interval(
+                self.hass, self.transition_hook, transition_interval
+            )
+
+    async def transition_hook(self, now):
+        """Transition the wrapped light."""
+        self._transition_brightness += self._transition_step
+        
+        await self._async_turn_on(self._transition_brightness * 17)
+        if (
+            self._transition_brightness  * 17
+            == self._attr_brightness
+        ):
+            self.stop_transition()
+
+    def stop_transition(self):
+        """Stop transitioning the wrapped light."""
+        if self._transition_updater is not None:
+            self._transition_updater()
+            self._transition_updater = None
+            self._transition_interval = None
+
+    async def _async_turn_on(self, brightness: int = 255) -> bool:
         state = None
         if not brightness:
             brightness = self._attr_brightness
@@ -214,40 +308,79 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         if not brightness:
             brightness = 255
 
-        brightness = int(brightness / 17)
+        brightness = round(brightness / 17)
 
-        if await self.coordinator.rf_send(
+        return await self.coordinator.rf_send(
             self.protocol,
             {"id": self.id, "unit": self.unit, "state": state, "dimlevel": brightness},
             self.repeats,
-        ):
-            self._attr_is_on = True
-            self._attr_brightness = brightness * 17
-            self._off_brightness = None
-            self.async_write_ha_state()
+        )
+
+    async def async_turn_on(self, **kwargs) -> None:
+        """Turn the entity on."""
+        _LOGGER.debug("Turning on %s", self.name)
+        brightness = kwargs.get(ATTR_BRIGHTNESS)
+
+        if ATTR_TRANSITION in kwargs:
+            # Test if wrapped light support transition
+            wrapped_light_state = self.hass.states.get(
+                self._wrapped_light_entity_id
+            ).as_dict()
+            self.start_transition(
+                wrapped_light_state, brightness, kwargs[ATTR_TRANSITION]
+            )
+            return
         else:
+            self.stop_transition()
+
+        if ATTR_FLASH in kwargs:
+            self._off_brightness = brightness
+            if kwargs[ATTR_FLASH] == FLASH_LONG:
+                self.start_flash(LONG_FLASH_LENGTH)
+            elif kwargs[ATTR_FLASH] == FLASH_SHORT:
+                self.start_flash(SHORT_FLASH_LENGTH)
+                return
+        else:
+            self.stop_flash()
+
+        if await self._async_turn_on(brightness):
+            self._attr_is_on = True
+            if brightness:
+                self._attr_brightness = round(brightness / 17) * 17
+            self._off_brightness = None
+        else:
+            self._attr_available = False
             _LOGGER.error("Failed to switch on %s", self.name)
+
+        self.async_write_ha_state()
+
+    async def _async_turn_off(self) -> bool:
+        return await self.coordinator.rf_send(
+            self.protocol,
+            {"id": self.id, "unit": self.unit, "state": False, "dimlevel": 0},
+            self.repeats,
+        )
 
     async def async_turn_off(self, **kwargs) -> None:
         """Turn the entity off."""
         _LOGGER.debug("Turning off %s", self.name)
-        if await self.coordinator.rf_send(
-            self.protocol,
-            {"id": self.id, "unit": self.unit, "state": False, "dimlevel": 0},
-            self.repeats,
-        ):
+
+        self.stop_flash()
+
+        if await self._async_turn_off():
             self._attr_is_on = False
 
             # Store current brightness so that the next turn_on uses it
             # when using "enhanced turn on".
             self._off_brightness = self._attr_brightness
-
-            self.async_write_ha_state()
         else:
+            self._attr_available = False
             _LOGGER.error("Failed to switch off %s", self.name)
 
+        self.async_write_ha_state()
 
-class HomeduinoRFDimmer1(HomeduinoRFDimmer):
+
+class HomeduinoRFDimmer1(HomeduinoRFLight):
     def __init__(
         self,
         coordinator: HomeduinoCoordinator,
