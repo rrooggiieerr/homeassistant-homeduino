@@ -392,3 +392,4 @@ class HomeduinoRFSensor(CoordinatorEntity, SensorEntity):
                 self._attr_available = False
 
         self.async_write_ha_state()
+
