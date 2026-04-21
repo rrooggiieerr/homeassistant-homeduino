@@ -9,7 +9,6 @@ from typing import Any
 import serial.tools.list_ports
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry, ConfigFlow, OptionsFlow
-from homeassistant.const import CONF_TYPE
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.selector import (
@@ -35,7 +34,29 @@ from homeduino import (
 from serial.serialutil import SerialException
 
 from . import HomeduinoCoordinator
-from .const import *
+from .const import (
+    CONF_BAUD_RATE,
+    CONF_ENTRY_TYPE,
+    CONF_ENTRY_TYPE_RF_DEVICE,
+    CONF_ENTRY_TYPE_TRANSCEIVER,
+    CONF_IO_ANALOG_,
+    CONF_IO_DHT11,
+    CONF_IO_DHT22,
+    CONF_IO_DIGITAL_,
+    CONF_IO_DIGITAL_INPUT,
+    CONF_IO_DIGITAL_OUTPUT,
+    CONF_IO_NONE,
+    CONF_IO_PWM_OUTPUT,
+    CONF_IO_RF_RECEIVE,
+    CONF_IO_RF_SEND,
+    CONF_RF_ID,
+    CONF_RF_ID_IGNORE_ALL,
+    CONF_RF_PROTOCOL,
+    CONF_RF_REPEATS,
+    CONF_RF_UNIT,
+    CONF_SERIAL_PORT,
+    DOMAIN,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -251,10 +272,10 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
             except HomeduinoResponseTimeoutError as ex:
                 _LOGGER.error("Unable to connect to the device %s", serial_port, ex)
                 errors["base"] = "cannot_connect"
-            except serial.SerialException as ex:
+            except serial.SerialException:
                 _LOGGER.exception("Unable to connect to the device %s", serial_port)
                 errors["base"] = "cannot_connect"
-            except Exception as ex:  # pylint: disable=broad-except
+            except Exception:  # pylint: disable=broad-except
                 _LOGGER.exception("Unable to connect to the device %s", serial_port)
                 errors["base"] = "cannot_connect"
 
