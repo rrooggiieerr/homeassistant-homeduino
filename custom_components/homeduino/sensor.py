@@ -177,7 +177,7 @@ async def async_setup_entry(
             entity_description = SensorEntityDescription(
                 key=(protocol, id, unit, "windDirection"),
                 device_class=SensorDeviceClass.WIND_DIRECTION,
-                state_class=SensorStateClass.MEASUREMENT,
+                state_class=SensorStateClass.MEASUREMENT_ANGLE,
                 native_unit_of_measurement=DEGREE,
             )
 
