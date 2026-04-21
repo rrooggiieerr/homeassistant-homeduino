@@ -102,6 +102,20 @@ async def async_setup_entry(
             )
 
         if protocol in ["contact4", "weather4", "weather5", "weather7", "weather13"]:
+            id = int(config_entry.data.get(CONF_RF_ID))
+            unit = config_entry.data.get(CONF_RF_UNIT)
+            if unit is not None:                                                
+                unit = int(unit)                                                
+                                                                                
+            identifier = f"{protocol}-{id}"                                     
+            if unit is not None:                                                
+                identifier += f"-{unit}"                                        
+                                                                                
+            device_info = DeviceInfo(                                           
+                identifiers={(DOMAIN, identifier)},                             
+                name=config_entry.title,                                        
+            )  
+
             entity_description = BinarySensorEntityDescription(
                 key=(protocol, id, unit, "lowBattery"),
                 device_class=BinarySensorDeviceClass.BATTERY,
@@ -161,7 +175,7 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
     _attr_available = False
 
-    fiel = None
+    field = None
 
     def __init__(
         self,
@@ -175,7 +189,7 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self.protocol = entity_description.key[0]
         self.id = entity_description.key[1]
         self.unit = entity_description.key[2]
-        if len(entity_description) >= 4:
+        if len(entity_description.key) >= 4:
             self.field = entity_description.key[3]
 
         self._attr_device_info = device_info
@@ -226,3 +240,4 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
             )
 
         self.async_write_ha_state()
+
