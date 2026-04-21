@@ -51,13 +51,14 @@ async def async_setup_entry(
             value = config_entry.options.get(key)
             _LOGGER.debug("key: %s, value: %s", key, value)
             if value == CONF_IO_PWM_OUTPUT:
-                entity_description = NumberEntityDescription(
-                    key=(config_entry.entry_id, digital_io),
+                entity_description = HomeduinoTransceiverNumberEntityDescription(
+                    key=config_entry.entry_id,
                     translation_key=CONF_IO_PWM_OUTPUT,
                     translation_placeholders={"digital_io": digital_io},
                     native_min_value=0,
                     native_max_value=255,
                     native_step=1,
+                    digital_io=digital_io,
                 )
                 entities.append(
                     HomeduinoTransceiverNumber(
@@ -66,6 +67,12 @@ async def async_setup_entry(
                 )
 
     async_add_entities(entities)
+
+
+class HomeduinoTransceiverNumberEntityDescription(
+    NumberEntityDescription, frozen_or_thawed=True
+):
+    digital_io: int
 
 
 class HomeduinoTransceiverNumber(CoordinatorEntity, RestoreNumber):
@@ -78,20 +85,15 @@ class HomeduinoTransceiverNumber(CoordinatorEntity, RestoreNumber):
         self,
         coordinator: HomeduinoCoordinator,
         device_info: DeviceInfo,
-        entity_description: NumberEntityDescription,
+        entity_description: HomeduinoTransceiverNumberEntityDescription,
     ) -> None:
         """Initialize the switch."""
         # Pass coordinator to CoordinatorEntity.
         super().__init__(coordinator, entity_description.key)
 
-        config_entry_id = entity_description.key[0]
-        self._digital_io = entity_description.key[1]
-
         self._attr_device_info = device_info
 
-        self._attr_unique_id = (
-            f"{config_entry_id}-{CONF_IO_PWM_OUTPUT}-{self._digital_io}"
-        )
+        self._attr_unique_id = f"{entity_description.key}-{CONF_IO_PWM_OUTPUT}-{entity_description.digital_io}"
 
         self.entity_description = entity_description
 
@@ -103,13 +105,15 @@ class HomeduinoTransceiverNumber(CoordinatorEntity, RestoreNumber):
         if self._homeduino.connected():
             self._attr_available = True
 
-            await self._homeduino.pin_mode(self._digital_io, HomeduinoPinMode.OUTPUT)
+            await self._homeduino.pin_mode(
+                self.entity_description.digital_io, HomeduinoPinMode.OUTPUT
+            )
 
             if (last_state := await self.async_get_last_state()) is not None:
                 last_number_data = await self.async_get_last_number_data()
                 native_value = last_number_data.native_value or 0
                 if await self._homeduino.analog_write(
-                    self._digital_io, int(native_value)
+                    self.entity_description.digital_io, int(native_value)
                 ):
                     self._attr_native_value = native_value
 
@@ -117,7 +121,9 @@ class HomeduinoTransceiverNumber(CoordinatorEntity, RestoreNumber):
 
     async def async_set_native_value(self, value: float) -> None:
         """Update the current value."""
-        if await self._homeduino.analog_write(self._digital_io, int(value)):
+        if await self._homeduino.analog_write(
+            self.entity_description.digital_io, int(value)
+        ):
             self._attr_native_value = value
 
         self.async_write_ha_state()

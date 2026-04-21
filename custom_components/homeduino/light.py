@@ -73,10 +73,12 @@ async def async_setup_entry(
             name=config_entry.title,
         )
 
-        entity_description = LightEntityDescription(
-            key=(protocol, id, unit),
+        entity_description = HomeduinoRFLightEntityDescription(
+            key=protocol,
             translation_key="rf_light",
             translation_placeholders={"unit": unit},
+            id=id,
+            unit=unit,
         )
 
         if config_entry.data.get(CONF_RF_PROTOCOL) == "dimmer1":
@@ -95,6 +97,11 @@ async def async_setup_entry(
     async_add_entities(entities)
 
 
+class HomeduinoRFLightEntityDescription(LightEntityDescription, frozen_or_thawed=True):
+    id: int
+    unit: int | None
+
+
 class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
     _attr_has_entity_name = True
     _attr_available = False
@@ -110,21 +117,21 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         self,
         coordinator: HomeduinoCoordinator,
         device_info: DeviceInfo,
-        entity_description: LightEntityDescription,
+        entity_description: HomeduinoRFLightEntityDescription,
         ignore_all: bool = False,
         repeats: int = DEFAULT_REPEATS,
     ) -> None:
         """Initialize the switch."""
         super().__init__(coordinator, entity_description.key)
 
-        self.protocol = entity_description.key[0]
-        self.protocols = [entity_description.key[0]]
-        self.id = entity_description.key[1]
-        self.unit = entity_description.key[2]
+        self.protocols = [entity_description.key]
 
         self._attr_device_info = device_info
 
-        self._attr_unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}"
+        unique_id = f"{DOMAIN}-{entity_description.key}-{entity_description.id}"
+        if entity_description.unit:
+            unique_id += f"-{entity_description.unit}"
+        self._attr_unique_id = self.unique_id
 
         self.entity_description = entity_description
         self.ignore_all = ignore_all
@@ -173,11 +180,15 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
             if self.coordinator.data.get("protocol") not in self.protocols:
                 return
 
-            if self.coordinator.data.get("values", {}).get("id") != self.id:
+            if (
+                self.coordinator.data.get("values", {}).get("id")
+                != self.entity_description.id
+            ):
                 return
 
             if (
-                self.coordinator.data.get("values", {}).get("unit") != self.unit
+                self.coordinator.data.get("values", {}).get("unit")
+                != self.entity_description.unit
                 and self.coordinator.data.get("values", {}).get("all", False) is False
             ):
                 return
@@ -217,8 +228,13 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         brightness = int(brightness / 17)
 
         if await self.coordinator.rf_send(
-            self.protocol,
-            {"id": self.id, "unit": self.unit, "state": state, "dimlevel": brightness},
+            self.entity_description.key,
+            {
+                "id": self.entity_description.id,
+                "unit": self.entity_description.unit,
+                "state": state,
+                "dimlevel": brightness,
+            },
             self.repeats,
         ):
             self._attr_is_on = True
@@ -232,8 +248,13 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         """Turn the entity off."""
         _LOGGER.debug("Turning off %s", self.name)
         if await self.coordinator.rf_send(
-            self.protocol,
-            {"id": self.id, "unit": self.unit, "state": False, "dimlevel": 0},
+            self.entity_description.key,
+            {
+                "id": self.entity_description.id,
+                "unit": self.entity_description.unit,
+                "state": False,
+                "dimlevel": 0,
+            },
             self.repeats,
         ):
             self._attr_is_on = False
@@ -252,7 +273,7 @@ class HomeduinoRFDimmer1(HomeduinoRFDimmer):
         self,
         coordinator: HomeduinoCoordinator,
         device_info: DeviceInfo,
-        entity_description: LightEntityDescription,
+        entity_description: HomeduinoRFLightEntityDescription,
         ignore_all: bool = False,
         repeats: int = DEFAULT_REPEATS,
     ) -> None:

@@ -125,11 +125,14 @@ async def async_setup_entry(
         )
 
         if protocol in ("weather4", "weather5", "weather7", "weather13", "weather19"):
-            entity_description = SensorEntityDescription(
-                key=(protocol, id, unit, "temperature"),
+            entity_description = HomeduinoRFSensorEntityDescription(
+                key=protocol,
                 device_class=SensorDeviceClass.TEMPERATURE,
                 state_class=SensorStateClass.MEASUREMENT,
                 native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+                id=id,
+                unit=unit,
+                field="temperature",
             )
 
             entities.append(
@@ -137,11 +140,14 @@ async def async_setup_entry(
             )
 
         if protocol in ("weather4", "weather5", "weather7", "weather13"):
-            entity_description = SensorEntityDescription(
-                key=(protocol, id, unit, "humidity"),
+            entity_description = HomeduinoRFSensorEntityDescription(
+                key=protocol,
                 device_class=SensorDeviceClass.HUMIDITY,
                 state_class=SensorStateClass.MEASUREMENT,
                 native_unit_of_measurement=PERCENTAGE,
+                id=id,
+                unit=unit,
+                field="humidity",
             )
 
             entities.append(
@@ -149,11 +155,14 @@ async def async_setup_entry(
             )
 
         if protocol in ("weather5",):
-            entity_description = SensorEntityDescription(
-                key=(protocol, id, unit, "avgAirspeed"),
+            entity_description = HomeduinoRFSensorEntityDescription(
+                key=protocol,
                 device_class=SensorDeviceClass.WIND_SPEED,
                 state_class=SensorStateClass.MEASUREMENT,
                 native_unit_of_measurement=UnitOfSpeed.METERS_PER_SECOND,
+                id=id,
+                unit=unit,
+                field="avgAirspeed",
             )
 
             entities.append(
@@ -161,12 +170,15 @@ async def async_setup_entry(
             )
 
         if protocol in ("weather5",):
-            entity_description = SensorEntityDescription(
-                key=(protocol, id, unit, "windGust"),
+            entity_description = HomeduinoRFSensorEntityDescription(
+                key=protocol,
                 translation_key="wind_gust",
                 device_class=SensorDeviceClass.WIND_SPEED,
                 state_class=SensorStateClass.MEASUREMENT,
                 native_unit_of_measurement=UnitOfSpeed.METERS_PER_SECOND,
+                id=id,
+                unit=unit,
+                field="windGust",
             )
 
             entities.append(
@@ -174,11 +186,14 @@ async def async_setup_entry(
             )
 
         if protocol in ("weather5",):
-            entity_description = SensorEntityDescription(
-                key=(protocol, id, unit, "windDirection"),
+            entity_description = HomeduinoRFSensorEntityDescription(
+                key=protocol,
                 device_class=SensorDeviceClass.WIND_DIRECTION,
                 state_class=SensorStateClass.MEASUREMENT_ANGLE,
                 native_unit_of_measurement=DEGREE,
+                id=id,
+                unit=unit,
+                filed="windDirection",
             )
 
             entities.append(
@@ -186,11 +201,14 @@ async def async_setup_entry(
             )
 
         if protocol in ("weather5",):
-            entity_description = SensorEntityDescription(
-                key=(protocol, id, unit, "rain"),
+            entity_description = HomeduinoRFSensorEntityDescription(
+                key=protocol,
                 device_class=SensorDeviceClass.PRECIPITATION,
                 state_class="total_increasing",
                 native_unit_of_measurement=UnitOfPrecipitationDepth.MILLIMETERS,
+                id=id,
+                unit=unit,
+                field="rain",
             )
 
             entities.append(
@@ -198,6 +216,20 @@ async def async_setup_entry(
             )
 
     async_add_entities(entities)
+
+
+class HomeduinoTransceiverSensorEntityDescription(
+    SensorEntityDescription, frozen_or_thawed=True
+):
+    io: int
+
+
+class HomeduinoRFSensorEntityDescription(
+    SensorEntityDescription, frozen_or_thawed=True
+):
+    id: int
+    unit: int | None
+    field: str
 
 
 class HomeduinoTransceiverSensor(CoordinatorEntity, SensorEntity):
@@ -327,19 +359,18 @@ class HomeduinoRFSensor(CoordinatorEntity, SensorEntity):
         self,
         coordinator: HomeduinoCoordinator,
         device_info: DeviceInfo,
-        entity_description: SensorEntityDescription,
+        entity_description: HomeduinoRFSensorEntityDescription,
     ):
         """Pass coordinator to CoordinatorEntity."""
         super().__init__(coordinator, entity_description.key)
 
-        self.protocol = entity_description.key[0]
-        self.id = entity_description.key[1]
-        self.unit = entity_description.key[2]
-        self.field = entity_description.key[3]
-
         self._attr_device_info = device_info
 
-        self._attr_unique_id = f"{self.protocol}-{self.id}-{self.unit}-{self.field}"
+        unique_id = f"{entity_description.key}-{entity_description.id}"
+        if entity_description.unit:
+            unique_id += f"-{entity_description.unit}"
+        unique_id += f"-{entity_description.field}"
+        self._attr_unique_id = unique_id
 
         self.entity_description = entity_description
 
@@ -373,19 +404,19 @@ class HomeduinoRFSensor(CoordinatorEntity, SensorEntity):
             if not self.coordinator.data:
                 return
 
-            if self.coordinator.data.get("protocol") != self.protocol:
+            if self.coordinator.data.get("protocol") != self.entity_description.key:
                 return
 
             values = self.coordinator.data.get("values", {})
-            if values.get("id") != self.id:
+            if values.get("id") != self.entity_description.id:
                 return
 
-            if values.get("unit") != self.unit:
+            if values.get("unit") != self.entity_description.unit:
                 return
 
             _LOGGER.debug(self.coordinator.data)
             try:
-                self._attr_native_value = values.get(self.field)
+                self._attr_native_value = values.get(self.entity_description.field)
                 self._attr_available = True
             except ValueError as ex:
                 _LOGGER.error(ex)

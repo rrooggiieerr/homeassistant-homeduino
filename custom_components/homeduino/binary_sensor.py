@@ -58,10 +58,11 @@ async def async_setup_entry(
             key = CONF_IO_DIGITAL_ + str(digital_io)
             value = config_entry.options.get(key)
             if value == CONF_IO_DIGITAL_INPUT:
-                entity_description = BinarySensorEntityDescription(
-                    key=(config_entry.entry_id, digital_io),
+                entity_description = HomeduinoTransceiverBinarySensorEntityDescription(
+                    key=config_entry.entry_id,
                     translation_key=CONF_IO_DIGITAL_INPUT,
                     translation_placeholders={"digital_io": digital_io},
+                    digital_io=digital_io,
                 )
                 entities.append(
                     HomeduinoTransceiverBinarySensor(
@@ -92,9 +93,11 @@ async def async_setup_entry(
             elif protocol.startswith("pir"):
                 device_class = BinarySensorDeviceClass.MOTION
 
-            entity_description = BinarySensorEntityDescription(
-                key=(protocol, id, unit),
+            entity_description = HomeduinoRFBinarySensorEntityDescription(
+                key=protocol,
                 device_class=device_class,
+                id=id,
+                unit=unit,
             )
 
             entities.append(
@@ -102,9 +105,12 @@ async def async_setup_entry(
             )
 
         if protocol in ["contact4", "weather4", "weather5", "weather7", "weather13"]:
-            entity_description = BinarySensorEntityDescription(
-                key=(protocol, id, unit, "lowBattery"),
+            entity_description = HomeduinoRFBinarySensorEntityDescription(
+                key=protocol,
                 device_class=BinarySensorDeviceClass.BATTERY,
+                id=id,
+                unit=unit,
+                field="lowBattery",
             )
 
             entities.append(
@@ -112,6 +118,20 @@ async def async_setup_entry(
             )
 
     async_add_entities(entities)
+
+
+class HomeduinoTransceiverBinarySensorEntityDescription(
+    BinarySensorEntityDescription, frozen_or_thawed=True
+):
+    digital_io: int
+
+
+class HomeduinoRFBinarySensorEntityDescription(
+    BinarySensorEntityDescription, frozen_or_thawed=True
+):
+    id: int
+    unit: int | None
+    field: str | None = None
 
 
 class HomeduinoTransceiverBinarySensor(CoordinatorEntity, BinarySensorEntity):
@@ -122,18 +142,14 @@ class HomeduinoTransceiverBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self,
         coordinator: HomeduinoCoordinator,
         device_info: DeviceInfo,
-        entity_description: BinarySensorEntityDescription,
+        entity_description: HomeduinoTransceiverBinarySensorEntityDescription,
     ):
         """Pass coordinator to CoordinatorEntity."""
         super().__init__(coordinator, entity_description.key)
 
         self._attr_device_info = device_info
 
-        self._config_entry_id = entity_description.key[0]
-        self._digital_io = entity_description.key[1]
-        self._attr_unique_id = (
-            f"{self._config_entry_id}-{CONF_IO_DIGITAL_INPUT}-{self._digital_io}"
-        )
+        self._attr_unique_id = f"{entity_description.key}-{CONF_IO_DIGITAL_INPUT}-{entity_description.digital_io}"
 
         self.entity_description = entity_description
 
@@ -142,7 +158,7 @@ class HomeduinoTransceiverBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
         homeduino = self.coordinator.get_transceiver(self.device_entry.id)
         await homeduino.add_digital_read_callback(
-            self._digital_io, self._handle_digital_read_update
+            self.entity_description.digital_io, self._handle_digital_read_update
         )
 
         if homeduino.connected():
@@ -167,22 +183,18 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self,
         coordinator: HomeduinoCoordinator,
         device_info: DeviceInfo,
-        entity_description: BinarySensorEntityDescription,
+        entity_description: HomeduinoRFBinarySensorEntityDescription,
     ) -> None:
         """Initialize the button."""
         super().__init__(coordinator, entity_description.key)
 
-        self.protocol = entity_description.key[0]
-        self.id = entity_description.key[1]
-        self.unit = entity_description.key[2]
-        if len(entity_description) >= 4:
-            self.field = entity_description.key[3]
-
         self._attr_device_info = device_info
 
-        unique_id = f"{DOMAIN}-{self.protocol}-{self.id}-{self.unit}"
-        if self.field:
-            unique_id += f"-{self.field}"
+        unique_id = f"{DOMAIN}-{entity_description.protocol}-{entity_description.id}"
+        if entity_description.unit is not None:
+            unique_id += f"-{entity_description.unit}"
+        if entity_description.field:
+            unique_id += f"-{entity_description.field}"
         self._attr_unique_id = unique_id
 
         self.entity_description = entity_description
@@ -210,19 +222,27 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
             if not self.coordinator.data:
                 return
 
-            if self.coordinator.data.get("protocol") != self.protocol:
+            if self.coordinator.data.get("protocol") != self.entity_description.key:
                 return
 
-            if self.coordinator.data.get("values", {}).get("id") != self.id:
+            if (
+                self.coordinator.data.get("values", {}).get("id")
+                != self.entity_description.id
+            ):
                 return
 
-            if self.coordinator.data.get("values", {}).get("unit") != self.unit:
+            if (
+                self.coordinator.data.get("values", {}).get("unit")
+                != self.entity_description.unit
+            ):
                 return
 
             _LOGGER.debug(self.coordinator.data)
 
             self._attr_is_on = self.coordinator.data.get("values", {}).get(
-                self.field if self.field else "state"
+                self.entity_description.field
+                if self.entity_description.field
+                else "state"
             )
 
         self.async_write_ha_state()
