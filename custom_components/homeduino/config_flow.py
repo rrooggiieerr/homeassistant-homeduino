@@ -8,9 +8,13 @@ from typing import Any
 
 import serial.tools.list_ports
 import voluptuous as vol
-from homeassistant.config_entries import ConfigEntry, ConfigFlow, OptionsFlow
+from homeassistant.config_entries import (
+    ConfigEntry,
+    ConfigFlow,
+    ConfigFlowResult,
+    OptionsFlow,
+)
 from homeassistant.core import callback
-from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.selector import (
     BooleanSelector,
     NumberSelector,
@@ -82,7 +86,7 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
 
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Handle the initial step."""
         # Test if we already have a Homeduino transceiver configured
         if not HomeduinoCoordinator.instance(self.hass).has_transceiver():
@@ -95,13 +99,13 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
 
     async def async_step_setup_transceiver(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Handle the setup transceiver step."""
         return await self.async_step_setup_serial(user_input)
 
     async def async_step_setup_serial(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Handle the setup transceiver serial step."""
         errors: dict[str, str] = {}
 
@@ -305,7 +309,7 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
 
     async def async_step_setup_rf_device(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Handle the setup rf switch step."""
         errors: dict[str, str] = {}
 
@@ -438,7 +442,7 @@ class HomeduinoOptionsFlowHandler(OptionsFlow):
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Manage the options."""
         errors: dict[str, str] = {}
 
@@ -531,13 +535,13 @@ class HomeduinoOptionsFlowHandler(OptionsFlow):
 
     async def async_step_transceiver(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Manage the options."""
         return await self.async_step_init(user_input)
 
     async def async_step_rf_device(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Manage the options."""
         return await self.async_step_init(user_input)
 
