@@ -7,6 +7,7 @@ from homeassistant.components.event import (
     EventEntity,
     EventEntityDescription,
 )
+from homeassistant.components.event.const import DoorbellEventType
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.device_registry import DeviceInfo
@@ -64,6 +65,7 @@ async def async_setup_entry(
             translation_key="rf_doorbell",
             translation_placeholders={"unit": unit},
             device_class=EventDeviceClass.DOORBELL,
+            event_types=[DoorbellEventType.RING],
         )
 
         entities.append(HomeduinoRFEvent(coordinator, device_info, entity_description))
