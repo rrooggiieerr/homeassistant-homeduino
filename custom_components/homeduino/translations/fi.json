@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Laite on jo määritetty"
+    },
+    "error": {
+      "cannot_connect": "Yhteyden muodostaminen epäonnistui",
+      "nonexisting_serial_port": "Sarjaporttia ei ole olemassa",
+      "unknown": "Odottamaton virhe"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "Laitteen tunnus",
+          "rf_id_ignore_all": "Ohita kaikki",
+          "rf_protocol": "pöytäkirja",
+          "rf_unit": "Laiteyksikkö"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Ota käyttöön, kun RF-laite jättää huomioimatta RF-kaukosäätimistä usein löytyvän all/master-painikkeen."
+        },
+        "title": "RF-laite"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "Ota analoginen tulo 0 käyttöön",
+          "analog_1": "Ota analoginen tulo käyttöön 1",
+          "analog_2": "Ota analoginen tulo käyttöön 2",
+          "analog_3": "Ota analoginen tulo käyttöön 3",
+          "analog_4": "Ota analoginen tulo käyttöön 4",
+          "analog_5": "Ota analoginen tulo käyttöön 5",
+          "analog_6": "Ota analoginen tulo käyttöön 6",
+          "analog_7": "Ota analoginen tulo käyttöön 7",
+          "baud_rate": "Tiedonsiirtonopeus",
+          "digital_10": "Digitaalinen IO 10",
+          "digital_11": "Digitaalinen IO 11",
+          "digital_12": "Digitaalinen IO 12",
+          "digital_13": "Digitaalinen IO 13",
+          "digital_2": "Digitaalinen IO 2",
+          "digital_3": "Digitaalinen IO 3",
+          "digital_4": "Digitaalinen IO 4",
+          "digital_5": "Digitaalinen IO 5",
+          "digital_6": "Digitaalinen IO 6",
+          "digital_7": "Digitaalinen IO 7",
+          "digital_8": "Digitaalinen IO 8",
+          "digital_9": "Digitaalinen IO 9",
+          "serial_port": "Sarjaportti"
+        },
+        "data_description": {
+          "baud_rate": "Homeduino-lähetin-vastaanottimesi määritetty siirtonopeus.",
+          "serial_port": "Sarjaportti, johon Homeduino Transceiver on kytketty."
+        },
+        "title": "Homeduino lähetin-vastaanotin"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF-laite",
+          "setup_transceiver": "Homeduino lähetin-vastaanotin"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Digitaalinen tulo {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Valo {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM-lähtö {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analoginen tulo {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Kosteus"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Lämpötila"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Kosteus"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Lämpötila"
+      },
+      "wind_gust": {
+        "name": "Tuulenpuuska"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Digitaalinen lähtö {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Vaihda {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ohita kaikki",
+          "rf_repeats": "RF toistaa"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Ota käyttöön, kun RF-laite jättää huomioimatta RF-kaukosäätimistä usein löytyvän all/master-painikkeen.",
+          "rf_repeats": "Kuinka monta kertaa RF-signaali on toistettava."
+        },
+        "title": "Homeduino RF-laitevaihtoehdot"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Ota analoginen tulo 0 käyttöön",
+          "analog_1": "Ota analoginen tulo käyttöön 1",
+          "analog_2": "Ota analoginen tulo käyttöön 2",
+          "analog_3": "Ota analoginen tulo käyttöön 3",
+          "analog_4": "Ota analoginen tulo käyttöön 4",
+          "analog_5": "Ota analoginen tulo käyttöön 5",
+          "analog_6": "Ota analoginen tulo käyttöön 6",
+          "analog_7": "Ota analoginen tulo käyttöön 7",
+          "digital_10": "Digitaalinen IO 10",
+          "digital_11": "Digitaalinen IO 11",
+          "digital_12": "Digitaalinen IO 12",
+          "digital_13": "Digitaalinen IO 13",
+          "digital_2": "Digitaalinen IO 2",
+          "digital_3": "Digitaalinen IO 3",
+          "digital_4": "Digitaalinen IO 4",
+          "digital_5": "Digitaalinen IO 5",
+          "digital_6": "Digitaalinen IO 6",
+          "digital_7": "Digitaalinen IO 7",
+          "digital_8": "Digitaalinen IO 8",
+          "digital_9": "Digitaalinen IO 9"
+        },
+        "title": "Homeduino-lähetin-vastaanottimen vaihtoehdot"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF-laite",
+        "transceiver": "Homeduino lähetin-vastaanotin"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-lankaväylä",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Digitaalinen tulo",
+        "digital_output": "Digitaalinen lähtö",
+        "none": "Ei yhdistetty",
+        "pwm_output": "PWM-lähtö",
+        "rf_receive": "RF-vastaanotto",
+        "rf_send": "RF-lähetys"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "Lähettää raaka-RF-komennon.",
+      "fields": {
+        "command": {
+          "description": "Lähetettävä komento.",
+          "name": "Komento"
+        },
+        "repeats": {
+          "description": "Kuinka monta kertaa RF-komento on lähetettävä.",
+          "name": "Toistaa"
+        }
+      },
+      "name": "Lähetä raaka RF-komento"
+    },
+    "rf_send": {
+      "description": "Lähettää RF-komennon.",
+      "fields": {
+        "all": {
+          "description": "Jos kaikki-lippu on asetettava, protokollan on tuettava sitä.",
+          "name": "Kaikki"
+        },
+        "id": {
+          "description": "Laitteen tunnus.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Käytettävä protokolla.",
+          "name": "pöytäkirja"
+        },
+        "repeats": {
+          "description": "Kuinka monta kertaa RF-komento on lähetettävä.",
+          "name": "Toistaa"
+        },
+        "state": {
+          "description": "Laitteelle lähetettävä tila.",
+          "name": "Osavaltio"
+        },
+        "unit": {
+          "description": "Laiteyksikkö.",
+          "name": "Yksikkö"
+        }
+      },
+      "name": "Lähetä RF-komento"
+    },
+    "send": {
+      "description": "Lähettää komennon Homeduinolle.",
+      "fields": {
+        "command": {
+          "description": "Lähetettävä komento.",
+          "name": "Komento"
+        },
+        "device_id": {
+          "description": "Homeduino-lähetin-vastaanotin, johon komento lähetetään.",
+          "name": "Laite"
+        }
+      },
+      "name": "Lähetä komento"
+    }
+  }
+}

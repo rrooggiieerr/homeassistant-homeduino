@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Устройството вече е конфигурирано"
+    },
+    "error": {
+      "cannot_connect": "Неуспешно свързване",
+      "nonexisting_serial_port": "Сериен порт не съществува",
+      "unknown": "Неочаквана грешка"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "ID на устройството",
+          "rf_id_ignore_all": "Игнорирайте всички",
+          "rf_protocol": "протокол",
+          "rf_unit": "Устройство единица"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Активирайте, когато вашето RF устройство игнорира бутона all/master, който често се намира на RF дистанционните управления."
+        },
+        "title": "RF устройство"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "Активиране на аналогов вход 0",
+          "analog_1": "Активиране на аналогов вход 1",
+          "analog_2": "Активиране на аналогов вход 2",
+          "analog_3": "Активиране на аналогов вход 3",
+          "analog_4": "Активиране на аналогов вход 4",
+          "analog_5": "Активиране на аналогов вход 5",
+          "analog_6": "Активиране на аналогов вход 6",
+          "analog_7": "Активиране на аналогов вход 7",
+          "baud_rate": "Скорост на предаване",
+          "digital_10": "Цифров IO 10",
+          "digital_11": "Цифров IO 11",
+          "digital_12": "Цифров IO 12",
+          "digital_13": "Цифров IO 13",
+          "digital_2": "Цифров IO 2",
+          "digital_3": "Цифров IO 3",
+          "digital_4": "Цифров IO 4",
+          "digital_5": "Цифров IO 5",
+          "digital_6": "Цифров IO 6",
+          "digital_7": "Цифров IO 7",
+          "digital_8": "Цифров IO 8",
+          "digital_9": "Цифров IO 9",
+          "serial_port": "Сериен порт"
+        },
+        "data_description": {
+          "baud_rate": "Конфигурираната скорост на предаване на вашия Homeduino трансивър.",
+          "serial_port": "Серийният порт, към който е свързан вашият трансивър Homeduino."
+        },
+        "title": "Homeduino трансивър"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF устройство",
+          "setup_transceiver": "Homeduino трансивър"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Цифров вход {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Светлина {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "ШИМ изход {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Аналогов вход {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Влажност"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Температура"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Влажност"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Температура"
+      },
+      "wind_gust": {
+        "name": "Порив на вятъра"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Цифров изход {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Превключете {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Игнорирайте всички",
+          "rf_repeats": "RF повтаря"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Активирайте, когато вашето RF устройство игнорира бутона all/master, който често се намира на RF дистанционните управления.",
+          "rf_repeats": "Броят пъти, които RF сигналът трябва да бъде повторен."
+        },
+        "title": "Опции на Homeduino RF устройство"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Активиране на аналогов вход 0",
+          "analog_1": "Активиране на аналогов вход 1",
+          "analog_2": "Активиране на аналогов вход 2",
+          "analog_3": "Активиране на аналогов вход 3",
+          "analog_4": "Активиране на аналогов вход 4",
+          "analog_5": "Активиране на аналогов вход 5",
+          "analog_6": "Активиране на аналогов вход 6",
+          "analog_7": "Активиране на аналогов вход 7",
+          "digital_10": "Цифров IO 10",
+          "digital_11": "Цифров IO 11",
+          "digital_12": "Цифров IO 12",
+          "digital_13": "Цифров IO 13",
+          "digital_2": "Цифров IO 2",
+          "digital_3": "Цифров IO 3",
+          "digital_4": "Цифров IO 4",
+          "digital_5": "Цифров IO 5",
+          "digital_6": "Цифров IO 6",
+          "digital_7": "Цифров IO 7",
+          "digital_8": "Цифров IO 8",
+          "digital_9": "Цифров IO 9"
+        },
+        "title": "Опции за трансивър Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF устройство",
+        "transceiver": "Homeduino трансивър"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-проводна шина",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Цифров вход",
+        "digital_output": "Цифров изход",
+        "none": "Не е свързан",
+        "pwm_output": "PWM изход",
+        "rf_receive": "RF приемане",
+        "rf_send": "RF изпращане"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "Изпраща необработена RF команда.",
+      "fields": {
+        "command": {
+          "description": "Команда за изпращане.",
+          "name": "командване"
+        },
+        "repeats": {
+          "description": "Броят времена, през които RF командата трябва да бъде изпратена.",
+          "name": "Повтаря се"
+        }
+      },
+      "name": "Изпратете необработена RF команда"
+    },
+    "rf_send": {
+      "description": "Изпраща RF команда.",
+      "fields": {
+        "all": {
+          "description": "Ако флагът за всички трябва да бъде зададен, трябва да се поддържа от протокола.",
+          "name": "Всички"
+        },
+        "id": {
+          "description": "ID на устройството.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Протоколът за използване.",
+          "name": "протокол"
+        },
+        "repeats": {
+          "description": "Броят времена, през които RF командата трябва да бъде изпратена.",
+          "name": "Повтаря се"
+        },
+        "state": {
+          "description": "Състоянието за изпращане към устройството.",
+          "name": "състояние"
+        },
+        "unit": {
+          "description": "Устройство единица.",
+          "name": "единица"
+        }
+      },
+      "name": "Изпратете RF команда"
+    },
+    "send": {
+      "description": "Изпраща команда до Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Команда за изпращане.",
+          "name": "командване"
+        },
+        "device_id": {
+          "description": "Трансивърът Homeduino, към който да изпратите командата.",
+          "name": "устройство"
+        }
+      },
+      "name": "Изпратете команда"
+    }
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "მოწყობილობა უკვე კონფიგურირებულია"
+    },
+    "error": {
+      "cannot_connect": "დაკავშირება ვერ მოხერხდა",
+      "nonexisting_serial_port": "სერიული პორტი არ არსებობს",
+      "unknown": "მოულოდნელი შეცდომა"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "მოწყობილობის ID",
+          "rf_id_ignore_all": "იგნორირება ყველა",
+          "rf_protocol": "პროტოკოლი",
+          "rf_unit": "მოწყობილობის ერთეული"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "ჩართეთ, როდესაც თქვენი RF მოწყობილობა უგულებელყოფს ყველა/მასტერ ღილაკს, რომელიც ხშირად გვხვდება RF დისტანციურ სამართავზე."
+        },
+        "title": "RF მოწყობილობა"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "ანალოგური შეყვანის ჩართვა 0",
+          "analog_1": "ანალოგური შეყვანის ჩართვა 1",
+          "analog_2": "ანალოგური შეყვანის ჩართვა 2",
+          "analog_3": "ანალოგური შეყვანის ჩართვა 3",
+          "analog_4": "ანალოგური შეყვანის ჩართვა 4",
+          "analog_5": "ანალოგური შეყვანის ჩართვა 5",
+          "analog_6": "ანალოგური შეყვანის ჩართვა 6",
+          "analog_7": "ანალოგური შეყვანის ჩართვა 7",
+          "baud_rate": "ბაუდის მაჩვენებელი",
+          "digital_10": "ციფრული IO 10",
+          "digital_11": "ციფრული IO 11",
+          "digital_12": "ციფრული IO 12",
+          "digital_13": "ციფრული IO 13",
+          "digital_2": "ციფრული IO 2",
+          "digital_3": "ციფრული IO 3",
+          "digital_4": "ციფრული IO 4",
+          "digital_5": "ციფრული IO 5",
+          "digital_6": "ციფრული IO 6",
+          "digital_7": "ციფრული IO 7",
+          "digital_8": "ციფრული IO 8",
+          "digital_9": "ციფრული IO 9",
+          "serial_port": "სერიული პორტი"
+        },
+        "data_description": {
+          "baud_rate": "თქვენი Homeduino გადამცემის კონფიგურირებული ბაუდის სიხშირე.",
+          "serial_port": "სერიული პორტი, რომელზეც დაკავშირებულია თქვენი Homeduino გადამცემი."
+        },
+        "title": "Homeduino გადამცემი"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF მოწყობილობა",
+          "setup_transceiver": "Homeduino გადამცემი"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "ციფრული შეყვანა {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "მსუბუქი {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM გამომავალი {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "ანალოგური შეყვანა {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} ტენიანობა"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} ტემპერატურა"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} ტენიანობა"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} ტემპერატურა"
+      },
+      "wind_gust": {
+        "name": "ქარის ნაკადი"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "ციფრული გამომავალი {digital_io}"
+      },
+      "rf_switch": {
+        "name": "გადართვა {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "იგნორირება ყველა",
+          "rf_repeats": "RF მეორდება"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "ჩართეთ, როდესაც თქვენი RF მოწყობილობა უგულებელყოფს ყველა/მასტერ ღილაკს, რომელიც ხშირად გვხვდება RF დისტანციურ სამართავზე.",
+          "rf_repeats": "რამდენჯერ უნდა განმეორდეს RF სიგნალი."
+        },
+        "title": "Homeduino RF მოწყობილობის პარამეტრები"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "ანალოგური შეყვანის ჩართვა 0",
+          "analog_1": "ანალოგური შეყვანის ჩართვა 1",
+          "analog_2": "ანალოგური შეყვანის ჩართვა 2",
+          "analog_3": "ანალოგური შეყვანის ჩართვა 3",
+          "analog_4": "ანალოგური შეყვანის ჩართვა 4",
+          "analog_5": "ანალოგური შეყვანის ჩართვა 5",
+          "analog_6": "ანალოგური შეყვანის ჩართვა 6",
+          "analog_7": "ანალოგური შეყვანის ჩართვა 7",
+          "digital_10": "ციფრული IO 10",
+          "digital_11": "ციფრული IO 11",
+          "digital_12": "ციფრული IO 12",
+          "digital_13": "ციფრული IO 13",
+          "digital_2": "ციფრული IO 2",
+          "digital_3": "ციფრული IO 3",
+          "digital_4": "ციფრული IO 4",
+          "digital_5": "ციფრული IO 5",
+          "digital_6": "ციფრული IO 6",
+          "digital_7": "ციფრული IO 7",
+          "digital_8": "ციფრული IO 8",
+          "digital_9": "ციფრული IO 9"
+        },
+        "title": "Homeduino გადამცემის პარამეტრები"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF მოწყობილობა",
+        "transceiver": "Homeduino გადამცემი"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-მავთულის ავტობუსი",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "ციფრული შეყვანა",
+        "digital_output": "ციფრული გამომავალი",
+        "none": "არ არის დაკავშირებული",
+        "pwm_output": "PWM გამომავალი",
+        "rf_receive": "RF მიღება",
+        "rf_send": "RF გაგზავნა"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "აგზავნის დაუმუშავებელ RF ბრძანებას.",
+      "fields": {
+        "command": {
+          "description": "გაგზავნის ბრძანება.",
+          "name": "ბრძანება"
+        },
+        "repeats": {
+          "description": "რამდენი დრო სჭირდება RF ბრძანების გაგზავნას.",
+          "name": "მეორდება"
+        }
+      },
+      "name": "გაგზავნეთ დაუმუშავებელი RF ბრძანება"
+    },
+    "rf_send": {
+      "description": "აგზავნის RF ბრძანებას.",
+      "fields": {
+        "all": {
+          "description": "თუ საჭიროა ყველა დროშის დაყენება, უნდა იყოს მხარდაჭერილი პროტოკოლით.",
+          "name": "ყველა"
+        },
+        "id": {
+          "description": "მოწყობილობის ID.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "გამოსაყენებელი პროტოკოლი.",
+          "name": "პროტოკოლი"
+        },
+        "repeats": {
+          "description": "რამდენი დრო სჭირდება RF ბრძანების გაგზავნას.",
+          "name": "მეორდება"
+        },
+        "state": {
+          "description": "მოწყობილობაზე გაგზავნის მდგომარეობა.",
+          "name": "სახელმწიფო"
+        },
+        "unit": {
+          "description": "მოწყობილობის ერთეული.",
+          "name": "ერთეული"
+        }
+      },
+      "name": "გაგზავნეთ RF ბრძანება"
+    },
+    "send": {
+      "description": "უგზავნის ბრძანებას Homeduino-ში.",
+      "fields": {
+        "command": {
+          "description": "გაგზავნის ბრძანება.",
+          "name": "ბრძანება"
+        },
+        "device_id": {
+          "description": "Homeduino გადამცემი ბრძანების გასაგზავნად.",
+          "name": "მოწყობილობა"
+        }
+      },
+      "name": "ბრძანების გაგზავნა"
+    }
+  }
+}

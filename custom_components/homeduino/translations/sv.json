@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Enheten är redan konfigurerad"
+    },
+    "error": {
+      "cannot_connect": "Det gick inte att ansluta",
+      "nonexisting_serial_port": "Seriell port finns inte",
+      "unknown": "Oväntat fel"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "Enhets-ID",
+          "rf_id_ignore_all": "Ignorera alla",
+          "rf_protocol": "Protokoll",
+          "rf_unit": "Enhetsenhet"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktivera när din RF-enhet ignorerar all/master-knappen som ofta finns på RF-fjärrkontroller."
+        },
+        "title": "RF-enhet"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "Aktivera analog ingång 0",
+          "analog_1": "Aktivera analog ingång 1",
+          "analog_2": "Aktivera analog ingång 2",
+          "analog_3": "Aktivera analog ingång 3",
+          "analog_4": "Aktivera analog ingång 4",
+          "analog_5": "Aktivera analog ingång 5",
+          "analog_6": "Aktivera analog ingång 6",
+          "analog_7": "Aktivera analog ingång 7",
+          "baud_rate": "Baudhastighet",
+          "digital_10": "Digital IO 10",
+          "digital_11": "Digital IO 11",
+          "digital_12": "Digital IO 12",
+          "digital_13": "Digital IO 13",
+          "digital_2": "Digital IO 2",
+          "digital_3": "Digital IO 3",
+          "digital_4": "Digital IO 4",
+          "digital_5": "Digital IO 5",
+          "digital_6": "Digital IO 6",
+          "digital_7": "Digital IO 7",
+          "digital_8": "Digital IO 8",
+          "digital_9": "Digital IO 9",
+          "serial_port": "Seriell port"
+        },
+        "data_description": {
+          "baud_rate": "Den konfigurerade baudhastigheten för din Homeduino Transceiver.",
+          "serial_port": "Serieporten som din Homeduino Transceiver är ansluten till."
+        },
+        "title": "Homeduino Transceiver"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF-enhet",
+          "setup_transceiver": "Homeduino Transceiver"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Digital ingång {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Ljus {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM-utgång {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analog ingång {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Luftfuktighet"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Temperatur"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Luftfuktighet"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Temperatur"
+      },
+      "wind_gust": {
+        "name": "Vindby"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Digital utgång {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Byt {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ignorera alla",
+          "rf_repeats": "RF upprepas"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktivera när din RF-enhet ignorerar all/master-knappen som ofta finns på RF-fjärrkontroller.",
+          "rf_repeats": "Antalet gånger RF-signalen behöver upprepas."
+        },
+        "title": "Alternativ för Homeduino RF-enhet"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Aktivera analog ingång 0",
+          "analog_1": "Aktivera analog ingång 1",
+          "analog_2": "Aktivera analog ingång 2",
+          "analog_3": "Aktivera analog ingång 3",
+          "analog_4": "Aktivera analog ingång 4",
+          "analog_5": "Aktivera analog ingång 5",
+          "analog_6": "Aktivera analog ingång 6",
+          "analog_7": "Aktivera analog ingång 7",
+          "digital_10": "Digital IO 10",
+          "digital_11": "Digital IO 11",
+          "digital_12": "Digital IO 12",
+          "digital_13": "Digital IO 13",
+          "digital_2": "Digital IO 2",
+          "digital_3": "Digital IO 3",
+          "digital_4": "Digital IO 4",
+          "digital_5": "Digital IO 5",
+          "digital_6": "Digital IO 6",
+          "digital_7": "Digital IO 7",
+          "digital_8": "Digital IO 8",
+          "digital_9": "Digital IO 9"
+        },
+        "title": "Alternativ för Homeduino Transceiver"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF-enhet",
+        "transceiver": "Homeduino Transceiver"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-trådsbuss",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Digital ingång",
+        "digital_output": "Digital utgång",
+        "none": "Ej ansluten",
+        "pwm_output": "PWM-utgång",
+        "rf_receive": "RF-mottagning",
+        "rf_send": "RF-sändning"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "Skickar ett rått RF-kommando.",
+      "fields": {
+        "command": {
+          "description": "Ett kommando att skicka.",
+          "name": "Kommando"
+        },
+        "repeats": {
+          "description": "Antalet gånger som RF-kommandot behöver skickas.",
+          "name": "Upprepas"
+        }
+      },
+      "name": "Skicka rått RF-kommando"
+    },
+    "rf_send": {
+      "description": "Skickar ett RF-kommando.",
+      "fields": {
+        "all": {
+          "description": "Om flaggan för alla måste ställas in, måste den stödjas av protokollet.",
+          "name": "Alla"
+        },
+        "id": {
+          "description": "Enhets-ID.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Protokollet att använda.",
+          "name": "Protokoll"
+        },
+        "repeats": {
+          "description": "Antalet gånger som RF-kommandot behöver skickas.",
+          "name": "Upprepas"
+        },
+        "state": {
+          "description": "Tillståndet att skicka till enheten.",
+          "name": "Ange"
+        },
+        "unit": {
+          "description": "Enhetsenhet.",
+          "name": "Enhet"
+        }
+      },
+      "name": "Skicka RF-kommando"
+    },
+    "send": {
+      "description": "Skickar ett kommando till Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Ett kommando att skicka.",
+          "name": "Kommando"
+        },
+        "device_id": {
+          "description": "Homeduino-sändaren att skicka kommandot till.",
+          "name": "Anordning"
+        }
+      },
+      "name": "Skicka kommando"
+    }
+  }
+}
