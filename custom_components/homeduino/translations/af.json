@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Toestel is reeds opgestel"
+    },
+    "error": {
+      "cannot_connect": "Kon nie koppel nie",
+      "nonexisting_serial_port": "Seriële poort bestaan ​​nie",
+      "unknown": "Onverwagte fout"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "Toestel-ID",
+          "rf_id_ignore_all": "Ignoreer alles",
+          "rf_protocol": "Protokol",
+          "rf_unit": "Toestel eenheid"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktiveer wanneer jou RF-toestel die all/master-knoppie ignoreer wat dikwels op RF-afstandbeheerders gevind word."
+        },
+        "title": "RF-toestel"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "Aktiveer analoog invoer 0",
+          "analog_1": "Aktiveer analoog invoer 1",
+          "analog_2": "Aktiveer analoog invoer 2",
+          "analog_3": "Aktiveer analoog invoer 3",
+          "analog_4": "Aktiveer analoog invoer 4",
+          "analog_5": "Aktiveer analoog invoer 5",
+          "analog_6": "Aktiveer analoog invoer 6",
+          "analog_7": "Aktiveer analoog invoer 7",
+          "baud_rate": "Baud rate",
+          "digital_10": "Digitale IO 10",
+          "digital_11": "Digitale IO 11",
+          "digital_12": "Digitale IO 12",
+          "digital_13": "Digitale IO 13",
+          "digital_2": "Digitale IO 2",
+          "digital_3": "Digitale IO 3",
+          "digital_4": "Digitale IO 4",
+          "digital_5": "Digitale IO 5",
+          "digital_6": "Digitale IO 6",
+          "digital_7": "Digitale IO 7",
+          "digital_8": "Digitale IO 8",
+          "digital_9": "Digitale IO 9",
+          "serial_port": "Seriepoort"
+        },
+        "data_description": {
+          "baud_rate": "Die gekonfigureerde baud rate van jou Homeduino Transceiver.",
+          "serial_port": "Die seriepoort waaraan jou Homeduino-senderontvanger gekoppel is."
+        },
+        "title": "Homeduino-ontvanger"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF-toestel",
+          "setup_transceiver": "Homeduino-ontvanger"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Digitale invoer {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Lig {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM-uitvoer {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analoog invoer {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Humiditeit"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} temperatuur"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Humiditeit"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} temperatuur"
+      },
+      "wind_gust": {
+        "name": "Windstoot"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Digitale uitvoer {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Skakel {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ignoreer alles",
+          "rf_repeats": "RF herhaal"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktiveer wanneer jou RF-toestel die all/master-knoppie ignoreer wat dikwels op RF-afstandbeheerders gevind word.",
+          "rf_repeats": "Die aantal kere wat die RF-sein herhaal moet word."
+        },
+        "title": "Homeduino RF-toestel opsies"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Aktiveer analoog invoer 0",
+          "analog_1": "Aktiveer analoog invoer 1",
+          "analog_2": "Aktiveer analoog invoer 2",
+          "analog_3": "Aktiveer analoog invoer 3",
+          "analog_4": "Aktiveer analoog invoer 4",
+          "analog_5": "Aktiveer analoog invoer 5",
+          "analog_6": "Aktiveer analoog invoer 6",
+          "analog_7": "Aktiveer analoog invoer 7",
+          "digital_10": "Digitale IO 10",
+          "digital_11": "Digitale IO 11",
+          "digital_12": "Digitale IO 12",
+          "digital_13": "Digitale IO 13",
+          "digital_2": "Digitale IO 2",
+          "digital_3": "Digitale IO 3",
+          "digital_4": "Digitale IO 4",
+          "digital_5": "Digitale IO 5",
+          "digital_6": "Digitale IO 6",
+          "digital_7": "Digitale IO 7",
+          "digital_8": "Digitale IO 8",
+          "digital_9": "Digitale IO 9"
+        },
+        "title": "Homeduino Transceiver opsies"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF-toestel",
+        "transceiver": "Homeduino-ontvanger"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-draad bus",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Digitale invoer",
+        "digital_output": "Digitale uitvoer",
+        "none": "Nie gekoppel nie",
+        "pwm_output": "PWM-uitvoer",
+        "rf_receive": "RF Ontvang",
+        "rf_send": "RF Stuur"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "Stuur 'n rou RF-opdrag.",
+      "fields": {
+        "command": {
+          "description": "'n Opdrag om te stuur.",
+          "name": "Bevel"
+        },
+        "repeats": {
+          "description": "Die aantal kere wat die RF-opdrag gestuur moet word.",
+          "name": "Herhaal"
+        }
+      },
+      "name": "Stuur rou RF-opdrag"
+    },
+    "rf_send": {
+      "description": "Stuur 'n RF-opdrag.",
+      "fields": {
+        "all": {
+          "description": "As die alle vlag gestel moet word, moet dit deur die protokol ondersteun word.",
+          "name": "Almal"
+        },
+        "id": {
+          "description": "Toestel-ID.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Die protokol om te gebruik.",
+          "name": "Protokol"
+        },
+        "repeats": {
+          "description": "Die aantal kere wat die RF-opdrag gestuur moet word.",
+          "name": "Herhaal"
+        },
+        "state": {
+          "description": "Die staat om na die toestel te stuur.",
+          "name": "Staat"
+        },
+        "unit": {
+          "description": "Toestel Eenheid.",
+          "name": "Eenheid"
+        }
+      },
+      "name": "Stuur RF-opdrag"
+    },
+    "send": {
+      "description": "Stuur 'n opdrag na Homeduino.",
+      "fields": {
+        "command": {
+          "description": "'n Opdrag om te stuur.",
+          "name": "Bevel"
+        },
+        "device_id": {
+          "description": "Die Homeduino-senderontvanger om die opdrag na te stuur.",
+          "name": "Toestel"
+        }
+      },
+      "name": "Stuur opdrag"
+    }
+  }
+}
