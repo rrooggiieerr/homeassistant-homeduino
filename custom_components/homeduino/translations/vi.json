@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Thiết bị đã được định cấu hình"
+    },
+    "error": {
+      "cannot_connect": "Không thể kết nối",
+      "nonexisting_serial_port": "Cổng nối tiếp không tồn tại",
+      "unknown": "Lỗi không mong muốn"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "ID thiết bị",
+          "rf_id_ignore_all": "Bỏ qua tất cả",
+          "rf_protocol": "Giao thức",
+          "rf_unit": "Đơn vị thiết bị"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Bật khi Thiết bị RF của bạn bỏ qua nút tất cả/chính thường thấy trên điều khiển từ xa RF."
+        },
+        "title": "Thiết bị RF"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "Kích hoạt đầu vào tương tự 0",
+          "analog_1": "Bật đầu vào analog 1",
+          "analog_2": "Bật đầu vào analog 2",
+          "analog_3": "Bật đầu vào analog 3",
+          "analog_4": "Bật đầu vào analog 4",
+          "analog_5": "Kích hoạt đầu vào analog 5",
+          "analog_6": "Kích hoạt đầu vào analog 6",
+          "analog_7": "Kích hoạt đầu vào analog 7",
+          "baud_rate": "Tốc độ truyền",
+          "digital_10": "IO kỹ thuật số 10",
+          "digital_11": "IO kỹ thuật số 11",
+          "digital_12": "IO kỹ thuật số 12",
+          "digital_13": "IO kỹ thuật số 13",
+          "digital_2": "IO kỹ thuật số 2",
+          "digital_3": "IO kỹ thuật số 3",
+          "digital_4": "IO kỹ thuật số 4",
+          "digital_5": "IO kỹ thuật số 5",
+          "digital_6": "IO kỹ thuật số 6",
+          "digital_7": "IO kỹ thuật số 7",
+          "digital_8": "IO kỹ thuật số 8",
+          "digital_9": "IO kỹ thuật số 9",
+          "serial_port": "Cổng nối tiếp"
+        },
+        "data_description": {
+          "baud_rate": "Tốc độ truyền được định cấu hình của Bộ thu phát Homeduino của bạn.",
+          "serial_port": "Cổng nối tiếp mà Bộ thu phát Homeduino của bạn được kết nối."
+        },
+        "title": "Bộ thu phát Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "Thiết bị RF",
+          "setup_transceiver": "Bộ thu phát Homeduino"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Đầu vào kỹ thuật số {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Ánh sáng {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "Đầu raPWM {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Đầu vào tương tự {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Độ ẩm"
+      },
+      "dht11_temperature": {
+        "name": "Nhiệt độ DHT11 {digital_io}"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Humidity"
+      },
+      "dht22_temperature": {
+        "name": "Nhiệt độ DHT22 {digital_io}"
+      },
+      "wind_gust": {
+        "name": "Gió giật"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Đầu ra kỹ thuật số {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Chuyển đổi {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Bỏ qua tất cả",
+          "rf_repeats": "lặp lại RF"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Bật khi Thiết bị RF của bạn bỏ qua nút tất cả/chính thường thấy trên điều khiển từ xa RF.",
+          "rf_repeats": "Số lần tín hiệu RF cần được lặp lại."
+        },
+        "title": "Tùy chọn thiết bị RF Homeduino"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Kích hoạt đầu vào tương tự 0",
+          "analog_1": "Bật đầu vào analog 1",
+          "analog_2": "Bật đầu vào analog 2",
+          "analog_3": "Bật đầu vào analog 3",
+          "analog_4": "Bật đầu vào analog 4",
+          "analog_5": "Kích hoạt đầu vào analog 5",
+          "analog_6": "Kích hoạt đầu vào analog 6",
+          "analog_7": "Kích hoạt đầu vào analog 7",
+          "digital_10": "IO kỹ thuật số 10",
+          "digital_11": "IO kỹ thuật số 11",
+          "digital_12": "IO kỹ thuật số 12",
+          "digital_13": "IO kỹ thuật số 13",
+          "digital_2": "IO kỹ thuật số 2",
+          "digital_3": "IO kỹ thuật số 3",
+          "digital_4": "IO kỹ thuật số 4",
+          "digital_5": "IO kỹ thuật số 5",
+          "digital_6": "IO kỹ thuật số 6",
+          "digital_7": "IO kỹ thuật số 7",
+          "digital_8": "IO kỹ thuật số 8",
+          "digital_9": "IO kỹ thuật số 9"
+        },
+        "title": "Tùy chọn bộ thu phát Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Thiết bị RF Homeduino",
+        "transceiver": "Bộ thu phát Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "Xe buýt 1 dây",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Đầu vào kỹ thuật số",
+        "digital_output": "Đầu ra kỹ thuật số",
+        "none": "Chưa kết nối",
+        "pwm_output": "Đầu ra xung điện",
+        "rf_receive": "Nhận RF",
+        "rf_send": "Gửi RF"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "Gửi lệnh RF thô.",
+      "fields": {
+        "command": {
+          "description": "Một lệnh để gửi.",
+          "name": "Yêu cầu"
+        },
+        "repeats": {
+          "description": "Số lần lệnh RF cần được gửi.",
+          "name": "Lặp lại"
+        }
+      },
+      "name": "Gửi lệnh RF thô"
+    },
+    "rf_send": {
+      "description": "Gửi lệnh RF.",
+      "fields": {
+        "all": {
+          "description": "Nếu cờ all cần được đặt, cần phải được giao thức hỗ trợ.",
+          "name": "Tất cả"
+        },
+        "id": {
+          "description": "ID thiết bị.",
+          "name": "NHẬN DẠNG"
+        },
+        "protocol": {
+          "description": "Giao thức để sử dụng.",
+          "name": "Giao thức"
+        },
+        "repeats": {
+          "description": "Số lần lệnh RF cần được gửi.",
+          "name": "Lặp lại"
+        },
+        "state": {
+          "description": "Trạng thái gửi đến thiết bị.",
+          "name": "Tình trạng"
+        },
+        "unit": {
+          "description": "Đơn vị thiết bị.",
+          "name": "Đơn vị"
+        }
+      },
+      "name": "Gửi lệnh RF"
+    },
+    "send": {
+      "description": "Gửi lệnh tới Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Một lệnh để gửi.",
+          "name": "Yêu cầu"
+        },
+        "device_id": {
+          "description": "Bộ thu phát Homeduino để gửi lệnh tới.",
+          "name": "Thiết bị"
+        }
+      },
+      "name": "Gửi lệnh"
+    }
+  }
+}

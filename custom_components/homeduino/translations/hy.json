@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Սարքն արդեն կազմաձևված է"
+    },
+    "error": {
+      "cannot_connect": "Չհաջողվեց միանալ",
+      "nonexisting_serial_port": "Սերիական միացք գոյություն չունի",
+      "unknown": "Անսպասելի սխալ"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "Սարքի ID",
+          "rf_id_ignore_all": "Անտեսել բոլորը",
+          "rf_protocol": "Արձանագրություն",
+          "rf_unit": "Սարքի միավոր"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Միացնել, երբ ձեր ՌԴ սարքը անտեսում է բոլոր/հիմնական կոճակը, որը հաճախ հանդիպում է ՌԴ հեռակառավարման վահանակների վրա:"
+        },
+        "title": "ՌԴ սարք"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "Միացնել անալոգային մուտքագրումը 0",
+          "analog_1": "Միացնել անալոգային մուտքը 1",
+          "analog_2": "Միացնել անալոգային մուտքը 2",
+          "analog_3": "Միացնել անալոգային մուտքը 3",
+          "analog_4": "Միացնել անալոգային մուտքը 4",
+          "analog_5": "Միացնել անալոգային մուտքագրումը 5",
+          "analog_6": "Միացնել անալոգային մուտքը 6",
+          "analog_7": "Միացնել անալոգային մուտքը 7",
+          "baud_rate": "Baud տոկոսադրույքը",
+          "digital_10": "Թվային IO 10",
+          "digital_11": "Թվային IO 11",
+          "digital_12": "Թվային IO 12",
+          "digital_13": "Թվային IO 13",
+          "digital_2": "Թվային IO 2",
+          "digital_3": "Թվային IO 3",
+          "digital_4": "Թվային IO 4",
+          "digital_5": "Թվային IO 5",
+          "digital_6": "Թվային IO 6",
+          "digital_7": "Թվային IO 7",
+          "digital_8": "Թվային IO 8",
+          "digital_9": "Թվային IO 9",
+          "serial_port": "Սերիական նավահանգիստ"
+        },
+        "data_description": {
+          "baud_rate": "Ձեր Homeduino հաղորդիչի կարգավորված բուդի արագությունը:",
+          "serial_port": "Սերիական պորտը, որին միացված է ձեր Homeduino հաղորդիչ:"
+        },
+        "title": "Homeduino հաղորդիչ"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "ՌԴ սարք",
+          "setup_transceiver": "Homeduino հաղորդիչ"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Թվային մուտքագրում {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Լույս {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM ելք {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Անալոգային մուտքագրում {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Խոնավություն"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Ջերմաստիճան"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Խոնավություն"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Ջերմաստիճան"
+      },
+      "wind_gust": {
+        "name": "Քամու պոռթկում"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Թվային ելք {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Փոխարկել {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Անտեսել բոլորը",
+          "rf_repeats": "ՌԴ-ն կրկնում է"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Միացնել, երբ ձեր ՌԴ սարքը անտեսում է բոլոր/հիմնական կոճակը, որը հաճախ հանդիպում է ՌԴ հեռակառավարման վահանակների վրա:",
+          "rf_repeats": "Քանի անգամ պետք է կրկնել ՌԴ ազդանշանը:"
+        },
+        "title": "Homeduino ՌԴ Սարքի ընտրանքներ"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Միացնել անալոգային մուտքագրումը 0",
+          "analog_1": "Միացնել անալոգային մուտքը 1",
+          "analog_2": "Միացնել անալոգային մուտքը 2",
+          "analog_3": "Միացնել անալոգային մուտքը 3",
+          "analog_4": "Միացնել անալոգային մուտքը 4",
+          "analog_5": "Միացնել անալոգային մուտքագրումը 5",
+          "analog_6": "Միացնել անալոգային մուտքը 6",
+          "analog_7": "Միացնել անալոգային մուտքը 7",
+          "digital_10": "Թվային IO 10",
+          "digital_11": "Թվային IO 11",
+          "digital_12": "Թվային IO 12",
+          "digital_13": "Թվային IO 13",
+          "digital_2": "Թվային IO 2",
+          "digital_3": "Թվային IO 3",
+          "digital_4": "Թվային IO 4",
+          "digital_5": "Թվային IO 5",
+          "digital_6": "Թվային IO 6",
+          "digital_7": "Թվային IO 7",
+          "digital_8": "Թվային IO 8",
+          "digital_9": "Թվային IO 9"
+        },
+        "title": "Homeduino հաղորդիչի ընտրանքներ"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino ՌԴ սարք",
+        "transceiver": "Homeduino հաղորդիչ"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-Wire Bus",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Թվային մուտքագրում",
+        "digital_output": "Թվային ելք",
+        "none": "Միացված չէ",
+        "pwm_output": "PWM ելք",
+        "rf_receive": "ՌԴ Ստանալ",
+        "rf_send": "ՌԴ Ուղարկել"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "Ուղարկում է հում ՌԴ հրաման:",
+      "fields": {
+        "command": {
+          "description": "Ուղարկելու հրաման.",
+          "name": "Հրաման"
+        },
+        "repeats": {
+          "description": "ՌԴ հրամանը ուղարկելու համար անհրաժեշտ ժամանակը:",
+          "name": "Կրկնում է"
+        }
+      },
+      "name": "Ուղարկեք չմշակված ՌԴ հրաման"
+    },
+    "rf_send": {
+      "description": "Ուղարկում է ՌԴ հրաման:",
+      "fields": {
+        "all": {
+          "description": "Եթե ​​բոլոր դրոշը պետք է սահմանվի, պետք է ապահովվի արձանագրությամբ:",
+          "name": "Բոլորը"
+        },
+        "id": {
+          "description": "Սարքի ID.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Օգտագործման արձանագրություն.",
+          "name": "Արձանագրություն"
+        },
+        "repeats": {
+          "description": "ՌԴ հրամանը ուղարկելու համար անհրաժեշտ ժամանակը:",
+          "name": "Կրկնում է"
+        },
+        "state": {
+          "description": "Պետությունը սարքին ուղարկելու համար:",
+          "name": "Պետություն"
+        },
+        "unit": {
+          "description": "Սարքի միավոր:",
+          "name": "Միավոր"
+        }
+      },
+      "name": "Ուղարկել ՌԴ հրաման"
+    },
+    "send": {
+      "description": "Հրաման է ուղարկում Homeduino-ին:",
+      "fields": {
+        "command": {
+          "description": "Ուղարկելու հրաման.",
+          "name": "Հրաման"
+        },
+        "device_id": {
+          "description": "Homeduino հաղորդիչ, որին հրամանն ուղարկում է:",
+          "name": "Սարք"
+        }
+      },
+      "name": "Ուղարկել հրաման"
+    }
+  }
+}

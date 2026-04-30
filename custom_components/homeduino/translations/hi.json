@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "डिवाइस पहले से ही कॉन्फ़िगर किया गया है"
+    },
+    "error": {
+      "cannot_connect": "जोडने में विफल",
+      "nonexisting_serial_port": "सीरियल पोर्ट मौजूद नहीं है",
+      "unknown": "अप्रत्याशित त्रुटि"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "डिवाइस आईडी",
+          "rf_id_ignore_all": "सभी को नजरअंदाज करें",
+          "rf_protocol": "शिष्टाचार",
+          "rf_unit": "डिवाइस इकाई"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "सक्षम करें जब आपका आरएफ डिवाइस आरएफ रिमोट कंट्रोल पर अक्सर पाए जाने वाले ऑल/मास्टर बटन को अनदेखा कर देता है।"
+        },
+        "title": "आरएफ डिवाइस"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "एनालॉग इनपुट 0 सक्षम करें",
+          "analog_1": "एनालॉग इनपुट सक्षम करें 1",
+          "analog_2": "एनालॉग इनपुट सक्षम करें 2",
+          "analog_3": "एनालॉग इनपुट सक्षम करें 3",
+          "analog_4": "एनालॉग इनपुट सक्षम करें 4",
+          "analog_5": "एनालॉग इनपुट सक्षम करें 5",
+          "analog_6": "एनालॉग इनपुट सक्षम करें 6",
+          "analog_7": "एनालॉग इनपुट सक्षम करें 7",
+          "baud_rate": "बॉड दर",
+          "digital_10": "डिजिटल आईओ 10",
+          "digital_11": "डिजिटल आईओ 11",
+          "digital_12": "डिजिटल आईओ 12",
+          "digital_13": "डिजिटल आईओ 13",
+          "digital_2": "डिजिटल आईओ 2",
+          "digital_3": "डिजिटल आईओ 3",
+          "digital_4": "डिजिटल आईओ 4",
+          "digital_5": "डिजिटल आईओ 5",
+          "digital_6": "डिजिटल आईओ 6",
+          "digital_7": "डिजिटल आईओ 7",
+          "digital_8": "डिजिटल आईओ 8",
+          "digital_9": "डिजिटल आईओ 9",
+          "serial_port": "आनुक्रमिक द्वार"
+        },
+        "data_description": {
+          "baud_rate": "आपके Homeduino ट्रांसीवर की कॉन्फ़िगर की गई बॉड दर।",
+          "serial_port": "आपका Homeduino ट्रांसीवर जिस सीरियल पोर्ट से जुड़ा है।"
+        },
+        "title": "होमडुइनो ट्रांसीवर"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "आरएफ डिवाइस",
+          "setup_transceiver": "होमडुइनो ट्रांसीवर"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "डिजिटल इनपुट {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "प्रकाश {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "पीडब्लूएम आउटपुट {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "एनालॉग इनपुट {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} आर्द्रता"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} तापमान"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} आर्द्रता"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} तापमान"
+      },
+      "wind_gust": {
+        "name": "हवा का झौंका"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "डिजिटल आउटपुट {digital_io}"
+      },
+      "rf_switch": {
+        "name": "स्विच {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "सभी को नजरअंदाज करें",
+          "rf_repeats": "आरएफ दोहराता है"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "सक्षम करें जब आपका आरएफ डिवाइस आरएफ रिमोट कंट्रोल पर अक्सर पाए जाने वाले ऑल/मास्टर बटन को अनदेखा कर देता है।",
+          "rf_repeats": "आरएफ सिग्नल को कितनी बार दोहराने की आवश्यकता है।"
+        },
+        "title": "Homeduino आरएफ डिवाइस विकल्प"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "एनालॉग इनपुट 0 सक्षम करें",
+          "analog_1": "एनालॉग इनपुट सक्षम करें 1",
+          "analog_2": "एनालॉग इनपुट सक्षम करें 2",
+          "analog_3": "एनालॉग इनपुट सक्षम करें 3",
+          "analog_4": "एनालॉग इनपुट सक्षम करें 4",
+          "analog_5": "एनालॉग इनपुट सक्षम करें 5",
+          "analog_6": "एनालॉग इनपुट सक्षम करें 6",
+          "analog_7": "एनालॉग इनपुट सक्षम करें 7",
+          "digital_10": "डिजिटल आईओ 10",
+          "digital_11": "डिजिटल आईओ 11",
+          "digital_12": "डिजिटल आईओ 12",
+          "digital_13": "डिजिटल आईओ 13",
+          "digital_2": "डिजिटल आईओ 2",
+          "digital_3": "डिजिटल आईओ 3",
+          "digital_4": "डिजिटल आईओ 4",
+          "digital_5": "डिजिटल आईओ 5",
+          "digital_6": "डिजिटल आईओ 6",
+          "digital_7": "डिजिटल आईओ 7",
+          "digital_8": "डिजिटल आईओ 8",
+          "digital_9": "डिजिटल आईओ 9"
+        },
+        "title": "Homeduino ट्रांसीवर विकल्प"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "होमडुइनो आरएफ डिवाइस",
+        "transceiver": "होमडुइनो ट्रांसीवर"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-तार बस",
+        "dht11": "DHT11",
+        "dht22": "डीएचटी22",
+        "digital_input": "डिजिटल इनपुट",
+        "digital_output": "डिजिटल आउटपुट",
+        "none": "जुड़े नहीं हैं",
+        "pwm_output": "पीडब्लूएम आउटपुट",
+        "rf_receive": "आरएफ प्राप्त करें",
+        "rf_send": "आरएफ भेजें"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "एक कच्चा आरएफ कमांड भेजता है।",
+      "fields": {
+        "command": {
+          "description": "भेजने का आदेश.",
+          "name": "आज्ञा"
+        },
+        "repeats": {
+          "description": "आरएफ कमांड को भेजने की आवश्यकता की संख्या।",
+          "name": "पुनर्प्रसारण"
+        }
+      },
+      "name": "कच्चा आरएफ कमांड भेजें"
+    },
+    "rf_send": {
+      "description": "एक आरएफ कमांड भेजता है.",
+      "fields": {
+        "all": {
+          "description": "यदि सभी ध्वज को सेट करने की आवश्यकता है, तो प्रोटोकॉल द्वारा समर्थित होना आवश्यक है।",
+          "name": "सभी"
+        },
+        "id": {
+          "description": "डिवाइस आईडी।",
+          "name": "पहचान"
+        },
+        "protocol": {
+          "description": "उपयोग करने के लिए प्रोटोकॉल.",
+          "name": "शिष्टाचार"
+        },
+        "repeats": {
+          "description": "आरएफ कमांड को भेजने की आवश्यकता की संख्या।",
+          "name": "पुनर्प्रसारण"
+        },
+        "state": {
+          "description": "डिवाइस पर भेजने की स्थिति.",
+          "name": "राज्य"
+        },
+        "unit": {
+          "description": "डिवाइस इकाई.",
+          "name": "इकाई"
+        }
+      },
+      "name": "आरएफ कमांड भेजें"
+    },
+    "send": {
+      "description": "Homeduino को एक कमांड भेजता है।",
+      "fields": {
+        "command": {
+          "description": "भेजने का आदेश.",
+          "name": "आज्ञा"
+        },
+        "device_id": {
+          "description": "कमांड भेजने के लिए होमडुइनो ट्रांसीवर।",
+          "name": "उपकरण"
+        }
+      },
+      "name": "आदेश भेजें"
+    }
+  }
+}

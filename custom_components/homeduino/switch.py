@@ -145,10 +145,10 @@ class HomeduinoTransceiverSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity)
 
         self.entity_description = entity_description
 
-        self._homeduino = self.coordinator.get_transceiver(self.device_entry.id)
-
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
+
+        self._homeduino = self.coordinator.get_transceiver(self.device_entry.id)
 
         if self._homeduino.connected():
             self._attr_available = True
