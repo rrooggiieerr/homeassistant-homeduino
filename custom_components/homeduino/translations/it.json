@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Il dispositivo è già configurato"
+    },
+    "error": {
+      "cannot_connect": "Impossibile connettersi",
+      "nonexisting_serial_port": "La porta seriale non esiste",
+      "unknown": "Errore imprevisto"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "ID del dispositivo",
+          "rf_id_ignore_all": "Ignora tutto",
+          "rf_protocol": "Protocollo",
+          "rf_unit": "Unità dispositivo"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Abilita quando il tuo dispositivo RF ignora il pulsante tutto/master spesso presente sui telecomandi RF."
+        },
+        "title": "Dispositivo RF"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "Abilita ingresso analogico 0",
+          "analog_1": "Abilita ingresso analogico 1",
+          "analog_2": "Abilita ingresso analogico 2",
+          "analog_3": "Abilita ingresso analogico 3",
+          "analog_4": "Abilita ingresso analogico 4",
+          "analog_5": "Abilita ingresso analogico 5",
+          "analog_6": "Abilita ingresso analogico 6",
+          "analog_7": "Abilita ingresso analogico 7",
+          "baud_rate": "Velocità di trasmissione",
+          "digital_10": "I/O digitale 10",
+          "digital_11": "I/O digitale 11",
+          "digital_12": "I/O digitale 12",
+          "digital_13": "I/O digitale 13",
+          "digital_2": "I/O digitale 2",
+          "digital_3": "I/O digitale 3",
+          "digital_4": "I/O digitale 4",
+          "digital_5": "I/O digitale 5",
+          "digital_6": "I/O digitale 6",
+          "digital_7": "I/O digitale 7",
+          "digital_8": "I/O digitale 8",
+          "digital_9": "I/O digitale 9",
+          "serial_port": "Porta seriale"
+        },
+        "data_description": {
+          "baud_rate": "La velocità di trasmissione configurata del tuo ricetrasmettitore Homeduino.",
+          "serial_port": "La porta seriale a cui è collegato il tuo ricetrasmettitore Homeduino."
+        },
+        "title": "Ricetrasmettitore Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "Dispositivo RF",
+          "setup_transceiver": "Ricetrasmettitore Homeduino"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Ingresso digitale {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Luce {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "Uscita PWM {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Ingresso analogico {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Umidità"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Temperatura"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Umidità"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Temperatura"
+      },
+      "wind_gust": {
+        "name": "Raffica di vento"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Uscita digitale {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Cambia {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ignora tutto",
+          "rf_repeats": "La radiofrequenza si ripete"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Abilita quando il tuo dispositivo RF ignora il pulsante tutto/master spesso presente sui telecomandi RF.",
+          "rf_repeats": "Il numero di volte in cui è necessario ripetere il segnale RF."
+        },
+        "title": "Opzioni del dispositivo RF Homeduino"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Abilita ingresso analogico 0",
+          "analog_1": "Abilita ingresso analogico 1",
+          "analog_2": "Abilita ingresso analogico 2",
+          "analog_3": "Abilita ingresso analogico 3",
+          "analog_4": "Abilita ingresso analogico 4",
+          "analog_5": "Abilita ingresso analogico 5",
+          "analog_6": "Abilita ingresso analogico 6",
+          "analog_7": "Abilita ingresso analogico 7",
+          "digital_10": "I/O digitale 10",
+          "digital_11": "I/O digitale 11",
+          "digital_12": "I/O digitale 12",
+          "digital_13": "I/O digitale 13",
+          "digital_2": "I/O digitale 2",
+          "digital_3": "I/O digitale 3",
+          "digital_4": "I/O digitale 4",
+          "digital_5": "I/O digitale 5",
+          "digital_6": "I/O digitale 6",
+          "digital_7": "I/O digitale 7",
+          "digital_8": "I/O digitale 8",
+          "digital_9": "I/O digitale 9"
+        },
+        "title": "Opzioni del ricetrasmettitore Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Dispositivo RF Homeduino",
+        "transceiver": "Ricetrasmettitore Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "Autobus a 1 filo",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Ingresso digitale",
+        "digital_output": "Uscita digitale",
+        "none": "Non connesso",
+        "pwm_output": "Uscita PWM",
+        "rf_receive": "Ricezione RF",
+        "rf_send": "Invio RF"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "Invia un comando RF grezzo.",
+      "fields": {
+        "command": {
+          "description": "Un comando da inviare.",
+          "name": "Comando"
+        },
+        "repeats": {
+          "description": "Il numero di volte in cui è necessario inviare il comando RF.",
+          "name": "Si ripete"
+        }
+      },
+      "name": "Invia comando RF grezzo"
+    },
+    "rf_send": {
+      "description": "Invia un comando RF.",
+      "fields": {
+        "all": {
+          "description": "Se è necessario impostare il flag all, è necessario che sia supportato dal protocollo.",
+          "name": "Tutto"
+        },
+        "id": {
+          "description": "ID del dispositivo.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Il protocollo da utilizzare.",
+          "name": "Protocollo"
+        },
+        "repeats": {
+          "description": "Il numero di volte in cui è necessario inviare il comando RF.",
+          "name": "Si ripete"
+        },
+        "state": {
+          "description": "Lo stato da inviare al dispositivo.",
+          "name": "Stato"
+        },
+        "unit": {
+          "description": "Unità dispositivo.",
+          "name": "Unità"
+        }
+      },
+      "name": "Invia comando RF"
+    },
+    "send": {
+      "description": "Invia un comando a Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Un comando da inviare.",
+          "name": "Comando"
+        },
+        "device_id": {
+          "description": "Il ricetrasmettitore Homeduino a cui inviare il comando.",
+          "name": "Dispositivo"
+        }
+      },
+      "name": "Invia comando"
+    }
+  }
+}

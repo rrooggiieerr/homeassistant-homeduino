@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "تم تكوين الجهاز بالفعل"
+    },
+    "error": {
+      "cannot_connect": "فشل الاتصال",
+      "nonexisting_serial_port": "المنفذ التسلسلي غير موجود",
+      "unknown": "خطأ غير متوقع"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "معرف الجهاز",
+          "rf_id_ignore_all": "تجاهل الكل",
+          "rf_protocol": "بروتوكول",
+          "rf_unit": "وحدة الجهاز"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "قم بالتمكين عندما يتجاهل جهاز التردد اللاسلكي الخاص بك الزر الكل/الرئيسي الموجود غالبًا في أجهزة التحكم عن بعد للتردد اللاسلكي."
+        },
+        "title": "جهاز الترددات اللاسلكية"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "تمكين الإدخال التناظري 0",
+          "analog_1": "تمكين الإدخال التناظري 1",
+          "analog_2": "تمكين الإدخال التناظري 2",
+          "analog_3": "تمكين الإدخال التناظري 3",
+          "analog_4": "تمكين الإدخال التناظري 4",
+          "analog_5": "تمكين الإدخال التناظري 5",
+          "analog_6": "تمكين الإدخال التناظري 6",
+          "analog_7": "تمكين الإدخال التناظري 7",
+          "baud_rate": "معدل الباود",
+          "digital_10": "الإدخال الرقمي 10",
+          "digital_11": "الإدخال الرقمي 11",
+          "digital_12": "الإدخال الرقمي 12",
+          "digital_13": "الإدخال الرقمي 13",
+          "digital_2": "الإدخال الرقمي 2",
+          "digital_3": "الإدخال الرقمي 3",
+          "digital_4": "الإدخال الرقمي 4",
+          "digital_5": "الإدخال الرقمي 5",
+          "digital_6": "الإدخال الرقمي 6",
+          "digital_7": "الإدخال الرقمي 7",
+          "digital_8": "الإدخال الرقمي 8",
+          "digital_9": "الإدخال الرقمي 9",
+          "serial_port": "المنفذ التسلسلي"
+        },
+        "data_description": {
+          "baud_rate": "معدل الباود الذي تم تكوينه لجهاز الإرسال والاستقبال Homeduino الخاص بك.",
+          "serial_port": "المنفذ التسلسلي الذي يتصل به جهاز الإرسال والاستقبال Homeduino الخاص بك."
+        },
+        "title": "جهاز الإرسال والاستقبال Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "جهاز الترددات اللاسلكية",
+          "setup_transceiver": "جهاز الإرسال والاستقبال Homeduino"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "الإدخال الرقمي {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "ضوء {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "مخرج PWM {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "الإدخال التناظري {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} الرطوبة"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} درجة الحرارة"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} الرطوبة"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} درجة الحرارة"
+      },
+      "wind_gust": {
+        "name": "عاصفة الرياح"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "الإخراج الرقمي {digital_io}"
+      },
+      "rf_switch": {
+        "name": "التبديل {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "تجاهل الكل",
+          "rf_repeats": "يكرر الترددات اللاسلكية"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "قم بالتمكين عندما يتجاهل جهاز التردد اللاسلكي الخاص بك الزر الكل/الرئيسي الموجود غالبًا في أجهزة التحكم عن بعد للتردد اللاسلكي.",
+          "rf_repeats": "عدد المرات التي يلزم فيها تكرار إشارة التردد اللاسلكي."
+        },
+        "title": "خيارات جهاز Homeduino RF"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "تمكين الإدخال التناظري 0",
+          "analog_1": "تمكين الإدخال التناظري 1",
+          "analog_2": "تمكين الإدخال التناظري 2",
+          "analog_3": "تمكين الإدخال التناظري 3",
+          "analog_4": "تمكين الإدخال التناظري 4",
+          "analog_5": "تمكين الإدخال التناظري 5",
+          "analog_6": "تمكين الإدخال التناظري 6",
+          "analog_7": "تمكين الإدخال التناظري 7",
+          "digital_10": "الإدخال الرقمي 10",
+          "digital_11": "الإدخال الرقمي 11",
+          "digital_12": "الإدخال الرقمي 12",
+          "digital_13": "الإدخال الرقمي 13",
+          "digital_2": "الإدخال الرقمي 2",
+          "digital_3": "الإدخال الرقمي 3",
+          "digital_4": "الإدخال الرقمي 4",
+          "digital_5": "الإدخال الرقمي 5",
+          "digital_6": "الإدخال الرقمي 6",
+          "digital_7": "الإدخال الرقمي 7",
+          "digital_8": "الإدخال الرقمي 8",
+          "digital_9": "الإدخال الرقمي 9"
+        },
+        "title": "خيارات جهاز الإرسال والاستقبال Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "جهاز Homeduino RF",
+        "transceiver": "جهاز الإرسال والاستقبال Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-الحافلة السلكية",
+        "dht11": "دي إتش تي11",
+        "dht22": "دي إتش تي22",
+        "digital_input": "الإدخال الرقمي",
+        "digital_output": "الإخراج الرقمي",
+        "none": "غير متصل",
+        "pwm_output": "مخرج PWM",
+        "rf_receive": "تلقي الترددات اللاسلكية",
+        "rf_send": "إرسال الترددات اللاسلكية"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "يرسل أمر RF الخام.",
+      "fields": {
+        "command": {
+          "description": "أمر للإرسال.",
+          "name": "يأمر"
+        },
+        "repeats": {
+          "description": "عدد الوقت الذي يلزم فيه إرسال أمر RF.",
+          "name": "يكرر"
+        }
+      },
+      "name": "إرسال أمر RF الخام"
+    },
+    "rf_send": {
+      "description": "يرسل أمر RF.",
+      "fields": {
+        "all": {
+          "description": "إذا كانت هناك حاجة إلى تعيين علامة الكل، فيجب دعمها بواسطة البروتوكول.",
+          "name": "الجميع"
+        },
+        "id": {
+          "description": "معرف الجهاز.",
+          "name": "بطاقة تعريف"
+        },
+        "protocol": {
+          "description": "البروتوكول المستخدم.",
+          "name": "بروتوكول"
+        },
+        "repeats": {
+          "description": "عدد الوقت الذي يلزم فيه إرسال أمر RF.",
+          "name": "يكرر"
+        },
+        "state": {
+          "description": "الحالة المراد إرسالها إلى الجهاز.",
+          "name": "ولاية"
+        },
+        "unit": {
+          "description": "وحدة الجهاز.",
+          "name": "وحدة"
+        }
+      },
+      "name": "إرسال أمر الترددات اللاسلكية"
+    },
+    "send": {
+      "description": "يرسل أمرًا إلى Homeduino.",
+      "fields": {
+        "command": {
+          "description": "أمر للإرسال.",
+          "name": "يأمر"
+        },
+        "device_id": {
+          "description": "جهاز الإرسال والاستقبال Homeduino لإرسال الأمر إليه.",
+          "name": "جهاز"
+        }
+      },
+      "name": "إرسال الأمر"
+    }
+  }
+}

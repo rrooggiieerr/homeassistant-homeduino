@@ -141,9 +141,12 @@ You can contribute to this integration, or show your appreciation, in the follow
 
 ### Contribute your language
 
-If you would like to use this Home Assistant integration in your own language you can provide a
-translation file as found in the `custom_components/homeduino/translations` directory. Create a
-pull request (preferred) or issue with the file attached.
+This integration comes with language support for most languages supported by Home Assistant. The
+language files are generated using Google Translate and may contain errors. If you spot a
+translation error you are welcome to suggest improvements.
+
+You can find the translation files in the `custom_components/homeduino/translations` directory. Create a
+pull request (preferred) or issue with your improvements.
 
 More on translating custom integrations can be found
 [here](https://developers.home-assistant.io/docs/internationalization/custom_integration/).

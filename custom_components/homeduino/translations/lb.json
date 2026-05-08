@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Den Apparat ass scho konfiguréiert"
+    },
+    "error": {
+      "cannot_connect": "Konnt net konnektéieren",
+      "nonexisting_serial_port": "Serial port existéiert net",
+      "unknown": "Onerwaarte Feeler"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "Apparat ID",
+          "rf_id_ignore_all": "Ignoréieren all",
+          "rf_protocol": "Protokoll",
+          "rf_unit": "Apparat Eenheet"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktivéiert wann Ären RF Gerät den All / Master Knäppchen ignoréiert déi dacks op RF Fernbedienungen fonnt gëtt."
+        },
+        "title": "RF Apparat"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "Aktivéiert den analoge Input 0",
+          "analog_1": "Aktivéiert den analoge Input 1",
+          "analog_2": "Aktivéiert den Analog-Input 2",
+          "analog_3": "Aktivéiert den Analog-Input 3",
+          "analog_4": "Aktivéiert den Analog-Input 4",
+          "analog_5": "Aktivéiert den analoge Input 5",
+          "analog_6": "Aktivéiert den analoge Input 6",
+          "analog_7": "Aktivéiert den analoge Input 7",
+          "baud_rate": "Baud Taux",
+          "digital_10": "Digital IO 10",
+          "digital_11": "Digital IO 11",
+          "digital_12": "Digital IO 12",
+          "digital_13": "Digital IO 13",
+          "digital_2": "Digital IO 2",
+          "digital_3": "Digital IO 3",
+          "digital_4": "Digital IO 4",
+          "digital_5": "Digital IO 5",
+          "digital_6": "Digital IO 6",
+          "digital_7": "Digital IO 7",
+          "digital_8": "Digital IO 8",
+          "digital_9": "Digital IO 9",
+          "serial_port": "Serien Hafen"
+        },
+        "data_description": {
+          "baud_rate": "De konfiguréierten Baudrate vun Ärem Homeduino Transceiver.",
+          "serial_port": "De Serien Hafen mat Ärem Homeduino Transceiver verbonnen ass."
+        },
+        "title": "Homeduino Transceiver"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF Apparat",
+          "setup_transceiver": "Homeduino Transceiver"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Digital Input {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Liicht {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM Ausgang {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analog Input {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Fiichtegkeet"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Temperatur"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Fiichtegkeet"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Temperatur"
+      },
+      "wind_gust": {
+        "name": "Wandstéiss"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Digital Ausgang {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Schalter {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ignoréieren all",
+          "rf_repeats": "RF widderhuelen"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktivéiert wann Ären RF Gerät den All / Master Knäppchen ignoréiert déi dacks op RF Fernbedienungen fonnt gëtt.",
+          "rf_repeats": "D'Zuel vun Mol d'RF Signal muss widderholl ginn."
+        },
+        "title": "Homeduino RF Apparat Optiounen"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Aktivéiert den analoge Input 0",
+          "analog_1": "Aktivéiert den analoge Input 1",
+          "analog_2": "Aktivéiert den Analog-Input 2",
+          "analog_3": "Aktivéiert den Analog-Input 3",
+          "analog_4": "Aktivéiert den Analog-Input 4",
+          "analog_5": "Aktivéiert den analoge Input 5",
+          "analog_6": "Aktivéiert den analoge Input 6",
+          "analog_7": "Aktivéiert den analoge Input 7",
+          "digital_10": "Digital IO 10",
+          "digital_11": "Digital IO 11",
+          "digital_12": "Digital IO 12",
+          "digital_13": "Digital IO 13",
+          "digital_2": "Digital IO 2",
+          "digital_3": "Digital IO 3",
+          "digital_4": "Digital IO 4",
+          "digital_5": "Digital IO 5",
+          "digital_6": "Digital IO 6",
+          "digital_7": "Digital IO 7",
+          "digital_8": "Digital IO 8",
+          "digital_9": "Digital IO 9"
+        },
+        "title": "Homeduino Transceiver Optiounen"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF Apparat",
+        "transceiver": "Homeduino Transceiver"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-Drot Bus",
+        "dht11": "DHT 11",
+        "dht22": "DHT 22",
+        "digital_input": "Digital Input",
+        "digital_output": "Digital Ausgang",
+        "none": "Net verbonnen",
+        "pwm_output": "PWM Ausgang",
+        "rf_receive": "RF Empfang",
+        "rf_send": "RF Senden"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "Schéckt e rau RF Kommando.",
+      "fields": {
+        "command": {
+          "description": "E Kommando ze schécken.",
+          "name": "Kommando"
+        },
+        "repeats": {
+          "description": "D'Zuel vun Zäiten déi RF Kommando muss geschéckt ginn.",
+          "name": "Widderhuelt"
+        }
+      },
+      "name": "Schéckt rau RF Kommando"
+    },
+    "rf_send": {
+      "description": "Schéckt e RF Kommando.",
+      "fields": {
+        "all": {
+          "description": "Wann all Fändel muss gesat ginn, muss vum Protokoll ënnerstëtzt ginn.",
+          "name": "All"
+        },
+        "id": {
+          "description": "Apparat ID.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "De Protokoll fir ze benotzen.",
+          "name": "Protokoll"
+        },
+        "repeats": {
+          "description": "D'Zuel vun Zäiten déi RF Kommando muss geschéckt ginn.",
+          "name": "Widderhuelt"
+        },
+        "state": {
+          "description": "De Staat fir den Apparat ze schécken.",
+          "name": "Staat"
+        },
+        "unit": {
+          "description": "Apparat Eenheet.",
+          "name": "Eenheet"
+        }
+      },
+      "name": "Schéckt RF Kommando"
+    },
+    "send": {
+      "description": "Schéckt e Kommando op Homeduino.",
+      "fields": {
+        "command": {
+          "description": "E Kommando ze schécken.",
+          "name": "Kommando"
+        },
+        "device_id": {
+          "description": "Den Homeduino Transceiver fir de Kommando ze schécken.",
+          "name": "Apparat"
+        }
+      },
+      "name": "Kommando schécken"
+    }
+  }
+}

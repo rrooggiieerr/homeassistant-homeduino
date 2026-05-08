@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Tæki er þegar stillt"
+    },
+    "error": {
+      "cannot_connect": "Tókst ekki að tengjast",
+      "nonexisting_serial_port": "Raðtengi er ekki til",
+      "unknown": "Óvænt villa"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "Auðkenni tækis",
+          "rf_id_ignore_all": "Hunsa allt",
+          "rf_protocol": "Bókun",
+          "rf_unit": "Tækjaeining"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Virkja þegar RF tækið þitt hunsar allt/master hnappinn sem oft er að finna á RF fjarstýringum."
+        },
+        "title": "RF tæki"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "Virkja hliðrænt inntak 0",
+          "analog_1": "Virkja hliðrænt inntak 1",
+          "analog_2": "Virkja hliðrænt inntak 2",
+          "analog_3": "Virkja hliðrænt inntak 3",
+          "analog_4": "Virkja hliðrænt inntak 4",
+          "analog_5": "Virkja hliðrænt inntak 5",
+          "analog_6": "Virkja hliðrænt inntak 6",
+          "analog_7": "Virkja hliðrænt inntak 7",
+          "baud_rate": "Baud hlutfall",
+          "digital_10": "Stafræn IO 10",
+          "digital_11": "Stafræn IO 11",
+          "digital_12": "Stafræn IO 12",
+          "digital_13": "Stafræn IO 13",
+          "digital_2": "Stafræn IO 2",
+          "digital_3": "Stafræn IO 3",
+          "digital_4": "Stafræn IO 4",
+          "digital_5": "Stafræn IO 5",
+          "digital_6": "Stafræn IO 6",
+          "digital_7": "Stafræn IO 7",
+          "digital_8": "Stafræn IO 8",
+          "digital_9": "Stafræn IO 9",
+          "serial_port": "Raðtengi"
+        },
+        "data_description": {
+          "baud_rate": "Stilltur flutningshraði Homeduino senditækisins þíns.",
+          "serial_port": "Raðtengi sem Homeduino senditæki er tengt við."
+        },
+        "title": "Homeduino senditæki"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF tæki",
+          "setup_transceiver": "Homeduino senditæki"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Stafrænt inntak {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Ljós {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM úttak {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analog inntak {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Raki"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Hitastig"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Raki"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Hitastig"
+      },
+      "wind_gust": {
+        "name": "Vindhviða"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Stafræn úttak {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Skiptu um {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Hunsa allt",
+          "rf_repeats": "RF endurtekur"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Virkja þegar RF tækið þitt hunsar allt/master hnappinn sem oft er að finna á RF fjarstýringum.",
+          "rf_repeats": "Fjöldi skipta sem þarf að endurtaka RF merkið."
+        },
+        "title": "Homeduino RF tæki valkostir"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Virkja hliðrænt inntak 0",
+          "analog_1": "Virkja hliðrænt inntak 1",
+          "analog_2": "Virkja hliðrænt inntak 2",
+          "analog_3": "Virkja hliðrænt inntak 3",
+          "analog_4": "Virkja hliðrænt inntak 4",
+          "analog_5": "Virkja hliðrænt inntak 5",
+          "analog_6": "Virkja hliðrænt inntak 6",
+          "analog_7": "Virkja hliðrænt inntak 7",
+          "digital_10": "Stafræn IO 10",
+          "digital_11": "Stafræn IO 11",
+          "digital_12": "Stafræn IO 12",
+          "digital_13": "Stafræn IO 13",
+          "digital_2": "Stafræn IO 2",
+          "digital_3": "Stafræn IO 3",
+          "digital_4": "Stafræn IO 4",
+          "digital_5": "Stafræn IO 5",
+          "digital_6": "Stafræn IO 6",
+          "digital_7": "Stafræn IO 7",
+          "digital_8": "Stafræn IO 8",
+          "digital_9": "Stafræn IO 9"
+        },
+        "title": "Homeduino senditæki"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF tæki",
+        "transceiver": "Homeduino senditæki"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-víra strætó",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Stafrænt inntak",
+        "digital_output": "Stafræn útgangur",
+        "none": "Ekki tengdur",
+        "pwm_output": "PWM úttak",
+        "rf_receive": "RF móttaka",
+        "rf_send": "RF Senda"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "Sendir hráa RF skipun.",
+      "fields": {
+        "command": {
+          "description": "Skipun til að senda.",
+          "name": "Skipun"
+        },
+        "repeats": {
+          "description": "Hversu oft þarf að senda RF skipunina.",
+          "name": "Endurtekið"
+        }
+      },
+      "name": "Sendu hráa RF skipun"
+    },
+    "rf_send": {
+      "description": "Sendir RF skipun.",
+      "fields": {
+        "all": {
+          "description": "Ef stilla þarf allt flaggið þarf að vera stutt af samskiptareglunni.",
+          "name": "Allt"
+        },
+        "id": {
+          "description": "Auðkenni tækis.",
+          "name": "auðkenni"
+        },
+        "protocol": {
+          "description": "Samskiptareglur til að nota.",
+          "name": "Bókun"
+        },
+        "repeats": {
+          "description": "Hversu oft þarf að senda RF skipunina.",
+          "name": "Endurtekið"
+        },
+        "state": {
+          "description": "Ríkið til að senda í tækið.",
+          "name": "Ríki"
+        },
+        "unit": {
+          "description": "Tækjaeining.",
+          "name": "Eining"
+        }
+      },
+      "name": "Sendu RF skipun"
+    },
+    "send": {
+      "description": "Sendir skipun til Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Skipun til að senda.",
+          "name": "Skipun"
+        },
+        "device_id": {
+          "description": "Homeduino senditæki til að senda skipunina á.",
+          "name": "Tæki"
+        }
+      },
+      "name": "Sendu skipun"
+    }
+  }
+}

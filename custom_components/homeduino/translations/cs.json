@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Zařízení je již nakonfigurováno"
+    },
+    "error": {
+      "cannot_connect": "Připojení se nezdařilo",
+      "nonexisting_serial_port": "Sériový port neexistuje",
+      "unknown": "Neočekávaná chyba"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "ID zařízení",
+          "rf_id_ignore_all": "Ignorovat všechny",
+          "rf_protocol": "Protokol",
+          "rf_unit": "Jednotka zařízení"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktivujte, když vaše zařízení RF ignoruje tlačítko vše/hlavní, které se často nachází na dálkových ovladačích RF."
+        },
+        "title": "RF zařízení"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "Povolit analogový vstup 0",
+          "analog_1": "Povolit analogový vstup 1",
+          "analog_2": "Povolit analogový vstup 2",
+          "analog_3": "Povolit analogový vstup 3",
+          "analog_4": "Povolit analogový vstup 4",
+          "analog_5": "Povolit analogový vstup 5",
+          "analog_6": "Povolit analogový vstup 6",
+          "analog_7": "Povolit analogový vstup 7",
+          "baud_rate": "Přenosová rychlost",
+          "digital_10": "Digitální IO 10",
+          "digital_11": "Digitální IO 11",
+          "digital_12": "Digitální IO 12",
+          "digital_13": "Digitální IO 13",
+          "digital_2": "Digitální IO 2",
+          "digital_3": "Digitální IO 3",
+          "digital_4": "Digitální IO 4",
+          "digital_5": "Digitální IO 5",
+          "digital_6": "Digitální IO 6",
+          "digital_7": "Digitální IO 7",
+          "digital_8": "Digitální IO 8",
+          "digital_9": "Digitální IO 9",
+          "serial_port": "Sériový port"
+        },
+        "data_description": {
+          "baud_rate": "Konfigurovaná přenosová rychlost vašeho Homeduino transceiveru.",
+          "serial_port": "Sériový port, ke kterému je připojen váš Homeduino Transceiver."
+        },
+        "title": "Homeduino transceiver"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "RF zařízení",
+          "setup_transceiver": "Homeduino transceiver"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Digitální vstup {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "světlo {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM výstup {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analogový vstup {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Vlhkost"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Teplota"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Vlhkost"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Teplota"
+      },
+      "wind_gust": {
+        "name": "Poryv větru"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Digitální výstup {digital_io}"
+      },
+      "rf_switch": {
+        "name": "Přepnout {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Ignorovat všechny",
+          "rf_repeats": "RF se opakuje"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktivujte, když vaše zařízení RF ignoruje tlačítko vše/hlavní, které se často nachází na dálkových ovladačích RF.",
+          "rf_repeats": "Kolikrát je třeba zopakovat RF signál."
+        },
+        "title": "Možnosti zařízení Homeduino RF"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Povolit analogový vstup 0",
+          "analog_1": "Povolit analogový vstup 1",
+          "analog_2": "Povolit analogový vstup 2",
+          "analog_3": "Povolit analogový vstup 3",
+          "analog_4": "Povolit analogový vstup 4",
+          "analog_5": "Povolit analogový vstup 5",
+          "analog_6": "Povolit analogový vstup 6",
+          "analog_7": "Povolit analogový vstup 7",
+          "digital_10": "Digitální IO 10",
+          "digital_11": "Digitální IO 11",
+          "digital_12": "Digitální IO 12",
+          "digital_13": "Digitální IO 13",
+          "digital_2": "Digitální IO 2",
+          "digital_3": "Digitální IO 3",
+          "digital_4": "Digitální IO 4",
+          "digital_5": "Digitální IO 5",
+          "digital_6": "Digitální IO 6",
+          "digital_7": "Digitální IO 7",
+          "digital_8": "Digitální IO 8",
+          "digital_9": "Digitální IO 9"
+        },
+        "title": "Možnosti transceiveru Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF zařízení",
+        "transceiver": "Homeduino transceiver"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-Wire Bus",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Digitální vstup",
+        "digital_output": "Digitální výstup",
+        "none": "Nepřipojeno",
+        "pwm_output": "PWM výstup",
+        "rf_receive": "RF příjem",
+        "rf_send": "RF Odeslat"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "Odešle nezpracovaný RF příkaz.",
+      "fields": {
+        "command": {
+          "description": "Příkaz k odeslání.",
+          "name": "Příkaz"
+        },
+        "repeats": {
+          "description": "Kolikrát musí být RF příkaz odeslán.",
+          "name": "Opakuje se"
+        }
+      },
+      "name": "Odešlete nezpracovaný RF příkaz"
+    },
+    "rf_send": {
+      "description": "Odešle RF příkaz.",
+      "fields": {
+        "all": {
+          "description": "Pokud je třeba nastavit příznak all, musí být podporován protokolem.",
+          "name": "Vše"
+        },
+        "id": {
+          "description": "ID zařízení.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Protokol, který se má použít.",
+          "name": "Protokol"
+        },
+        "repeats": {
+          "description": "Kolikrát musí být RF příkaz odeslán.",
+          "name": "Opakuje se"
+        },
+        "state": {
+          "description": "Stav, který se má odeslat do zařízení.",
+          "name": "Stát"
+        },
+        "unit": {
+          "description": "Jednotka zařízení.",
+          "name": "Jednotka"
+        }
+      },
+      "name": "Odeslat RF příkaz"
+    },
+    "send": {
+      "description": "Odešle příkaz do Homeduina.",
+      "fields": {
+        "command": {
+          "description": "Příkaz k odeslání.",
+          "name": "Příkaz"
+        },
+        "device_id": {
+          "description": "Vysílač s přijímačem Homeduino, do kterého chcete odeslat příkaz.",
+          "name": "Zařízení"
+        }
+      },
+      "name": "Odeslat příkaz"
+    }
+  }
+}

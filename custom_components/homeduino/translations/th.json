@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "อุปกรณ์ได้รับการกำหนดค่าแล้ว"
+    },
+    "error": {
+      "cannot_connect": "ไม่สามารถเชื่อมต่อได้",
+      "nonexisting_serial_port": "ไม่มีพอร์ตอนุกรม",
+      "unknown": "ข้อผิดพลาดที่ไม่คาดคิด"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "รหัสอุปกรณ์",
+          "rf_id_ignore_all": "ละเว้นทั้งหมด",
+          "rf_protocol": "โปรโตคอล",
+          "rf_unit": "หน่วยอุปกรณ์"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "เปิดใช้งานเมื่ออุปกรณ์ RF ของคุณละเว้นปุ่มทั้งหมด/หลักที่มักพบในรีโมทคอนโทรล RF"
+        },
+        "title": "อุปกรณ์คลื่นความถี่วิทยุ"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "เปิดใช้งานอินพุตแบบอะนาล็อก 0",
+          "analog_1": "เปิดใช้งานอินพุตแบบอะนาล็อก 1",
+          "analog_2": "เปิดใช้งานอินพุตแบบอะนาล็อก 2",
+          "analog_3": "เปิดใช้งานอินพุตแบบอะนาล็อก 3",
+          "analog_4": "เปิดใช้งานอินพุตแบบอะนาล็อก 4",
+          "analog_5": "เปิดใช้งานอินพุตแบบอะนาล็อก 5",
+          "analog_6": "เปิดใช้งานอินพุตแบบอะนาล็อก 6",
+          "analog_7": "เปิดใช้งานอินพุตแบบอะนาล็อก 7",
+          "baud_rate": "อัตรารับส่งข้อมูล",
+          "digital_10": "ไอโอดิจิทัล 10",
+          "digital_11": "ไอโอดิจิทัล 11",
+          "digital_12": "ไอโอดิจิทัล 12",
+          "digital_13": "ไอโอดิจิทัล 13",
+          "digital_2": "ไอโอดิจิทัล 2",
+          "digital_3": "ไอโอดิจิทัล 3",
+          "digital_4": "ไอโอดิจิทัล 4",
+          "digital_5": "ไอโอดิจิทัล 5",
+          "digital_6": "ไอโอดิจิทัล 6",
+          "digital_7": "ดิจิตอลไอโอ 7",
+          "digital_8": "ดิจิตอลไอโอ 8",
+          "digital_9": "ดิจิตอลไอโอ 9",
+          "serial_port": "พอร์ตอนุกรม"
+        },
+        "data_description": {
+          "baud_rate": "อัตรารับส่งข้อมูลที่กำหนดค่าไว้ของเครื่องรับส่งสัญญาณ Homeduino ของคุณ",
+          "serial_port": "พอร์ตอนุกรมที่เครื่องรับส่งสัญญาณ Homeduino ของคุณเชื่อมต่ออยู่"
+        },
+        "title": "เครื่องรับส่งสัญญาณ Homeduino"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "อุปกรณ์คลื่นความถี่วิทยุ",
+          "setup_transceiver": "เครื่องรับส่งสัญญาณ Homeduino"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "อินพุตดิจิตอล {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "แสง {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "เอาต์พุต PWM {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "อินพุตแบบอะนาล็อก {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} ความชื้น"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} อุณหภูมิ"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} ความชื้น"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} อุณหภูมิ"
+      },
+      "wind_gust": {
+        "name": "ลมกระโชก"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "เอาท์พุทดิจิตอล {digital_io}"
+      },
+      "rf_switch": {
+        "name": "สลับ {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "ละเว้นทั้งหมด",
+          "rf_repeats": "RF ซ้ำ"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "เปิดใช้งานเมื่ออุปกรณ์ RF ของคุณละเว้นปุ่มทั้งหมด/หลักที่มักพบในรีโมทคอนโทรล RF",
+          "rf_repeats": "จำนวนครั้งที่ต้องส่งสัญญาณ RF ซ้ำ"
+        },
+        "title": "ตัวเลือกอุปกรณ์ Homeduino RF"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "เปิดใช้งานอินพุตแบบอะนาล็อก 0",
+          "analog_1": "เปิดใช้งานอินพุตแบบอะนาล็อก 1",
+          "analog_2": "เปิดใช้งานอินพุตแบบอะนาล็อก 2",
+          "analog_3": "เปิดใช้งานอินพุตแบบอะนาล็อก 3",
+          "analog_4": "เปิดใช้งานอินพุตแบบอะนาล็อก 4",
+          "analog_5": "เปิดใช้งานอินพุตแบบอะนาล็อก 5",
+          "analog_6": "เปิดใช้งานอินพุตแบบอะนาล็อก 6",
+          "analog_7": "เปิดใช้งานอินพุตแบบอะนาล็อก 7",
+          "digital_10": "ไอโอดิจิทัล 10",
+          "digital_11": "ไอโอดิจิทัล 11",
+          "digital_12": "ไอโอดิจิทัล 12",
+          "digital_13": "ไอโอดิจิทัล 13",
+          "digital_2": "ไอโอดิจิทัล 2",
+          "digital_3": "ไอโอดิจิทัล 3",
+          "digital_4": "ไอโอดิจิทัล 4",
+          "digital_5": "ไอโอดิจิทัล 5",
+          "digital_6": "ไอโอดิจิทัล 6",
+          "digital_7": "ดิจิตอลไอโอ 7",
+          "digital_8": "ดิจิตอลไอโอ 8",
+          "digital_9": "ดิจิตอลไอโอ 9"
+        },
+        "title": "ตัวเลือกตัวรับส่งสัญญาณ Homeduino"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "อุปกรณ์ RF Homeduino",
+        "transceiver": "เครื่องรับส่งสัญญาณ Homeduino"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "รถบัส 1 สาย",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "อินพุตดิจิตอล",
+        "digital_output": "เอาท์พุทดิจิตอล",
+        "none": "ไม่ได้เชื่อมต่อ",
+        "pwm_output": "เอาท์พุทพีเอ็มดับเบิลยู",
+        "rf_receive": "รับ RF",
+        "rf_send": "RF ส่ง"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "ส่งคำสั่ง RF แบบดิบ",
+      "fields": {
+        "command": {
+          "description": "คำสั่งที่จะส่ง",
+          "name": "สั่งการ"
+        },
+        "repeats": {
+          "description": "จำนวนครั้งที่ต้องส่งคำสั่ง RF",
+          "name": "ซ้ำ"
+        }
+      },
+      "name": "ส่งคำสั่ง RF ดิบ"
+    },
+    "rf_send": {
+      "description": "ส่งคำสั่ง RF",
+      "fields": {
+        "all": {
+          "description": "หากจำเป็นต้องตั้งค่าสถานะทั้งหมด จะต้องได้รับการสนับสนุนโดยโปรโตคอล",
+          "name": "ทั้งหมด"
+        },
+        "id": {
+          "description": "รหัสอุปกรณ์",
+          "name": "บัตรประจำตัวประชาชน"
+        },
+        "protocol": {
+          "description": "โปรโตคอลที่จะใช้",
+          "name": "โปรโตคอล"
+        },
+        "repeats": {
+          "description": "จำนวนครั้งที่ต้องส่งคำสั่ง RF",
+          "name": "ซ้ำ"
+        },
+        "state": {
+          "description": "สถานะที่จะส่งไปยังอุปกรณ์",
+          "name": "สถานะ"
+        },
+        "unit": {
+          "description": "หน่วยอุปกรณ์",
+          "name": "หน่วย"
+        }
+      },
+      "name": "ส่งคำสั่ง RF"
+    },
+    "send": {
+      "description": "ส่งคำสั่งไปที่ Homeduino",
+      "fields": {
+        "command": {
+          "description": "คำสั่งที่จะส่ง",
+          "name": "สั่งการ"
+        },
+        "device_id": {
+          "description": "ตัวรับส่งสัญญาณ Homeduino เพื่อส่งคำสั่งไปยัง",
+          "name": "อุปกรณ์"
+        }
+      },
+      "name": "ส่งคำสั่ง"
+    }
+  }
+}

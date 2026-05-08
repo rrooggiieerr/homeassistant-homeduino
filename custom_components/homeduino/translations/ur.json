@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "ڈیوائس پہلے ہی کنفیگر ہے۔"
+    },
+    "error": {
+      "cannot_connect": "رابطہ قائم کرنے میں ناکام",
+      "nonexisting_serial_port": "سیریل پورٹ موجود نہیں ہے۔",
+      "unknown": "غیر متوقع غلطی"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "ڈیوائس کی شناخت",
+          "rf_id_ignore_all": "سب کو نظر انداز کریں۔",
+          "rf_protocol": "پروٹوکول",
+          "rf_unit": "ڈیوائس یونٹ"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "جب آپ کا RF ڈیوائس اکثر RF ریموٹ کنٹرولز پر پائے جانے والے آل/ماسٹر بٹن کو نظر انداز کر دے تو اسے فعال کریں۔"
+        },
+        "title": "آر ایف ڈیوائس"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "اینالاگ ان پٹ 0 کو فعال کریں۔",
+          "analog_1": "اینالاگ ان پٹ 1 کو فعال کریں۔",
+          "analog_2": "اینالاگ ان پٹ 2 کو فعال کریں۔",
+          "analog_3": "اینالاگ ان پٹ 3 کو فعال کریں۔",
+          "analog_4": "اینالاگ ان پٹ 4 کو فعال کریں۔",
+          "analog_5": "اینالاگ ان پٹ 5 کو فعال کریں۔",
+          "analog_6": "اینالاگ ان پٹ 6 کو فعال کریں۔",
+          "analog_7": "اینالاگ ان پٹ 7 کو فعال کریں۔",
+          "baud_rate": "بوڈ کی شرح",
+          "digital_10": "ڈیجیٹل IO 10",
+          "digital_11": "ڈیجیٹل IO 11",
+          "digital_12": "ڈیجیٹل IO 12",
+          "digital_13": "ڈیجیٹل IO 13",
+          "digital_2": "ڈیجیٹل IO 2",
+          "digital_3": "ڈیجیٹل IO 3",
+          "digital_4": "ڈیجیٹل IO 4",
+          "digital_5": "ڈیجیٹل IO 5",
+          "digital_6": "ڈیجیٹل IO 6",
+          "digital_7": "ڈیجیٹل IO 7",
+          "digital_8": "ڈیجیٹل IO 8",
+          "digital_9": "ڈیجیٹل IO 9",
+          "serial_port": "سیریل پورٹ"
+        },
+        "data_description": {
+          "baud_rate": "آپ کے Homeduino ٹرانسیور کی ترتیب شدہ بوڈ ریٹ۔",
+          "serial_port": "سیریل پورٹ جس سے آپ کا Homeduino ٹرانسیور منسلک ہے۔"
+        },
+        "title": "ہومڈوینو ٹرانسیور"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "آر ایف ڈیوائس",
+          "setup_transceiver": "ہومڈوینو ٹرانسیور"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "ڈیجیٹل ان پٹ {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "روشنی {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM آؤٹ پٹ {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "اینالاگ ان پٹ {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} نمی"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} درجہ حرارت"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} نمی"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} درجہ حرارت"
+      },
+      "wind_gust": {
+        "name": "ہوا کا جھونکا"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "ڈیجیٹل آؤٹ پٹ {digital_io}"
+      },
+      "rf_switch": {
+        "name": "سوئچ {unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "سب کو نظر انداز کریں۔",
+          "rf_repeats": "آر ایف دہراتا ہے۔"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "جب آپ کا RF ڈیوائس اکثر RF ریموٹ کنٹرولز پر پائے جانے والے آل/ماسٹر بٹن کو نظر انداز کر دے تو اسے فعال کریں۔",
+          "rf_repeats": "RF سگنل کو جتنی بار دہرانے کی ضرورت ہے۔"
+        },
+        "title": "Homeduino RF ڈیوائس کے اختیارات"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "اینالاگ ان پٹ 0 کو فعال کریں۔",
+          "analog_1": "اینالاگ ان پٹ 1 کو فعال کریں۔",
+          "analog_2": "اینالاگ ان پٹ 2 کو فعال کریں۔",
+          "analog_3": "اینالاگ ان پٹ 3 کو فعال کریں۔",
+          "analog_4": "اینالاگ ان پٹ 4 کو فعال کریں۔",
+          "analog_5": "اینالاگ ان پٹ 5 کو فعال کریں۔",
+          "analog_6": "اینالاگ ان پٹ 6 کو فعال کریں۔",
+          "analog_7": "اینالاگ ان پٹ 7 کو فعال کریں۔",
+          "digital_10": "ڈیجیٹل IO 10",
+          "digital_11": "ڈیجیٹل IO 11",
+          "digital_12": "ڈیجیٹل IO 12",
+          "digital_13": "ڈیجیٹل IO 13",
+          "digital_2": "ڈیجیٹل IO 2",
+          "digital_3": "ڈیجیٹل IO 3",
+          "digital_4": "ڈیجیٹل IO 4",
+          "digital_5": "ڈیجیٹل IO 5",
+          "digital_6": "ڈیجیٹل IO 6",
+          "digital_7": "ڈیجیٹل IO 7",
+          "digital_8": "ڈیجیٹل IO 8",
+          "digital_9": "ڈیجیٹل IO 9"
+        },
+        "title": "Homeduino ٹرانسیور کے اختیارات"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino RF ڈیوائس",
+        "transceiver": "ہومڈوینو ٹرانسیور"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1-وائر بس",
+        "dht11": "ڈی ایچ ٹی 11",
+        "dht22": "ڈی ایچ ٹی 22",
+        "digital_input": "ڈیجیٹل ان پٹ",
+        "digital_output": "ڈیجیٹل آؤٹ پٹ",
+        "none": "منسلک نہیں ہے۔",
+        "pwm_output": "پی ڈبلیو ایم آؤٹ پٹ",
+        "rf_receive": "آر ایف وصول کریں۔",
+        "rf_send": "آر ایف بھیجیں۔"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "ایک خام RF کمانڈ بھیجتا ہے۔",
+      "fields": {
+        "command": {
+          "description": "بھیجنے کا حکم۔",
+          "name": "حکم"
+        },
+        "repeats": {
+          "description": "RF کمانڈ کو بھیجنے کے لیے وقت کی تعداد۔",
+          "name": "دہراتی ہے۔"
+        }
+      },
+      "name": "خام RF کمانڈ بھیجیں۔"
+    },
+    "rf_send": {
+      "description": "آر ایف کمانڈ بھیجتا ہے۔",
+      "fields": {
+        "all": {
+          "description": "اگر تمام پرچم کو سیٹ کرنے کی ضرورت ہے، تو پروٹوکول کی طرف سے حمایت کی ضرورت ہے.",
+          "name": "تمام"
+        },
+        "id": {
+          "description": "ڈیوائس کی شناخت۔",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "استعمال کرنے کے لیے پروٹوکول۔",
+          "name": "پروٹوکول"
+        },
+        "repeats": {
+          "description": "RF کمانڈ کو بھیجنے کے لیے وقت کی تعداد۔",
+          "name": "دہراتی ہے۔"
+        },
+        "state": {
+          "description": "ڈیوائس پر بھیجنے کے لیے ریاست۔",
+          "name": "ریاست"
+        },
+        "unit": {
+          "description": "ڈیوائس یونٹ۔",
+          "name": "یونٹ"
+        }
+      },
+      "name": "آر ایف کمانڈ بھیجیں۔"
+    },
+    "send": {
+      "description": "Homeduino کو کمانڈ بھیجتا ہے۔",
+      "fields": {
+        "command": {
+          "description": "بھیجنے کا حکم۔",
+          "name": "حکم"
+        },
+        "device_id": {
+          "description": "کمانڈ بھیجنے کے لیے ہومڈوینو ٹرانسیور۔",
+          "name": "ڈیوائس"
+        }
+      },
+      "name": "کمانڈ بھیجیں۔"
+    }
+  }
+}

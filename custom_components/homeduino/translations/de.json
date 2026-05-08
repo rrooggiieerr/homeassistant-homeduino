@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Gerät ist bereits konfiguriert"
+    },
+    "error": {
+      "cannot_connect": "Verbindung konnte nicht hergestellt werden",
+      "nonexisting_serial_port": "Serieller Port existiert nicht",
+      "unknown": "Unerwarteter Fehler"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "Geräte ID",
+          "rf_id_ignore_all": "Alles ignorieren",
+          "rf_protocol": "Protokoll",
+          "rf_unit": "Geräteeinheit"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktivieren Sie diese Option, wenn Ihr HF Gerät die all/master taste ignoriert, die häufig auf HF Fernbedienungen zu finden ist."
+        },
+        "title": "HF Gerät"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "Analogeingang 0 aktivieren",
+          "analog_1": "Analogeingang 1 aktivieren",
+          "analog_2": "Analogeingang 2 aktivieren",
+          "analog_3": "Analogeingang 3 aktivieren",
+          "analog_4": "Analogeingang 4 aktivieren",
+          "analog_5": "Analogeingang 5 aktivieren",
+          "analog_6": "Analogeingang 6 aktivieren",
+          "analog_7": "Analogeingang 7 aktivieren",
+          "baud_rate": "Baudrate",
+          "digital_10": "Digitales IO 10",
+          "digital_11": "Digitales IO 11",
+          "digital_12": "Digitales IO 12",
+          "digital_13": "Digitales IO 13",
+          "digital_2": "Digitales IO 2",
+          "digital_3": "Digitales IO 3",
+          "digital_4": "Digitales IO 4",
+          "digital_5": "Digitales IO 5",
+          "digital_6": "Digitales IO 6",
+          "digital_7": "Digitales IO 7",
+          "digital_8": "Digitales IO 8",
+          "digital_9": "Digitales IO 9",
+          "serial_port": "Serieller Anschluss"
+        },
+        "data_description": {
+          "baud_rate": "Die konfigurierte Baudrate Ihres Homeduino Transceivers.",
+          "serial_port": "Der serielle Port, an den Ihr Homeduino Transceiver angeschlossen ist."
+        },
+        "title": "Homeduino Transceiver"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "HF Gerät",
+          "setup_transceiver": "Homeduino Transceiver"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "Digitaler Eingang {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "Licht {unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "PWM Ausgang {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "Analoger Eingang {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} Luftfeuchtigkeit"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} Temperatur"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} Luftfeuchtigkeit"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} Temperatur"
+      },
+      "wind_gust": {
+        "name": "Windböe"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "Digitaler Ausgang {digital_io}"
+      },
+      "rf_switch": {
+        "name": "{unit} wechseln"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "Alles ignorieren",
+          "rf_repeats": "HF Wiederholungen"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "Aktivieren Sie diese Option, wenn Ihr HF Gerät die all/master taste ignoriert, die häufig auf HF Fernbedienungen zu finden ist.",
+          "rf_repeats": "Die Häufigkeit, mit der das HF Signal wiederholt werden muss."
+        },
+        "title": "Homeduino HF Geräteoptionen"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "Analogeingang 0 aktivieren",
+          "analog_1": "Analogeingang 1 aktivieren",
+          "analog_2": "Analogeingang 2 aktivieren",
+          "analog_3": "Analogeingang 3 aktivieren",
+          "analog_4": "Analogeingang 4 aktivieren",
+          "analog_5": "Analogeingang 5 aktivieren",
+          "analog_6": "Analogeingang 6 aktivieren",
+          "analog_7": "Analogeingang 7 aktivieren",
+          "digital_10": "Digitales IO 10",
+          "digital_11": "Digitales IO 11",
+          "digital_12": "Digitales IO 12",
+          "digital_13": "Digitales IO 13",
+          "digital_2": "Digitales IO 2",
+          "digital_3": "Digitales IO 3",
+          "digital_4": "Digitales IO 4",
+          "digital_5": "Digitales IO 5",
+          "digital_6": "Digitales IO 6",
+          "digital_7": "Digitales IO 7",
+          "digital_8": "Digitales IO 8",
+          "digital_9": "Digitales IO 9"
+        },
+        "title": "Homeduino Transceiver Optionen"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino HF Gerät",
+        "transceiver": "Homeduino Transceiver"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1 Draht Bus",
+        "dht11": "DHT11",
+        "dht22": "DHT22",
+        "digital_input": "Digitaler Eingang",
+        "digital_output": "Digitaler Ausgang",
+        "none": "Nicht verbunden",
+        "pwm_output": "PWM Ausgang",
+        "rf_receive": "HF Empfang",
+        "rf_send": "HF Senden"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "Sendet einen rohen HF Befehl.",
+      "fields": {
+        "command": {
+          "description": "Ein Befehl zum Senden.",
+          "name": "Befehl"
+        },
+        "repeats": {
+          "description": "Die Häufigkeit, mit der der HF Befehl gesendet werden muss.",
+          "name": "Wiederholt"
+        }
+      },
+      "name": "Senden Sie einen rohen HF Befehl"
+    },
+    "rf_send": {
+      "description": "Sendet einen HF Befehl.",
+      "fields": {
+        "all": {
+          "description": "Wenn das All flag gesetzt werden muss, muss es vom Protokoll unterstützt werden.",
+          "name": "All"
+        },
+        "id": {
+          "description": "Geräte ID.",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "Das zu verwendende Protokoll.",
+          "name": "Protokoll"
+        },
+        "repeats": {
+          "description": "Die Häufigkeit, mit der der HF Befehl gesendet werden muss.",
+          "name": "Wiederholt"
+        },
+        "state": {
+          "description": "Der Status, der an das Gerät gesendet werden soll.",
+          "name": "Status"
+        },
+        "unit": {
+          "description": "Geräteeinheit.",
+          "name": "Einheit"
+        }
+      },
+      "name": "HF Befehl senden"
+    },
+    "send": {
+      "description": "Sendet einen Befehl an Homeduino.",
+      "fields": {
+        "command": {
+          "description": "Ein Befehl zum Senden.",
+          "name": "Befehl"
+        },
+        "device_id": {
+          "description": "Der Homeduino Transceiver, an den der Befehl gesendet werden soll.",
+          "name": "Gerät"
+        }
+      },
+      "name": "Befehl senden"
+    }
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "设备已配置"
+    },
+    "error": {
+      "cannot_connect": "连接失败",
+      "nonexisting_serial_port": "串口不存在",
+      "unknown": "意外错误"
+    },
+    "step": {
+      "setup_rf_device": {
+        "data": {
+          "rf_id": "设备ID",
+          "rf_id_ignore_all": "全部忽略",
+          "rf_protocol": "协议",
+          "rf_unit": "装置单位"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "当您的 RF 设备忽略 RF 遥控器上常见的全部/主按钮时启用。"
+        },
+        "title": "射频装置"
+      },
+      "setup_serial": {
+        "data": {
+          "analog_0": "启用模拟输入0",
+          "analog_1": "启用模拟输入 1",
+          "analog_2": "启用模拟输入 2",
+          "analog_3": "启用模拟输入 3",
+          "analog_4": "启用模拟输入 4",
+          "analog_5": "启用模拟输入 5",
+          "analog_6": "启用模拟输入 6",
+          "analog_7": "启用模拟输入 7",
+          "baud_rate": "波特率",
+          "digital_10": "数字IO 10",
+          "digital_11": "数字IO 11",
+          "digital_12": "数字IO 12",
+          "digital_13": "数字IO 13",
+          "digital_2": "数字IO 2",
+          "digital_3": "数字IO 3",
+          "digital_4": "数字IO 4",
+          "digital_5": "数字IO 5",
+          "digital_6": "数字IO 6",
+          "digital_7": "数字IO 7",
+          "digital_8": "数字IO 8",
+          "digital_9": "数字IO 9",
+          "serial_port": "串口"
+        },
+        "data_description": {
+          "baud_rate": "Homeduino 收发器配置的波特率。",
+          "serial_port": "Homeduino 收发器连接的串行端口。"
+        },
+        "title": "Homeduino 收发器"
+      },
+      "user": {
+        "menu_options": {
+          "setup_rf_device": "射频装置",
+          "setup_transceiver": "Homeduino 收发器"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "digital_input": {
+        "name": "数字输入 {digital_io}"
+      }
+    },
+    "light": {
+      "rf_light": {
+        "name": "光{unit}"
+      }
+    },
+    "number": {
+      "pwm_output": {
+        "name": "脉宽调制输出 {digital_io}"
+      }
+    },
+    "sensor": {
+      "analog_input": {
+        "name": "模拟输入 {analog_input}"
+      },
+      "dht11_humidity": {
+        "name": "DHT11 {digital_io} 湿度"
+      },
+      "dht11_temperature": {
+        "name": "DHT11 {digital_io} 温度"
+      },
+      "dht22_humidity": {
+        "name": "DHT22 {digital_io} 湿度"
+      },
+      "dht22_temperature": {
+        "name": "DHT22 {digital_io} 温度"
+      },
+      "wind_gust": {
+        "name": "阵风"
+      }
+    },
+    "switch": {
+      "digital_output": {
+        "name": "数字输出 {digital_io}"
+      },
+      "rf_switch": {
+        "name": "开关{unit}"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "rf_device": {
+        "data": {
+          "rf_id_ignore_all": "全部忽略",
+          "rf_repeats": "射频重复"
+        },
+        "data_description": {
+          "rf_id_ignore_all": "当您的 RF 设备忽略 RF 遥控器上常见的全部/主按钮时启用。",
+          "rf_repeats": "RF 信号需要重复的次数。"
+        },
+        "title": "Homeduino 射频设备选项"
+      },
+      "transceiver": {
+        "data": {
+          "analog_0": "启用模拟输入0",
+          "analog_1": "启用模拟输入 1",
+          "analog_2": "启用模拟输入 2",
+          "analog_3": "启用模拟输入 3",
+          "analog_4": "启用模拟输入 4",
+          "analog_5": "启用模拟输入 5",
+          "analog_6": "启用模拟输入 6",
+          "analog_7": "启用模拟输入 7",
+          "digital_10": "数字IO 10",
+          "digital_11": "数字IO 11",
+          "digital_12": "数字IO 12",
+          "digital_13": "数字IO 13",
+          "digital_2": "数字IO 2",
+          "digital_3": "数字IO 3",
+          "digital_4": "数字IO 4",
+          "digital_5": "数字IO 5",
+          "digital_6": "数字IO 6",
+          "digital_7": "数字IO 7",
+          "digital_8": "数字IO 8",
+          "digital_9": "数字IO 9"
+        },
+        "title": "Homeduino 收发器选项"
+      }
+    }
+  },
+  "selector": {
+    "device_types": {
+      "options": {
+        "rf_device": "Homeduino 射频设备",
+        "transceiver": "Homeduino 收发器"
+      }
+    },
+    "digital_io": {
+      "options": {
+        "1_wire": "1线总线",
+        "dht11": "双氢睾酮11",
+        "dht22": "双氢睾酮22",
+        "digital_input": "数字输入",
+        "digital_output": "数字输出",
+        "none": "未连接",
+        "pwm_output": "脉宽调制输出",
+        "rf_receive": "射频接收",
+        "rf_send": "射频发送"
+      }
+    }
+  },
+  "services": {
+    "raw_rf_send": {
+      "description": "发送原始 RF 命令。",
+      "fields": {
+        "command": {
+          "description": "要发送的命令。",
+          "name": "命令"
+        },
+        "repeats": {
+          "description": "RF命令需要发送的次数。",
+          "name": "重复"
+        }
+      },
+      "name": "发送原始 RF 命令"
+    },
+    "rf_send": {
+      "description": "发送 RF 命令。",
+      "fields": {
+        "all": {
+          "description": "如果需要设置all标志，需要协议支持。",
+          "name": "全部"
+        },
+        "id": {
+          "description": "设备 ID。",
+          "name": "ID"
+        },
+        "protocol": {
+          "description": "要使用的协议。",
+          "name": "协议"
+        },
+        "repeats": {
+          "description": "RF命令需要发送的次数。",
+          "name": "重复"
+        },
+        "state": {
+          "description": "要发送到设备的状态。",
+          "name": "状态"
+        },
+        "unit": {
+          "description": "设备单位。",
+          "name": "单元"
+        }
+      },
+      "name": "发送射频命令"
+    },
+    "send": {
+      "description": "向 Homeduino 发送命令。",
+      "fields": {
+        "command": {
+          "description": "要发送的命令。",
+          "name": "命令"
+        },
+        "device_id": {
+          "description": "要向其发送命令的 Homeduino 收发器。",
+          "name": "设备"
+        }
+      },
+      "name": "发送命令"
+    }
+  }
+}
