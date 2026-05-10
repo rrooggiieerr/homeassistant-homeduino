@@ -107,9 +107,11 @@ class HomeduinoTransceiverNumber(CoordinatorEntity, RestoreNumber):
                 self.entity_description.digital_io, HomeduinoPinMode.OUTPUT
             )
 
-            if (last_state := await self.async_get_last_state()) is not None:
-                last_number_data = await self.async_get_last_number_data()
-                native_value = last_number_data.native_value or 0
+            last_number_data = await self.async_get_last_number_data()
+            if (last_number_data is not None) and (
+                last_number_data.native_value is not None
+            ):
+                native_value = last_number_data.native_value
                 if await self._homeduino.analog_write(
                     self.entity_description.digital_io, int(native_value)
                 ):
