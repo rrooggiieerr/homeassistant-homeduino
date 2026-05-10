@@ -94,8 +94,9 @@ async def async_setup_entry(
                 device_class = BinarySensorDeviceClass.MOTION
 
             entity_description = HomeduinoRFBinarySensorEntityDescription(
-                key=protocol,
+                key=identifier,
                 device_class=device_class,
+                protocol=protocol,
                 id=id,
                 unit=unit,
                 inverted=protocol.startswith("contact"),
@@ -107,8 +108,9 @@ async def async_setup_entry(
 
         if protocol in ["contact4", "weather4", "weather5", "weather7", "weather13"]:
             entity_description = HomeduinoRFBinarySensorEntityDescription(
-                key=protocol,
+                key=identifier,
                 device_class=BinarySensorDeviceClass.BATTERY,
+                protocol=protocol,
                 id=id,
                 unit=unit,
                 field="lowBattery",
@@ -130,6 +132,7 @@ class HomeduinoTransceiverBinarySensorEntityDescription(
 class HomeduinoRFBinarySensorEntityDescription(
     BinarySensorEntityDescription, frozen_or_thawed=True
 ):
+    protocol: str
     id: int
     unit: int | None
     field: str | None = None
@@ -192,9 +195,7 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
         self._attr_device_info = device_info
 
-        unique_id = f"{DOMAIN}-{entity_description.protocol}-{entity_description.id}"
-        if entity_description.unit is not None:
-            unique_id += f"-{entity_description.unit}"
+        unique_id = f"{DOMAIN}-{entity_description.key}"
         if entity_description.field:
             unique_id += f"-{entity_description.field}"
         self._attr_unique_id = unique_id
@@ -224,7 +225,7 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
             if not self.coordinator.data:
                 return
 
-            if self.coordinator.data.get("protocol") != self.entity_description.key:
+            if self.coordinator.data.get("protocol") != self.entity_description.protocol:
                 return
 
             if (

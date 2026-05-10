@@ -87,9 +87,10 @@ async def async_setup_entry(
         )
 
         entity_description = HomeduinoRFSwitchEntityDescription(
-            key=protocol,
+            key=identifier,
             translation_key="rf_switch",
             translation_placeholders={"unit": unit},
+            protocol=protocol,
             id=id,
             unit=unit,
             ignore_all=id_ignore_all,
@@ -109,6 +110,7 @@ class HomeduinoTransceiverSwitchEntityDescription(
 class HomeduinoRFSwitchEntityDescription(
     SwitchEntityDescription, frozen_or_thawed=True
 ):
+    protocol: str
     id: int
     unit: int | None = None
     ignore_all: bool = False
@@ -196,10 +198,7 @@ class HomeduinoRFSwitch(CoordinatorEntity, SwitchEntity, RestoreEntity):
 
         self._attr_device_info = device_info
 
-        unique_id = f"{DOMAIN}-{entity_description.key}-{entity_description.id}"
-        if entity_description.unit:
-            unique_id += f"-{entity_description.unit}"
-        self._attr_unique_id = unique_id
+        self._attr_unique_id = f"{DOMAIN}-{entity_description.key}"
 
         self.entity_description = entity_description
 

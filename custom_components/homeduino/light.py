@@ -71,31 +71,30 @@ async def async_setup_entry(
             name=config_entry.title,
         )
 
+        protocols = [protocol]
+        if config_entry.data.get(CONF_RF_PROTOCOL) == "dimmer1":
+            protocols.append("switch1")
+
         entity_description = HomeduinoRFLightEntityDescription(
-            key=protocol,
+            key=identifier,
             translation_key="rf_light",
             translation_placeholders={"unit": unit},
+            protocols=protocols,
             id=id,
             unit=unit,
         )
 
-        if config_entry.data.get(CONF_RF_PROTOCOL) == "dimmer1":
-            entities.append(
-                HomeduinoRFDimmer1(
-                    coordinator, device_info, entity_description, id_ignore_all, repeats
-                )
+        entities.append(
+            HomeduinoRFDimmer(
+                coordinator, device_info, entity_description, id_ignore_all, repeats
             )
-        else:
-            entities.append(
-                HomeduinoRFDimmer(
-                    coordinator, device_info, entity_description, id_ignore_all, repeats
-                )
-            )
+        )
 
     async_add_entities(entities)
 
 
 class HomeduinoRFLightEntityDescription(LightEntityDescription, frozen_or_thawed=True):
+    protocols: [str]
     id: int
     unit: int | None
 
@@ -122,14 +121,9 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         """Initialize the switch."""
         super().__init__(coordinator, entity_description.key)
 
-        self.protocols = [entity_description.key]
-
         self._attr_device_info = device_info
 
-        unique_id = f"{DOMAIN}-{entity_description.key}-{entity_description.id}"
-        if entity_description.unit:
-            unique_id += f"-{entity_description.unit}"
-        self._attr_unique_id = self.unique_id
+        self._attr_unique_id = f"{DOMAIN}-{entity_description.key}"
 
         self.entity_description = entity_description
         self.ignore_all = ignore_all
@@ -175,7 +169,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
             if not self.coordinator.data:
                 return
 
-            if self.coordinator.data.get("protocol") not in self.protocols:
+            if self.coordinator.data.get("protocol") not in self.entity_description.protocols:
                 return
 
             if (
@@ -226,7 +220,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         brightness = int(brightness / 17)
 
         if await self.coordinator.rf_send(
-            self.entity_description.key,
+            self.entity_description.protocols[0],
             {
                 "id": self.entity_description.id,
                 "unit": self.entity_description.unit,
@@ -246,7 +240,7 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
         """Turn the entity off."""
         _LOGGER.debug("Turning off %s", self.name)
         if await self.coordinator.rf_send(
-            self.entity_description.key,
+            self.entity_description.protocols[0],
             {
                 "id": self.entity_description.id,
                 "unit": self.entity_description.unit,
@@ -264,20 +258,3 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
             self.async_write_ha_state()
         else:
             _LOGGER.error("Failed to switch off %s", self.name)
-
-
-class HomeduinoRFDimmer1(HomeduinoRFDimmer):
-    def __init__(
-        self,
-        coordinator: HomeduinoCoordinator,
-        device_info: DeviceInfo,
-        entity_description: HomeduinoRFLightEntityDescription,
-        ignore_all: bool = False,
-        repeats: int = DEFAULT_REPEATS,
-    ) -> None:
-        """Initialize the switch."""
-        super().__init__(
-            coordinator, device_info, entity_description, ignore_all, repeats
-        )
-
-        self.protocols.append("switch1")
