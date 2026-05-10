@@ -70,21 +70,21 @@ async def async_setup_entry(
                 )
     elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
+        id = int(config_entry.data.get(CONF_RF_ID))
+        unit = config_entry.data.get(CONF_RF_UNIT)
+        if unit is not None:
+            unit = int(unit)                                                                    
+
+        identifier = f"{protocol}-{id}"
+        if unit is not None:
+            identifier += f"-{unit}"
+
+        device_info = DeviceInfo(
+            identifiers={(DOMAIN, identifier)},
+            name=config_entry.title,
+        )
+
         if protocol.startswith(("contact", "pir")):
-            id = int(config_entry.data.get(CONF_RF_ID))
-            unit = config_entry.data.get(CONF_RF_UNIT)
-            if unit is not None:
-                unit = int(unit)
-
-            identifier = f"{protocol}-{id}"
-            if unit is not None:
-                identifier += f"-{unit}"
-
-            device_info = DeviceInfo(
-                identifiers={(DOMAIN, identifier)},
-                name=config_entry.title,
-            )
-
             # Determine device_class based on protocol
             device_class = None
             if protocol.startswith("contact"):
@@ -161,7 +161,7 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
     _attr_available = False
 
-    fiel = None
+    field = None
 
     def __init__(
         self,
@@ -175,7 +175,7 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self.protocol = entity_description.key[0]
         self.id = entity_description.key[1]
         self.unit = entity_description.key[2]
-        if len(entity_description) >= 4:
+        if len(entity_description.key) >= 4:
             self.field = entity_description.key[3]
 
         self._attr_device_info = device_info
@@ -226,3 +226,4 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
             )
 
         self.async_write_ha_state()
+
