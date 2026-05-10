@@ -14,7 +14,7 @@
   	"rfcontrol"
   ],
   "requirements": [
-    "homeduino==0.0.22"
+    "homeduino==0.0.24"
   ],
   "version": "0.0.8"
 }
