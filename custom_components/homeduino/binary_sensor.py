@@ -98,6 +98,7 @@ async def async_setup_entry(
                 device_class=device_class,
                 id=id,
                 unit=unit,
+                inverted=protocol.startswith("contact"),
             )
 
             entities.append(
@@ -132,6 +133,7 @@ class HomeduinoRFBinarySensorEntityDescription(
     id: int
     unit: int | None
     field: str | None = None
+    inverted: bool = False
 
 
 class HomeduinoTransceiverBinarySensor(CoordinatorEntity, BinarySensorEntity):
@@ -239,10 +241,15 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
 
             _LOGGER.debug(self.coordinator.data)
 
-            self._attr_is_on = self.coordinator.data.get("values", {}).get(
+            is_on = self.coordinator.data.get("values", {}).get(
                 self.entity_description.field
                 if self.entity_description.field
                 else "state"
             )
+
+            if self.entity_description.inverted:
+                is_on = not is_on
+
+            self._attr_is_on = is_on
 
         self.async_write_ha_state()
