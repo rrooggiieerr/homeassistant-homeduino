@@ -70,6 +70,10 @@ async def async_setup_entry(
                 )
     elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
+        device_info = DeviceInfo(                                           
+            identifiers={(DOMAIN, identifier)},                             
+            name=config_entry.title,                                        
+        )  
         if protocol.startswith(("contact", "pir")):
             id = int(config_entry.data.get(CONF_RF_ID))
             unit = config_entry.data.get(CONF_RF_UNIT)
@@ -79,11 +83,6 @@ async def async_setup_entry(
             identifier = f"{protocol}-{id}"
             if unit is not None:
                 identifier += f"-{unit}"
-
-            device_info = DeviceInfo(
-                identifiers={(DOMAIN, identifier)},
-                name=config_entry.title,
-            )
 
             # Determine device_class based on protocol
             device_class = None
@@ -110,11 +109,6 @@ async def async_setup_entry(
             identifier = f"{protocol}-{id}"                                     
             if unit is not None:                                                
                 identifier += f"-{unit}"                                        
-                                                                                
-            device_info = DeviceInfo(                                           
-                identifiers={(DOMAIN, identifier)},                             
-                name=config_entry.title,                                        
-            )  
 
             entity_description = BinarySensorEntityDescription(
                 key=(protocol, id, unit, "lowBattery"),
