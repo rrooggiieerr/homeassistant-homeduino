@@ -405,7 +405,10 @@ class HomeduinoRFSensor(CoordinatorEntity, SensorEntity):
             if not self.coordinator.data:
                 return
 
-            if self.coordinator.data.get("protocol") != self.entity_description.protocol:
+            if (
+                self.coordinator.data.get("protocol")
+                != self.entity_description.protocol
+            ):
                 return
 
             values = self.coordinator.data.get("values", {})

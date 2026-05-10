@@ -53,7 +53,6 @@ async def async_setup_entry(
     elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE and config_entry.data.get(
         CONF_RF_PROTOCOL
     ).startswith("dimmer"):
-
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
         id = int(config_entry.data.get(CONF_RF_ID))
         unit = config_entry.data.get(CONF_RF_UNIT)
@@ -169,7 +168,10 @@ class HomeduinoRFDimmer(CoordinatorEntity, LightEntity, RestoreEntity):
             if not self.coordinator.data:
                 return
 
-            if self.coordinator.data.get("protocol") not in self.entity_description.protocols:
+            if (
+                self.coordinator.data.get("protocol")
+                not in self.entity_description.protocols
+            ):
                 return
 
             if (
