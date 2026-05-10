@@ -2,7 +2,6 @@
 
 import json
 import logging
-import os
 
 import homeassistant.helpers.config_validation as cv
 import serial
@@ -12,6 +11,7 @@ from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant, ServiceCall, callback
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import device_registry as dr
+from homeassistant.helpers.device_registry import DeviceEntry
 from homeassistant.helpers.selector import (
     BooleanSelector,
     NumberSelector,
@@ -24,11 +24,8 @@ from homeassistant.helpers.selector import (
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeduino import (
     DEFAULT_BAUD_RATE,
-    DEFAULT_RECEIVE_PIN,
     DEFAULT_REPEATS,
-    DEFAULT_SEND_PIN,
     Homeduino,
-    HomeduinoError,
     HomeduinoResponseTimeoutError,
 )
 

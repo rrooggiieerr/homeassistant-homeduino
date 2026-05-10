@@ -6,10 +6,13 @@ from typing import Any
 
 import serial.tools.list_ports
 import voluptuous as vol
-from homeassistant.config_entries import ConfigEntry, ConfigFlow, OptionsFlow
-from homeassistant.const import CONF_TYPE
+from homeassistant.config_entries import (
+    ConfigEntry,
+    ConfigFlow,
+    ConfigFlowResult,
+    OptionsFlow,
+)
 from homeassistant.core import callback
-from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.selector import (
     BooleanSelector,
     NumberSelector,
@@ -33,7 +36,29 @@ from homeduino import (
 from serial.serialutil import SerialException
 
 from . import HomeduinoCoordinator
-from .const import *
+from .const import (
+    CONF_BAUD_RATE,
+    CONF_ENTRY_TYPE,
+    CONF_ENTRY_TYPE_RF_DEVICE,
+    CONF_ENTRY_TYPE_TRANSCEIVER,
+    CONF_IO_ANALOG_,
+    CONF_IO_DHT11,
+    CONF_IO_DHT22,
+    CONF_IO_DIGITAL_,
+    CONF_IO_DIGITAL_INPUT,
+    CONF_IO_DIGITAL_OUTPUT,
+    CONF_IO_NONE,
+    CONF_IO_PWM_OUTPUT,
+    CONF_IO_RF_RECEIVE,
+    CONF_IO_RF_SEND,
+    CONF_RF_ID,
+    CONF_RF_ID_IGNORE_ALL,
+    CONF_RF_PROTOCOL,
+    CONF_RF_REPEATS,
+    CONF_RF_UNIT,
+    CONF_SERIAL_PORT,
+    DOMAIN,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -59,7 +84,7 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
 
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Handle the initial step."""
         # Test if we already have a Homeduino transceiver configured
         if not HomeduinoCoordinator.instance(self.hass).has_transceiver():
@@ -72,13 +97,13 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
 
     async def async_step_setup_transceiver(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Handle the setup transceiver step."""
         return await self.async_step_setup_serial(user_input)
 
     async def async_step_setup_serial(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Handle the setup transceiver serial step."""
         errors: dict[str, str] = {}
 
@@ -249,10 +274,10 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
             except HomeduinoResponseTimeoutError as ex:
                 _LOGGER.error("Unable to connect to the device %s", serial_port, ex)
                 errors["base"] = "cannot_connect"
-            except serial.SerialException as ex:
+            except serial.SerialException:
                 _LOGGER.exception("Unable to connect to the device %s", serial_port)
                 errors["base"] = "cannot_connect"
-            except Exception as ex:  # pylint: disable=broad-except
+            except Exception:  # pylint: disable=broad-except
                 _LOGGER.exception("Unable to connect to the device %s", serial_port)
                 errors["base"] = "cannot_connect"
 
@@ -282,7 +307,7 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
 
     async def async_step_setup_rf_device(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Handle the setup rf switch step."""
         errors: dict[str, str] = {}
 
@@ -415,7 +440,7 @@ class HomeduinoOptionsFlowHandler(OptionsFlow):
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Manage the options."""
         errors: dict[str, str] = {}
 
@@ -508,13 +533,13 @@ class HomeduinoOptionsFlowHandler(OptionsFlow):
 
     async def async_step_transceiver(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Manage the options."""
         return await self.async_step_init(user_input)
 
     async def async_step_rf_device(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Manage the options."""
         return await self.async_step_init(user_input)
 
