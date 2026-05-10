@@ -73,7 +73,7 @@ async def async_setup_entry(
         id = int(config_entry.data.get(CONF_RF_ID))
         unit = config_entry.data.get(CONF_RF_UNIT)
         if unit is not None:
-            unit = int(unit)                                                                    
+            unit = int(unit)
 
         identifier = f"{protocol}-{id}"
         if unit is not None:
@@ -226,4 +226,3 @@ class HomeduinoRFBinarySensor(CoordinatorEntity, BinarySensorEntity):
             )
 
         self.async_write_ha_state()
-
