@@ -70,20 +70,18 @@ async def async_setup_entry(
                 )
     elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
         protocol = config_entry.data.get(CONF_RF_PROTOCOL)
-        device_info = DeviceInfo(                                           
-            identifiers={(DOMAIN, identifier)},                             
-            name=config_entry.title,                                        
-        )  
+        id = int(config_entry.data.get(CONF_RF_ID))
+        unit = config_entry.data.get(CONF_RF_UNIT)
+        if unit is not None:
+            unit = int(unit)                                                                    
+        identifier = f"{protocol}-{id}"
+        if unit is not None:
+            identifier += f"-{unit}"
+        device_info = DeviceInfo(
+            identifiers={(DOMAIN, identifier)},
+            name=config_entry.title,
+        )
         if protocol.startswith(("contact", "pir")):
-            id = int(config_entry.data.get(CONF_RF_ID))
-            unit = config_entry.data.get(CONF_RF_UNIT)
-            if unit is not None:
-                unit = int(unit)
-
-            identifier = f"{protocol}-{id}"
-            if unit is not None:
-                identifier += f"-{unit}"
-
             # Determine device_class based on protocol
             device_class = None
             if protocol.startswith("contact"):
@@ -100,16 +98,7 @@ async def async_setup_entry(
                 HomeduinoRFBinarySensor(coordinator, device_info, entity_description)
             )
 
-        if protocol in ["contact4", "weather4", "weather5", "weather7", "weather13"]:
-            id = int(config_entry.data.get(CONF_RF_ID))
-            unit = config_entry.data.get(CONF_RF_UNIT)
-            if unit is not None:                                                
-                unit = int(unit)                                                
-                                                                                
-            identifier = f"{protocol}-{id}"                                     
-            if unit is not None:                                                
-                identifier += f"-{unit}"                                        
-
+        if protocol in ["contact4", "weather4", "weather5", "weather7", "weather13"]:                             
             entity_description = BinarySensorEntityDescription(
                 key=(protocol, id, unit, "lowBattery"),
                 device_class=BinarySensorDeviceClass.BATTERY,
