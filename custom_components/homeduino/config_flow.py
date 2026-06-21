@@ -4,7 +4,6 @@ import logging
 import os
 from typing import Any
 
-import serial.tools.list_ports
 import voluptuous as vol
 from homeassistant.config_entries import (
     ConfigEntry,
@@ -22,6 +21,7 @@ from homeassistant.helpers.selector import (
     SelectSelector,
     SelectSelectorConfig,
     SelectSelectorMode,
+    SerialPortSelector,
 )
 from homeduino import (
     BAUD_RATES,
@@ -74,13 +74,119 @@ _DIGITAL_IO_DEVICES = [
 ]
 
 
+def build_transceiver_options_schema() -> {}:
+    schema = {}
+
+    for digital_io in range(2, 13):
+        options = [
+            CONF_IO_NONE,
+        ]
+        if digital_io in (2, 3):
+            options += [
+                CONF_IO_RF_RECEIVE,
+            ]
+
+        options += _DIGITAL_IO
+
+        if digital_io in (3, 5, 6, 9, 10, 11):
+            options += [
+                CONF_IO_PWM_OUTPUT,
+            ]
+
+        options += _DIGITAL_IO_DEVICES
+
+        default = CONF_IO_NONE
+        if digital_io == DEFAULT_RECEIVE_PIN:
+            default = CONF_IO_RF_RECEIVE
+        if digital_io == DEFAULT_SEND_PIN:
+            default = CONF_IO_RF_SEND
+
+        schema[vol.Optional(f"{CONF_IO_DIGITAL_}{digital_io}", default=default)] = (
+            SelectSelector(
+                SelectSelectorConfig(
+                    options=options,
+                    mode=SelectSelectorMode.DROPDOWN,
+                    translation_key="digital_io",
+                )
+            )
+        )
+
+    schema[vol.Optional(f"{CONF_IO_DIGITAL_}13", default=CONF_IO_NONE)] = (
+        SelectSelector(
+            SelectSelectorConfig(
+                options=[
+                    CONF_IO_NONE,
+                    CONF_IO_RF_SEND,
+                    CONF_IO_DIGITAL_OUTPUT,
+                ],
+                mode=SelectSelectorMode.DROPDOWN,
+                translation_key="digital_io",
+            )
+        )
+    )
+
+    for analog_input in range(0, 8):
+        schema[vol.Optional(f"{CONF_IO_ANALOG_}{analog_input}")] = BooleanSelector()
+
+    return schema
+
+
+STEP_SETUP_TRANSCEIVER_SCHEMA = vol.Schema(
+    {
+        vol.Required(CONF_SERIAL_PORT, default=""): SerialPortSelector(),
+        vol.Required(CONF_BAUD_RATE, default=str(DEFAULT_BAUD_RATE)): SelectSelector(
+            SelectSelectorConfig(
+                options=[
+                    SelectOptionDict(value=str(baud_rate), label=f"{baud_rate:n} Bd")
+                    for baud_rate in BAUD_RATES
+                ],
+                mode=SelectSelectorMode.DROPDOWN,
+            )
+        ),
+    }
+).extend(build_transceiver_options_schema())
+TRANSCEIVER_OPTIONS_SCHEMA = vol.Schema(build_transceiver_options_schema())
+
+STEP_SETUP_RF_DEVICE_SCHEMA = vol.Schema(
+    {
+        vol.Required(CONF_RF_PROTOCOL, default=""): SelectSelector(
+            SelectSelectorConfig(
+                options=[
+                    protocol_name
+                    for protocol_name in Homeduino.get_protocols()
+                    if protocol_name.startswith(
+                        ("contact", "dimmer", "pir", "switch", "weather")
+                    )
+                ],
+                mode=SelectSelectorMode.DROPDOWN,
+            )
+        ),
+        vol.Required(CONF_RF_ID): NumberSelector(
+            NumberSelectorConfig(min=0, mode=NumberSelectorMode.BOX)
+        ),
+        vol.Optional(CONF_RF_UNIT): NumberSelector(
+            NumberSelectorConfig(min=0, mode=NumberSelectorMode.BOX)
+        ),
+        vol.Optional(
+            CONF_RF_ID_IGNORE_ALL,
+            default=False,
+        ): BooleanSelector(),
+    }
+)
+RF_DEVICE_OPTIONS_SCHEMA = vol.Schema(
+    {
+        vol.Optional(CONF_RF_ID_IGNORE_ALL): BooleanSelector(),
+        vol.Optional(CONF_RF_REPEATS, default=DEFAULT_REPEATS): NumberSelector(
+            NumberSelectorConfig(min=1, step=1, mode=NumberSelectorMode.BOX)
+        ),
+    }
+)
+
+
 class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
     """Handle a config flow for Homeduino 433 MHz RF transceiver."""
 
     VERSION = 2
-
-    _step_setup_serial_schema: vol.Schema
-    _step_setup_rf_device_schema: vol.Schema
 
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
@@ -99,158 +205,18 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
         self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
         """Handle the setup transceiver step."""
-        return await self.async_step_setup_serial(user_input)
-
-    async def async_step_setup_serial(
-        self, user_input: dict[str, Any] | None = None
-    ) -> ConfigFlowResult:
-        """Handle the setup transceiver serial step."""
         errors: dict[str, str] = {}
 
         if user_input is not None:
-            title, data, options = await self.validate_input_setup_serial(
-                user_input, errors
-            )
+            # Validate the data can be used to set up a connection.
+            STEP_SETUP_TRANSCEIVER_SCHEMA(user_input)
 
-            if not errors:
-                return self.async_create_entry(title=title, data=data, options=options)
+            serial_port = user_input.get(CONF_SERIAL_PORT)
+            baud_rate = int(user_input[CONF_BAUD_RATE])
 
-        ports = await self.hass.async_add_executor_job(serial.tools.list_ports.comports)
-        list_of_ports = {}
-        for port in ports:
-            list_of_ports[port.device] = (
-                f"{port}, s/n: {port.serial_number or 'n/a'}"
-                + (f" - {port.manufacturer}" if port.manufacturer else "")
-            )
+            await self.async_set_unique_id(f"{DOMAIN}-{serial_port}")
+            self._abort_if_unique_id_configured()
 
-        self._step_setup_serial_schema = vol.Schema(
-            {
-                vol.Required(CONF_SERIAL_PORT, default=""): SelectSelector(
-                    SelectSelectorConfig(
-                        options=[
-                            SelectOptionDict(value=k, label=v)
-                            for k, v in list_of_ports.items()
-                        ],
-                        mode=SelectSelectorMode.DROPDOWN,
-                        custom_value=True,
-                        sort=True,
-                    )
-                ),
-                vol.Required(
-                    CONF_BAUD_RATE, default=str(DEFAULT_BAUD_RATE)
-                ): SelectSelector(
-                    SelectSelectorConfig(
-                        options=[
-                            SelectOptionDict(
-                                value=str(baud_rate), label=f"{baud_rate:n} Bd"
-                            )
-                            for baud_rate in BAUD_RATES
-                        ],
-                        mode=SelectSelectorMode.DROPDOWN,
-                    )
-                ),
-            }
-        )
-
-        for digital_io in range(2, 13):
-            options = [
-                CONF_IO_NONE,
-            ]
-            if digital_io in (2, 3):
-                options += [
-                    CONF_IO_RF_RECEIVE,
-                ]
-
-            options += _DIGITAL_IO
-
-            if digital_io in (3, 5, 6, 9, 10, 11):
-                options += [
-                    CONF_IO_PWM_OUTPUT,
-                ]
-
-            options += _DIGITAL_IO_DEVICES
-
-            default = CONF_IO_NONE
-            if digital_io == DEFAULT_RECEIVE_PIN:
-                default = CONF_IO_RF_RECEIVE
-            if digital_io == DEFAULT_SEND_PIN:
-                default = CONF_IO_RF_SEND
-
-            self._step_setup_serial_schema = self._step_setup_serial_schema.extend(
-                {
-                    vol.Optional(
-                        CONF_IO_DIGITAL_ + str(digital_io), default=default
-                    ): SelectSelector(
-                        SelectSelectorConfig(
-                            options=options,
-                            mode=SelectSelectorMode.DROPDOWN,
-                            translation_key="digital_io",
-                        )
-                    ),
-                }
-            )
-
-        self._step_setup_serial_schema = self._step_setup_serial_schema.extend(
-            {
-                vol.Optional(
-                    CONF_IO_DIGITAL_ + "13", default=CONF_IO_NONE
-                ): SelectSelector(
-                    SelectSelectorConfig(
-                        options=[CONF_IO_NONE, CONF_IO_RF_SEND, CONF_IO_DIGITAL_OUTPUT],
-                        mode=SelectSelectorMode.DROPDOWN,
-                        translation_key="digital_io",
-                    )
-                ),
-            }
-        )
-
-        for analog_input in range(0, 8):
-            self._step_setup_serial_schema = self._step_setup_serial_schema.extend(
-                {vol.Optional(CONF_IO_ANALOG_ + str(analog_input)): BooleanSelector()}
-            )
-
-        if user_input is not None:
-            data_schema = self.add_suggested_values_to_schema(
-                self._step_setup_serial_schema, user_input
-            )
-        else:
-            data_schema = self._step_setup_serial_schema
-
-        return self.async_show_form(
-            step_id="setup_serial",
-            data_schema=data_schema,
-            errors=errors,
-        )
-
-    async def validate_input_setup_serial(
-        self, data: dict[str, Any], errors: dict[str, str]
-    ) -> (str, dict[str, Any], dict[str, Any]):
-        """Validate the user input and create data.
-
-        Data has the keys from _step_setup_serial_schema with values provided by the user.
-        """
-        # Validate the data can be used to set up a connection.
-        self._step_setup_serial_schema(data)
-
-        serial_port = data.get(CONF_SERIAL_PORT)
-
-        if serial_port is None:
-            raise vol.error.RequiredFieldInvalid("No serial port configured")
-
-        serial_port = await self.hass.async_add_executor_job(
-            get_serial_by_id, serial_port
-        )
-
-        # Test if the device exists
-        if not os.path.exists(serial_port):
-            errors[CONF_SERIAL_PORT] = "nonexisting_serial_port"
-
-        await self.async_set_unique_id(f"{DOMAIN}-{serial_port}")
-        self._abort_if_unique_id_configured()
-
-        baud_rate = int(data[CONF_BAUD_RATE])
-
-        if errors.get(CONF_SERIAL_PORT) is None:
             # Test if we can connect to the device
             try:
                 homeduino = Homeduino(
@@ -272,37 +238,44 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
 
                 _LOGGER.info("Device %s available", serial_port)
             except HomeduinoResponseTimeoutError as ex:
-                _LOGGER.error("Unable to connect to the device %s", serial_port, ex)
-                errors["base"] = "cannot_connect"
-            except serial.SerialException:
                 _LOGGER.exception("Unable to connect to the device %s", serial_port)
                 errors["base"] = "cannot_connect"
             except Exception:  # pylint: disable=broad-except
                 _LOGGER.exception("Unable to connect to the device %s", serial_port)
                 errors["base"] = "cannot_connect"
 
-        options = {}
+            if not errors:
+                title = f"Homeduino Transceiver {serial_port}"
+                data = {
+                    CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_TRANSCEIVER,
+                    CONF_SERIAL_PORT: serial_port,
+                    CONF_BAUD_RATE: baud_rate,
+                }
 
-        for digital_io in range(2, 14):
-            key = CONF_IO_DIGITAL_ + str(digital_io)
-            value = data.get(key)
-            if value == CONF_IO_NONE:
-                value = None
-            options[key] = value
+                options = {}
 
-        for analog_input in range(0, 8):
-            key = CONF_IO_ANALOG_ + str(analog_input)
-            options[key] = data.get(key)
+                for digital_io in range(2, 14):
+                    key = CONF_IO_DIGITAL_ + str(digital_io)
+                    value = user_input.get(key)
+                    if value == CONF_IO_NONE:
+                        value = None
+                    options[key] = value
 
-        # Return title, data, options.
-        return (
-            f"Homeduino Transceiver {serial_port}",
-            {
-                CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_TRANSCEIVER,
-                CONF_SERIAL_PORT: serial_port,
-                CONF_BAUD_RATE: baud_rate,
-            },
-            options,
+                for analog_input in range(0, 8):
+                    key = CONF_IO_ANALOG_ + str(analog_input)
+                    options[key] = user_input.get(key)
+
+                return self.async_create_entry(title=title, data=data, options=options)
+
+        # Combine user input with schema.
+        data_schema = self.add_suggested_values_to_schema(
+            STEP_SETUP_TRANSCEIVER_SCHEMA, user_input or {}
+        )
+
+        return self.async_show_form(
+            step_id="setup_transceiver",
+            data_schema=data_schema,
+            errors=errors,
         )
 
     async def async_step_setup_rf_device(
@@ -312,110 +285,49 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
 
         if user_input is not None:
-            _LOGGER.debug("user_input: %s", user_input)
+            # Validate the data.
+            STEP_SETUP_RF_DEVICE_SCHEMA(user_input)
 
-            title, data, options = await self.validate_input_setup_rf_device(
-                user_input, errors
-            )
-            _LOGGER.debug(
-                "title: %s, data: %s, options: %s, errors: %s",
-                title,
-                data,
-                options,
-                errors,
-            )
+            rf_protocol: str = user_input.get(CONF_RF_PROTOCOL).strip()
+            rf_id: int = int(user_input.get(CONF_RF_ID))
+            rf_unit: int = user_input.get(CONF_RF_UNIT, None)
+            if rf_unit is not None:
+                rf_unit = int(rf_unit)
+            rf_id_ignore_all: bool = user_input.get(CONF_RF_ID_IGNORE_ALL, False)
+
+            unique_id = f"{DOMAIN}-{rf_protocol}-{rf_id}"
+            if rf_unit is not None:
+                unique_id += f"-{rf_unit}"
+            await self.async_set_unique_id(unique_id)
+            self._abort_if_unique_id_configured()
+
+            title = f"{rf_protocol} {rf_id}"
+            if rf_unit is not None:
+                title += f" {rf_unit}"
+
+            data = {
+                CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_RF_DEVICE,
+                CONF_RF_PROTOCOL: rf_protocol,
+                CONF_RF_ID: rf_id,
+            }
+            if rf_unit is not None:
+                data[CONF_RF_UNIT] = rf_unit
+
+            options = {}
+            if rf_protocol.startswith("switch") or rf_protocol.startswith("dimmer"):
+                options[CONF_RF_ID_IGNORE_ALL] = rf_id_ignore_all
 
             if not errors:
                 return self.async_create_entry(title=title, data=data, options=options)
 
-        protocol_names = Homeduino.get_protocols()
-        protocol_names = [
-            protocol_name
-            for protocol_name in protocol_names
-            if protocol_name.startswith(
-                ("contact", "dimmer", "pir", "switch", "weather")
-            )
-        ]
-
-        self._step_setup_rf_device_schema = vol.Schema(
-            {
-                vol.Required(CONF_RF_PROTOCOL, default=""): SelectSelector(
-                    SelectSelectorConfig(
-                        options=protocol_names,
-                        mode=SelectSelectorMode.DROPDOWN,
-                    )
-                ),
-                vol.Required(CONF_RF_ID): NumberSelector(
-                    NumberSelectorConfig(min=0, mode=NumberSelectorMode.BOX)
-                ),
-                vol.Optional(CONF_RF_UNIT): NumberSelector(
-                    NumberSelectorConfig(min=0, mode=NumberSelectorMode.BOX)
-                ),
-                vol.Optional(
-                    CONF_RF_ID_IGNORE_ALL,
-                    default=False,
-                ): BooleanSelector(),
-            }
+        data_schema = self.add_suggested_values_to_schema(
+            STEP_SETUP_RF_DEVICE_SCHEMA, user_input or {}
         )
-
-        if user_input is not None:
-            data_schema = self.add_suggested_values_to_schema(
-                self._step_setup_rf_device_schema, user_input
-            )
-        else:
-            data_schema = self._step_setup_rf_device_schema
 
         return self.async_show_form(
             step_id="setup_rf_device",
             data_schema=data_schema,
             errors=errors,
-        )
-
-    async def validate_input_setup_rf_device(
-        self, data: dict[str, Any], errors: dict[str, str]
-    ) -> (str, dict[str, Any], dict[str, Any]):
-        """Validate the user input and create data.
-
-        Data has the keys from _step_setup_rf_device_schema with values provided by the user.
-        """
-        # Validate the data.
-        self._step_setup_rf_device_schema(data)
-
-        _LOGGER.debug(data)
-        rf_protocol: str = data.get(CONF_RF_PROTOCOL).strip()
-        rf_id: int = int(data.get(CONF_RF_ID))
-        rf_unit: int = data.get(CONF_RF_UNIT, None)
-        if rf_unit is not None:
-            rf_unit = int(rf_unit)
-        rf_id_ignore_all: bool = data.get(CONF_RF_ID_IGNORE_ALL, False)
-
-        unique_id = f"{DOMAIN}-{rf_protocol}-{rf_id}"
-        if rf_unit is not None:
-            unique_id += f"-{rf_unit}"
-        await self.async_set_unique_id(unique_id)
-        self._abort_if_unique_id_configured()
-
-        title = f"{rf_protocol} {rf_id}"
-        if rf_unit is not None:
-            title += f" {rf_unit}"
-        data = {
-            CONF_ENTRY_TYPE: CONF_ENTRY_TYPE_RF_DEVICE,
-            CONF_RF_PROTOCOL: rf_protocol,
-            CONF_RF_ID: rf_id,
-        }
-        if rf_unit is not None:
-            data[CONF_RF_UNIT] = rf_unit
-
-        options = {}
-
-        if rf_protocol.startswith("switch") or rf_protocol.startswith("dimmer"):
-            options[CONF_RF_ID_IGNORE_ALL] = rf_id_ignore_all
-
-        # Return title, data, options.
-        return (
-            title,
-            data,
-            options,
         )
 
     @staticmethod
@@ -428,16 +340,6 @@ class HomeduinoConfigFlow(ConfigFlow, domain=DOMAIN):
 
 
 class HomeduinoOptionsFlowHandler(OptionsFlow):
-    TRANSCEIVER_OPTIONS_SCHEMA = vol.Schema({})
-    RF_DEVICE_OPTIONS_SCHEMA = vol.Schema(
-        {
-            vol.Optional(CONF_RF_ID_IGNORE_ALL): BooleanSelector(),
-            vol.Optional(CONF_RF_REPEATS, default=DEFAULT_REPEATS): NumberSelector(
-                NumberSelectorConfig(min=1, step=1, mode=NumberSelectorMode.BOX)
-            ),
-        }
-    )
-
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
@@ -446,69 +348,11 @@ class HomeduinoOptionsFlowHandler(OptionsFlow):
 
         entry_type = self.config_entry.data.get(CONF_ENTRY_TYPE)
 
+        data_schema: vol.Schema
         if entry_type == CONF_ENTRY_TYPE_TRANSCEIVER:
-            data_schema = self.TRANSCEIVER_OPTIONS_SCHEMA
-
-            for digital_io in range(2, 13):
-                options = [
-                    CONF_IO_NONE,
-                ]
-                if digital_io in (2, 3):
-                    options += [
-                        CONF_IO_RF_RECEIVE,
-                    ]
-
-                options += _DIGITAL_IO
-
-                if digital_io in (3, 5, 6, 9, 10, 11):
-                    options += [
-                        CONF_IO_PWM_OUTPUT,
-                    ]
-
-                options += _DIGITAL_IO_DEVICES
-
-                data_schema = data_schema.extend(
-                    {
-                        vol.Optional(
-                            CONF_IO_DIGITAL_ + str(digital_io), default=CONF_IO_NONE
-                        ): SelectSelector(
-                            SelectSelectorConfig(
-                                options=options,
-                                mode=SelectSelectorMode.DROPDOWN,
-                                translation_key="digital_io",
-                            )
-                        ),
-                    }
-                )
-
-            data_schema = data_schema.extend(
-                {
-                    vol.Optional(
-                        CONF_IO_DIGITAL_ + "13", default=CONF_IO_NONE
-                    ): SelectSelector(
-                        SelectSelectorConfig(
-                            options=[
-                                CONF_IO_NONE,
-                                CONF_IO_RF_SEND,
-                                CONF_IO_DIGITAL_OUTPUT,
-                            ],
-                            mode=SelectSelectorMode.DROPDOWN,
-                            translation_key="digital_io",
-                        )
-                    ),
-                }
-            )
-
-            for analog_input in range(0, 8):
-                data_schema = data_schema.extend(
-                    {
-                        vol.Optional(
-                            CONF_IO_ANALOG_ + str(analog_input)
-                        ): BooleanSelector()
-                    }
-                )
+            data_schema = TRANSCEIVER_OPTIONS_SCHEMA
         elif entry_type == CONF_ENTRY_TYPE_RF_DEVICE:
-            data_schema = self.RF_DEVICE_OPTIONS_SCHEMA
+            data_schema = RF_DEVICE_OPTIONS_SCHEMA
 
         if user_input is not None:
             data_schema(user_input)
@@ -520,12 +364,9 @@ class HomeduinoOptionsFlowHandler(OptionsFlow):
 
             return self.async_create_entry(title="", data=user_input)
 
-        if user_input is not None:
-            data_schema = self.add_suggested_values_to_schema(data_schema, user_input)
-        else:
-            data_schema = self.add_suggested_values_to_schema(
-                data_schema, self.config_entry.options
-            )
+        data_schema = self.add_suggested_values_to_schema(
+            data_schema, user_input or self.config_entry.options
+        )
 
         return self.async_show_form(
             step_id=entry_type, data_schema=data_schema, errors=errors

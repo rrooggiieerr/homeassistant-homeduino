@@ -21,7 +21,7 @@
         },
         "title": "РФ уређај"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Омогућите аналогни улаз 0",
           "analog_1": "Омогућите аналогни улаз 1",

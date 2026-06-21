@@ -21,7 +21,7 @@
         },
         "title": "射頻裝置"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "啟用類比輸入0",
           "analog_1": "啟用類比輸入 1",

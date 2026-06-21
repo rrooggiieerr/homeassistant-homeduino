@@ -21,7 +21,7 @@
         },
         "title": "Urządzenie RF"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Włącz wejście analogowe 0",
           "analog_1": "Włącz wejście analogowe 1",

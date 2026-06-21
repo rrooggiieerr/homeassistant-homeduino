@@ -21,7 +21,7 @@
         },
         "title": "Gléas RF"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Cumasaigh ionchur analógach 0",
           "analog_1": "Cumasaigh ionchur analógach 1",

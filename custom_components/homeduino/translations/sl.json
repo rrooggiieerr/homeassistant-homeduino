@@ -21,7 +21,7 @@
         },
         "title": "RF naprava"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Omogoči analogni vhod 0",
           "analog_1": "Omogoči analogni vhod 1",

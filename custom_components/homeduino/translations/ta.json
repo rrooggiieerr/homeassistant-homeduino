@@ -21,7 +21,7 @@
         },
         "title": "RF சாதனம்"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "அனலாக் உள்ளீடு 0 ஐ இயக்கு",
           "analog_1": "அனலாக் உள்ளீட்டை இயக்கு 1",

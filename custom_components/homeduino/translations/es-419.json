@@ -21,7 +21,7 @@
         },
         "title": "Dispositivo de radiofrecuencia"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Habilitar entrada analógica 0",
           "analog_1": "Habilitar entrada analógica 1",

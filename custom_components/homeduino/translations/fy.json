@@ -21,7 +21,7 @@
         },
         "title": "RF-apparaat"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Analoge ynfier 0 ynskeakelje",
           "analog_1": "Analoge ynfier ynskeakelje 1",

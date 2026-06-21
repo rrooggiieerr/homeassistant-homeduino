@@ -21,7 +21,7 @@
         },
         "title": "RF მოწყობილობა"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "ანალოგური შეყვანის ჩართვა 0",
           "analog_1": "ანალოგური შეყვანის ჩართვა 1",

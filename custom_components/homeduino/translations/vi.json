@@ -21,7 +21,7 @@
         },
         "title": "Thiết bị RF"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Kích hoạt đầu vào tương tự 0",
           "analog_1": "Bật đầu vào analog 1",

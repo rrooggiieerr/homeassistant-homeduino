@@ -21,7 +21,7 @@
         },
         "title": "RF Gailua"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Gaitu sarrera analogikoa 0",
           "analog_1": "Gaitu sarrera analogikoa 1",

@@ -21,7 +21,7 @@
         },
         "title": "RF tæki"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Virkja hliðrænt inntak 0",
           "analog_1": "Virkja hliðrænt inntak 1",

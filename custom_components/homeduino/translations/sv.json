@@ -21,7 +21,7 @@
         },
         "title": "RF-enhet"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Aktivera analog ingång 0",
           "analog_1": "Aktivera analog ingång 1",

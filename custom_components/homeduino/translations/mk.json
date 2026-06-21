@@ -21,7 +21,7 @@
         },
         "title": "RF уред"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Овозможете аналоген влез 0",
           "analog_1": "Овозможете аналоген влез 1",

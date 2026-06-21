@@ -21,7 +21,7 @@
         },
         "title": "Pajisja RF"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Aktivizo hyrjen analoge 0",
           "analog_1": "Aktivizo hyrjen analoge 1",

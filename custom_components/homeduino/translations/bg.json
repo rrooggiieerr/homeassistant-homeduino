@@ -21,7 +21,7 @@
         },
         "title": "RF устройство"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Активиране на аналогов вход 0",
           "analog_1": "Активиране на аналогов вход 1",

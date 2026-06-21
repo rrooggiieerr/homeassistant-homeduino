@@ -21,7 +21,7 @@
         },
         "title": "RF-enhed"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Aktiver analog indgang 0",
           "analog_1": "Aktiver analog indgang 1",

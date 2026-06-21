@@ -15,7 +15,7 @@
 					"setup_rf_device": "RF Device"
 				}
 			},
-			"setup_serial": {
+			"setup_transceiver": {
 				"title": "Homeduino Transceiver",
 				"data": {
 					"serial_port": "Serial port",

@@ -21,7 +21,7 @@
         },
         "title": "Dyfais RF"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Galluogi mewnbwn analog 0",
           "analog_1": "Galluogi mewnbwn analog 1",

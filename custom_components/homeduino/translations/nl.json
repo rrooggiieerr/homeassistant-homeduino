@@ -21,7 +21,7 @@
         },
         "title": "RF Apparaat"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Schakel analoge ingang 0 in",
           "analog_1": "Schakel analoge ingang 1 in",

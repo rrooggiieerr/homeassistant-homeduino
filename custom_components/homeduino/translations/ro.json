@@ -21,7 +21,7 @@
         },
         "title": "Dispozitiv RF"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Activați intrarea analogică 0",
           "analog_1": "Activați intrarea analogică 1",

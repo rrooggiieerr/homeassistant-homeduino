@@ -21,7 +21,7 @@
         },
         "title": "RF Cihazı"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Analog girişi etkinleştir 0",
           "analog_1": "Analog giriş 1'i etkinleştir",

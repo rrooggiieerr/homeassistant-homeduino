@@ -21,7 +21,7 @@
         },
         "title": "RF-toestel"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Aktiveer analoog invoer 0",
           "analog_1": "Aktiveer analoog invoer 1",

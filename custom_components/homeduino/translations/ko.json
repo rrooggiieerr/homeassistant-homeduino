@@ -21,7 +21,7 @@
         },
         "title": "RF 장치"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "아날로그 입력 0 활성화",
           "analog_1": "아날로그 입력 1 활성화",

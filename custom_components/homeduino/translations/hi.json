@@ -21,7 +21,7 @@
         },
         "title": "आरएफ डिवाइस"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "एनालॉग इनपुट 0 सक्षम करें",
           "analog_1": "एनालॉग इनपुट सक्षम करें 1",

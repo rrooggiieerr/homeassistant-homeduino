@@ -21,7 +21,7 @@
         },
         "title": "RF uređaj"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Omogući analogni ulaz 0",
           "analog_1": "Omogući analogni ulaz 1",

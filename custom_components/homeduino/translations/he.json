@@ -21,7 +21,7 @@
         },
         "title": "מכשיר RF"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "אפשר קלט אנלוגי 0",
           "analog_1": "אפשר קלט אנלוגי 1",

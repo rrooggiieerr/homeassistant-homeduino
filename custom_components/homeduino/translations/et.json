@@ -21,7 +21,7 @@
         },
         "title": "RF seade"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Luba analoogsisend 0",
           "analog_1": "Luba analoogsisend 1",

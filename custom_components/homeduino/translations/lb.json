@@ -21,7 +21,7 @@
         },
         "title": "RF Apparat"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Aktivéiert den analoge Input 0",
           "analog_1": "Aktivéiert den analoge Input 1",

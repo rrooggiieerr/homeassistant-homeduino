@@ -21,7 +21,7 @@
         },
         "title": "دستگاه RF"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "ورودی آنالوگ 0 را فعال کنید",
           "analog_1": "ورودی آنالوگ 1 را فعال کنید",

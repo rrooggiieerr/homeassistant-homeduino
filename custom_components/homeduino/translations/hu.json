@@ -21,7 +21,7 @@
         },
         "title": "RF eszköz"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Engedélyezze a 0 analóg bemenetet",
           "analog_1": "Engedélyezze az 1. analóg bemenetet",

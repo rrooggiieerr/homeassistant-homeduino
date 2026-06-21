@@ -21,7 +21,7 @@
         },
         "title": "RF Aparato"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Ebligu analogan enigon 0",
           "analog_1": "Ebligu analogan enigon 1",

@@ -21,7 +21,7 @@
         },
         "title": "Dispositiu de RF"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Habilita l'entrada analògica 0",
           "analog_1": "Habilita l'entrada analògica 1",

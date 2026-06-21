@@ -21,7 +21,7 @@
         },
         "title": "RF zařízení"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Povolit analogový vstup 0",
           "analog_1": "Povolit analogový vstup 1",

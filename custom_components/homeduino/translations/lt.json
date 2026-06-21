@@ -21,7 +21,7 @@
         },
         "title": "RF įrenginys"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Įjungti analoginę įvestį 0",
           "analog_1": "Įjungti analoginę įvestį 1",

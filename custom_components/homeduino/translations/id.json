@@ -21,7 +21,7 @@
         },
         "title": "Perangkat RF"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Aktifkan masukan analog 0",
           "analog_1": "Aktifkan masukan analog 1",

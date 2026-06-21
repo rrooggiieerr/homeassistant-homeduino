@@ -21,7 +21,7 @@
         },
         "title": "射频装置"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "启用模拟输入0",
           "analog_1": "启用模拟输入 1",

@@ -21,7 +21,7 @@
         },
         "title": "RF ierīce"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Iespējot analogo ieeju 0",
           "analog_1": "Iespējot analogo ieeju 1",

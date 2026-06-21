@@ -21,7 +21,7 @@
         },
         "title": "RF-Gerät"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Analogeingang 0 aktivieren",
           "analog_1": "Analogeingang 1 aktivieren",

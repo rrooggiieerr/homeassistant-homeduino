@@ -21,7 +21,7 @@
         },
         "title": "RFデバイス"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "アナログ入力0を有効にする",
           "analog_1": "アナログ入力 1 を有効にする",

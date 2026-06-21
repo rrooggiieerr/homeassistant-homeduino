@@ -21,7 +21,7 @@
         },
         "title": "RF-laite"
       },
-      "setup_serial": {
+      "setup_transceiver": {
         "data": {
           "analog_0": "Ota analoginen tulo 0 käyttöön",
           "analog_1": "Ota analoginen tulo käyttöön 1",
