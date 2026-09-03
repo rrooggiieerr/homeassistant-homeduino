@@ -77,4 +77,5 @@ exclude-labels:
 
 exclude-contributors:
   - 'dependabot'
+  - 'dependabot[bot]'
   - 'imgbot'
