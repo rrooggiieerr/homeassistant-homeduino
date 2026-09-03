@@ -196,7 +196,7 @@ async def async_setup_entry(
                 protocol=protocol,
                 id=id,
                 unit=unit,
-                filed="windDirection",
+                field="windDirection",
             )
 
             entities.append(
